@@ -12,11 +12,11 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		3A43DF321015F7A40004E73F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A43DF311015F7A40004E73F /* Note.m */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
 		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
 		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
-		3AC5BF9F1015987E00D062A4 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF9E1015987E00D062A4 /* Note.m */; };
 		3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C01B1015AEC300D062A4 /* NoteCell.m */; };
 		3AC5C04A1015B45F00D062A4 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0491015B45F00D062A4 /* UIColor+Extensions.m */; };
 		3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0551015B64600D062A4 /* NoteThumbnail.m */; };
@@ -37,14 +37,14 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Notitas_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notitas_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A43DF301015F7A40004E73F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		3A43DF311015F7A40004E73F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Notitas.xcdatamodel; sourceTree = "<group>"; };
 		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
 		3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotitasAppDelegate.m; sourceTree = "<group>"; };
 		3AC5BF951015986900D062A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		3AC5BF961015986900D062A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		3AC5BF9D1015987E00D062A4 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		3AC5BF9E1015987E00D062A4 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AC5C01A1015AEC300D062A4 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
 		3AC5C01B1015AEC300D062A4 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
 		3AC5C0481015B45F00D062A4 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
@@ -200,8 +200,8 @@
 		3AC5BF981015986900D062A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3AC5BF9D1015987E00D062A4 /* Note.h */,
-				3AC5BF9E1015987E00D062A4 /* Note.m */,
+				3A43DF301015F7A40004E73F /* Note.h */,
+				3A43DF311015F7A40004E73F /* Note.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -276,11 +276,11 @@
 				3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */,
 				3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */,
 				3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */,
-				3AC5BF9F1015987E00D062A4 /* Note.m in Sources */,
 				3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */,
 				3AC5C04A1015B45F00D062A4 /* UIColor+Extensions.m in Sources */,
 				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
 				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
+				3A43DF321015F7A40004E73F /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,12 +55,20 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                                                                target:self 
-                                                                               action:@selector(insertNewObject)];
-    NSArray *items = [[NSArray alloc] initWithObjects:addButton, nil];
+                                                                               action:@selector(insertNewObject:)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                                                                                   target:nil 
+                                                                                   action:nil];
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(about:) forControlEvents:UIControlEventTouchDown];
+    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    NSArray *items = [[NSArray alloc] initWithObjects:addButton, flexibleSpace, infoBarButton, nil];
     addButton.style = UIBarButtonItemStylePlain;
     self.toolbarItems = items;
     [items release];
     [addButton release];
+    [flexibleSpace release];
+    [infoBarButton release];
 	
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) 
@@ -109,7 +117,36 @@
 #pragma mark -
 #pragma mark IBOutlet methods
 
-- (void)insertNewObject 
+- (void)about:(id)sender
+{
+	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                                  inManagedObjectContext:context];
+	
+    newNote.timeStamp = [NSDate date];
+    newNote.contents = @"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved";
+    
+    // Create an angle for this note on the cardboard
+    CGFloat sign = (random() % 2) == 0 ? -1.0 : 1.0;
+    CGFloat angle = sign * (random() % 20) * M_PI / 180.0;
+    newNote.angle = [NSNumber numberWithDouble:angle];
+	
+    NSError *error;
+    if ([context save:&error]) 
+    {
+        [self.tableView reloadData];
+        
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
+        NSInteger row = rowsCount - 1;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionNone
+                                      animated:YES];
+    }
+}
+
+- (void)insertNewObject:(id)sender
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
 	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
