@@ -40,6 +40,15 @@
 #pragma mark -
 #pragma mark IBAction methods
 
+- (IBAction)changeColor:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeColorNotification" 
+                                                        object:self];
+    int value = [_note.color intValue] + 1;
+    value = value % 4;
+    _note.color = [NSNumber numberWithInt:value];
+}
+
 - (IBAction)done:(id)sender
 {
     [self disappear];

@@ -2,7 +2,7 @@
 //  Note.m
 //  Notitas
 //
-//  Created by Adrian on 7/21/09.
+//  Created by Adrian on 7/22/09.
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
@@ -11,12 +11,13 @@
 @implementation Note 
 
 @dynamic angle;
+@dynamic fontSize;
+@dynamic longitude;
+@dynamic color;
 @dynamic timeStamp;
+@dynamic latitude;
 @dynamic contents;
 @dynamic fontFamily;
-@dynamic fontSize;
-@dynamic latitude;
-@dynamic longitude;
 @dynamic hasLocation;
 
 @end

@@ -32,6 +32,7 @@
 @property (nonatomic, retain) Note *note;
 @property (nonatomic, assign) id<NoteEditorDelegate> delegate;
 
+- (IBAction)changeColor:(id)sender;
 - (IBAction)done:(id)sender;
 - (IBAction)action:(id)sender;
 - (IBAction)trash:(id)sender;

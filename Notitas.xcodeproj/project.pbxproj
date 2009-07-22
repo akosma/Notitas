@@ -18,19 +18,22 @@
 		3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A15C4FD10175D7B00ECB335 /* Map.xib */; };
 		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A1BDFEE10177D3800775127 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFED10177D3800775127 /* location.png */; };
-		3A43DF321015F7A40004E73F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A43DF311015F7A40004E73F /* Note.m */; };
 		3AA753B910179455007B3E5C /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA753B810179455007B3E5C /* SoundEffect.m */; };
 		3AA753C310179559007B3E5C /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3AA753C210179559007B3E5C /* Erase.caf */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
+		3AA7543210179E51007B3E5C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7543110179E51007B3E5C /* color.png */; };
+		3AA7544710179F6E007B3E5C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7544610179F6E007B3E5C /* Note.m */; };
+		3AA7544F1017A0D9007B3E5C /* thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544B1017A0D9007B3E5C /* thumbnail0.png */; };
+		3AA754501017A0D9007B3E5C /* thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544C1017A0D9007B3E5C /* thumbnail1.png */; };
+		3AA754511017A0D9007B3E5C /* thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544D1017A0D9007B3E5C /* thumbnail2.png */; };
+		3AA754521017A0D9007B3E5C /* thumbnail3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544E1017A0D9007B3E5C /* thumbnail3.png */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
 		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
 		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
 		3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C01B1015AEC300D062A4 /* NoteCell.m */; };
-		3AC5C04A1015B45F00D062A4 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0491015B45F00D062A4 /* UIColor+Extensions.m */; };
 		3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0551015B64600D062A4 /* NoteThumbnail.m */; };
 		3AC5C10E1015C3DC00D062A4 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C10D1015C3DC00D062A4 /* texture.png */; };
-		3AC5C12B1015C5D000D062A4 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C12A1015C5D000D062A4 /* thumbnail.png */; };
 		3AC5C16D1015CB6000D062A4 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C16C1015CB6000D062A4 /* icon.png */; };
 		3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */; };
 		3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */; };
@@ -53,12 +56,18 @@
 		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
-		3A43DF301015F7A40004E73F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		3A43DF311015F7A40004E73F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AA753B710179455007B3E5C /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
 		3AA753B810179455007B3E5C /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffect.m; sourceTree = "<group>"; };
 		3AA753C210179559007B3E5C /* Erase.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Erase.caf; sourceTree = "<group>"; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3AA7543110179E51007B3E5C /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
+		3AA7544510179F6E007B3E5C /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		3AA7544610179F6E007B3E5C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		3AA7544B1017A0D9007B3E5C /* thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail0.png; sourceTree = "<group>"; };
+		3AA7544C1017A0D9007B3E5C /* thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail1.png; sourceTree = "<group>"; };
+		3AA7544D1017A0D9007B3E5C /* thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail2.png; sourceTree = "<group>"; };
+		3AA7544E1017A0D9007B3E5C /* thumbnail3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail3.png; sourceTree = "<group>"; };
+		3AA7545D1017A1B7007B3E5C /* ColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCode.h; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Notitas.xcdatamodel; sourceTree = "<group>"; };
 		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
@@ -67,12 +76,9 @@
 		3AC5BF961015986900D062A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		3AC5C01A1015AEC300D062A4 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
 		3AC5C01B1015AEC300D062A4 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
-		3AC5C0481015B45F00D062A4 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
-		3AC5C0491015B45F00D062A4 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		3AC5C0541015B64600D062A4 /* NoteThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteThumbnail.h; sourceTree = "<group>"; };
 		3AC5C0551015B64600D062A4 /* NoteThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteThumbnail.m; sourceTree = "<group>"; };
 		3AC5C10D1015C3DC00D062A4 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
-		3AC5C12A1015C5D000D062A4 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		3AC5C16C1015CB6000D062A4 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		3AC5C1C11015D18300D062A4 /* NoteCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCellDelegate.h; sourceTree = "<group>"; };
 		3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditor.xib; sourceTree = "<group>"; };
@@ -171,10 +177,14 @@
 		3AC5BF77101597BA00D062A4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3AA7544B1017A0D9007B3E5C /* thumbnail0.png */,
+				3AA7544C1017A0D9007B3E5C /* thumbnail1.png */,
+				3AA7544D1017A0D9007B3E5C /* thumbnail2.png */,
+				3AA7544E1017A0D9007B3E5C /* thumbnail3.png */,
+				3AA7543110179E51007B3E5C /* color.png */,
 				3A1BDFED10177D3800775127 /* location.png */,
 				3AC5C3F31015EEE300D062A4 /* Default.png */,
 				3AC5C16C1015CB6000D062A4 /* icon.png */,
-				3AC5C12A1015C5D000D062A4 /* thumbnail.png */,
 				3AC5C10D1015C3DC00D062A4 /* texture.png */,
 			);
 			path = Images;
@@ -234,8 +244,7 @@
 			children = (
 				3AA753B710179455007B3E5C /* SoundEffect.h */,
 				3AA753B810179455007B3E5C /* SoundEffect.m */,
-				3AC5C0481015B45F00D062A4 /* UIColor+Extensions.h */,
-				3AC5C0491015B45F00D062A4 /* UIColor+Extensions.m */,
+				3AA7545D1017A1B7007B3E5C /* ColorCode.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -243,8 +252,8 @@
 		3AC5BF981015986900D062A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3A43DF301015F7A40004E73F /* Note.h */,
-				3A43DF311015F7A40004E73F /* Note.m */,
+				3AA7544510179F6E007B3E5C /* Note.h */,
+				3AA7544610179F6E007B3E5C /* Note.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,7 +309,6 @@
 			files = (
 				3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */,
 				3AC5C10E1015C3DC00D062A4 /* texture.png in Resources */,
-				3AC5C12B1015C5D000D062A4 /* thumbnail.png in Resources */,
 				3AC5C16D1015CB6000D062A4 /* icon.png in Resources */,
 				3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */,
 				3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */,
@@ -308,6 +316,11 @@
 				3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */,
 				3A1BDFEE10177D3800775127 /* location.png in Resources */,
 				3AA753C310179559007B3E5C /* Erase.caf in Resources */,
+				3AA7543210179E51007B3E5C /* color.png in Resources */,
+				3AA7544F1017A0D9007B3E5C /* thumbnail0.png in Resources */,
+				3AA754501017A0D9007B3E5C /* thumbnail1.png in Resources */,
+				3AA754511017A0D9007B3E5C /* thumbnail2.png in Resources */,
+				3AA754521017A0D9007B3E5C /* thumbnail3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,12 +336,11 @@
 				3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */,
 				3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */,
 				3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */,
-				3AC5C04A1015B45F00D062A4 /* UIColor+Extensions.m in Sources */,
 				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
 				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
-				3A43DF321015F7A40004E73F /* Note.m in Sources */,
 				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
 				3AA753B910179455007B3E5C /* SoundEffect.m in Sources */,
+				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

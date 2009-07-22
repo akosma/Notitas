@@ -12,6 +12,7 @@
 #import "NoteThumbnail.h"
 #import "NoteEditor.h"
 #import "NotitasAppDelegate.h"
+#import "ColorCode.h"
 
 static double randomAngle()
 {
@@ -318,6 +319,7 @@ static double randomAngle()
         _thumbnail = [[NoteThumbnail alloc] initWithFrame:realFrame];
     }
     _thumbnail.frame = realFrame;
+    _thumbnail.color = (ColorCode)[_currentNote.color intValue];
     if (_editor == nil)
     {
         _editor = [[NoteEditor alloc] init];

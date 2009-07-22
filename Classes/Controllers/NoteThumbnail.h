@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ColorCode.h"
 
 @interface NoteThumbnail : UIView 
 {
 @private
     UILabel *_summaryLabel;
     UIImageView *_backgroundView;
+    ColorCode _color;
 }
 
+@property (nonatomic) ColorCode color;
 @property (nonatomic, copy) NSString *text;
 
 @end

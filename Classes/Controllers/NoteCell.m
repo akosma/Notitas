@@ -7,9 +7,9 @@
 //
 
 #import "NoteCell.h"
-#import "UIColor+Extensions.h"
 #import "Note.h"
 #import "NoteThumbnail.h"
+#import "ColorCode.h"
 
 @implementation NoteCell
 
@@ -73,6 +73,7 @@
         CGAffineTransform trans = CGAffineTransformMakeRotation([_leftNote.angle doubleValue]);
         _leftView.transform = trans;
         _leftView.text = _leftNote.contents;
+        _leftView.color = (ColorCode)[_leftNote.color intValue];
         _leftView.hidden = NO;
     }
 }
@@ -98,6 +99,7 @@
         CGAffineTransform trans = CGAffineTransformMakeRotation([_rightNote.angle doubleValue]);
         _rightView.transform = trans;
         _rightView.text = _rightNote.contents;
+        _rightView.color = (ColorCode)[_rightNote.color intValue];
         _rightView.hidden = NO;
     }
 }

@@ -11,6 +11,7 @@
 @implementation NoteThumbnail
 
 @dynamic text;
+@dynamic color;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -21,7 +22,7 @@
     {
         CGRect rect = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height);
         _backgroundView = [[UIImageView alloc] initWithFrame:rect];
-        _backgroundView.image = [UIImage imageNamed:@"thumbnail.png"];
+        _backgroundView.image = [UIImage imageNamed:@"thumbnail0.png"];
         
         [self addSubview:_backgroundView];
         
@@ -32,6 +33,11 @@
         _summaryLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
         
         [self addSubview:_summaryLabel];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeColor:) 
+                                                     name:@"ChangeColorNotification"
+                                                   object:nil];
     }
     return self;
 }
@@ -57,6 +63,28 @@
     CGSize size = [newText sizeWithFont:_summaryLabel.font constrainedToSize:constraints];
     _summaryLabel.frame = CGRectMake(15.0, 20.0, width, size.height);
     _summaryLabel.text = newText;
+}
+
+- (ColorCode)color
+{
+    return _color;
+}
+
+- (void)setColor:(ColorCode)newColor
+{
+    _color = newColor;
+    NSString *imageName = [NSString stringWithFormat:@"thumbnail%d.png", (int)_color];
+    _backgroundView.image = [UIImage imageNamed:imageName];
+}
+
+#pragma mark -
+#pragma mark NSNotification handler
+
+- (void)changeColor:(NSNotification *)notification
+{
+    int value = (int)_color + 1;
+    ColorCode newColor = (ColorCode)(value % 4);
+    [self setColor:newColor];
 }
 
 @end
