@@ -36,5 +36,6 @@
 - (IBAction)insertNewObject:(id)sender;
 - (IBAction)about:(id)sender;
 - (IBAction)removeAllNotes:(id)sender;
+- (IBAction)newNoteWithLocation:(id)sender;
 
 @end

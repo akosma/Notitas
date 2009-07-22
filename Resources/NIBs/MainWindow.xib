@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="41"/>
 			<integer value="2"/>
-			<integer value="49"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -121,6 +121,17 @@
 						<reference key="IBUIToolbar" ref="1060554267"/>
 						<int key="IBUISystemItemIdentifier">16</int>
 					</object>
+					<object class="IBUIBarButtonItem" id="420198980">
+						<reference key="IBUIToolbar" ref="1060554267"/>
+						<int key="IBUISystemItemIdentifier">5</int>
+					</object>
+					<object class="IBUIBarButtonItem" id="692012288">
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">location.png</string>
+						</object>
+						<reference key="IBUIToolbar" ref="1060554267"/>
+					</object>
 					<object class="IBUIBarButtonItem" id="255393712">
 						<reference key="IBUIToolbar" ref="1060554267"/>
 						<int key="IBUISystemItemIdentifier">5</int>
@@ -195,6 +206,14 @@
 					</object>
 					<int key="connectionID">53</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">newNoteWithLocation:</string>
+						<reference key="source" ref="692012288"/>
+						<reference key="destination" ref="884716538"/>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -245,6 +264,8 @@
 							<reference ref="870062116"/>
 							<reference ref="255393712"/>
 							<reference ref="263372634"/>
+							<reference ref="420198980"/>
+							<reference ref="692012288"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -287,6 +308,16 @@
 						<reference key="object" ref="229333897"/>
 						<reference key="parent" ref="263372634"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">54</int>
+						<reference key="object" ref="420198980"/>
+						<reference key="parent" ref="1060554267"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="692012288"/>
+						<reference key="parent" ref="1060554267"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -310,6 +341,8 @@
 					<string>46.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
+					<string>54.IBPluginDependency</string>
+					<string>55.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -336,6 +369,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -354,7 +389,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">56</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -395,10 +430,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>about:</string>
 							<string>insertNewObject:</string>
+							<string>newNoteWithLocation:</string>
 							<string>removeAllNotes:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

@@ -16,7 +16,6 @@
 - (NSFetchedResultsController *)fetchedResultsController;
 - (Note *)createNoteInContext:(NSManagedObjectContext *)context;
 - (void)scrollToBottomRow;
-- (void)newNoteWithLocation;
 @end
 
 
@@ -102,19 +101,6 @@
            fromLocation:(CLLocation *)oldLocation
 {
     _locationInformationAvailable = YES;
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *locationNoteKey = @"locationNoteKey";
-    if ([defaults objectForKey:locationNoteKey] == nil)
-    {
-        // Booleans are initialized to NO...
-        [defaults setBool:YES forKey:locationNoteKey];
-    }
-    BOOL noteWithLocation = [defaults boolForKey:locationNoteKey];
-    if (noteWithLocation)
-    {
-        [self newNoteWithLocation];
-    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -159,6 +145,25 @@
 
 #pragma mark -
 #pragma mark IBOutlet methods
+
+- (IBAction)newNoteWithLocation:(id)sender
+{
+    if (_locationInformationAvailable)
+    {
+        NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+        Note *newNote = [self createNoteInContext:context];
+        CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
+        CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
+        newNote.contents = [NSString stringWithFormat:@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", latitude, longitude];
+        
+        NSError *error;
+        if ([context save:&error]) 
+        {
+            [self.tableView reloadData];
+            [self scrollToBottomRow];
+        }
+    }
+}
 
 - (IBAction)removeAllNotes:(id)sender
 {
@@ -422,23 +427,6 @@
     [self.tableView scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
-}
-
-- (void)newNoteWithLocation
-{
-	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	Note *newNote = [self createNoteInContext:context];
-    CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
-    CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
-    newNote.contents = [NSString stringWithFormat:@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f\n\n\
-(You can deactivate these notes in the iPhone Settings)", latitude, longitude];
-    
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-        [self scrollToBottomRow];
-    }
 }
 
 @end
