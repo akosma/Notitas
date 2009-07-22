@@ -26,6 +26,7 @@ static double randomAngle()
 - (NSFetchedResultsController *)fetchedResultsController;
 - (Note *)createNoteInContext:(NSManagedObjectContext *)context;
 - (void)scrollToBottomRow;
+- (void)checkTrashIconEnabled;
 @end
 
 
@@ -73,6 +74,8 @@ static double randomAngle()
 	if (![[self fetchedResultsController] performFetch:&error]) 
     {
 	}
+    
+    [self checkTrashIconEnabled];
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -151,6 +154,7 @@ static double randomAngle()
             {
                 [[NotitasAppDelegate sharedDelegate] playEraseSound];
                 [self.tableView reloadData];
+                _trashButton.enabled = NO;
             }
             break;
         }
@@ -194,6 +198,7 @@ static double randomAngle()
         {
             [self.tableView reloadData];
             [self scrollToBottomRow];
+            _trashButton.enabled = YES;
         }
     }
 }
@@ -220,6 +225,7 @@ static double randomAngle()
     {
         [self.tableView reloadData];
         [self scrollToBottomRow];
+        _trashButton.enabled = YES;
     }
 }
 
@@ -233,6 +239,7 @@ static double randomAngle()
     {
         [self.tableView reloadData];
         [self scrollToBottomRow];
+        _trashButton.enabled = YES;
     }
 }
 
@@ -376,6 +383,7 @@ static double randomAngle()
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
+        [self checkTrashIconEnabled];
     }
 
     [UIView beginAnimations:@"trash" context:NULL];
@@ -453,12 +461,30 @@ static double randomAngle()
 - (void)scrollToBottomRow
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
-    NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
+    NSInteger itemCount = [sectionInfo numberOfObjects];
+    NSInteger rowsCount = ceil(itemCount / 2.0);
     NSInteger row = rowsCount - 1;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
+    
+}
+
+- (void)checkTrashIconEnabled
+{
+    NSArray *sections = [_fetchedResultsController sections];
+    if ([sections count] > 0)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        NSInteger itemCount = [sectionInfo numberOfObjects];
+        _trashButton.enabled = (itemCount > 0);
+    }
+    else 
+    {
+        _trashButton.enabled = NO;
+    }
+
 }
 
 @end

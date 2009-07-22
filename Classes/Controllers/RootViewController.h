@@ -30,6 +30,8 @@
     NoteThumbnail *_thumbnail;
     
     IBOutlet UIBarButtonItem *_locationButton;
+    IBOutlet UIBarButtonItem *_trashButton;
+
     CLLocationManager *_locationManager;
     BOOL _locationInformationAvailable;
 }

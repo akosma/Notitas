@@ -73,11 +73,9 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
             if (error == kAudioServicesNoError) { // success
                 _soundID = aSoundID;
             } else {
-                NSLog(@"Error %d loading sound at path: %@", error, path);
                 [self release], self = nil;
             }
         } else {
-            NSLog(@"NSURL is nil for path: %@", path);
             [self release], self = nil;
         }
     }

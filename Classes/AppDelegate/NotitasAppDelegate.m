@@ -67,7 +67,6 @@
         if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) 
         {
 			// Handle error.
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);  // Fail
         } 
     }
@@ -82,7 +81,6 @@
     if (![[self managedObjectContext] save:&error]) 
     {
 		// Handle error
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		exit(-1);  // Fail
     }
 }
