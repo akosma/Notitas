@@ -34,6 +34,9 @@
 
 - (void)dealloc 
 {
+    _locationManager.delegate = nil;
+    [_locationManager release];
+
     [_thumbnail release];
     _editor.delegate = nil;
     [_editor release];
@@ -58,45 +61,42 @@
 	if (![[self fetchedResultsController] performFetch:&error]) 
     {
 	}
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 100;
+    [_locationManager startUpdatingLocation];
+    
+    _locationInformationAvailable = NO;
 }
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
-/*
- // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	// Return YES for supported orientations.
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
- */
 
 - (void)didReceiveMemoryWarning 
 {
     [super didReceiveMemoryWarning];
+    [_thumbnail release];
+    _thumbnail = nil;
+
+    _editor.delegate = nil;
+    [_editor release];
+    _editor = nil;
 }
 
-//- (void)viewDidUnload 
-//{
-//}
+#pragma mark -
+#pragma mark CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager 
+    didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation
+{
+    _locationInformationAvailable = YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [_locationManager stopUpdatingLocation];
+    _locationInformationAvailable = NO;
+}
 
 #pragma mark -
 #pragma mark IBOutlet methods
@@ -114,6 +114,13 @@
     CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
     CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
     newNote.angle = [NSNumber numberWithDouble:angle];
+
+    newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
+    if (_locationInformationAvailable)
+    {
+        newNote.latitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.latitude];
+        newNote.longitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.longitude];
+    }
 	
     NSError *error;
     if ([context save:&error]) 

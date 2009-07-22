@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <CoreLocation/CoreLocation.h>
 #import "NoteEditorDelegate.h"
 
 @class Note;

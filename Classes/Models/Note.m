@@ -15,5 +15,8 @@
 @dynamic contents;
 @dynamic fontFamily;
 @dynamic fontSize;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic hasLocation;
 
 @end

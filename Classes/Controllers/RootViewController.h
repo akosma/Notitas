@@ -6,6 +6,8 @@
 //  Copyright akosma software 2009. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "NoteCellDelegate.h"
 #import "NoteEditorDelegate.h"
 
@@ -15,7 +17,8 @@
 
 @interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,
                                                        NoteCellDelegate,
-                                                       NoteEditorDelegate> 
+                                                       NoteEditorDelegate,
+                                                       CLLocationManagerDelegate> 
 {
 @private
 	NSFetchedResultsController *_fetchedResultsController;
@@ -23,6 +26,8 @@
     NoteEditor *_editor;
     Note *_currentNote;
     NoteThumbnail *_thumbnail;
+    CLLocationManager *_locationManager;
+    BOOL _locationInformationAvailable;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;

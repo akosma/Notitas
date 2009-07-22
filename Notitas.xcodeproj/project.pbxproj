@@ -13,6 +13,10 @@
 		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		3A15C47D101754B600ECB335 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C47C101754B600ECB335 /* MessageUI.framework */; };
+		3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4BE10175AA500ECB335 /* CoreLocation.framework */; };
+		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
+		3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A15C4FD10175D7B00ECB335 /* Map.xib */; };
+		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A43DF321015F7A40004E73F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A43DF311015F7A40004E73F /* Note.m */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
@@ -39,6 +43,11 @@
 		28A0AAE50D9B0CCF005BE974 /* Notitas_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notitas_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A15C47C101754B600ECB335 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3A15C4BE10175AA500ECB335 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3A15C4C210175AB700ECB335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3A15C4FD10175D7B00ECB335 /* Map.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Map.xib; sourceTree = "<group>"; };
+		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A43DF301015F7A40004E73F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		3A43DF311015F7A40004E73F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -76,6 +85,8 @@
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */,
 				3A15C47D101754B600ECB335 /* MessageUI.framework in Frameworks */,
+				3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */,
+				3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +125,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A15C4C210175AB700ECB335 /* MapKit.framework */,
+				3A15C4BE10175AA500ECB335 /* CoreLocation.framework */,
 				3A15C47C101754B600ECB335 /* MessageUI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -151,6 +164,7 @@
 			children = (
 				3AC5BF79101597BA00D062A4 /* MainWindow.xib */,
 				3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */,
+				3A15C4FD10175D7B00ECB335 /* Map.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -188,6 +202,8 @@
 				3AC5C29C1015DD0E00D062A4 /* NoteEditor.h */,
 				3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */,
 				3AC5C2F01015E21400D062A4 /* NoteEditorDelegate.h */,
+				3A15C4FF10175D8B00ECB335 /* Map.h */,
+				3A15C50010175D8B00ECB335 /* Map.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -266,6 +282,7 @@
 				3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */,
 				3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */,
 				3AC5C3F41015EEE300D062A4 /* Default.png in Resources */,
+				3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +302,7 @@
 				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
 				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
 				3A43DF321015F7A40004E73F /* Note.m in Sources */,
+				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

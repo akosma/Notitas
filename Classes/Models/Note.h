@@ -17,5 +17,8 @@
 @property (nonatomic, retain) NSString *contents;
 @property (nonatomic, retain) NSString *fontFamily;
 @property (nonatomic, retain) NSNumber *fontSize;
+@property (nonatomic, retain) NSNumber *latitude;
+@property (nonatomic, retain) NSNumber *longitude;
+@property (nonatomic, retain) NSNumber *hasLocation;
 
 @end

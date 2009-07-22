@@ -8,6 +8,7 @@
 
 #import "NoteEditor.h"
 #import "Note.h"
+#import "Map.h"
 
 @implementation NoteEditor
 
@@ -64,9 +65,21 @@
 {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                        delegate:self 
-                                              cancelButtonTitle:@"Cancel" 
+                                              cancelButtonTitle:nil 
                                          destructiveButtonTitle:nil 
-                                              otherButtonTitles:@"Send via e-mail", @"Post using Twitterriffic", nil];
+                                              otherButtonTitles:nil];
+    
+    [sheet addButtonWithTitle:@"Send via e-mail"];
+    [sheet addButtonWithTitle:@"Post using Twitterriffic"];
+    BOOL locationAvailable = [_note.hasLocation boolValue];
+    if (locationAvailable)
+    {
+        [sheet addButtonWithTitle:@"See location"];
+    }
+    [sheet addButtonWithTitle:@"Cancel"];
+
+    sheet.cancelButtonIndex = (locationAvailable) ? 3 : 2;
+    
     [sheet showInView:self.view];
     [sheet release];
 }
@@ -85,7 +98,14 @@
             composer.mailComposeDelegate = self;
             
             NSMutableString *message = [[NSMutableString alloc] init];
-            [message appendString:_note.contents];
+            if (_note.contents == nil)
+            {
+                [message appendString:@"(empty note)"];
+            }
+            else
+            {
+                [message appendString:_note.contents];
+            }
             [message appendString:@"\n\nSent from Notitas by akosma - http://akosma.com/"];
             NSString *subject = @"Note sent from Notitas by akosma";
             [composer setSubject:subject];
@@ -108,6 +128,21 @@
             [message release];
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
+            break;
+        }
+            
+        case 2:
+        {
+            if ([_note.hasLocation boolValue])
+            {
+                Map *map = [[Map alloc] init];
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:[_note.latitude doubleValue] 
+                                                                  longitude:[_note.longitude doubleValue]];
+                map.location = location;
+                [location release];
+                [self presentModalViewController:map animated:YES];
+                [map release];
+            }
             break;
         }
 
