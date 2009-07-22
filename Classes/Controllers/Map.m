@@ -57,6 +57,7 @@
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate 
                                                    addressDictionary:nil];
     [_mapView addAnnotation:placemark];
+    [placemark release];
 }
 
 @end

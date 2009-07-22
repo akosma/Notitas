@@ -18,7 +18,8 @@
 @interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,
                                                        NoteCellDelegate,
                                                        NoteEditorDelegate,
-                                                       CLLocationManagerDelegate> 
+                                                       CLLocationManagerDelegate,
+                                                       UIAlertViewDelegate> 
 {
 @private
 	NSFetchedResultsController *_fetchedResultsController;
@@ -31,5 +32,9 @@
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+- (IBAction)insertNewObject:(id)sender;
+- (IBAction)about:(id)sender;
+- (IBAction)removeAllNotes:(id)sender;
 
 @end

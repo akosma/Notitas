@@ -99,9 +99,54 @@
 }
 
 #pragma mark -
+#pragma mark UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
+    {
+        case 0:
+            // Cancel
+            break;
+            
+        case 1:
+        {
+            // OK
+            NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+            NSArray *notes = [_fetchedResultsController fetchedObjects];
+            for (Note *note in notes)
+            {
+                [context deleteObject:note];
+            }
+            
+            NSError *error;
+            if ([context save:&error]) 
+            {
+                [self.tableView reloadData];
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark -
 #pragma mark IBOutlet methods
 
-- (void)about:(id)sender
+- (IBAction)removeAllNotes:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove all the notes?"
+                                                    message:@"You will remove all the notes!\nThis action cannot be undone."
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+}
+
+- (IBAction)about:(id)sender
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
 	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
@@ -137,7 +182,7 @@
     }
 }
 
-- (void)insertNewObject:(id)sender
+- (IBAction)insertNewObject:(id)sender
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
 	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"

@@ -111,6 +111,12 @@
             NSString *subject = @"Note sent from Notitas by akosma";
             [composer setSubject:subject];
             [composer setMessageBody:message isHTML:NO];
+            
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.3];
+            _toolbar.transform = _hidingTransformation;
+            [UIView commitAnimations];            
+            
             [self presentModalViewController:composer animated:YES];
             [composer release];
             [message release];
@@ -141,6 +147,12 @@
                                                                   longitude:[_note.longitude doubleValue]];
                 map.location = location;
                 [location release];
+                
+                [UIView beginAnimations:nil context:NULL];
+                [UIView setAnimationDuration:0.3];
+                _toolbar.transform = _hidingTransformation;
+                [UIView commitAnimations];                
+                
                 [self presentModalViewController:map animated:YES];
                 [map release];
             }

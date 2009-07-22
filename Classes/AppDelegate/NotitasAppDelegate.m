@@ -39,30 +39,8 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
-    _rootController = [[RootViewController alloc] init];
 	_rootController.managedObjectContext = [self managedObjectContext];
-
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 437.0, 320.0, 43.0)];
-    _toolbar.barStyle = UIBarStyleBlackTranslucent;
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                               target:_rootController 
-                                                                               action:@selector(insertNewObject:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                                                   target:nil 
-                                                                                   action:nil];
-    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [infoButton addTarget:_rootController 
-                   action:@selector(about:) 
-         forControlEvents:UIControlEventTouchDown];
-    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-    NSArray *items = [[NSArray alloc] initWithObjects:addButton, flexibleSpace, infoBarButton, nil];
-    addButton.style = UIBarButtonItemStylePlain;
-    _toolbar.items = items;
-    [items release];
-    [addButton release];
-    [flexibleSpace release];
-    [infoBarButton release];
+    _toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0);
     
 	[_window addSubview:_rootController.view];
     [_window addSubview:_toolbar];

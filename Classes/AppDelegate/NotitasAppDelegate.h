@@ -16,9 +16,8 @@
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
 
     IBOutlet UIWindow *_window;
-    UIToolbar *_toolbar;
-
-    RootViewController *_rootController;
+    IBOutlet UIToolbar *_toolbar;
+    IBOutlet RootViewController *_rootController;
 }
 
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
