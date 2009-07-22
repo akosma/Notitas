@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "NoteEditorDelegate.h"
 
 @class Note;
 
-@interface NoteEditor : UIViewController <UIAlertViewDelegate>
+@interface NoteEditor : UIViewController <UIAlertViewDelegate, 
+                                          UIActionSheetDelegate,
+                                          MFMailComposeViewControllerDelegate>
 {
 @private
     IBOutlet UITextView *_textView;
