@@ -95,6 +95,7 @@
         {
             // E-mail
             MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+            composer.navigationBar.barStyle = UIBarStyleBlackTranslucent;
             composer.mailComposeDelegate = self;
             
             NSMutableString *message = [[NSMutableString alloc] init];
@@ -214,6 +215,9 @@
 
 - (void)viewDidLoad 
 {
+    // This line is required; otherwise, after calling dismissModalViewControllerAnimated:
+    // the whole editor appears 20 pixels down... weird!
+    self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
     _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
     _toolbar.transform = _hidingTransformation;
 }

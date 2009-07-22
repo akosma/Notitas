@@ -50,7 +50,7 @@
     CLLocationCoordinate2D coordinate = _location.coordinate;
     _mapView.centerCoordinate = coordinate;
     
-    MKCoordinateSpan span = MKCoordinateSpanMake(2.0, 2.0);
+    MKCoordinateSpan span = MKCoordinateSpanMake(1.0, 1.0);
     MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, span);
     
     _mapView.region = region;
