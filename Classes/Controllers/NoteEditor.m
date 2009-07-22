@@ -62,10 +62,13 @@
 
 - (IBAction)trash:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
-                                                    message:@"This action cannot be undone."
+    NSString *title = NSLocalizedString(@"Are you sure?", @"Title of the 'trash' dialog of the editor controller");
+    NSString *message = NSLocalizedString(@"This action cannot be undone.", @"Explanation of the 'trash' dialog of the editor controller");
+    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancel"
+                                          cancelButtonTitle:cancelText
                                           otherButtonTitles:@"OK", nil];
     [alert show];
     [alert release];
@@ -78,15 +81,20 @@
                                               cancelButtonTitle:nil 
                                          destructiveButtonTitle:nil 
                                               otherButtonTitles:nil];
+
+    NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
+    NSString *twitterrifficText = NSLocalizedString(@"Post using Twitterriffic", @"Button to send notes via Twitter");
+    NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
+    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
     
-    [sheet addButtonWithTitle:@"Send via e-mail"];
-    [sheet addButtonWithTitle:@"Post using Twitterriffic"];
+    [sheet addButtonWithTitle:emailText];
+    [sheet addButtonWithTitle:twitterrifficText];
     BOOL locationAvailable = [_note.hasLocation boolValue];
     if (locationAvailable)
     {
-        [sheet addButtonWithTitle:@"View location"];
+        [sheet addButtonWithTitle:locationText];
     }
-    [sheet addButtonWithTitle:@"Cancel"];
+    [sheet addButtonWithTitle:cancelText];
 
     sheet.cancelButtonIndex = (locationAvailable) ? 3 : 2;
     
@@ -111,14 +119,16 @@
             NSMutableString *message = [[NSMutableString alloc] init];
             if (_note.contents == nil)
             {
-                [message appendString:@"(empty note)"];
+                NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+                [message appendString:emptyNoteText];
             }
             else
             {
                 [message appendString:_note.contents];
             }
-            [message appendString:@"\n\nSent from Notitas by akosma - http://akosma.com/"];
-            NSString *subject = @"Note sent from Notitas by akosma";
+            NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+            [message appendString:sentFromText];
+            NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
             [composer setSubject:subject];
             [composer setMessageBody:message isHTML:NO];
             

@@ -191,7 +191,8 @@ static double randomAngle()
         Note *newNote = [self createNoteInContext:context];
         CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
         CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
-        newNote.contents = [NSString stringWithFormat:@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", latitude, longitude];
+        NSString *template = NSLocalizedString(@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", @"Message created by the 'location' button");
+        newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
         
         NSError *error;
         if ([context save:&error]) 
@@ -205,10 +206,13 @@ static double randomAngle()
 
 - (IBAction)removeAllNotes:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Remove all the notes?"
-                                                    message:@"You will remove all the notes!\nThis action cannot be undone."
+    NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
+    NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
+    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'Cancel' word");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancel"
+                                          cancelButtonTitle:cancelText
                                           otherButtonTitles:@"OK", nil];
     [alert show];
     [alert release];
@@ -218,7 +222,9 @@ static double randomAngle()
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
 	Note *newNote = [self createNoteInContext:context];
-    newNote.contents = @"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved";
+    
+    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved", @"Copyright text");
+    newNote.contents = copyright;
 
     NSError *error;
     if ([context save:&error]) 
