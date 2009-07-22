@@ -23,6 +23,8 @@
     IBOutlet UIToolbar *_toolbar;
     
     Note *_note;
+    NSInteger _twitterrifficButtonIndex;
+    NSInteger _locationButtonIndex;
     
     CGAffineTransform _hidingTransformation;
     

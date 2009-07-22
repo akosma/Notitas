@@ -88,15 +88,28 @@
     NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
     
     [sheet addButtonWithTitle:emailText];
-    [sheet addButtonWithTitle:twitterrifficText];
+    NSInteger sheetButtonCount = 1;
+    
+    NSString *stringURL = @"twitterrific:///post?message=test";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [sheet addButtonWithTitle:twitterrifficText];
+        sheetButtonCount += 1;
+        _twitterrifficButtonIndex = 1;
+    }    
+    
     BOOL locationAvailable = [_note.hasLocation boolValue];
     if (locationAvailable)
     {
         [sheet addButtonWithTitle:locationText];
+        sheetButtonCount += 1;
+        _locationButtonIndex = sheetButtonCount - 1;
     }
     [sheet addButtonWithTitle:cancelText];
+    sheetButtonCount += 1;
 
-    sheet.cancelButtonIndex = (locationAvailable) ? 3 : 2;
+    sheet.cancelButtonIndex = sheetButtonCount - 1;
     
     [sheet showInView:self.view];
     [sheet release];
@@ -107,55 +120,51 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) 
+    if (buttonIndex == 0)
     {
-        case 0:
-        {
-            // E-mail
-            MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-            composer.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-            composer.mailComposeDelegate = self;
-            
-            NSMutableString *message = [[NSMutableString alloc] init];
-            if (_note.contents == nil)
-            {
-                NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
-                [message appendString:emptyNoteText];
-            }
-            else
-            {
-                [message appendString:_note.contents];
-            }
-            NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
-            [message appendString:sentFromText];
-            NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
-            [composer setSubject:subject];
-            [composer setMessageBody:message isHTML:NO];
-            
-            [self disappear];
-            
-            [self presentModalViewController:composer animated:YES];
-            [composer release];
-            [message release];
-            break;
-        }
+        // E-mail
+        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+        composer.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+        composer.mailComposeDelegate = self;
 
-        case 1:
+        NSMutableString *message = [[NSMutableString alloc] init];
+        if (_note.contents == nil)
+        {
+            NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+            [message appendString:emptyNoteText];
+        }
+        else
+        {
+            [message appendString:_note.contents];
+        }
+        NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+        [message appendString:sentFromText];
+        NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+        [composer setSubject:subject];
+        [composer setMessageBody:message isHTML:NO];
+
+        [self disappear];
+
+        [self presentModalViewController:composer animated:YES];
+        [composer release];
+        [message release];
+    }
+    else
+    {
+        if (_twitterrifficButtonIndex == buttonIndex)
         {
             // Twitterriffic
             NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-                                                                          (CFStringRef)_note.contents,
-                                                                          NULL, 
-                                                                          (CFStringRef)@";/?:@&=+$,", 
-                                                                          kCFStringEncodingUTF8);
+                                                                                    (CFStringRef)_note.contents,
+                                                                                    NULL, 
+                                                                                    (CFStringRef)@";/?:@&=+$,", 
+                                                                                    kCFStringEncodingUTF8);
             NSString *stringURL = [NSString stringWithFormat:@"twitterrific:///post?message=%@", message];
             [message release];
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
-            break;
         }
-            
-        case 2:
+        else if (_locationButtonIndex == buttonIndex)
         {
             if ([_note.hasLocation boolValue])
             {
@@ -170,28 +179,20 @@
                 [self presentModalViewController:map animated:YES];
                 [map release];
             }
-            break;
         }
-
-//        case 2:
-//        {
-//            // TwitterFon
-//            // Delayed until the handling of URLs by TwitterFon includes removing %20 escapes...
-//            NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-//                                                                                    (CFStringRef)_note.contents,
-//                                                                                    NULL, 
-//                                                                                    (CFStringRef)@";/?:@&=+$,", 
-//                                                                                    kCFStringEncodingUTF8);
-//            NSString *stringURL = [NSString stringWithFormat:@"twitterfon:///post?%@", message];
-//            [message release];
-//            NSURL *url = [NSURL URLWithString:stringURL];
-//            [[UIApplication sharedApplication] openURL:url];
-//            break;
-//        }
-            
-        default:
-            break;
     }
+
+// TwitterFon
+// Delayed until the handling of URLs by TwitterFon includes removing %20 escapes...
+// NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
+//                                                                         (CFStringRef)_note.contents,
+//                                                                         NULL, 
+//                                                                         (CFStringRef)@";/?:@&=+$,", 
+//                                                                         kCFStringEncodingUTF8);
+// NSString *stringURL = [NSString stringWithFormat:@"twitterfon:///post?%@", message];
+// [message release];
+// NSURL *url = [NSURL URLWithString:stringURL];
+// [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark -
@@ -242,6 +243,8 @@
     self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
     _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
     _toolbar.transform = _hidingTransformation;
+    _twitterrifficButtonIndex = -1;
+    _locationButtonIndex = -1;
 }
 
 - (void)didReceiveMemoryWarning 
