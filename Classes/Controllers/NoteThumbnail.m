@@ -53,7 +53,7 @@
 - (void)setText:(NSString *)newText
 {
     CGFloat width = _summaryLabel.frame.size.width;
-    CGSize constraints = CGSizeMake(width, self.frame.size.height - 45.0);
+    CGSize constraints = CGSizeMake(width, 90.0);
     CGSize size = [newText sizeWithFont:_summaryLabel.font constrainedToSize:constraints];
     _summaryLabel.frame = CGRectMake(15.0, 20.0, width, size.height);
     _summaryLabel.text = newText;

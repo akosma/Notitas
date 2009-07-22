@@ -14,6 +14,9 @@
 
 @interface RootViewController (Private)
 - (NSFetchedResultsController *)fetchedResultsController;
+- (Note *)createNoteInContext:(NSManagedObjectContext *)context;
+- (void)scrollToBottomRow;
+- (void)newNoteWithLocation;
 @end
 
 
@@ -69,6 +72,15 @@
     [_locationManager startUpdatingLocation];
     
     _locationInformationAvailable = NO;
+    
+    NSString *firstRunKey = @"firstRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstRun = [defaults boolForKey:firstRunKey];
+    if (!firstRun)
+    {
+        [self about:nil];
+        [defaults setBool:YES forKey:firstRunKey];
+    }
 }
 
 - (void)didReceiveMemoryWarning 
@@ -90,6 +102,19 @@
            fromLocation:(CLLocation *)oldLocation
 {
     _locationInformationAvailable = YES;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *locationNoteKey = @"locationNoteKey";
+    if ([defaults objectForKey:locationNoteKey] == nil)
+    {
+        // Booleans are initialized to NO...
+        [defaults setBool:YES forKey:locationNoteKey];
+    }
+    BOOL noteWithLocation = [defaults boolForKey:locationNoteKey];
+    if (noteWithLocation)
+    {
+        [self newNoteWithLocation];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -149,64 +174,27 @@
 - (IBAction)about:(id)sender
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                  inManagedObjectContext:context];
-	
-    newNote.timeStamp = [NSDate date];
+	Note *newNote = [self createNoteInContext:context];
     newNote.contents = @"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved";
-    
-    // Create an angle for this note on the cardboard
-    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
-    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
-    newNote.angle = [NSNumber numberWithDouble:angle];
 
-    newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
-    if (_locationInformationAvailable)
-    {
-        newNote.latitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.latitude];
-        newNote.longitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.longitude];
-    }
-	
     NSError *error;
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
-        
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
-        NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
-        NSInteger row = rowsCount - 1;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-        [self.tableView scrollToRowAtIndexPath:indexPath
-                              atScrollPosition:UITableViewScrollPositionNone
-                                      animated:YES];
+        [self scrollToBottomRow];
     }
 }
 
 - (IBAction)insertNewObject:(id)sender
 {
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                  inManagedObjectContext:context];
-	
-    newNote.timeStamp = [NSDate date];
-
-    // Create an angle for this note on the cardboard
-    CGFloat sign = (random() % 2) == 0 ? -1.0 : 1.0;
-    CGFloat angle = sign * (random() % 20) * M_PI / 180.0;
-    newNote.angle = [NSNumber numberWithDouble:angle];
-	
+	[self createNoteInContext:context];
+    
     NSError *error;
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
-        
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
-        NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
-        NSInteger row = rowsCount - 1;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-        [self.tableView scrollToRowAtIndexPath:indexPath
-                              atScrollPosition:UITableViewScrollPositionNone
-                                      animated:YES];
+        [self scrollToBottomRow];
     }
 }
 
@@ -403,5 +391,54 @@
 	
 	return _fetchedResultsController;
 }    
+
+- (Note *)createNoteInContext:(NSManagedObjectContext *)context
+{
+	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                                  inManagedObjectContext:context];
+	
+    newNote.timeStamp = [NSDate date];
+    
+    // Create an angle for this note on the cardboard
+    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
+    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
+    newNote.angle = [NSNumber numberWithDouble:angle];
+    
+    newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
+    if (_locationInformationAvailable)
+    {
+        newNote.latitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.latitude];
+        newNote.longitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.longitude];
+    }
+    return newNote;
+}
+
+- (void)scrollToBottomRow
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+    NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
+    NSInteger row = rowsCount - 1;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionNone
+                                  animated:YES];
+}
+
+- (void)newNoteWithLocation
+{
+	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+	Note *newNote = [self createNoteInContext:context];
+    CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
+    CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
+    newNote.contents = [NSString stringWithFormat:@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f\n\n\
+(You can deactivate these notes in the iPhone Settings)", latitude, longitude];
+    
+    NSError *error;
+    if ([context save:&error]) 
+    {
+        [self.tableView reloadData];
+        [self scrollToBottomRow];
+    }
+}
 
 @end

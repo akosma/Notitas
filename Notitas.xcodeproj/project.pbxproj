@@ -17,6 +17,7 @@
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
 		3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A15C4FD10175D7B00ECB335 /* Map.xib */; };
 		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
+		3A1BDFA51017798A00775127 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFA41017798A00775127 /* Settings.bundle */; };
 		3A43DF321015F7A40004E73F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A43DF311015F7A40004E73F /* Note.m */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
@@ -48,6 +49,7 @@
 		3A15C4FD10175D7B00ECB335 /* Map.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Map.xib; sourceTree = "<group>"; };
 		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		3A1BDFA41017798A00775127 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3A43DF301015F7A40004E73F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		3A43DF311015F7A40004E73F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */,
 				3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */,
 				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
+				3A1BDFA41017798A00775127 /* Settings.bundle */,
 				3AC5BF77101597BA00D062A4 /* Images */,
 				3AC5BF78101597BA00D062A4 /* NIBs */,
 			);
@@ -283,6 +286,7 @@
 				3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */,
 				3AC5C3F41015EEE300D062A4 /* Default.png in Resources */,
 				3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */,
+				3A1BDFA51017798A00775127 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

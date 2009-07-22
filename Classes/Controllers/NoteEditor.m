@@ -10,6 +10,11 @@
 #import "Note.h"
 #import "Map.h"
 
+@interface NoteEditor (Private)
+- (void)disappear;
+@end
+
+
 @implementation NoteEditor
 
 @synthesize note = _note;
@@ -37,11 +42,7 @@
 
 - (IBAction)done:(id)sender
 {
-    [_textView resignFirstResponder];
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
-    _toolbar.transform = _hidingTransformation;
-	[UIView commitAnimations];    
+    [self disappear];
     
     _note.contents = _textView.text;
     if ([_delegate respondsToSelector:@selector(noteEditorDidFinishedEditing:)])
@@ -112,10 +113,7 @@
             [composer setSubject:subject];
             [composer setMessageBody:message isHTML:NO];
             
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationDuration:0.3];
-            _toolbar.transform = _hidingTransformation;
-            [UIView commitAnimations];            
+            [self disappear];
             
             [self presentModalViewController:composer animated:YES];
             [composer release];
@@ -148,10 +146,7 @@
                 map.location = location;
                 [location release];
                 
-                [UIView beginAnimations:nil context:NULL];
-                [UIView setAnimationDuration:0.3];
-                _toolbar.transform = _hidingTransformation;
-                [UIView commitAnimations];                
+                [self disappear];
                 
                 [self presentModalViewController:map animated:YES];
                 [map release];
@@ -194,11 +189,7 @@
         case 1:
         {
             // OK
-            [_textView resignFirstResponder];
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationDuration:0.3];
-            _toolbar.transform = _hidingTransformation;
-            [UIView commitAnimations];    
+            [self disappear];
             
             if ([_delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
             {
@@ -248,6 +239,18 @@
 	[UIView setAnimationDuration:0.3];
     _toolbar.transform = CGAffineTransformIdentity;
 	[UIView commitAnimations];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)disappear
+{
+    [_textView resignFirstResponder];
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+    _toolbar.transform = _hidingTransformation;
+	[UIView commitAnimations];    
 }
 
 @end
