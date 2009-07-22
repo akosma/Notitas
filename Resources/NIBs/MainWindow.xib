@@ -126,6 +126,7 @@
 						<int key="IBUISystemItemIdentifier">5</int>
 					</object>
 					<object class="IBUIBarButtonItem" id="692012288">
+						<bool key="IBUIEnabled">NO</bool>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">location.png</string>
@@ -213,6 +214,14 @@
 						<reference key="destination" ref="884716538"/>
 					</object>
 					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_locationButton</string>
+						<reference key="source" ref="884716538"/>
+						<reference key="destination" ref="692012288"/>
+					</object>
+					<int key="connectionID">57</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -389,7 +398,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">56</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -432,6 +441,7 @@
 							<string>insertNewObject:</string>
 							<string>newNoteWithLocation:</string>
 							<string>removeAllNotes:</string>
+							<string>shakeNotes:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -439,7 +449,12 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">_locationButton</string>
+						<string key="NS.object.0">UIBarButtonItem</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>

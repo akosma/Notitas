@@ -6,9 +6,13 @@
 //  Copyright akosma software 2009. All rights reserved.
 //
 
-@class RootViewController;
+#import <UIKit/UIKit.h>
 
-@interface NotitasAppDelegate : NSObject <UIApplicationDelegate> 
+@class RootViewController;
+@class SoundEffect;
+
+@interface NotitasAppDelegate : NSObject <UIApplicationDelegate, 
+                                          UIAccelerometerDelegate> 
 {
 @private
     NSManagedObjectModel *_managedObjectModel;
@@ -18,6 +22,9 @@
     IBOutlet UIWindow *_window;
     IBOutlet UIToolbar *_toolbar;
     IBOutlet RootViewController *_rootController;
+
+	CFTimeInterval _lastTime;
+    SoundEffect *_eraseSound;
 }
 
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
@@ -26,6 +33,7 @@
 + (NotitasAppDelegate *)sharedDelegate;
 
 - (IBAction)saveAction:sender;
+- (void)playEraseSound;
 
 @end
 

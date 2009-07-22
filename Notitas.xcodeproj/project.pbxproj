@@ -19,6 +19,9 @@
 		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A1BDFEE10177D3800775127 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFED10177D3800775127 /* location.png */; };
 		3A43DF321015F7A40004E73F /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A43DF311015F7A40004E73F /* Note.m */; };
+		3AA753B910179455007B3E5C /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA753B810179455007B3E5C /* SoundEffect.m */; };
+		3AA753C310179559007B3E5C /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3AA753C210179559007B3E5C /* Erase.caf */; };
+		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
 		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
@@ -52,6 +55,10 @@
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		3A43DF301015F7A40004E73F /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		3A43DF311015F7A40004E73F /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		3AA753B710179455007B3E5C /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
+		3AA753B810179455007B3E5C /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffect.m; sourceTree = "<group>"; };
+		3AA753C210179559007B3E5C /* Erase.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Erase.caf; sourceTree = "<group>"; };
+		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Notitas.xcdatamodel; sourceTree = "<group>"; };
 		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +96,7 @@
 				3A15C47D101754B600ECB335 /* MessageUI.framework in Frameworks */,
 				3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */,
 				3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */,
+				3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +135,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AA753E510179806007B3E5C /* AudioToolbox.framework */,
 				3A15C4C210175AB700ECB335 /* MapKit.framework */,
 				3A15C4BE10175AA500ECB335 /* CoreLocation.framework */,
 				3A15C47C101754B600ECB335 /* MessageUI.framework */,
@@ -138,6 +147,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3AA753BA1017953B007B3E5C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3AA753C210179559007B3E5C /* Erase.caf */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		3AC5BF76101597BA00D062A4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +162,7 @@
 				3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */,
 				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
 				3AC5BF77101597BA00D062A4 /* Images */,
+				3AA753BA1017953B007B3E5C /* Sounds */,
 				3AC5BF78101597BA00D062A4 /* NIBs */,
 			);
 			path = Resources;
@@ -214,6 +232,8 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3AA753B710179455007B3E5C /* SoundEffect.h */,
+				3AA753B810179455007B3E5C /* SoundEffect.m */,
 				3AC5C0481015B45F00D062A4 /* UIColor+Extensions.h */,
 				3AC5C0491015B45F00D062A4 /* UIColor+Extensions.m */,
 			);
@@ -287,6 +307,7 @@
 				3AC5C3F41015EEE300D062A4 /* Default.png in Resources */,
 				3A15C4FE10175D7B00ECB335 /* Map.xib in Resources */,
 				3A1BDFEE10177D3800775127 /* location.png in Resources */,
+				3AA753C310179559007B3E5C /* Erase.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +328,7 @@
 				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
 				3A43DF321015F7A40004E73F /* Note.m in Sources */,
 				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
+				3AA753B910179455007B3E5C /* SoundEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

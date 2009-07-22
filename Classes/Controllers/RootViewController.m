@@ -11,6 +11,15 @@
 #import "Note.h"
 #import "NoteThumbnail.h"
 #import "NoteEditor.h"
+#import "NotitasAppDelegate.h"
+
+static double randomAngle()
+{
+    // Create an angle for this note on the cardboard
+    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
+    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
+    return angle;
+}
 
 @interface RootViewController (Private)
 - (NSFetchedResultsController *)fetchedResultsController;
@@ -100,7 +109,13 @@
     didUpdateToLocation:(CLLocation *)newLocation 
            fromLocation:(CLLocation *)oldLocation
 {
-    _locationInformationAvailable = YES;
+    int latitude = (int)newLocation.coordinate.latitude;
+    int longitude = (int)newLocation.coordinate.longitude;
+    if (latitude != 0 && longitude != 0)
+    {
+        _locationInformationAvailable = YES;
+        _locationButton.enabled = YES;
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -133,6 +148,7 @@
             NSError *error;
             if ([context save:&error]) 
             {
+                [[NotitasAppDelegate sharedDelegate] playEraseSound];
                 [self.tableView reloadData];
             }
             break;
@@ -145,6 +161,22 @@
 
 #pragma mark -
 #pragma mark IBOutlet methods
+
+- (IBAction)shakeNotes:(id)sender
+{
+    NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+    NSArray *notes = [_fetchedResultsController fetchedObjects];
+    for (Note *note in notes)
+    {
+        note.angle = [NSNumber numberWithDouble:randomAngle()];
+    }
+    
+    NSError *error;
+    if ([context save:&error]) 
+    {
+        [self.tableView reloadData];
+    }
+}
 
 - (IBAction)newNoteWithLocation:(id)sender
 {
@@ -351,6 +383,8 @@
     _thumbnail.alpha = 0.0;
     _editor.view.alpha = 0.0;
     [UIView commitAnimations];
+    
+    [[NotitasAppDelegate sharedDelegate] playEraseSound];
 }
 
 #pragma mark -
@@ -403,11 +437,7 @@
                                                   inManagedObjectContext:context];
 	
     newNote.timeStamp = [NSDate date];
-    
-    // Create an angle for this note on the cardboard
-    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
-    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
-    newNote.angle = [NSNumber numberWithDouble:angle];
+    newNote.angle = [NSNumber numberWithDouble:randomAngle()];
     
     newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
     if (_locationInformationAvailable)

@@ -24,15 +24,19 @@
 @private
 	NSFetchedResultsController *_fetchedResultsController;
 	NSManagedObjectContext *_managedObjectContext;
+    
     NoteEditor *_editor;
     Note *_currentNote;
     NoteThumbnail *_thumbnail;
+    
+    IBOutlet UIBarButtonItem *_locationButton;
     CLLocationManager *_locationManager;
     BOOL _locationInformationAvailable;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
+- (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
 - (IBAction)about:(id)sender;
 - (IBAction)removeAllNotes:(id)sender;
