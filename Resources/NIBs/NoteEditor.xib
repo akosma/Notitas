@@ -42,8 +42,8 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUITextView" id="585430944">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 64}, {320, 200}}</string>
+						<int key="NSvFlags">258</int>
+						<string key="NSFrame">{{0, 20}, {320, 200}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -64,8 +64,8 @@
 					</object>
 					<object class="IBUIToolbar" id="620598499">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{0, 20}, {320, 44}}</string>
+						<int key="NSvFlags">290</int>
+						<string key="NSFrame">{{0, 220}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -73,9 +73,16 @@
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIBarButtonItem" id="363386975">
-								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="620598499"/>
 								<int key="IBUISystemItemIdentifier">16</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="1003496240">
+								<reference key="IBUIToolbar" ref="620598499"/>
+								<int key="IBUISystemItemIdentifier">5</int>
+							</object>
+							<object class="IBUIBarButtonItem" id="228600558">
+								<reference key="IBUIToolbar" ref="620598499"/>
+								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="910609867">
 								<reference key="IBUIToolbar" ref="620598499"/>
@@ -84,7 +91,7 @@
 							<object class="IBUIBarButtonItem" id="50880589">
 								<int key="IBUIStyle">2</int>
 								<reference key="IBUIToolbar" ref="620598499"/>
-								<int key="IBUISystemItemIdentifier">0</int>
+								<int key="IBUISystemItemIdentifier">3</int>
 							</object>
 						</object>
 					</object>
@@ -179,6 +186,8 @@
 							<reference ref="910609867"/>
 							<reference ref="50880589"/>
 							<reference ref="363386975"/>
+							<reference ref="228600558"/>
+							<reference ref="1003496240"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -197,6 +206,16 @@
 						<reference key="object" ref="910609867"/>
 						<reference key="parent" ref="620598499"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">20</int>
+						<reference key="object" ref="228600558"/>
+						<reference key="parent" ref="620598499"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="1003496240"/>
+						<reference key="parent" ref="620598499"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -210,6 +229,8 @@
 					<string>12.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
+					<string>20.IBPluginDependency</string>
+					<string>21.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 				</object>
@@ -217,7 +238,9 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>NoteEditor</string>
 					<string>UIResponder</string>
-					<string>{{416, 376}, {320, 480}}</string>
+					<string>{{302, 376}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -242,7 +265,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">19</int>
+			<int key="maxID">21</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

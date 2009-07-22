@@ -17,6 +17,8 @@
 
 @implementation NotitasAppDelegate
 
+@synthesize toolbar = _toolbar;
+
 + (NotitasAppDelegate *)sharedDelegate
 {
     return (NotitasAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -24,11 +26,11 @@
 
 - (void)dealloc 
 {
+    [_toolbar release];
     [_managedObjectContext release];
     [_managedObjectModel release];
     [_persistentStoreCoordinator release];
     [_rootController release];
-    [_navController release];
 	[super dealloc];
 }
 
@@ -39,13 +41,31 @@
 {
     _rootController = [[RootViewController alloc] init];
 	_rootController.managedObjectContext = [self managedObjectContext];
-    _navController = [[UINavigationController alloc] initWithRootViewController:_rootController];
-    _navController.toolbarHidden = NO;
-    _navController.toolbar.barStyle = UIBarStyleBlackTranslucent;
-    _navController.navigationBarHidden = YES;
-    _navController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	
-	[_window addSubview:[_navController view]];
+
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 437.0, 320.0, 43.0)];
+    _toolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+                                                                               target:_rootController 
+                                                                               action:@selector(insertNewObject:)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                                                                                   target:nil 
+                                                                                   action:nil];
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [infoButton addTarget:_rootController 
+                   action:@selector(about:) 
+         forControlEvents:UIControlEventTouchDown];
+    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    NSArray *items = [[NSArray alloc] initWithObjects:addButton, flexibleSpace, infoBarButton, nil];
+    addButton.style = UIBarButtonItemStylePlain;
+    _toolbar.items = items;
+    [items release];
+    [addButton release];
+    [flexibleSpace release];
+    [infoBarButton release];
+    
+	[_window addSubview:_rootController.view];
+    [_window addSubview:_toolbar];
     [_window makeKeyAndVisible];
 }
 

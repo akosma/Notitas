@@ -52,23 +52,7 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = 150.0;
-    
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                                               target:self 
-                                                                               action:@selector(insertNewObject:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                                                   target:nil 
-                                                                                   action:nil];
-    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [infoButton addTarget:self action:@selector(about:) forControlEvents:UIControlEventTouchDown];
-    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-    NSArray *items = [[NSArray alloc] initWithObjects:addButton, flexibleSpace, infoBarButton, nil];
-    addButton.style = UIBarButtonItemStylePlain;
-    self.toolbarItems = items;
-    [items release];
-    [addButton release];
-    [flexibleSpace release];
-    [infoBarButton release];
+	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
 	
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) 
@@ -189,6 +173,16 @@
     return rowsCount;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)] autorelease];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     static NSString *cellIdentifier = @"NoteCell";
@@ -231,7 +225,7 @@
 - (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
 {
     _currentNote = note;
-    CGRect realFrame = [self.navigationController.view convertRect:frame fromView:cell];
+    CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
     if (_thumbnail == nil)
     {
         _thumbnail = [[NoteThumbnail alloc] initWithFrame:realFrame];
@@ -248,8 +242,8 @@
     _thumbnail.alpha = 1.0;
     _thumbnail.transform = CGAffineTransformMakeRotation([note.angle doubleValue]);
 
-    [self.navigationController.view addSubview:_thumbnail];
-    [self.navigationController.view addSubview:_editor.view];
+    [self.tableView.window addSubview:_thumbnail];
+    [self.tableView.window addSubview:_editor.view];
     [_editor viewWillAppear:NO];
     
     [UIView beginAnimations:@"maximize" context:NULL];

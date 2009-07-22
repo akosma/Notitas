@@ -16,16 +16,17 @@
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
 
     IBOutlet UIWindow *_window;
+    UIToolbar *_toolbar;
 
     RootViewController *_rootController;
-    UINavigationController *_navController;
 }
+
+@property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
+@property (nonatomic, readonly) UIToolbar *toolbar;
 
 + (NotitasAppDelegate *)sharedDelegate;
 
 - (IBAction)saveAction:sender;
-
-@property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 
 @end
 
