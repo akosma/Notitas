@@ -111,8 +111,8 @@
     newNote.contents = @"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved";
     
     // Create an angle for this note on the cardboard
-    CGFloat sign = (random() % 2) == 0 ? -1.0 : 1.0;
-    CGFloat angle = sign * (random() % 20) * M_PI / 180.0;
+    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
+    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
     newNote.angle = [NSNumber numberWithDouble:angle];
 	
     NSError *error;
