@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="17"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -72,17 +72,17 @@
 						<int key="IBUIBarStyle">2</int>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="363386975">
+							<object class="IBUIBarButtonItem" id="228600558">
 								<reference key="IBUIToolbar" ref="620598499"/>
-								<int key="IBUISystemItemIdentifier">16</int>
+								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="1003496240">
 								<reference key="IBUIToolbar" ref="620598499"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="228600558">
+							<object class="IBUIBarButtonItem" id="363386975">
 								<reference key="IBUIToolbar" ref="620598499"/>
-								<int key="IBUISystemItemIdentifier">9</int>
+								<int key="IBUISystemItemIdentifier">16</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="910609867">
 								<reference key="IBUIToolbar" ref="620598499"/>
@@ -201,9 +201,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="910609867"/>
 							<reference ref="50880589"/>
-							<reference ref="363386975"/>
-							<reference ref="228600558"/>
 							<reference ref="1003496240"/>
+							<reference ref="228600558"/>
+							<reference ref="363386975"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
