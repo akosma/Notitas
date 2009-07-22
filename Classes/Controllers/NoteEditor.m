@@ -37,6 +37,11 @@
 - (IBAction)done:(id)sender
 {
     [_textView resignFirstResponder];
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+    _toolbar.transform = _hidingTransformation;
+	[UIView commitAnimations];    
+    
     _note.contents = _textView.text;
     if ([_delegate respondsToSelector:@selector(noteEditorDidFinishedEditing:)])
     {
@@ -46,15 +51,60 @@
 
 - (IBAction)trash:(id)sender
 {
-    [_textView resignFirstResponder];
-    if ([_delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Confirmation"
+                                                    message:@"Are you sure?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+}
+
+- (IBAction)action:(id)sender
+{
+    
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
     {
-        [_delegate noteEditorDidSendNoteToTrash:self];
+        case 0:
+            // Cancel
+            break;
+
+        case 1:
+        {
+            // OK
+            [_textView resignFirstResponder];
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.3];
+            _toolbar.transform = _hidingTransformation;
+            [UIView commitAnimations];    
+            
+            if ([_delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
+            {
+                [_delegate noteEditorDidSendNoteToTrash:self];
+            }
+            break;
+        }
+
+        default:
+            break;
     }
 }
 
 #pragma mark -
 #pragma mark UIViewController methods
+
+- (void)viewDidLoad 
+{
+    _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
+    _toolbar.transform = _hidingTransformation;
+}
 
 - (void)didReceiveMemoryWarning 
 {
@@ -65,6 +115,11 @@
 {
     _textView.text = _note.contents;
     [_textView becomeFirstResponder];
+
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+    _toolbar.transform = CGAffineTransformIdentity;
+	[UIView commitAnimations];
 }
 
 @end
