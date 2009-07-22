@@ -51,8 +51,8 @@
 
 - (IBAction)trash:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Confirmation"
-                                                    message:@"Are you sure?"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                                    message:@"This action cannot be undone."
                                                    delegate:self
                                           cancelButtonTitle:@"Cancel"
                                           otherButtonTitles:@"OK", nil];
