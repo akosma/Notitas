@@ -74,7 +74,7 @@
     BOOL locationAvailable = [_note.hasLocation boolValue];
     if (locationAvailable)
     {
-        [sheet addButtonWithTitle:@"See location"];
+        [sheet addButtonWithTitle:@"View location"];
     }
     [sheet addButtonWithTitle:@"Cancel"];
 
