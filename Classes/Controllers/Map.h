@@ -18,6 +18,7 @@
     IBOutlet MKMapView *_mapView;
     Note *_note;
     id<MKMapViewDelegate> _delegate;
+    MKPlacemark *_placemark;
 }
 
 @property (nonatomic, retain) Note *note;

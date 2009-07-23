@@ -27,6 +27,9 @@
 
 - (void)dealloc 
 {
+    [_mapView removeAnnotation:_placemark];
+    [_placemark release];
+
     _delegate = nil;
     [_note release];
     [super dealloc];
@@ -57,10 +60,13 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
     
     _mapView.region = region;
-    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate 
+    
+    [_mapView removeAnnotation:_placemark];
+    [_placemark release];
+
+    _placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate 
                                                    addressDictionary:nil];
-    [_mapView addAnnotation:placemark];
-    [placemark release];
+    [_mapView addAnnotation:_placemark];
 }
 
 @end
