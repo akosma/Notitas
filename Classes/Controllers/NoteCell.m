@@ -74,6 +74,7 @@
         _leftView.transform = trans;
         _leftView.text = _leftNote.contents;
         _leftView.color = _leftNote.colorCode;
+        _leftView.font = _leftNote.fontCode;
         _leftView.hidden = NO;
     }
 }
@@ -100,6 +101,7 @@
         _rightView.transform = trans;
         _rightView.text = _rightNote.contents;
         _rightView.color = _rightNote.colorCode;
+        _rightView.font = _rightNote.fontCode;
         _rightView.hidden = NO;
     }
 }

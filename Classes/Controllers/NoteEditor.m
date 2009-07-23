@@ -44,11 +44,21 @@
 #pragma mark -
 #pragma mark IBAction methods
 
+- (IBAction)changeFont:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFontNotification" 
+                                                        object:self];
+    int value = _note.fontCode + 1;
+    value = value % 4;
+    _note.fontFamily = [NSNumber numberWithInt:value];
+    _textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
+}
+
 - (IBAction)changeColor:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeColorNotification" 
                                                         object:self];
-    int value = [_note.color intValue] + 1;
+    int value = _note.colorCode + 1;
     value = value % 4;
     _note.color = [NSNumber numberWithInt:value];
 }
@@ -285,6 +295,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
     _textView.text = _note.contents;
+    _textView.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:24.0];
     [_textView becomeFirstResponder];
 
 	[UIView beginAnimations:nil context:NULL];

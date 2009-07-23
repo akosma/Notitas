@@ -23,6 +23,7 @@
 @dynamic colorCode;
 @dynamic location;
 @dynamic angleRadians;
+@dynamic fontCode;
 
 - (ColorCode)colorCode
 {
@@ -39,6 +40,11 @@
 - (double)angleRadians
 {
     return [self.angle doubleValue];
+}
+
+- (FontCode)fontCode
+{
+    return (FontCode)[self.fontFamily intValue];
 }
 
 @end

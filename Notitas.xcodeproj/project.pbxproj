@@ -44,6 +44,7 @@
 		3AC5C3F41015EEE300D062A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3F31015EEE300D062A4 /* Default.png */; };
 		3AE3056C1018544400D43A02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3056B1018544400D43A02 /* Localizable.strings */; };
 		3AE3057F1018572600D43A02 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3057E1018572600D43A02 /* Map.xib */; };
+		3AE3059910185A6800D43A02 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3059810185A6800D43A02 /* font.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,8 @@
 		3AE3056E1018544D00D43A02 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3056F1018546C00D43A02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3057E1018572600D43A02 /* Map.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Map.xib; sourceTree = "<group>"; };
+		3AE3059810185A6800D43A02 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
+		3AE3059F10185B4600D43A02 /* FontCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontCode.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Notitas-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Notitas-Info.plist"; path = "../Notitas-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +193,7 @@
 		3AC5BF77101597BA00D062A4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3AE3059810185A6800D43A02 /* font.png */,
 				3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */,
 				3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */,
 				3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */,
@@ -262,6 +266,7 @@
 				3AA753B710179455007B3E5C /* SoundEffect.h */,
 				3AA753B810179455007B3E5C /* SoundEffect.m */,
 				3AA7545D1017A1B7007B3E5C /* ColorCode.h */,
+				3AE3059F10185B4600D43A02 /* FontCode.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				3A9BA4BF10183B8E006F7A3F /* small_thumbnail3.png in Resources */,
 				3AE3056C1018544400D43A02 /* Localizable.strings in Resources */,
 				3AE3057F1018572600D43A02 /* Map.xib in Resources */,
+				3AE3059910185A6800D43A02 /* font.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

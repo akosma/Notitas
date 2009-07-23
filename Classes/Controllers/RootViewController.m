@@ -13,6 +13,7 @@
 #import "NoteEditor.h"
 #import "NotitasAppDelegate.h"
 #import "ColorCode.h"
+#import "FontCode.h"
 
 static double randomAngle()
 {
@@ -20,6 +21,12 @@ static double randomAngle()
     CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
     CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
     return angle;
+}
+
+static FontCode randomFont()
+{
+    FontCode code = (FontCode)(arc4random() % 4);
+    return code;
 }
 
 static ColorCode randomColorCode()
@@ -464,6 +471,7 @@ static ColorCode randomColorCode()
 	
     newNote.timeStamp = [NSDate date];
     newNote.angle = [NSNumber numberWithDouble:randomAngle()];
+    newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
     newNote.color = [NSNumber numberWithInt:randomColorCode()];
     
     newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];

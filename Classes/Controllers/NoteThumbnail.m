@@ -12,6 +12,7 @@
 
 @dynamic text;
 @dynamic color;
+@dynamic font;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -30,13 +31,17 @@
         _summaryLabel = [[UILabel alloc] initWithFrame:rect];
         _summaryLabel.backgroundColor = [UIColor clearColor];
         _summaryLabel.numberOfLines = 0;
-        _summaryLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
         
         [self addSubview:_summaryLabel];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeColor:) 
                                                      name:@"ChangeColorNotification"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFont:)
+                                                     name:@"ChangeFontNotification"
                                                    object:nil];
     }
     return self;
@@ -78,8 +83,26 @@
     _backgroundView.image = [UIImage imageNamed:imageName];
 }
 
+- (FontCode)font
+{
+    return _font;
+}
+
+- (void)setFont:(FontCode)newCode
+{
+    _font = newCode;
+    _summaryLabel.font = [UIFont fontWithName:fontNameForCode(_font) size:12.0];
+}
+
 #pragma mark -
 #pragma mark NSNotification handler
+
+- (void)changeFont:(NSNotification *)notification
+{
+    int value = (int)_font + 1;
+    FontCode newColor = (FontCode)(value % 4);
+    [self setFont:newColor];
+}
 
 - (void)changeColor:(NSNotification *)notification
 {

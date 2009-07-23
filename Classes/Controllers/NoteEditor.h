@@ -43,5 +43,6 @@
 - (IBAction)done:(id)sender;
 - (IBAction)action:(id)sender;
 - (IBAction)trash:(id)sender;
+- (IBAction)changeFont:(id)sender;
 
 @end

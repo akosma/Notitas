@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ColorCode.h"
+#import "FontCode.h"
 
 @interface Note :  NSManagedObject  
 {
@@ -21,11 +22,12 @@
 @property (nonatomic, retain) NSDate * timeStamp;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSString * contents;
-@property (nonatomic, retain) NSString * fontFamily;
+@property (nonatomic, retain) NSNumber * fontFamily;
 @property (nonatomic, retain) NSNumber * hasLocation;
 
 @property (nonatomic, readonly) ColorCode colorCode;
 @property (nonatomic, readonly) CLLocation *location;
 @property (nonatomic, readonly) double angleRadians;
+@property (nonatomic, readonly) FontCode fontCode;
 
 @end
