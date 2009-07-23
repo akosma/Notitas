@@ -34,6 +34,8 @@
 
 - (void)dealloc 
 {
+    _map.delegate = nil;
+    [_map release];
     [_note release];
     _delegate = nil;
     [super dealloc];
@@ -170,14 +172,15 @@
         {
             if ([_note.hasLocation boolValue])
             {
-                Map *map = [[Map alloc] init];
-                map.delegate = self;
-                map.note = _note;
+                if (_map == nil)
+                {
+                    _map = [[Map alloc] init];
+                    _map.delegate = self;
+                }
+                _map.note = _note;
                 
                 [self disappear];
-                
-                [self presentModalViewController:map animated:YES];
-                [map release];
+                [self presentModalViewController:_map animated:YES];
             }
         }
     }
@@ -270,6 +273,9 @@
 - (void)didReceiveMemoryWarning 
 {
     [super didReceiveMemoryWarning];
+    _map.delegate = nil;
+    [_map release];
+    _map = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated 

@@ -14,6 +14,7 @@
 #import "NoteEditorDelegate.h"
 
 @class Note;
+@class Map;
 
 @interface NoteEditor : UIViewController <UIAlertViewDelegate, 
                                           UIActionSheetDelegate,
@@ -31,6 +32,8 @@
     CGAffineTransform _hidingTransformation;
     
     id<NoteEditorDelegate> _delegate;
+    
+    Map *_map;
 }
 
 @property (nonatomic, retain) Note *note;
