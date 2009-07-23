@@ -32,11 +32,10 @@
 
 - (void)dealloc 
 {
-    [_toolbar release];
     [_managedObjectContext release];
     [_managedObjectModel release];
     [_persistentStoreCoordinator release];
-    [_rootController release];
+    [_eraseSound release];
 	[super dealloc];
 }
 

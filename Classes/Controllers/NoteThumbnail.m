@@ -45,6 +45,7 @@
 - (void)dealloc 
 {
     [_summaryLabel release];
+    [_backgroundView release];
     [super dealloc];
 }
 

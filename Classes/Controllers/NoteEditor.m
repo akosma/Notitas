@@ -34,6 +34,7 @@
 
 - (void)dealloc 
 {
+    [_note release];
     _delegate = nil;
     [super dealloc];
 }
