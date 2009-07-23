@@ -59,112 +59,6 @@ static double randomAngle()
 }
 
 #pragma mark -
-#pragma mark UIView methods
-
-- (void)viewDidLoad 
-{
-    [super viewDidLoad];
-
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.rowHeight = 150.0;
-	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
-	
-	NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error]) 
-    {
-	}
-    
-    [self checkTrashIconEnabled];
-    
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = 100;
-    [_locationManager startUpdatingLocation];
-    
-    _locationInformationAvailable = NO;
-    
-    NSString *firstRunKey = @"firstRunKey";
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL firstRun = [defaults boolForKey:firstRunKey];
-    if (!firstRun)
-    {
-        [self about:nil];
-        [defaults setBool:YES forKey:firstRunKey];
-    }
-}
-
-- (void)didReceiveMemoryWarning 
-{
-    [super didReceiveMemoryWarning];
-    [_thumbnail release];
-    _thumbnail = nil;
-
-    _editor.delegate = nil;
-    [_editor release];
-    _editor = nil;
-}
-
-#pragma mark -
-#pragma mark CLLocationManagerDelegate methods
-
-- (void)locationManager:(CLLocationManager *)manager 
-    didUpdateToLocation:(CLLocation *)newLocation 
-           fromLocation:(CLLocation *)oldLocation
-{
-    int latitude = (int)newLocation.coordinate.latitude;
-    int longitude = (int)newLocation.coordinate.longitude;
-    if (latitude != 0 && longitude != 0)
-    {
-        _locationInformationAvailable = YES;
-        _locationButton.enabled = YES;
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    [_locationManager stopUpdatingLocation];
-    _locationInformationAvailable = NO;
-}
-
-#pragma mark -
-#pragma mark UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) 
-    {
-        case 0:
-            // Cancel
-            break;
-            
-        case 1:
-        {
-            // OK
-            NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-            NSArray *notes = [_fetchedResultsController fetchedObjects];
-            for (Note *note in notes)
-            {
-                [context deleteObject:note];
-            }
-            
-            NSError *error;
-            if ([context save:&error]) 
-            {
-                [[NotitasAppDelegate sharedDelegate] playEraseSound];
-                [self.tableView reloadData];
-                _trashButton.enabled = NO;
-            }
-            break;
-        }
-            
-        default:
-            break;
-    }
-}
-
-#pragma mark -
 #pragma mark IBOutlet methods
 
 - (IBAction)shakeNotes:(id)sender
@@ -361,7 +255,7 @@ static double randomAngle()
 }
 
 #pragma mark -
-#pragma mark noteEditorDelegate methods
+#pragma mark NoteEditorDelegate methods
 
 - (void)noteEditorDidFinishedEditing:(NoteEditor *)editor
 {
@@ -404,6 +298,64 @@ static double randomAngle()
 }
 
 #pragma mark -
+#pragma mark CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager 
+    didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation
+{
+    int latitude = (int)newLocation.coordinate.latitude;
+    int longitude = (int)newLocation.coordinate.longitude;
+    if (latitude != 0 && longitude != 0)
+    {
+        _locationInformationAvailable = YES;
+        _locationButton.enabled = YES;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [_locationManager stopUpdatingLocation];
+    _locationInformationAvailable = NO;
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
+    {
+        case 0:
+            // Cancel
+            break;
+            
+        case 1:
+        {
+            // OK
+            NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+            NSArray *notes = [_fetchedResultsController fetchedObjects];
+            for (Note *note in notes)
+            {
+                [context deleteObject:note];
+            }
+            
+            NSError *error;
+            if ([context save:&error]) 
+            {
+                [[NotitasAppDelegate sharedDelegate] playEraseSound];
+                [self.tableView reloadData];
+                _trashButton.enabled = NO;
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark -
 #pragma mark UIView animation delegate methods
 
 - (void)animationFinished:(NSString *)animationID finished:(BOOL)finished context:(void *)context
@@ -416,6 +368,53 @@ static double randomAngle()
     }
 }
 
+#pragma mark -
+#pragma mark UIView methods
+
+- (void)viewDidLoad 
+{
+    [super viewDidLoad];
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.rowHeight = 150.0;
+	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
+	
+	NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) 
+    {
+	}
+    
+    [self checkTrashIconEnabled];
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 100;
+    [_locationManager startUpdatingLocation];
+    
+    _locationInformationAvailable = NO;
+    
+    NSString *firstRunKey = @"firstRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstRun = [defaults boolForKey:firstRunKey];
+    if (!firstRun)
+    {
+        [self about:nil];
+        [defaults setBool:YES forKey:firstRunKey];
+    }
+}
+
+- (void)didReceiveMemoryWarning 
+{
+    [super didReceiveMemoryWarning];
+    [_thumbnail release];
+    _thumbnail = nil;
+    
+    _editor.delegate = nil;
+    [_editor release];
+    _editor = nil;
+}
 
 #pragma mark -
 #pragma mark Private methods
