@@ -49,10 +49,7 @@
 
 - (void)viewDidLoad
 {
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:[_note.latitude doubleValue]
-                                                      longitude:[_note.longitude doubleValue]];
-    CLLocationCoordinate2D coordinate = location.coordinate;
-    [location release];
+    CLLocationCoordinate2D coordinate = _note.location.coordinate;
     _mapView.delegate = _delegate;
     _mapView.centerCoordinate = coordinate;
     

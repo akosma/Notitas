@@ -232,7 +232,7 @@ static ColorCode randomColorCode()
         _thumbnail = [[NoteThumbnail alloc] initWithFrame:realFrame];
     }
     _thumbnail.frame = realFrame;
-    _thumbnail.color = (ColorCode)[_currentNote.color intValue];
+    _thumbnail.color = _currentNote.colorCode;
     if (_editor == nil)
     {
         _editor = [[NoteEditor alloc] init];
@@ -242,7 +242,7 @@ static ColorCode randomColorCode()
     _editor.note = _currentNote;
 
     _thumbnail.alpha = 1.0;
-    _thumbnail.transform = CGAffineTransformMakeRotation([note.angle doubleValue]);
+    _thumbnail.transform = CGAffineTransformMakeRotation(note.angleRadians);
 
     [self.tableView.window addSubview:_thumbnail];
     [self.tableView.window addSubview:_editor.view];
@@ -276,7 +276,7 @@ static ColorCode randomColorCode()
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
-    _thumbnail.transform = CGAffineTransformMakeRotation([_currentNote.angle doubleValue]);
+    _thumbnail.transform = CGAffineTransformMakeRotation(_currentNote.angleRadians);
     _editor.view.alpha = 0.0;
     [UIView commitAnimations];
 }

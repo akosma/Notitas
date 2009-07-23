@@ -20,4 +20,25 @@
 @dynamic fontFamily;
 @dynamic hasLocation;
 
+@dynamic colorCode;
+@dynamic location;
+@dynamic angleRadians;
+
+- (ColorCode)colorCode
+{
+    return (ColorCode)[self.color intValue];
+}
+
+- (CLLocation *)location
+{
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue]
+                                                      longitude:[self.longitude doubleValue]];
+    return [location autorelease];
+}
+
+- (double)angleRadians
+{
+    return [self.angle doubleValue];
+}
+
 @end

@@ -70,10 +70,10 @@
     }
     else
     {
-        CGAffineTransform trans = CGAffineTransformMakeRotation([_leftNote.angle doubleValue]);
+        CGAffineTransform trans = CGAffineTransformMakeRotation(_leftNote.angleRadians);
         _leftView.transform = trans;
         _leftView.text = _leftNote.contents;
-        _leftView.color = (ColorCode)[_leftNote.color intValue];
+        _leftView.color = _leftNote.colorCode;
         _leftView.hidden = NO;
     }
 }
@@ -96,10 +96,10 @@
     }
     else
     {
-        CGAffineTransform trans = CGAffineTransformMakeRotation([_rightNote.angle doubleValue]);
+        CGAffineTransform trans = CGAffineTransformMakeRotation(_rightNote.angleRadians);
         _rightView.transform = trans;
         _rightView.text = _rightNote.contents;
-        _rightView.color = (ColorCode)[_rightNote.color intValue];
+        _rightView.color = _rightNote.colorCode;
         _rightView.hidden = NO;
     }
 }

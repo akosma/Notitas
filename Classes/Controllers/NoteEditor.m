@@ -207,10 +207,10 @@
                                                        reuseIdentifier:identifier] autorelease];
     }
     
-    ColorCode code = (ColorCode)[_note.color intValue];
+    ColorCode code = _note.colorCode;
     NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d.png", code];
     annotationView.image = [UIImage imageNamed:imageName];
-    annotationView.transform = CGAffineTransformMakeRotation([_note.angle doubleValue]);
+    annotationView.transform = CGAffineTransformMakeRotation(_note.angleRadians);
     return annotationView;
 }
 
