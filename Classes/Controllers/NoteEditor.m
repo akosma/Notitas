@@ -142,7 +142,6 @@
     {
         // E-mail
         MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-        composer.navigationBar.barStyle = UIBarStyleBlackTranslucent;
         composer.mailComposeDelegate = self;
 
         NSMutableString *message = [[NSMutableString alloc] init];

@@ -2,7 +2,7 @@
 "(empty note)" = "(nota vacía)";
 
 /* Some marketing here */
-"\n\nSent from Notitas by akosma - http://akosma.com/" = "\n\nEnviado desde Notitas por akosma - http://akosma.com/";
+"\n\nSent from Notitas by akosma - http://akosma.com/" = "\n\nEnviado desde Notitas por akosma - http://muchasnotitas.com/";
 
 /* Title of the 'trash' dialog of the editor controller */
 "Are you sure?" = "Está seguro?";
@@ -17,7 +17,7 @@
 "Note sent from Notitas by akosma" = "Nota enviada desde Notitas por akosma";
 
 /* Copyright text */
-"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas por akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nTodos Derechos Reservados";
+"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas por akosma\nhttp://muchasnotitas.com/\nCopyright 2009 © akosma software\nTodos Derechos Reservados";
 
 /* Button to send notes via Twitter */
 "Post using Twitterriffic" = "Twittear con Twitterriffic";
