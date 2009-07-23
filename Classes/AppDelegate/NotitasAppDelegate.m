@@ -58,6 +58,26 @@
     [_window makeKeyAndVisible];
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+{
+    if ([[url scheme] isEqualToString:@"notitas"])
+    {
+        if ([[url path] isEqualToString:@"/new"])
+        {
+            NSString *parameter = [url query];
+            CFStringRef clean = CFURLCreateStringByReplacingPercentEscapes(kCFAllocatorDefault, 
+                                                                           (CFStringRef)parameter, 
+                                                                           CFSTR(""));
+            
+            [_rootController createNewNoteWithContents:(NSString *)clean];
+            CFRelease(clean);
+            return YES;
+        }
+        return NO;
+    }
+    return NO;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application 
 {
     NSError *error;

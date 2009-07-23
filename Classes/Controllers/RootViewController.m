@@ -72,7 +72,22 @@ static ColorCode randomColorCode()
 }
 
 #pragma mark -
-#pragma mark IBOutlet methods
+#pragma mark Public methods
+
+- (void)createNewNoteWithContents:(NSString *)contents
+{
+	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+	Note *newNote = [self createNoteInContext:context];
+    newNote.contents = contents;
+    
+    NSError *error;
+    if ([context save:&error]) 
+    {
+        [self.tableView reloadData];
+        [self scrollToBottomRow];
+        _trashButton.enabled = YES;
+    }
+}
 
 - (IBAction)shakeNotes:(id)sender
 {

@@ -28,5 +28,16 @@
 	<string>MainWindow</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleBlackTranslucent</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.akosma.Notitas</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>notitas</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

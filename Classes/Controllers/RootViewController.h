@@ -44,4 +44,6 @@
 - (IBAction)removeAllNotes:(id)sender;
 - (IBAction)newNoteWithLocation:(id)sender;
 
+- (void)createNewNoteWithContents:(NSString *)contents;
+
 @end
