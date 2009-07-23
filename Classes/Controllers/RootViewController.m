@@ -377,6 +377,11 @@ static ColorCode randomColorCode()
 #pragma mark -
 #pragma mark UIView methods
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self scrollToBottomRow];
+}
+
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
@@ -472,15 +477,18 @@ static ColorCode randomColorCode()
 
 - (void)scrollToBottomRow
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
-    NSInteger itemCount = [sectionInfo numberOfObjects];
-    NSInteger rowsCount = ceil(itemCount / 2.0);
-    NSInteger row = rowsCount - 1;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath
-                          atScrollPosition:UITableViewScrollPositionNone
-                                  animated:YES];
-    
+    NSArray *sections = [_fetchedResultsController sections];
+    if ([sections count] > 0)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        NSInteger itemCount = [sectionInfo numberOfObjects];
+        NSInteger rowsCount = ceil(itemCount / 2.0);
+        NSInteger row = rowsCount - 1;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionNone
+                                      animated:YES];
+    }
 }
 
 - (void)checkTrashIconEnabled
