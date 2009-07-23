@@ -10,6 +10,7 @@
 #import "Note.h"
 #import "Map.h"
 #import "ColorCode.h"
+#import "NotitasAppDelegate.h"
 
 @interface NoteEditor (Private)
 - (void)disappear;
@@ -119,7 +120,7 @@
     }    
     
     BOOL locationAvailable = [_note.hasLocation boolValue];
-    if (locationAvailable)
+    if (locationAvailable && [NotitasAppDelegate sharedDelegate].networkConnectivityAvailable)
     {
         [sheet addButtonWithTitle:locationText];
         _locationButtonIndex = sheetButtonCount;

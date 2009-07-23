@@ -9,6 +9,7 @@
 #import "NotitasAppDelegate.h"
 #import "RootViewController.h"
 #import "SoundEffect.h"
+#import "Reachability.h"
 
 #define kAccelerometerFrequency			25 //Hz
 #define kFilteringFactor				0.1
@@ -24,6 +25,7 @@
 @implementation NotitasAppDelegate
 
 @synthesize toolbar = _toolbar;
+@synthesize networkConnectivityAvailable = _networkConnectivityAvailable;
 
 + (NotitasAppDelegate *)sharedDelegate
 {
@@ -52,6 +54,25 @@
     
     NSBundle *mainBundle = [NSBundle mainBundle];	
     _eraseSound = [[SoundEffect alloc] initWithContentsOfFile:[mainBundle pathForResource:@"Erase" ofType:@"caf"]];
+    
+    // Let's be optimists :)
+    _networkConnectivityAvailable = YES;
+    // Check if the Google is available (for the maps!)
+    Reachability *reachability = [Reachability sharedReachability];
+    reachability.hostName = @"www.google.com";
+
+    // triggers the request, at first synchronously (bug in Reachability, see
+    // http://www.alexcurylo.com/blog/2009/05/01/code-reachability/
+    NetworkStatus remoteHostStatus = [[Reachability sharedReachability] remoteHostStatus];
+    _networkConnectivityAvailable = (remoteHostStatus != NotReachable);
+
+    // Now asynchronously...
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:@"kNetworkReachabilityChangedNotification" 
+                                               object:reachability];
+    reachability.networkStatusNotificationsEnabled = YES;
+    [reachability remoteHostStatus];
     
 	[_window addSubview:_rootController.view];
     [_window addSubview:_toolbar];
@@ -137,6 +158,15 @@
 		_lastTime = CFAbsoluteTimeGetCurrent();
         [_rootController shakeNotes:self];
 	}
+}
+
+#pragma mark -
+#pragma mark NSNotification handlers
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    NetworkStatus remoteHostStatus = [[Reachability sharedReachability] remoteHostStatus];
+    _networkConnectivityAvailable = (remoteHostStatus != NotReachable);
 }
 
 #pragma mark -

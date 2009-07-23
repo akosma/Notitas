@@ -17,6 +17,8 @@
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
 		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A1BDFEE10177D3800775127 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFED10177D3800775127 /* location.png */; };
+		3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7761CB1018A706009F0CD1 /* Reachability.m */; };
+		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -61,6 +63,9 @@
 		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		3A7761CA1018A706009F0CD1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3A7761CB1018A706009F0CD1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 				3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */,
 				3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */,
 				3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */,
+				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +162,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */,
 				3AA753E510179806007B3E5C /* AudioToolbox.framework */,
 				3A15C4C210175AB700ECB335 /* MapKit.framework */,
 				3A15C4BE10175AA500ECB335 /* CoreLocation.framework */,
@@ -263,6 +270,8 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3A7761CA1018A706009F0CD1 /* Reachability.h */,
+				3A7761CB1018A706009F0CD1 /* Reachability.m */,
 				3AA753B710179455007B3E5C /* SoundEffect.h */,
 				3AA753B810179455007B3E5C /* SoundEffect.m */,
 				3AA7545D1017A1B7007B3E5C /* ColorCode.h */,
@@ -379,6 +388,7 @@
 				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
 				3AA753B910179455007B3E5C /* SoundEffect.m in Sources */,
 				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
+				3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

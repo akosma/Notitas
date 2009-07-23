@@ -25,10 +25,13 @@
 
 	CFTimeInterval _lastTime;
     SoundEffect *_eraseSound;
+    
+    BOOL _networkConnectivityAvailable;
 }
 
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 @property (nonatomic, readonly) UIToolbar *toolbar;
+@property (nonatomic, readonly) BOOL networkConnectivityAvailable;
 
 + (NotitasAppDelegate *)sharedDelegate;
 
