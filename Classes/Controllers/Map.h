@@ -10,14 +10,18 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class Note;
+
 @interface Map : UIViewController 
 {
 @private
     IBOutlet MKMapView *_mapView;
-    CLLocation *_location;
+    Note *_note;
+    id<MKMapViewDelegate> _delegate;
 }
 
-@property (nonatomic, retain) CLLocation *location;
+@property (nonatomic, retain) Note *note;
+@property (nonatomic, assign) id<MKMapViewDelegate> delegate;
 
 - (IBAction)done:(id)sender;
 

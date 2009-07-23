@@ -10,13 +10,15 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 #import "NoteEditorDelegate.h"
 
 @class Note;
 
 @interface NoteEditor : UIViewController <UIAlertViewDelegate, 
                                           UIActionSheetDelegate,
-                                          MFMailComposeViewControllerDelegate>
+                                          MFMailComposeViewControllerDelegate,
+                                          MKMapViewDelegate>
 {
 @private
     IBOutlet UITextView *_textView;

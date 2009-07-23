@@ -7,10 +7,12 @@
 //
 
 #import "Map.h"
+#import "Note.h"
 
 @implementation Map
 
-@synthesize location = _location;
+@synthesize note = _note;
+@synthesize delegate = _delegate;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -25,7 +27,7 @@
 
 - (void)dealloc 
 {
-    [_location release];
+    [_note release];
     [super dealloc];
 }
 
@@ -45,13 +47,16 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    CLLocationCoordinate2D coordinate = _location.coordinate;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[_note.latitude doubleValue]
+                                                      longitude:[_note.longitude doubleValue]];
+    CLLocationCoordinate2D coordinate = location.coordinate;
+    [location release];
+    _mapView.delegate = _delegate;
     _mapView.centerCoordinate = coordinate;
     
-    MKCoordinateSpan span = MKCoordinateSpanMake(1.0, 1.0);
-    MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, span);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
     
     _mapView.region = region;
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate 

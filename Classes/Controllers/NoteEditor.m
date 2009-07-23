@@ -9,6 +9,7 @@
 #import "NoteEditor.h"
 #import "Note.h"
 #import "Map.h"
+#import "ColorCode.h"
 
 @interface NoteEditor (Private)
 - (void)disappear;
@@ -169,10 +170,8 @@
             if ([_note.hasLocation boolValue])
             {
                 Map *map = [[Map alloc] init];
-                CLLocation *location = [[CLLocation alloc] initWithLatitude:[_note.latitude doubleValue] 
-                                                                  longitude:[_note.longitude doubleValue]];
-                map.location = location;
-                [location release];
+                map.delegate = self;
+                map.note = _note;
                 
                 [self disappear];
                 
@@ -193,6 +192,26 @@
 // [message release];
 // NSURL *url = [NSURL URLWithString:stringURL];
 // [[UIApplication sharedApplication] openURL:url];
+}
+
+#pragma mark -
+#pragma mark MKMapViewDelegate methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    static NSString *identifier = @"Annotation";
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    if (annotationView == nil)
+    {
+        annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation 
+                                                       reuseIdentifier:identifier] autorelease];
+    }
+    
+    ColorCode code = (ColorCode)[_note.color intValue];
+    NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d.png", code];
+    annotationView.image = [UIImage imageNamed:imageName];
+    annotationView.transform = CGAffineTransformMakeRotation([_note.angle doubleValue]);
+    return annotationView;
 }
 
 #pragma mark -
