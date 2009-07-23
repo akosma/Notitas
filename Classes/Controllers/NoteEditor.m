@@ -52,6 +52,7 @@
     value = value % 4;
     _note.fontFamily = [NSNumber numberWithInt:value];
     _textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
+    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
 }
 
 - (IBAction)changeColor:(id)sender
@@ -90,6 +91,9 @@
 
 - (IBAction)action:(id)sender
 {
+    // Make sure that the latest contents are available for the actions
+    _note.contents = _textView.text;
+
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                        delegate:self 
                                               cancelButtonTitle:nil 
@@ -109,21 +113,20 @@
     if ([[UIApplication sharedApplication] canOpenURL:url])
     {
         [sheet addButtonWithTitle:twitterrifficText];
+        _twitterrifficButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
-        _twitterrifficButtonIndex = 1;
     }    
     
     BOOL locationAvailable = [_note.hasLocation boolValue];
     if (locationAvailable)
     {
         [sheet addButtonWithTitle:locationText];
+        _locationButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
-        _locationButtonIndex = sheetButtonCount - 1;
     }
     [sheet addButtonWithTitle:cancelText];
+    sheet.cancelButtonIndex = sheetButtonCount;
     sheetButtonCount += 1;
-
-    sheet.cancelButtonIndex = sheetButtonCount - 1;
     
     [sheet showInView:self.view];
     [sheet release];
@@ -142,7 +145,7 @@
         composer.mailComposeDelegate = self;
 
         NSMutableString *message = [[NSMutableString alloc] init];
-        if (_note.contents == nil)
+        if (_note.contents == nil || [_note.contents length] == 0)
         {
             NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
             [message appendString:emptyNoteText];
@@ -294,6 +297,8 @@
 
 - (void)viewWillAppear:(BOOL)animated 
 {
+    _timeStampLabel.text = _note.timeString; 
+    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:12.0];
     _textView.text = _note.contents;
     _textView.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:24.0];
     [_textView becomeFirstResponder];

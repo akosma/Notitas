@@ -24,6 +24,7 @@
 @private
     IBOutlet UITextView *_textView;
     IBOutlet UIToolbar *_toolbar;
+    IBOutlet UILabel *_timeStampLabel;
     
     Note *_note;
     NSInteger _twitterrifficButtonIndex;

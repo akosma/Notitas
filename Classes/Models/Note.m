@@ -24,6 +24,7 @@
 @dynamic location;
 @dynamic angleRadians;
 @dynamic fontCode;
+@dynamic timeString;
 
 - (ColorCode)colorCode
 {
@@ -45,6 +46,18 @@
 - (FontCode)fontCode
 {
     return (FontCode)[self.fontFamily intValue];
+}
+
+- (NSString *)timeString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    
+    NSString *result = [dateFormatter stringFromDate:self.timeStamp];
+    [dateFormatter release];
+    return result;
 }
 
 @end
