@@ -473,6 +473,7 @@ static ColorCode randomColorCode()
     newNote.angle = [NSNumber numberWithDouble:randomAngle()];
     newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
     newNote.color = [NSNumber numberWithInt:randomColorCode()];
+    newNote.contents = @"";
     
     newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
     if (_locationInformationAvailable)
