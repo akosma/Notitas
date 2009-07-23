@@ -16,10 +16,16 @@
 
 static double randomAngle()
 {
-    // Create an angle for this note on the cardboard
+    // Returns an angle between -19 and 19 degrees, in radians
     CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
     CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
     return angle;
+}
+
+static ColorCode randomColorCode()
+{
+    ColorCode code = (ColorCode)(arc4random() % 4);
+    return code;
 }
 
 @interface RootViewController (Private)
@@ -453,6 +459,7 @@ static double randomAngle()
 	
     newNote.timeStamp = [NSDate date];
     newNote.angle = [NSNumber numberWithDouble:randomAngle()];
+    newNote.color = [NSNumber numberWithInt:randomColorCode()];
     
     newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
     if (_locationInformationAvailable)
