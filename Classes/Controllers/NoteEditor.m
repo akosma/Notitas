@@ -236,6 +236,21 @@
     return annotationView;
 }
 
+- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 #pragma mark -
 #pragma mark UITextViewDelegate methods
 
