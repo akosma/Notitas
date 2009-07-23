@@ -39,3 +39,6 @@
 
 /* Title of the map view */
 "Map" = "Carte";
+
+/* The 'characters' word */
+"characters" = "caractères";

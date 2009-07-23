@@ -19,7 +19,8 @@
 @interface NoteEditor : UIViewController <UIAlertViewDelegate, 
                                           UIActionSheetDelegate,
                                           MFMailComposeViewControllerDelegate,
-                                          MKMapViewDelegate>
+                                          MKMapViewDelegate,
+                                          UITextViewDelegate>
 {
 @private
     IBOutlet UITextView *_textView;

@@ -13,6 +13,7 @@
 
 @interface NoteEditor (Private)
 - (void)disappear;
+- (void)updateLabel;
 @end
 
 
@@ -236,6 +237,14 @@
 }
 
 #pragma mark -
+#pragma mark UITextViewDelegate methods
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    [self updateLabel];
+}
+
+#pragma mark -
 #pragma mark UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -297,11 +306,11 @@
 
 - (void)viewWillAppear:(BOOL)animated 
 {
-    _timeStampLabel.text = _note.timeString; 
     _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:12.0];
     _textView.text = _note.contents;
     _textView.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:24.0];
     [_textView becomeFirstResponder];
+    [self updateLabel];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
@@ -321,4 +330,10 @@
 	[UIView commitAnimations];    
 }
 
+- (void)updateLabel
+{
+    NSString *characters = NSLocalizedString(@"characters", @"The 'characters' word");
+    _timeStampLabel.text = [NSString stringWithFormat:@"%d %@ - %@", [_textView.text length], characters, _note.timeString];
+}
+     
 @end
