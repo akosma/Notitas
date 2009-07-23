@@ -48,7 +48,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animate
 {
     CLLocationCoordinate2D coordinate = _note.location.coordinate;
     _mapView.delegate = _delegate;
