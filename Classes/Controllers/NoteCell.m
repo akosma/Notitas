@@ -72,9 +72,12 @@
     {
         CGAffineTransform trans = CGAffineTransformMakeRotation(_leftNote.angleRadians);
         _leftView.transform = trans;
-        _leftView.text = _leftNote.contents;
         _leftView.color = _leftNote.colorCode;
         _leftView.font = _leftNote.fontCode;
+        
+        // This must come last, so that the size calculation
+        // of the label inside the thumbnail is done!
+        _leftView.text = _leftNote.contents;
         _leftView.hidden = NO;
     }
 }
@@ -99,9 +102,12 @@
     {
         CGAffineTransform trans = CGAffineTransformMakeRotation(_rightNote.angleRadians);
         _rightView.transform = trans;
-        _rightView.text = _rightNote.contents;
         _rightView.color = _rightNote.colorCode;
         _rightView.font = _rightNote.fontCode;
+
+        // This must come last, so that the size calculation
+        // of the label inside the thumbnail is done!
+        _rightView.text = _rightNote.contents;
         _rightView.hidden = NO;
     }
 }
