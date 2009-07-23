@@ -1,0 +1,41 @@
+/* To be used when en empty note is sent via e-mail */
+"(empty note)" = "(empty note)";
+
+/* Some marketing here */
+"\n\nSent from Notitas by akosma - http://akosma.com/" = "\n\nSent from Notitas by akosma - http://akosma.com/";
+
+/* Title of the 'trash' dialog of the editor controller */
+"Are you sure?" = "Are you sure?";
+
+/* The 'cancel' word */
+"Cancel" = "Cancel";
+
+/* Message created by the 'location' button */
+"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f" = "Current location:\n\nLatitude: %1$.3f\nLongitude: %2$.3f";
+
+/* Title of the e-mail sent by the application */
+"Note sent from Notitas by akosma" = "Note sent from Notitas by akosma";
+
+/* Copyright text */
+"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved";
+
+/* Button to send notes via Twitter */
+"Post using Twitterriffic" = "Tweet using Twitterriffic";
+
+/* Title of the 'remove all notes' dialog */
+"Remove all the notes?" = "Remove all the notes?";
+
+/* Button to send notes via e-mail */
+"Send via e-mail" = "Send via e-mail";
+
+/* Explanation of the 'trash' dialog of the editor controller */
+"This action cannot be undone." = "This action cannot be undone.";
+
+/* Button to view the note location */
+"View location" = "View location";
+
+/* Warning message of the 'remove all notes' dialog */
+"You will remove all the notes!\nThis action cannot be undone." = "You will remove all the notes!\nThis action cannot be undone.";
+
+/* Title of the map view */
+"Map" = "Map";

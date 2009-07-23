@@ -53,6 +53,8 @@
 
 - (void)viewWillAppear:(BOOL)animate
 {
+    _titleItem.title = NSLocalizedString(@"Map", @"Title of the map view");
+    
     CLLocationCoordinate2D coordinate = _note.location.coordinate;
     _mapView.delegate = _delegate;
     _mapView.centerCoordinate = coordinate;

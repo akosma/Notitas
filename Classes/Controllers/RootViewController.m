@@ -108,7 +108,7 @@ static ColorCode randomColorCode()
 {
     NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
     NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
-    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'Cancel' word");
+    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:self

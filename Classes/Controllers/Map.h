@@ -16,6 +16,7 @@
 {
 @private
     IBOutlet MKMapView *_mapView;
+    IBOutlet UINavigationItem *_titleItem;
     Note *_note;
     id<MKMapViewDelegate> _delegate;
     MKPlacemark *_placemark;

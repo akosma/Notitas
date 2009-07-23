@@ -106,7 +106,7 @@
 							<object class="IBUIBarButtonItem" id="50880589">
 								<int key="IBUIStyle">2</int>
 								<reference key="IBUIToolbar" ref="620598499"/>
-								<int key="IBUISystemItemIdentifier">3</int>
+								<int key="IBUISystemItemIdentifier">0</int>
 							</object>
 						</object>
 					</object>
