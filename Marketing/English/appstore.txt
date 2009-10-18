@@ -1,0 +1,11 @@
+Notitas ("little notes" in Spanish) is a geographically-aware virtual board where you can post text notes of any kind.
+
+Add a note, tap on it, and edit it! It's that simple! You can change the font type with the touch of a button, or the background color. You can then export them via e-mail, or, if you have Twitterriffic installed in your device, you can send them directly to Twitter!
+
+Notitas is also geolocation-aware; if allowed to, Notitas will store the latitude and longitude of every one of your notes. It will then propose you to show where they were created using a built-in map. This makes Notitas a useful note-taking application for people "on the go"!.
+
+Finally, why not shaking your device a little? If the board is visible, the notes will be shifted a bit!
+
+Notitas is available in English, Spanish and French.
+
+IMPORTANT: Neither Notitas nor akosma software are related to Twitterriffic or Iconfactory in any way. Twitterriffic is Copyright © 2009 The Iconfactory.

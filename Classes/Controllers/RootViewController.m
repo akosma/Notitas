@@ -38,7 +38,7 @@ static ColorCode randomColorCode()
 @interface RootViewController (Private)
 - (NSFetchedResultsController *)fetchedResultsController;
 - (Note *)createNoteInContext:(NSManagedObjectContext *)context;
-- (void)scrollToBottomRow;
+- (void)scrollToBottomRowAnimated:(BOOL)animated;
 - (void)checkTrashIconEnabled;
 @end
 
@@ -84,7 +84,7 @@ static ColorCode randomColorCode()
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
-        [self scrollToBottomRow];
+        [self scrollToBottomRowAnimated:YES];
         _trashButton.enabled = YES;
     }
 }
@@ -120,7 +120,7 @@ static ColorCode randomColorCode()
         if ([context save:&error]) 
         {
             [self.tableView reloadData];
-            [self scrollToBottomRow];
+            [self scrollToBottomRowAnimated:YES];
             _trashButton.enabled = YES;
         }
     }
@@ -152,7 +152,7 @@ static ColorCode randomColorCode()
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
-        [self scrollToBottomRow];
+        [self scrollToBottomRowAnimated:YES];
         _trashButton.enabled = YES;
     }
 }
@@ -166,7 +166,7 @@ static ColorCode randomColorCode()
     if ([context save:&error]) 
     {
         [self.tableView reloadData];
-        [self scrollToBottomRow];
+        [self scrollToBottomRowAnimated:YES];
         _trashButton.enabled = YES;
     }
 }
@@ -272,9 +272,7 @@ static ColorCode randomColorCode()
     
     [UIView beginAnimations:@"maximize" context:NULL];
     [UIView setAnimationDuration:0.5];
-    CGFloat offsetX = self.tableView.contentOffset.x - _thumbnail.frame.origin.x;
-    CGFloat offsetY = self.tableView.contentOffset.y - _thumbnail.frame.origin.y;
-    CGAffineTransform trans = CGAffineTransformMakeTranslation(offsetX / 5.0, offsetY / 5.0);
+    CGAffineTransform trans = CGAffineTransformMakeTranslation(0.0, 0.0);
     CGAffineTransform scale = CGAffineTransformScale(trans, 10.0, 10.0);
     CGAffineTransform rotation = CGAffineTransformRotate(scale, 0.0);
     _thumbnail.transform = rotation;
@@ -401,7 +399,11 @@ static ColorCode randomColorCode()
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self scrollToBottomRow];
+    // To avoid memory problems on startup, avoid the animation
+    // when this screen is shown; if there is an animation here,
+    // all the items are loaded into memory at once, which may 
+    // crash the application.
+    [self scrollToBottomRowAnimated:NO];
 }
 
 - (void)viewDidLoad 
@@ -410,7 +412,7 @@ static ColorCode randomColorCode()
     
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.rowHeight = 150.0;
+    self.tableView.rowHeight = 160.0;
 	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
 	
 	NSError *error;
@@ -499,7 +501,7 @@ static ColorCode randomColorCode()
     return newNote;
 }
 
-- (void)scrollToBottomRow
+- (void)scrollToBottomRowAnimated:(BOOL)animated
 {
     NSArray *sections = [_fetchedResultsController sections];
     if ([sections count] > 0)
@@ -511,7 +513,7 @@ static ColorCode randomColorCode()
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         [self.tableView scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionNone
-                                      animated:YES];
+                                      animated:animated];
     }
 }
 

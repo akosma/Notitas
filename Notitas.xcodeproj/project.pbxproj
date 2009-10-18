@@ -63,6 +63,7 @@
 		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		3A4E1B14108B9B7700FF1E9F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A7761CA1018A706009F0CD1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3A7761CB1018A706009F0CD1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -333,6 +334,7 @@
 				en,
 				fr,
 				es,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -401,6 +403,7 @@
 				3AE3056D1018544A00D43A02 /* fr */,
 				3AE3056E1018544D00D43A02 /* es */,
 				3AE3056F1018546C00D43A02 /* en */,
+				3A4E1B14108B9B7700FF1E9F /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -461,7 +464,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Notitas-Info.plist";
 				PRODUCT_NAME = Notitas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "429F1EFD-9759-4036-A7B4-5EC3B528FEA1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BF0AF99-4EB7-4D57-92AB-6A5E0F2566FC";
 			};
 			name = "Distribution Ad Hoc";
 		};

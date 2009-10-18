@@ -26,12 +26,12 @@
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        _leftFrame = CGRectMake(20.0, 10.0, 130.0, 130.0);
+        _leftFrame = CGRectMake(5.0, 5.0, 150.0, 150.0);
         _leftView = [[NoteThumbnail alloc] initWithFrame:_leftFrame];
         _leftView.hidden = YES;
         [self.contentView addSubview:_leftView];
 
-        _rightFrame = CGRectMake(170.0, 10.0, 130.0, 130.0);
+        _rightFrame = CGRectMake(165.0, 5.0, 150.0, 150.0);
         _rightView = [[NoteThumbnail alloc] initWithFrame:_rightFrame];
         _rightView.hidden = YES;
         [self.contentView addSubview:_rightView];

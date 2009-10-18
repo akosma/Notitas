@@ -27,7 +27,7 @@
         
         [self addSubview:_backgroundView];
         
-        rect = CGRectMake(15.0, 20.0, frame.size.width - 25.0, frame.size.height - 35.0);
+        rect = CGRectMake(22.0, 32.0, frame.size.width - 42.0, frame.size.height - 42.0);
         _summaryLabel = [[UILabel alloc] initWithFrame:rect];
         _summaryLabel.backgroundColor = [UIColor clearColor];
         _summaryLabel.numberOfLines = 0;
@@ -67,7 +67,7 @@
     CGFloat width = _summaryLabel.frame.size.width;
     CGSize constraints = CGSizeMake(width, 90.0);
     CGSize size = [newText sizeWithFont:_summaryLabel.font constrainedToSize:constraints];
-    _summaryLabel.frame = CGRectMake(15.0, 20.0, width, size.height);
+    _summaryLabel.frame = CGRectMake(22.0, 32.0, width, size.height);
     _summaryLabel.text = newText;
 }
 
