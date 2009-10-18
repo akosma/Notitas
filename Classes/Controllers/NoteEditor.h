@@ -15,6 +15,7 @@
 
 @class Note;
 @class Map;
+@class TwitterClientManager;
 
 @interface NoteEditor : UIViewController <UIAlertViewDelegate, 
                                           UIActionSheetDelegate,
@@ -26,6 +27,7 @@
     IBOutlet UITextView *_textView;
     IBOutlet UIToolbar *_toolbar;
     IBOutlet UILabel *_timeStampLabel;
+    UIActionSheet *_twitterChoiceSheet;
     
     Note *_note;
     NSInteger _twitterrifficButtonIndex;
@@ -36,6 +38,7 @@
     id<NoteEditorDelegate> _delegate;
     
     Map *_map;
+    TwitterClientManager *_clientManager;
 }
 
 @property (nonatomic, retain) Note *note;

@@ -20,7 +20,7 @@
 "Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas por akosma\nhttp://muchasnotitas.com/\nCopyright 2009 © akosma software\nTodos Derechos Reservados";
 
 /* Button to send notes via Twitter */
-"Post using Twitterriffic" = "Twittear con Twitterriffic";
+"Send via Twitter" = "Enviar por Twitter";
 
 /* Title of the 'remove all notes' dialog */
 "Remove all the notes?" = "Borrar todas las notas?";

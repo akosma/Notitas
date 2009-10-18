@@ -17,6 +17,10 @@
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
 		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A1BDFEE10177D3800775127 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFED10177D3800775127 /* location.png */; };
+		3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */; };
+		3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */; };
+		3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */; };
+		3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */; };
 		3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7761CB1018A706009F0CD1 /* Reachability.m */; };
 		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
@@ -64,6 +68,14 @@
 		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		3A4E1B14108B9B7700FF1E9F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterClients.plist; sourceTree = "<group>"; };
+		3A4E1B8B108BA8D700FF1E9F /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
+		3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClient.m; sourceTree = "<group>"; };
+		3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClientManager.h; sourceTree = "<group>"; };
+		3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClientManager.m; sourceTree = "<group>"; };
+		3A4E1B91108BA8E300FF1E9F /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		3A4E1BB8108BAD6B00FF1E9F /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		3A7761CA1018A706009F0CD1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3A7761CB1018A706009F0CD1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -154,6 +166,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3A4E1B91108BA8E300FF1E9F /* Definitions.h */,
 				28A0AAE50D9B0CCF005BE974 /* Notitas_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -187,6 +200,8 @@
 		3AC5BF76101597BA00D062A4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */,
+				3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */,
 				3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */,
 				3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */,
 				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
@@ -271,6 +286,11 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3A4E1BB8108BAD6B00FF1E9F /* SynthesizeSingleton.h */,
+				3A4E1B8B108BA8D700FF1E9F /* TwitterClient.h */,
+				3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */,
+				3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */,
+				3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */,
 				3A7761CA1018A706009F0CD1 /* Reachability.h */,
 				3A7761CB1018A706009F0CD1 /* Reachability.m */,
 				3AA753B710179455007B3E5C /* SoundEffect.h */,
@@ -370,6 +390,8 @@
 				3AE3056C1018544400D43A02 /* Localizable.strings in Resources */,
 				3AE3057F1018572600D43A02 /* Map.xib in Resources */,
 				3AE3059910185A6800D43A02 /* font.png in Resources */,
+				3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */,
+				3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +413,8 @@
 				3AA753B910179455007B3E5C /* SoundEffect.m in Sources */,
 				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
 				3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */,
+				3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */,
+				3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

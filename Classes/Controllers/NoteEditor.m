@@ -11,6 +11,7 @@
 #import "Map.h"
 #import "ColorCode.h"
 #import "NotitasAppDelegate.h"
+#import "TwitterClientManager.h"
 
 @interface NoteEditor (Private)
 - (void)disappear;
@@ -30,6 +31,7 @@
 {
     if (self = [super initWithNibName:@"NoteEditor" bundle:nil]) 
     {
+        _clientManager = [TwitterClientManager sharedTwitterClientManager];
     }
     return self;
 }
@@ -103,16 +105,14 @@
                                               otherButtonTitles:nil];
 
     NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
-    NSString *twitterrifficText = NSLocalizedString(@"Post using Twitterriffic", @"Button to send notes via Twitter");
+    NSString *twitterrifficText = NSLocalizedString(@"Send via Twitter", @"Button to send notes via Twitter");
     NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
     NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
     
     [sheet addButtonWithTitle:emailText];
     NSInteger sheetButtonCount = 1;
     
-    NSString *stringURL = @"twitterrific:///post?message=test";
-    NSURL *url = [NSURL URLWithString:stringURL];
-    if ([[UIApplication sharedApplication] canOpenURL:url])
+    if ([_clientManager isAnyClientAvailable])
     {
         [sheet addButtonWithTitle:twitterrifficText];
         _twitterrifficButtonIndex = sheetButtonCount;
@@ -139,77 +139,92 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    if (actionSheet == _twitterChoiceSheet)
     {
-        // E-mail
-        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-        composer.mailComposeDelegate = self;
+        NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+        [_clientManager setSelectedClientName:buttonTitle];
+        [_clientManager send:_note.contents];
 
-        NSMutableString *message = [[NSMutableString alloc] init];
-        if (_note.contents == nil || [_note.contents length] == 0)
+        [_twitterChoiceSheet release];
+        _twitterChoiceSheet = nil;
+    }
+    else 
+    {
+        if (buttonIndex == 0)
         {
-            NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
-            [message appendString:emptyNoteText];
+            // E-mail
+            MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+            composer.mailComposeDelegate = self;
+
+            NSMutableString *message = [[NSMutableString alloc] init];
+            if (_note.contents == nil || [_note.contents length] == 0)
+            {
+                NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+                [message appendString:emptyNoteText];
+            }
+            else
+            {
+                [message appendString:_note.contents];
+            }
+            NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+            [message appendString:sentFromText];
+            NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+            [composer setSubject:subject];
+            [composer setMessageBody:message isHTML:NO];
+
+            [self disappear];
+
+            [self presentModalViewController:composer animated:YES];
+            [composer release];
+            [message release];
         }
         else
         {
-            [message appendString:_note.contents];
-        }
-        NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
-        [message appendString:sentFromText];
-        NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
-        [composer setSubject:subject];
-        [composer setMessageBody:message isHTML:NO];
-
-        [self disappear];
-
-        [self presentModalViewController:composer animated:YES];
-        [composer release];
-        [message release];
-    }
-    else
-    {
-        if (_twitterrifficButtonIndex == buttonIndex)
-        {
-            // Twitterriffic
-            NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-                                                                                    (CFStringRef)_note.contents,
-                                                                                    NULL, 
-                                                                                    (CFStringRef)@";/?:@&=+$,", 
-                                                                                    kCFStringEncodingUTF8);
-            NSString *stringURL = [NSString stringWithFormat:@"twitterrific:///post?message=%@", message];
-            [message release];
-            NSURL *url = [NSURL URLWithString:stringURL];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-        else if (_locationButtonIndex == buttonIndex)
-        {
-            if ([_note.hasLocation boolValue])
+            if (_twitterrifficButtonIndex == buttonIndex)
             {
-                if (_map == nil)
+                if ([_clientManager canSendMessage])
                 {
-                    _map = [[Map alloc] init];
-                    _map.delegate = self;
+                    // A client is installed and ready to be used!
+                    // Let's send a message using it. We don't care which client this is!
+                    [_clientManager send:_note.contents];
                 }
-                _map.note = _note;
-                
-                [self disappear];
-                [self presentModalViewController:_map animated:YES];
+                else 
+                {
+                    // This path means that a client has been installed in the device,
+                    // but the current value in the preferences is "None" or other device not installed.
+                    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+                    _twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
+                                                                      delegate:self
+                                                             cancelButtonTitle:nil
+                                                        destructiveButtonTitle:nil
+                                                             otherButtonTitles:nil];
+                    NSArray *availableClients = [_clientManager availableClients];
+                    for (NSString *client in availableClients)
+                    {
+                        [_twitterChoiceSheet addButtonWithTitle:client];
+                    }
+                    [_twitterChoiceSheet addButtonWithTitle:cancelText];
+                    _twitterChoiceSheet.cancelButtonIndex = [availableClients count];
+                    [_twitterChoiceSheet showInView:self.view];
+                }
+            }
+            else if (_locationButtonIndex == buttonIndex)
+            {
+                if ([_note.hasLocation boolValue])
+                {
+                    if (_map == nil)
+                    {
+                        _map = [[Map alloc] init];
+                        _map.delegate = self;
+                    }
+                    _map.note = _note;
+                    
+                    [self disappear];
+                    [self presentModalViewController:_map animated:YES];
+                }
             }
         }
     }
-
-// TwitterFon
-// Delayed until the handling of URLs by TwitterFon includes removing %20 escapes...
-// NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-//                                                                         (CFStringRef)_note.contents,
-//                                                                         NULL, 
-//                                                                         (CFStringRef)@";/?:@&=+$,", 
-//                                                                         kCFStringEncodingUTF8);
-// NSString *stringURL = [NSString stringWithFormat:@"twitterfon:///post?%@", message];
-// [message release];
-// NSURL *url = [NSURL URLWithString:stringURL];
-// [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark -
