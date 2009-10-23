@@ -93,6 +93,8 @@ static ColorCode randomColorCode()
 
 - (IBAction)shakeNotes:(id)sender
 {
+    // We don't want to undo the new angles of the notes!
+    [_undoManager disableUndoRegistration];
     NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
     NSArray *notes = [_fetchedResultsController fetchedObjects];
     for (Note *note in notes)
@@ -105,6 +107,8 @@ static ColorCode randomColorCode()
     {
         [self.tableView reloadData];
     }
+    // Start registering undo events again
+    [_undoManager enableUndoRegistration];
 }
 
 - (IBAction)newNoteWithLocation:(id)sender
@@ -250,6 +254,7 @@ static ColorCode randomColorCode()
 - (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
 {
 	[self resignFirstResponder];
+    [_undoManager beginUndoGrouping];
 
     _currentNote = note;
     CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
@@ -305,6 +310,8 @@ static ColorCode randomColorCode()
     _thumbnail.transform = CGAffineTransformMakeRotation(_currentNote.angleRadians);
     _editor.view.alpha = 0.0;
     [UIView commitAnimations];
+
+    [_undoManager endUndoGrouping];
 }
 
 - (void)noteEditorDidSendNoteToTrash:(NoteEditor *)editor
@@ -329,6 +336,7 @@ static ColorCode randomColorCode()
     [UIView commitAnimations];
     
     [[NotitasAppDelegate sharedDelegate] playEraseSound];
+    [_undoManager endUndoGrouping];
 }
 
 #pragma mark -

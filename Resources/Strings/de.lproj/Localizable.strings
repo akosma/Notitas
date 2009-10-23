@@ -29,13 +29,13 @@
 "Send via e-mail" = "Per E-Mail senden";
 
 /* Explanation of the 'trash' dialog of the editor controller */
-"This action cannot be undone." = "Dieser Vorgang kann nicht wiederrufen werden.";
+"This action cannot be undone." = "Dieser Vorgang kann wiederrufen werden.";
 
 /* Button to view the note location */
 "View location" = "Ort anzeigen";
 
 /* Warning message of the 'remove all notes' dialog */
-"You will remove all the notes!\nThis action cannot be undone." = "Hiermit werden alle Notizen gelöscht!\nDieser Vorgang kann nicht wiederrufen werden.";
+"You will remove all the notes!\nThis action cannot be undone." = "Hiermit werden alle Notizen gelöscht!\nDieser Vorgang kann wiederrufen werden.";
 
 /* Title of the map view */
 "Map" = "Karte";

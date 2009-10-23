@@ -29,13 +29,13 @@
 "Send via e-mail" = "Enviar por e-mail";
 
 /* Explanation of the 'trash' dialog of the editor controller */
-"This action cannot be undone." = "Esta acción no se puede revertir.";
+"This action cannot be undone." = "Esta acción se puede revertir.";
 
 /* Button to view the note location */
 "View location" = "Ver posición";
 
 /* Warning message of the 'remove all notes' dialog */
-"You will remove all the notes!\nThis action cannot be undone." = "Va a borrar todas las notas!\nEsta acción no se puede revertir.";
+"You will remove all the notes!\nThis action cannot be undone." = "Va a borrar todas las notas!\nEsta acción se puede revertir.";
 
 /* Title of the map view */
 "Map" = "Mapa";
