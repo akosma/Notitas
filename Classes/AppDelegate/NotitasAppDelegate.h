@@ -11,7 +11,7 @@
 @class RootViewController;
 @class SoundEffect;
 
-@interface NotitasAppDelegate : NSObject <UIApplicationDelegate, 
+@interface NotitasAppDelegate : NSObject <UIApplicationDelegate,
                                           UIAccelerometerDelegate> 
 {
 @private

@@ -49,6 +49,8 @@
 	_rootController.managedObjectContext = [self managedObjectContext];
     _toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0);
 
+    application.applicationSupportsShakeToEdit = YES;
+
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
     
@@ -182,9 +184,12 @@
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) 
     {
+        NSUndoManager *undoManager = [[NSUndoManager alloc] init];
+        [undoManager setLevelsOfUndo:10];
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setUndoManager:nil];
+        [_managedObjectContext setUndoManager:undoManager];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        [undoManager release];
     }
     return _managedObjectContext;
 }

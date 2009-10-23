@@ -24,6 +24,7 @@
 @private
 	NSFetchedResultsController *_fetchedResultsController;
 	NSManagedObjectContext *_managedObjectContext;
+    NSUndoManager *_undoManager;
     
     NoteEditor *_editor;
     Note *_currentNote;
@@ -37,6 +38,7 @@
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSUndoManager *undoManager;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

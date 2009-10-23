@@ -46,6 +46,7 @@ static ColorCode randomColorCode()
 @implementation RootViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize undoManager = _undoManager;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -63,6 +64,7 @@ static ColorCode randomColorCode()
     _locationManager.delegate = nil;
     [_locationManager release];
 
+    [_undoManager release];
     [_thumbnail release];
     _editor.delegate = nil;
     [_editor release];
@@ -247,6 +249,8 @@ static ColorCode randomColorCode()
 
 - (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
 {
+	[self resignFirstResponder];
+
     _currentNote = note;
     CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
     if (_thumbnail == nil)
@@ -285,6 +289,8 @@ static ColorCode randomColorCode()
 
 - (void)noteEditorDidFinishedEditing:(NoteEditor *)editor
 {
+	[self becomeFirstResponder];
+
     NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
     NSError *error;
     if ([context save:&error]) 
@@ -303,7 +309,9 @@ static ColorCode randomColorCode()
 
 - (void)noteEditorDidSendNoteToTrash:(NoteEditor *)editor
 {
+	[self becomeFirstResponder];
 	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
+
     [context deleteObject:_currentNote];
     NSError *error;
     if ([context save:&error]) 
@@ -395,15 +403,38 @@ static ColorCode randomColorCode()
 }
 
 #pragma mark -
+#pragma mark Undo support
+
+- (void)undoManagerDidUndo:(NSNotification *)notification 
+{
+	[self.tableView reloadData];
+    [self checkTrashIconEnabled];
+}
+
+- (void)undoManagerDidRedo:(NSNotification *)notification 
+{
+	[self.tableView reloadData];
+    [self checkTrashIconEnabled];
+}
+
+#pragma mark -
 #pragma mark UIView methods
+
+-(BOOL)canBecomeFirstResponder 
+{
+	return YES;
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+
     // To avoid memory problems on startup, avoid the animation
     // when this screen is shown; if there is an animation here,
     // all the items are loaded into memory at once, which may 
     // crash the application.
     [self scrollToBottomRowAnimated:NO];
+	[self becomeFirstResponder];
 }
 
 - (void)viewDidLoad 
@@ -419,7 +450,19 @@ static ColorCode randomColorCode()
 	if (![[self fetchedResultsController] performFetch:&error]) 
     {
 	}
+
+    _undoManager = [_managedObjectContext undoManager];
+    [_undoManager setLevelsOfUndo:3];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidUndo:) 
+                                                 name:NSUndoManagerDidUndoChangeNotification 
+                                               object:_undoManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidRedo:) 
+                                                 name:NSUndoManagerDidRedoChangeNotification 
+                                               object:_undoManager];
+
     [self checkTrashIconEnabled];
     
     _locationManager = [[CLLocationManager alloc] init];
@@ -438,6 +481,12 @@ static ColorCode randomColorCode()
         [self about:nil];
         [defaults setBool:YES forKey:firstRunKey];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated 
+{
+	[self resignFirstResponder];
+	[super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning 
