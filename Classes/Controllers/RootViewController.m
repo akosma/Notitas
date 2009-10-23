@@ -567,10 +567,13 @@ static ColorCode randomColorCode()
         NSInteger itemCount = [sectionInfo numberOfObjects];
         NSInteger rowsCount = ceil(itemCount / 2.0);
         NSInteger row = rowsCount - 1;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-        [self.tableView scrollToRowAtIndexPath:indexPath
-                              atScrollPosition:UITableViewScrollPositionNone
-                                      animated:animated];
+        if (row >= 0) // this fixes a crash in the device, but works on the simulator
+        {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexPath
+                                  atScrollPosition:UITableViewScrollPositionNone
+                                          animated:animated];
+        }
     }
 }
 
