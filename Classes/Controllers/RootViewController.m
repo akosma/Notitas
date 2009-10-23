@@ -272,9 +272,9 @@ static ColorCode randomColorCode()
     
     [UIView beginAnimations:@"maximize" context:NULL];
     [UIView setAnimationDuration:0.5];
-    CGAffineTransform trans = CGAffineTransformMakeTranslation(0.0, 0.0);
+    CGAffineTransform trans = CGAffineTransformMakeTranslation(-realFrame.origin.x, -realFrame.origin.y);
     CGAffineTransform scale = CGAffineTransformScale(trans, 10.0, 10.0);
-    CGAffineTransform rotation = CGAffineTransformRotate(scale, 0.0);
+    CGAffineTransform rotation = CGAffineTransformRotate(scale, -note.angleRadians);
     _thumbnail.transform = rotation;
     _editor.view.alpha = 1.0;
     [UIView commitAnimations];
