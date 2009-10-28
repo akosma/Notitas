@@ -10,6 +10,7 @@
 #import "RootViewController.h"
 #import "SoundEffect.h"
 #import "Reachability.h"
+#import "Appirater.h"
 
 #define kAccelerometerFrequency			25 //Hz
 #define kFilteringFactor				0.1
@@ -46,6 +47,8 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
+    [Appirater appLaunched];
+    
 	_rootController.managedObjectContext = [self managedObjectContext];
     _toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0);
 
