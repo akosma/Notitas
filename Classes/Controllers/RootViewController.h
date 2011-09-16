@@ -20,32 +20,16 @@
                                                        NoteEditorDelegate,
                                                        CLLocationManagerDelegate,
                                                        UIAlertViewDelegate> 
-{
-@private
-	NSFetchedResultsController *_fetchedResultsController;
-	NSManagedObjectContext *_managedObjectContext;
-    NSUndoManager *_undoManager;
-    
-    NoteEditor *_editor;
-    Note *_currentNote;
-    NoteThumbnail *_thumbnail;
-    
-    IBOutlet UIBarButtonItem *_locationButton;
-    IBOutlet UIBarButtonItem *_trashButton;
 
-    CLLocationManager *_locationManager;
-    BOOL _locationInformationAvailable;
-}
-
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSUndoManager *undoManager;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
-- (IBAction)about:(id)sender;
 - (IBAction)removeAllNotes:(id)sender;
 - (IBAction)newNoteWithLocation:(id)sender;
 
 - (void)createNewNoteWithContents:(NSString *)contents;
+- (IBAction)about:(id)sender;
 
 @end

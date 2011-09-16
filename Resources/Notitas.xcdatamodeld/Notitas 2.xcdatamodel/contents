@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Note" representedClassName="Note">
+        <attribute name="angle" optional="YES" attributeType="Double" defaultValueString="0"/>
+        <attribute name="color" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="contents" optional="YES" attributeType="String"/>
+        <attribute name="fontFamily" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="fontSize" optional="YES" attributeType="Double" defaultValueString="18"/>
+        <attribute name="hasLocation" optional="YES" attributeType="Boolean" defaultValueString="NO"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+        <attribute name="xcoord" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="ycoord" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+    </entity>
+    <elements>
+        <element name="Note" positionX="-63" positionY="-27" width="128" height="210"/>
+    </elements>
+</model>

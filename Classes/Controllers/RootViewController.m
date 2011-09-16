@@ -7,128 +7,166 @@
 //
 
 #import "RootViewController.h"
+#import "MNOHelpers.h"
 #import "NoteCell.h"
 #import "Note.h"
 #import "NoteThumbnail.h"
 #import "NoteEditor.h"
-#import "NotitasAppDelegate.h"
-#import "ColorCode.h"
-#import "FontCode.h"
 
-static double randomAngle()
-{
-    // Returns an angle between -19 and 19 degrees, in radians
-    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
-    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
-    return angle;
-}
 
-static FontCode randomFont()
-{
-    FontCode code = (FontCode)(arc4random() % 4);
-    return code;
-}
+@interface RootViewController ()
 
-static ColorCode randomColorCode()
-{
-    ColorCode code = (ColorCode)(arc4random() % 4);
-    return code;
-}
+@property (nonatomic, retain) Note *currentNote;
+@property (nonatomic, retain) NoteEditor *editor;
+@property (nonatomic, retain) NoteThumbnail *thumbnail;
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) BOOL locationInformationAvailable;
 
-@interface RootViewController (Private)
-- (NSFetchedResultsController *)fetchedResultsController;
-- (Note *)createNoteInContext:(NSManagedObjectContext *)context;
 - (void)scrollToBottomRowAnimated:(BOOL)animated;
 - (void)checkTrashIconEnabled;
+- (Note *)createNote;
+
 @end
 
 
 @implementation RootViewController
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize undoManager = _undoManager;
-
-#pragma mark -
-#pragma mark Constructor and destructor
-
-- (id)init
-{
-    if (self = [super initWithStyle:UITableViewStylePlain])
-    {
-    }
-    return self;
-}
+@synthesize locationInformationAvailable = _locationInformationAvailable;
+@synthesize currentNote = _currentNote;
+@synthesize editor = _editor;
+@synthesize thumbnail = _thumbnail;
+@synthesize locationManager = _locationManager;
+@synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize trashButton = _trashButton;
+@synthesize locationButton = _locationButton;
 
 - (void)dealloc 
 {
+    [_locationButton release];
+    [_currentNote release];
     _locationManager.delegate = nil;
     [_locationManager release];
 
-    [_undoManager release];
     [_thumbnail release];
     _editor.delegate = nil;
     [_editor release];
 	[_fetchedResultsController release];
-	[_managedObjectContext release];
+    [_trashButton release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - UIViewController methods
+
+-(BOOL)canBecomeFirstResponder 
+{
+	return YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // To avoid memory problems on startup, avoid the animation
+    // when this screen is shown; if there is an animation here,
+    // all the items are loaded into memory at once, which may 
+    // crash the application.
+    [self scrollToBottomRowAnimated:NO];
+	[self becomeFirstResponder];
+}
+
+- (void)viewDidLoad 
+{
+    [super viewDidLoad];
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.rowHeight = 160.0;
+	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
+    
+    self.fetchedResultsController = [[MNOCoreDataManager sharedMNOCoreDataManager] createFetchedResultsController];
+    self.fetchedResultsController.delegate = self;
+	[self.fetchedResultsController performFetch:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidUndo:) 
+                                                 name:NSUndoManagerDidUndoChangeNotification 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidRedo:) 
+                                                 name:NSUndoManagerDidRedoChangeNotification 
+                                               object:nil];
+    
+    [self checkTrashIconEnabled];
+    
+    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 100;
+    [self.locationManager startUpdatingLocation];
+    
+    self.locationInformationAvailable = NO;
+    
+    NSString *firstRunKey = @"firstRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstRun = [defaults boolForKey:firstRunKey];
+    if (!firstRun)
+    {
+        [self about:nil];
+        [defaults setBool:YES forKey:firstRunKey];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated 
+{
+	[self resignFirstResponder];
+	[super viewWillDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning 
+{
+    [super didReceiveMemoryWarning];
+    [_thumbnail release];
+    _thumbnail = nil;
+    
+    _editor.delegate = nil;
+    [_editor release];
+    _editor = nil;
+}
+
+#pragma mark - Public methods
 
 - (void)createNewNoteWithContents:(NSString *)contents
 {
-	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	Note *newNote = [self createNoteInContext:context];
+	Note *newNote = [self createNote];
     newNote.contents = contents;
-    
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-        [self scrollToBottomRowAnimated:YES];
-        _trashButton.enabled = YES;
-    }
+
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self.tableView reloadData];
+    [self scrollToBottomRowAnimated:YES];
+    self.trashButton.enabled = YES;
 }
 
 - (IBAction)shakeNotes:(id)sender
 {
-    // We don't want to undo the new angles of the notes!
-    [_undoManager disableUndoRegistration];
-    NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-    NSArray *notes = [_fetchedResultsController fetchedObjects];
-    for (Note *note in notes)
-    {
-        note.angle = [NSNumber numberWithDouble:randomAngle()];
-    }
-    
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-    }
-    // Start registering undo events again
-    [_undoManager enableUndoRegistration];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] shakeNotes];
+    [self.tableView reloadData];
 }
 
 - (IBAction)newNoteWithLocation:(id)sender
 {
-    if (_locationInformationAvailable)
+    if (self.locationInformationAvailable)
     {
-        NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-        Note *newNote = [self createNoteInContext:context];
+        Note *newNote = [self createNote];
         CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
         CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
         NSString *template = NSLocalizedString(@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", @"Message created by the 'location' button");
         newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
-        
-        NSError *error;
-        if ([context save:&error]) 
-        {
-            [self.tableView reloadData];
-            [self scrollToBottomRowAnimated:YES];
-            _trashButton.enabled = YES;
-        }
+
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [self.tableView reloadData];
+        [self scrollToBottomRowAnimated:YES];
+        self.trashButton.enabled = YES;
     }
 }
 
@@ -148,46 +186,37 @@ static ColorCode randomColorCode()
 
 - (IBAction)about:(id)sender
 {
-	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	Note *newNote = [self createNoteInContext:context];
+	Note *newNote = [self createNote];
     
-    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved", @"Copyright text");
+    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009-2011 © akosma software\nAll Rights Reserved", @"Copyright text");
     newNote.contents = copyright;
 
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-        [self scrollToBottomRowAnimated:YES];
-        _trashButton.enabled = YES;
-    }
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self.tableView reloadData];
+    [self scrollToBottomRowAnimated:YES];
+    self.trashButton.enabled = YES;
 }
 
 - (IBAction)insertNewObject:(id)sender
 {
-	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-	[self createNoteInContext:context];
+	[self createNote];
     
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-        [self scrollToBottomRowAnimated:YES];
-        _trashButton.enabled = YES;
-    }
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self.tableView reloadData];
+    [self scrollToBottomRowAnimated:YES];
+    self.trashButton.enabled = YES;
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-    return [[_fetchedResultsController sections] count];
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-	id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+	id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
     return rowsCount;
 }
@@ -227,17 +256,17 @@ static ColorCode randomColorCode()
     // There are two notes per cell. The one on the left always appears.
     NSInteger noteIndex = (indexPath.row * 2);
     NSIndexPath *leftIndexPath = [NSIndexPath indexPathForRow:noteIndex inSection:0];
-    Note *leftNote = [_fetchedResultsController objectAtIndexPath:leftIndexPath];
+    Note *leftNote = [self.fetchedResultsController objectAtIndexPath:leftIndexPath];
     cell.leftNote = leftNote;
 
     // Let's check whether we need to add a note at the right:
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:indexPath.section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
     NSInteger notesCount = [sectionInfo numberOfObjects];
     if (notesCount > (noteIndex + 1))
     {
         noteIndex += 1;
         NSIndexPath *rightIndexPath = [NSIndexPath indexPathForRow:noteIndex inSection:0];
-        Note *rightNote = [_fetchedResultsController objectAtIndexPath:rightIndexPath];
+        Note *rightNote = [self.fetchedResultsController objectAtIndexPath:rightIndexPath];
         cell.rightNote = rightNote;        
     }
     else 
@@ -248,99 +277,92 @@ static ColorCode randomColorCode()
     return cell;
 }
 
-#pragma mark -
-#pragma mark NoteCellDelegate methods
+#pragma mark - NoteCellDelegate methods
 
 - (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
 {
 	[self resignFirstResponder];
-    [_undoManager beginUndoGrouping];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 
-    _currentNote = note;
+    self.currentNote = note;
     CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
-    if (_thumbnail == nil)
+    if (self.thumbnail == nil)
     {
-        _thumbnail = [[NoteThumbnail alloc] initWithFrame:realFrame];
+        self.thumbnail = [[[NoteThumbnail alloc] initWithFrame:realFrame] autorelease];
     }
-    _thumbnail.frame = realFrame;
-    _thumbnail.color = _currentNote.colorCode;
-    if (_editor == nil)
+    self.thumbnail.frame = realFrame;
+    self.thumbnail.color = self.currentNote.colorCode;
+    if (self.editor == nil)
     {
-        _editor = [[NoteEditor alloc] init];
-        _editor.view.alpha = 0.0;
-        _editor.delegate = self;
+        self.editor = [[[NoteEditor alloc] init] autorelease];
+        self.editor.view.alpha = 0.0;
+        self.editor.delegate = self;
     }
-    _editor.note = _currentNote;
+    self.editor.note = self.currentNote;
 
-    _thumbnail.alpha = 1.0;
-    _thumbnail.transform = CGAffineTransformMakeRotation(note.angleRadians);
+    self.thumbnail.alpha = 1.0;
+    self.thumbnail.transform = CGAffineTransformMakeRotation(note.angleRadians);
 
-    [self.tableView.window addSubview:_thumbnail];
-    [self.tableView.window addSubview:_editor.view];
-    [_editor viewWillAppear:NO];
+    [self.tableView.window addSubview:self.thumbnail];
+    [self.tableView.window addSubview:self.editor.view];
+    [self.editor viewWillAppear:NO];
     
-    [UIView beginAnimations:@"maximize" context:NULL];
-    [UIView setAnimationDuration:0.5];
-    CGAffineTransform trans = CGAffineTransformMakeTranslation(-realFrame.origin.x, -realFrame.origin.y);
-    CGAffineTransform scale = CGAffineTransformScale(trans, 10.0, 10.0);
-    CGAffineTransform rotation = CGAffineTransformRotate(scale, -note.angleRadians);
-    _thumbnail.transform = rotation;
-    _editor.view.alpha = 1.0;
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5 
+                     animations:^{
+                         CGAffineTransform trans = CGAffineTransformMakeTranslation(-realFrame.origin.x, -realFrame.origin.y);
+                         CGAffineTransform scale = CGAffineTransformScale(trans, 10.0, 10.0);
+                         CGAffineTransform rotation = CGAffineTransformRotate(scale, -note.angleRadians);
+                         self.thumbnail.transform = rotation;
+                         self.editor.view.alpha = 1.0;
+                     }];
 }
 
-#pragma mark -
-#pragma mark NoteEditorDelegate methods
+#pragma mark - NoteEditorDelegate methods
 
 - (void)noteEditorDidFinishedEditing:(NoteEditor *)editor
 {
 	[self becomeFirstResponder];
 
-    NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-    }
-    
-    [UIView beginAnimations:@"minimize" context:NULL];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
-    _thumbnail.transform = CGAffineTransformMakeRotation(_currentNote.angleRadians);
-    _editor.view.alpha = 0.0;
-    [UIView commitAnimations];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self.tableView reloadData];
 
-    [_undoManager endUndoGrouping];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.thumbnail.transform = CGAffineTransformMakeRotation(self.currentNote.angleRadians);
+                         self.editor.view.alpha = 0.0;
+                     } 
+                     completion:^(BOOL finished){
+                         self.thumbnail.transform = CGAffineTransformIdentity;
+                         [self.thumbnail removeFromSuperview];
+                         [self.editor.view removeFromSuperview];
+                     }];
+
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
 }
 
 - (void)noteEditorDidSendNoteToTrash:(NoteEditor *)editor
 {
 	[self becomeFirstResponder];
-	NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-
-    [context deleteObject:_currentNote];
-    NSError *error;
-    if ([context save:&error]) 
-    {
-        [self.tableView reloadData];
-        [self checkTrashIconEnabled];
-    }
-
-    [UIView beginAnimations:@"trash" context:NULL];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
-    _thumbnail.alpha = 0.0;
-    _editor.view.alpha = 0.0;
-    [UIView commitAnimations];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentNote];
+    [self.tableView reloadData];
+    [self checkTrashIconEnabled];
     
-    [[NotitasAppDelegate sharedDelegate] playEraseSound];
-    [_undoManager endUndoGrouping];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         self.thumbnail.alpha = 0.0;
+                         self.editor.view.alpha = 0.0;
+                     } 
+                     completion:^(BOOL finished){
+                         self.thumbnail.transform = CGAffineTransformIdentity;
+                         [self.thumbnail removeFromSuperview];
+                         [self.editor.view removeFromSuperview];
+                     }];
+    
+    [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
 }
 
-#pragma mark -
-#pragma mark CLLocationManagerDelegate methods
+#pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager 
     didUpdateToLocation:(CLLocation *)newLocation 
@@ -350,19 +372,18 @@ static ColorCode randomColorCode()
     int longitude = (int)newLocation.coordinate.longitude;
     if (latitude != 0 && longitude != 0)
     {
-        _locationInformationAvailable = YES;
-        _locationButton.enabled = YES;
+        self.locationInformationAvailable = YES;
+        self.locationButton.enabled = YES;
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    [_locationManager stopUpdatingLocation];
-    _locationInformationAvailable = NO;
+    [self.locationManager stopUpdatingLocation];
+    self.locationInformationAvailable = NO;
 }
 
-#pragma mark -
-#pragma mark UIAlertViewDelegate methods
+#pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -375,20 +396,10 @@ static ColorCode randomColorCode()
         case 1:
         {
             // OK
-            NSManagedObjectContext *context = [_fetchedResultsController managedObjectContext];
-            NSArray *notes = [_fetchedResultsController fetchedObjects];
-            for (Note *note in notes)
-            {
-                [context deleteObject:note];
-            }
-            
-            NSError *error;
-            if ([context save:&error]) 
-            {
-                [[NotitasAppDelegate sharedDelegate] playEraseSound];
-                [self.tableView reloadData];
-                _trashButton.enabled = NO;
-            }
+            [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
+            [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+            [self.tableView reloadData];
+            self.trashButton.enabled = NO;
             break;
         }
             
@@ -397,21 +408,7 @@ static ColorCode randomColorCode()
     }
 }
 
-#pragma mark -
-#pragma mark UIView animation delegate methods
-
-- (void)animationFinished:(NSString *)animationID finished:(BOOL)finished context:(void *)context
-{
-    if ([animationID isEqualToString:@"minimize"] || [animationID isEqualToString:@"trash"])
-    {
-        _thumbnail.transform = CGAffineTransformIdentity;
-        [_thumbnail removeFromSuperview];
-        [_editor.view removeFromSuperview];
-    }
-}
-
-#pragma mark -
-#pragma mark Undo support
+#pragma mark - Undo support
 
 - (void)undoManagerDidUndo:(NSNotification *)notification 
 {
@@ -425,145 +422,37 @@ static ColorCode randomColorCode()
     [self checkTrashIconEnabled];
 }
 
-#pragma mark -
-#pragma mark UIView methods
+#pragma mark - NSFetchedResultsControllerDelegate methods
 
--(BOOL)canBecomeFirstResponder 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-	return YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    // To avoid memory problems on startup, avoid the animation
-    // when this screen is shown; if there is an animation here,
-    // all the items are loaded into memory at once, which may 
-    // crash the application.
-    [self scrollToBottomRowAnimated:NO];
-	[self becomeFirstResponder];
-}
-
-- (void)viewDidLoad 
-{
-    [super viewDidLoad];
-    
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.rowHeight = 160.0;
-	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
-	
-	NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error]) 
+    if (controller == self.fetchedResultsController)
     {
-	}
-
-    _undoManager = [_managedObjectContext undoManager];
-    [_undoManager setLevelsOfUndo:3];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(undoManagerDidUndo:) 
-                                                 name:NSUndoManagerDidUndoChangeNotification 
-                                               object:_undoManager];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(undoManagerDidRedo:) 
-                                                 name:NSUndoManagerDidRedoChangeNotification 
-                                               object:_undoManager];
-
-    [self checkTrashIconEnabled];
-    
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = 100;
-    [_locationManager startUpdatingLocation];
-    
-    _locationInformationAvailable = NO;
-    
-    NSString *firstRunKey = @"firstRunKey";
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL firstRun = [defaults boolForKey:firstRunKey];
-    if (!firstRun)
-    {
-        [self about:nil];
-        [defaults setBool:YES forKey:firstRunKey];
+        [self.tableView reloadData];
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated 
-{
-	[self resignFirstResponder];
-	[super viewWillDisappear:animated];
-}
+#pragma mark - Private methods
 
-- (void)didReceiveMemoryWarning 
+- (Note *)createNote
 {
-    [super didReceiveMemoryWarning];
-    [_thumbnail release];
-    _thumbnail = nil;
-    
-    _editor.delegate = nil;
-    [_editor release];
-    _editor = nil;
-}
+	Note *newNote = [[MNOCoreDataManager sharedMNOCoreDataManager] createNote];
 
-#pragma mark -
-#pragma mark Private methods
-
-- (NSFetchedResultsController *)fetchedResultsController 
-{
-    if (_fetchedResultsController != nil) 
+    newNote.hasLocation = [NSNumber numberWithBool:self.locationInformationAvailable];
+    if (self.locationInformationAvailable)
     {
-        return _fetchedResultsController;
-    }
-    
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:_managedObjectContext];
-	[fetchRequest setEntity:entity];
-	
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[fetchRequest setSortDescriptors:sortDescriptors];
-	[sortDescriptor release];
-	[sortDescriptors release];
-	
-	_fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-                                                                    managedObjectContext:_managedObjectContext 
-                                                                      sectionNameKeyPath:nil 
-                                                                               cacheName:@"Root"];
-    _fetchedResultsController.delegate = self;
-	[fetchRequest release];
-	
-	return _fetchedResultsController;
-}    
-
-- (Note *)createNoteInContext:(NSManagedObjectContext *)context
-{
-	Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                  inManagedObjectContext:context];
-	
-    newNote.timeStamp = [NSDate date];
-    newNote.angle = [NSNumber numberWithDouble:randomAngle()];
-    newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
-    newNote.color = [NSNumber numberWithInt:randomColorCode()];
-    newNote.contents = @"";
-    
-    newNote.hasLocation = [NSNumber numberWithBool:_locationInformationAvailable];
-    if (_locationInformationAvailable)
-    {
-        newNote.latitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.latitude];
-        newNote.longitude = [NSNumber numberWithDouble:_locationManager.location.coordinate.longitude];
+        newNote.latitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
+        newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
     }
     return newNote;
 }
 
 - (void)scrollToBottomRowAnimated:(BOOL)animated
 {
-    NSArray *sections = [_fetchedResultsController sections];
+    NSArray *sections = [self.fetchedResultsController sections];
     if ([sections count] > 0)
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
         NSInteger itemCount = [sectionInfo numberOfObjects];
         NSInteger rowsCount = ceil(itemCount / 2.0);
         NSInteger row = rowsCount - 1;
@@ -579,16 +468,16 @@ static ColorCode randomColorCode()
 
 - (void)checkTrashIconEnabled
 {
-    NSArray *sections = [_fetchedResultsController sections];
+    NSArray *sections = [self.fetchedResultsController sections];
     if ([sections count] > 0)
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:0];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
         NSInteger itemCount = [sectionInfo numberOfObjects];
-        _trashButton.enabled = (itemCount > 0);
+        self.trashButton.enabled = (itemCount > 0);
     }
     else 
     {
-        _trashButton.enabled = NO;
+        self.trashButton.enabled = NO;
     }
 
 }

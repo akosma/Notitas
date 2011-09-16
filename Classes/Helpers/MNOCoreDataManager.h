@@ -8,7 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import <AKOLibrary/AKOLibrary.h>
+#import <AKOLibrary/SynthesizeSingleton.h>
+
+@class Note;
+
 
 @interface MNOCoreDataManager : AKOCoreDataManager
+
+@property (nonatomic, readonly) NSUndoManager *undoManager;
+
+
++ (id)sharedMNOCoreDataManager;
+
+- (NSFetchedResultsController *)createFetchedResultsController;
+- (Note *)createNote;
+- (void)shakeNotes;
+- (void)beginUndoGrouping;
+- (void)endUndoGrouping;
 
 @end

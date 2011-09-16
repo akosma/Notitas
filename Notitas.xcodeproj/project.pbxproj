@@ -32,6 +32,7 @@
 		3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093914238239003B5B43 /* QuartzCore.framework */; };
 		3A60093C14238239003B5B43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093A14238239003B5B43 /* Security.framework */; };
 		3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */; };
+		3A68EFFA14238EB1008DC819 /* Notitas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A68EFF814238EB1008DC819 /* Notitas.xcdatamodeld */; };
 		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
@@ -46,7 +47,6 @@
 		3AA754511017A0D9007B3E5C /* thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544D1017A0D9007B3E5C /* thumbnail2.png */; };
 		3AA754521017A0D9007B3E5C /* thumbnail3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544E1017A0D9007B3E5C /* thumbnail3.png */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
-		3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */; };
 		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
 		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
 		3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C01B1015AEC300D062A4 /* NoteCell.m */; };
@@ -57,6 +57,7 @@
 		3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */; };
 		3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */; };
 		3AC5C3F41015EEE300D062A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3F31015EEE300D062A4 /* Default.png */; };
+		3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3F63F142391B600812023 /* MNOSoundManager.m */; };
 		3AE3056C1018544400D43A02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3056B1018544400D43A02 /* Localizable.strings */; };
 		3AE3057F1018572600D43A02 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3057E1018572600D43A02 /* Map.xib */; };
 		3AE3059910185A6800D43A02 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3059810185A6800D43A02 /* font.png */; };
@@ -98,6 +99,9 @@
 		3A60093D14238244003B5B43 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A68EFF014238B83008DC819 /* MNOCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOCoreDataManager.h; sourceTree = "<group>"; };
 		3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOCoreDataManager.m; sourceTree = "<group>"; };
+		3A68EFF914238EB1008DC819 /* Notitas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notitas.xcdatamodel; sourceTree = "<group>"; };
+		3A68EFFB14238F38008DC819 /* Notitas 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notitas 2.xcdatamodel"; sourceTree = "<group>"; };
+		3A68EFFC14239015008DC819 /* MNOHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOHelpers.h; sourceTree = "<group>"; };
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
@@ -114,7 +118,6 @@
 		3AA7544E1017A0D9007B3E5C /* thumbnail3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail3.png; sourceTree = "<group>"; };
 		3AA7545D1017A1B7007B3E5C /* ColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCode.h; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Notitas.xcdatamodel; sourceTree = "<group>"; };
 		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
 		3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotitasAppDelegate.m; sourceTree = "<group>"; };
 		3AC5BF951015986900D062A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 		3AC5C2F01015E21400D062A4 /* NoteEditorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditorDelegate.h; sourceTree = "<group>"; };
 		3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3AC5C3F31015EEE300D062A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3AD3F63E142391B600812023 /* MNOSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOSoundManager.h; sourceTree = "<group>"; };
+		3AD3F63F142391B600812023 /* MNOSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOSoundManager.m; sourceTree = "<group>"; };
 		3AE3056D1018544A00D43A02 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3056E1018544D00D43A02 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3056F1018546C00D43A02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -257,7 +262,7 @@
 				3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */,
 				3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */,
 				3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */,
-				3AC5BF7B101597BA00D062A4 /* Notitas.xcdatamodel */,
+				3A68EFF814238EB1008DC819 /* Notitas.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
 				3AC5BF77101597BA00D062A4 /* Images */,
 				3AA753BA1017953B007B3E5C /* Sounds */,
@@ -340,8 +345,11 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3A68EFFC14239015008DC819 /* MNOHelpers.h */,
 				3A68EFF014238B83008DC819 /* MNOCoreDataManager.h */,
 				3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */,
+				3AD3F63E142391B600812023 /* MNOSoundManager.h */,
+				3AD3F63F142391B600812023 /* MNOSoundManager.m */,
 				3A4E1B8B108BA8D700FF1E9F /* TwitterClient.h */,
 				3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */,
 				3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */,
@@ -460,7 +468,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3AC5BF7E101597BA00D062A4 /* Notitas.xcdatamodel in Sources */,
 				3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */,
 				3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */,
 				3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */,
@@ -472,6 +479,8 @@
 				3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */,
 				3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */,
 				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
+				3A68EFFA14238EB1008DC819 /* Notitas.xcdatamodeld in Sources */,
+				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,74 +541,6 @@
 			};
 			name = Release;
 		};
-		3AC5C3CB1015EC4000D062A4 /* Distribution Ad Hoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = iphoneos;
-			};
-			name = "Distribution Ad Hoc";
-		};
-		3AC5C3CC1015EC4000D062A4 /* Distribution Ad Hoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adrian Kosmaczewski";
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Externals\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Notitas_Prefix.pch;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				INFOPLIST_FILE = "Notitas-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = Notitas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BF0AF99-4EB7-4D57-92AB-6A5E0F2566FC";
-			};
-			name = "Distribution Ad Hoc";
-		};
-		3AEBBD231018B9F10057CAF1 /* Distribution App Store */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				SDKROOT = iphoneos;
-			};
-			name = "Distribution App Store";
-		};
-		3AEBBD241018B9F10057CAF1 /* Distribution App Store */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adrian Kosmaczewski";
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Externals\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Notitas_Prefix.pch;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				INFOPLIST_FILE = "Notitas-Info.plist";
-				OTHER_LDFLAGS = "-all_load";
-				PRODUCT_NAME = Notitas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01DDA876-C541-41E3-8F3E-EB3E7913E151";
-			};
-			name = "Distribution App Store";
-		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -632,8 +573,6 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				3AC5C3CC1015EC4000D062A4 /* Distribution Ad Hoc */,
-				3AEBBD241018B9F10057CAF1 /* Distribution App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -643,13 +582,25 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				3AC5C3CB1015EC4000D062A4 /* Distribution Ad Hoc */,
-				3AEBBD231018B9F10057CAF1 /* Distribution App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A68EFF814238EB1008DC819 /* Notitas.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A68EFFB14238F38008DC819 /* Notitas 2.xcdatamodel */,
+				3A68EFF914238EB1008DC819 /* Notitas.xcdatamodel */,
+			);
+			currentVersion = 3A68EFFB14238F38008DC819 /* Notitas 2.xcdatamodel */;
+			path = Notitas.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

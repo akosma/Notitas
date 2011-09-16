@@ -120,7 +120,7 @@
     }    
     
     BOOL locationAvailable = [_note.hasLocation boolValue];
-    if (locationAvailable && [NotitasAppDelegate sharedDelegate].networkConnectivityAvailable)
+    if (locationAvailable)
     {
         [sheet addButtonWithTitle:locationText];
         _locationButtonIndex = sheetButtonCount;

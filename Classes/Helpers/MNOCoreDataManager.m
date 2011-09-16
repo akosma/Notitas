@@ -7,16 +7,124 @@
 //
 
 #import "MNOCoreDataManager.h"
+#import "Note.h"
+
+static NSString *cacheName = @"Root";
+
+static double randomAngle()
+{
+    // Returns an angle between -19 and 19 degrees, in radians
+    CGFloat sign = (arc4random() % 2) == 0 ? -1.0 : 1.0;
+    CGFloat angle = sign * (arc4random() % 20) * M_PI / 180.0;
+    return angle;
+}
+
+static FontCode randomFont()
+{
+    FontCode code = (FontCode)(arc4random() % 4);
+    return code;
+}
+
+static ColorCode randomColorCode()
+{
+    ColorCode code = (ColorCode)(arc4random() % 4);
+    return code;
+}
 
 @implementation MNOCoreDataManager
+
+@dynamic undoManager;
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 
 - (id)init
 {
     self = [super initWithFilename:@"Notitas"];
     if (self) 
     {
+        [self.managedObjectContext.undoManager setLevelsOfUndo:3];
     }
     return self;
+}
+
+#pragma mark - Public methods
+
+- (NSUndoManager *)undoManager
+{
+    return self.managedObjectContext.undoManager;
+}
+
+- (NSFetchedResultsController *)createFetchedResultsController 
+{
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" 
+                                              inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES] autorelease];
+	NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	NSFetchedResultsController *fetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+                                                                                                managedObjectContext:self.managedObjectContext 
+                                                                                                  sectionNameKeyPath:nil 
+                                                                                                           cacheName:cacheName] autorelease];
+	return fetchedResultsController;
+}
+
+- (Note *)createNote
+{
+    [NSFetchedResultsController deleteCacheWithName:cacheName];
+
+	Note *newNote = [self createObjectOfType:@"Note"];
+	
+    newNote.timeStamp = [NSDate date];
+    newNote.angle = [NSNumber numberWithDouble:randomAngle()];
+    newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
+    newNote.color = [NSNumber numberWithInt:randomColorCode()];
+    newNote.contents = @"";
+    
+    return newNote;
+}
+
+- (void)shakeNotes
+{
+    // We don't want to undo the new angles of the notes!
+    [self.managedObjectContext.undoManager disableUndoRegistration];
+    NSFetchRequest *fetchRequest = [self fetchRequestForType:@"Note"];
+    NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    for (Note *note in notes)
+    {
+        note.angle = [NSNumber numberWithDouble:randomAngle()];
+    }
+    [self save];
+    
+    // Start registering undo events again
+    [self.managedObjectContext.undoManager enableUndoRegistration];    
+}
+
+- (void)beginUndoGrouping
+{
+    [self.managedObjectContext.undoManager beginUndoGrouping];
+}
+
+- (void)endUndoGrouping
+{
+    [self.managedObjectContext.undoManager endUndoGrouping];
+}
+
+#pragma mark - Overridden methods
+
+- (void)save
+{
+    [super save];
+    [NSFetchedResultsController deleteCacheWithName:cacheName];
+}
+
+- (void)deleteObject:(NSManagedObject *)object
+{
+    [super deleteObject:object];
+    [NSFetchedResultsController deleteCacheWithName:cacheName];
 }
 
 @end
