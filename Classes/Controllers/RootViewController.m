@@ -134,6 +134,13 @@
     _editor = nil;
 }
 
+#pragma mark - Shake events
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    [self shakeNotes:self];
+}
+
 #pragma mark - Public methods
 
 - (void)createNewNoteWithContents:(NSString *)contents
