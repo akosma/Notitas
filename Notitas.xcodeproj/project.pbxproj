@@ -57,7 +57,6 @@
 		3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0551015B64600D062A4 /* NoteThumbnail.m */; };
 		3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */; };
 		3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */; };
-		3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */; };
 		3AC5C3F41015EEE300D062A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3F31015EEE300D062A4 /* Default.png */; };
 		3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3F63F142391B600812023 /* MNOSoundManager.m */; };
 		3AE3056C1018544400D43A02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3056B1018544400D43A02 /* Localizable.strings */; };
@@ -87,6 +86,7 @@
 		3A1F0D131423C5E800BEBE5E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3A1F0D141423C5E800BEBE5E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		3A1F0D151423C5E800BEBE5E /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		3A1F0D1D1423C8A500BEBE5E /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		3A4D6B7E1098280000F3DB45 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -137,7 +137,6 @@
 		3AC5C29C1015DD0E00D062A4 /* NoteEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditor.h; sourceTree = "<group>"; };
 		3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteEditor.m; sourceTree = "<group>"; };
 		3AC5C2F01015E21400D062A4 /* NoteEditorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditorDelegate.h; sourceTree = "<group>"; };
-		3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3AC5C3F31015EEE300D062A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3AD3F63E142391B600812023 /* MNOSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOSoundManager.h; sourceTree = "<group>"; };
 		3AD3F63F142391B600812023 /* MNOSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOSoundManager.m; sourceTree = "<group>"; };
@@ -264,8 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */,
+				3A1F0D1D1423C8A500BEBE5E /* Entitlements.entitlements */,
 				3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */,
-				3AC5C3C91015EC1C00D062A4 /* Entitlements.plist */,
 				3A68EFF814238EB1008DC819 /* Notitas.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
 				3AC5BF77101597BA00D062A4 /* Images */,
@@ -442,7 +441,6 @@
 			files = (
 				3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */,
 				3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */,
-				3AC5C3CA1015EC1C00D062A4 /* Entitlements.plist in Resources */,
 				3AC5C3F41015EEE300D062A4 /* Default.png in Resources */,
 				3A1BDFEE10177D3800775127 /* location.png in Resources */,
 				3AA753C310179559007B3E5C /* Erase.caf in Resources */,
