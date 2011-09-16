@@ -25,6 +25,9 @@
 		3A1F0D1A1423C5E800BEBE5E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D131423C5E800BEBE5E /* Icon.png */; };
 		3A1F0D1B1423C5E800BEBE5E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D141423C5E800BEBE5E /* Icon@2x.png */; };
 		3A1F0D1C1423C5E800BEBE5E /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D151423C5E800BEBE5E /* iTunesArtwork */; };
+		3A1F0D351423D41800BEBE5E /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */; };
+		3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */; };
+		3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */; };
 		3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7D1098280000F3DB45 /* Appirater.m */; };
 		3A4D6B801098280000F3DB45 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7E1098280000F3DB45 /* README */; };
 		3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */; };
@@ -87,6 +90,10 @@
 		3A1F0D141423C5E800BEBE5E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		3A1F0D151423C5E800BEBE5E /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		3A1F0D1D1423C8A500BEBE5E /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources/NIBs/iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait.png"; path = "Resources/NIBs/iPad/Default-Portrait.png"; sourceTree = "<group>"; };
+		3A1F0D391423D54500BEBE5E /* RootViewControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewControllerPad.h; sourceTree = "<group>"; };
+		3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerPad.m; sourceTree = "<group>"; };
 		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		3A4D6B7E1098280000F3DB45 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -191,6 +198,7 @@
 				3A4D6B7A1098280000F3DB45 /* Externals */,
 				3AC5BF901015986900D062A4 /* Classes */,
 				3AC5BF76101597BA00D062A4 /* Resources */,
+				3A1F0D331423D41700BEBE5E /* iPad */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -231,6 +239,24 @@
 				28860BE40F44EE6400985440 /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A1F0D331423D41700BEBE5E /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */,
+				3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		3A1F0D381423D52A00BEBE5E /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				3A1F0D391423D54500BEBE5E /* RootViewControllerPad.h */,
+				3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */,
+			);
+			path = iPad;
 			sourceTree = "<group>";
 		};
 		3A4D6B7A1098280000F3DB45 /* Externals */ = {
@@ -315,6 +341,7 @@
 				3AC5BF941015986900D062A4 /* Controllers */,
 				3AC5BF971015986900D062A4 /* Helpers */,
 				3AC5BF981015986900D062A4 /* Models */,
+				3A1F0D381423D52A00BEBE5E /* iPad */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -463,6 +490,8 @@
 				3A1F0D1A1423C5E800BEBE5E /* Icon.png in Resources */,
 				3A1F0D1B1423C5E800BEBE5E /* Icon@2x.png in Resources */,
 				3A1F0D1C1423C5E800BEBE5E /* iTunesArtwork in Resources */,
+				3A1F0D351423D41800BEBE5E /* MainWindow-iPad.xib in Resources */,
+				3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +516,7 @@
 				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
 				3A68EFFA14238EB1008DC819 /* Notitas.xcdatamodeld in Sources */,
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
+				3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,8 +553,10 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -542,8 +574,10 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

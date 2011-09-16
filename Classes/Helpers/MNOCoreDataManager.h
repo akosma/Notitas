@@ -25,5 +25,6 @@
 - (void)shakeNotes;
 - (void)beginUndoGrouping;
 - (void)endUndoGrouping;
+- (NSArray *)allNotes;
 
 @end

@@ -15,14 +15,18 @@
 @class Note;
 @class NoteThumbnail;
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,
-                                                       NoteCellDelegate,
-                                                       NoteEditorDelegate,
-                                                       CLLocationManagerDelegate,
-                                                       UIAlertViewDelegate> 
+@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,
+                                                  NoteCellDelegate,
+                                                  NoteEditorDelegate,
+                                                  CLLocationManagerDelegate,
+                                                  UIAlertViewDelegate,
+                                                  UITableViewDelegate,
+                                                  UITableViewDataSource> 
 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

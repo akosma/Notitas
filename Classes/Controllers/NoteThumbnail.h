@@ -11,10 +11,15 @@
 #import <AKOLibrary/AKOLibrary.h>
 #import "MNOHelpers.h"
 
+
+@class Note;
+
+
 @interface NoteThumbnail : UIView 
 
 @property (nonatomic) FontCode font;
 @property (nonatomic) ColorCode color;
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, retain) Note *note;
 
 @end

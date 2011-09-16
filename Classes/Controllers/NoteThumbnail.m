@@ -43,6 +43,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @synthesize redLayer = _redLayer;
 @synthesize greenLayer = _greenLayer;
 @synthesize yellowLayer = _yellowLayer;
+@synthesize note = _note;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -106,6 +107,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 - (void)dealloc 
 {
+    [_note release];
     [_blueLayer release];
     [_greenLayer release];
     [_redLayer release];

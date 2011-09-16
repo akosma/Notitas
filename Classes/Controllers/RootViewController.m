@@ -40,6 +40,8 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize trashButton = _trashButton;
 @synthesize locationButton = _locationButton;
+@synthesize toolbar = _toolbar;
+@synthesize tableView = _tableView;
 
 - (void)dealloc 
 {
@@ -47,6 +49,8 @@
     [_currentNote release];
     _locationManager.delegate = nil;
     [_locationManager release];
+    [_toolbar release];
+    [_tableView release];
 
     [_thumbnail release];
     _editor.delegate = nil;
@@ -79,6 +83,9 @@
 {
     [super viewDidLoad];
     
+    self.toolbar.frame = CGRectMake(0.0, 416.0, 320.0, 44.0);
+    [self.view addSubview:self.toolbar];
+
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.rowHeight = 160.0;

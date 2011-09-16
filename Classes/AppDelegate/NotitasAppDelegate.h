@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class RootViewController;
 
 @interface NotitasAppDelegate : NSObject <UIApplicationDelegate> 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet RootViewController *rootController;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet id rootController;
 
 @end

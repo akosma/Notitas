@@ -22,14 +22,12 @@
 
 @synthesize window = _window;
 @synthesize rootController = _rootController;
-@synthesize toolbar = _toolbar;
 @synthesize lastTime = _lastTime;
 
 - (void)dealloc 
 {
     [_window release];
     [_rootController release];
-    [_toolbar release];
 	[super dealloc];
 }
 
@@ -40,9 +38,7 @@
 {
     [Appirater appLaunched];
     
-    self.toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0);
     self.window.rootViewController = self.rootController;
-    [self.window addSubview:self.toolbar];
     [self.window makeKeyAndVisible];
 }
 
@@ -67,6 +63,11 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application 
+{
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
 {
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
 }

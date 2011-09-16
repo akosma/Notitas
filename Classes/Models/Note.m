@@ -19,12 +19,15 @@
 @dynamic contents;
 @dynamic fontFamily;
 @dynamic hasLocation;
+@dynamic xcoord;
+@dynamic ycoord;
 
 @dynamic colorCode;
 @dynamic location;
 @dynamic angleRadians;
 @dynamic fontCode;
 @dynamic timeString;
+@dynamic position;
 
 - (ColorCode)colorCode
 {
@@ -58,6 +61,22 @@
     NSString *result = [dateFormatter stringFromDate:self.timeStamp];
     [dateFormatter release];
     return result;
+}
+
+- (CGPoint)position
+{
+    CGFloat x = [self.xcoord floatValue];
+    CGFloat y = [self.ycoord floatValue];
+    CGPoint point = CGPointMake(x, y);
+    return point;
+}
+
+- (void)setPosition:(CGPoint)position
+{
+    NSNumber *x = [NSNumber numberWithFloat:position.x];
+    NSNumber *y = [NSNumber numberWithFloat:position.y];
+    self.xcoord = x;
+    self.ycoord = y;
 }
 
 @end

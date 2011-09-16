@@ -31,6 +31,18 @@ static ColorCode randomColorCode()
     return code;
 }
 
+static float randomXPosition()
+{
+    float position = (float)(arc4random() % 768);
+    return position;
+}
+
+static float randomYPosition()
+{
+    float position = (float)(arc4random() % 1024);
+    return position;
+}
+
 @implementation MNOCoreDataManager
 
 @dynamic undoManager;
@@ -72,6 +84,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 	return fetchedResultsController;
 }
 
+- (NSArray *)allNotes
+{
+    NSFetchRequest *fetchRequest = [self fetchRequestForType:@"Note"];
+    NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    return notes;
+}
+
 - (Note *)createNote
 {
     [NSFetchedResultsController deleteCacheWithName:cacheName];
@@ -84,6 +103,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     newNote.color = [NSNumber numberWithInt:randomColorCode()];
     newNote.contents = @"";
     
+    float xpos = randomXPosition();
+    float ypos = randomYPosition();
+    newNote.xcoord = [NSNumber numberWithFloat:xpos];
+    newNote.ycoord = [NSNumber numberWithFloat:ypos];
+    
     return newNote;
 }
 
@@ -91,8 +115,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 {
     // We don't want to undo the new angles of the notes!
     [self.managedObjectContext.undoManager disableUndoRegistration];
-    NSFetchRequest *fetchRequest = [self fetchRequestForType:@"Note"];
-    NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    NSArray *notes = [self allNotes];
     for (Note *note in notes)
     {
         note.angle = [NSNumber numberWithDouble:randomAngle()];
