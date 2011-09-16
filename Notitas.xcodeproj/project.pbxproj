@@ -23,13 +23,19 @@
 		3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */; };
 		3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */; };
 		3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */; };
-		3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7761CB1018A706009F0CD1 /* Reachability.m */; };
+		3A60092E142381B9003B5B43 /* AKOLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60092D142381B9003B5B43 /* AKOLibrary.framework */; };
+		3A600930142381FC003B5B43 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */; };
+		3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093114238209003B5B43 /* MediaPlayer.framework */; };
+		3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093314238218003B5B43 /* CFNetwork.framework */; };
+		3A60093614238222003B5B43 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093514238222003B5B43 /* CoreText.framework */; };
+		3A6009381423822C003B5B43 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6009371423822C003B5B43 /* MobileCoreServices.framework */; };
+		3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093914238239003B5B43 /* QuartzCore.framework */; };
+		3A60093C14238239003B5B43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093A14238239003B5B43 /* Security.framework */; };
 		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
 		3A9BA4BF10183B8E006F7A3F /* small_thumbnail3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BB10183B8E006F7A3F /* small_thumbnail3.png */; };
-		3AA753B910179455007B3E5C /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA753B810179455007B3E5C /* SoundEffect.m */; };
 		3AA753C310179559007B3E5C /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3AA753C210179559007B3E5C /* Erase.caf */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AA7543210179E51007B3E5C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7543110179E51007B3E5C /* color.png */; };
@@ -81,15 +87,20 @@
 		3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClientManager.m; sourceTree = "<group>"; };
 		3A4E1B91108BA8E300FF1E9F /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		3A4E1BB8108BAD6B00FF1E9F /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		3A7761CA1018A706009F0CD1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		3A7761CB1018A706009F0CD1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3A60092D142381B9003B5B43 /* AKOLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AKOLibrary.framework; path = Externals/AKOLibrary.framework; sourceTree = "<group>"; };
+		3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
+		3A60093114238209003B5B43 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3A60093314238218003B5B43 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		3A60093514238222003B5B43 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3A6009371423822C003B5B43 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3A60093914238239003B5B43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3A60093A14238239003B5B43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3A60093D14238244003B5B43 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
 		3A9BA4BB10183B8E006F7A3F /* small_thumbnail3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail3.png; sourceTree = "<group>"; };
-		3AA753B710179455007B3E5C /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
-		3AA753B810179455007B3E5C /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffect.m; sourceTree = "<group>"; };
 		3AA753C210179559007B3E5C /* Erase.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Erase.caf; sourceTree = "<group>"; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3AA7543110179E51007B3E5C /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
@@ -133,6 +144,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
+				3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */,
+				3A60093C14238239003B5B43 /* Security.framework in Frameworks */,
+				3A6009381423822C003B5B43 /* MobileCoreServices.framework in Frameworks */,
+				3A60093614238222003B5B43 /* CoreText.framework in Frameworks */,
+				3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */,
+				3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */,
+				3A600930142381FC003B5B43 /* libz.1.2.3.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -141,7 +160,7 @@
 				3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */,
 				3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */,
 				3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */,
-				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
+				3A60092E142381B9003B5B43 /* AKOLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +201,15 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A60092D142381B9003B5B43 /* AKOLibrary.framework */,
+				3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */,
+				3A60093D14238244003B5B43 /* SystemConfiguration.framework */,
+				3A60093914238239003B5B43 /* QuartzCore.framework */,
+				3A60093A14238239003B5B43 /* Security.framework */,
+				3A6009371423822C003B5B43 /* MobileCoreServices.framework */,
+				3A60093514238222003B5B43 /* CoreText.framework */,
+				3A60093314238218003B5B43 /* CFNetwork.framework */,
+				3A60093114238209003B5B43 /* MediaPlayer.framework */,
 				3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */,
 				3AA753E510179806007B3E5C /* AudioToolbox.framework */,
 				3A15C4C210175AB700ECB335 /* MapKit.framework */,
@@ -315,10 +343,6 @@
 				3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */,
 				3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */,
 				3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */,
-				3A7761CA1018A706009F0CD1 /* Reachability.h */,
-				3A7761CB1018A706009F0CD1 /* Reachability.m */,
-				3AA753B710179455007B3E5C /* SoundEffect.h */,
-				3AA753B810179455007B3E5C /* SoundEffect.m */,
 				3AA7545D1017A1B7007B3E5C /* ColorCode.h */,
 				3AE3059F10185B4600D43A02 /* FontCode.h */,
 			);
@@ -440,9 +464,7 @@
 				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
 				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
 				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
-				3AA753B910179455007B3E5C /* SoundEffect.m in Sources */,
 				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
-				3A7761CC1018A706009F0CD1 /* Reachability.m in Sources */,
 				3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */,
 				3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */,
 				3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */,
@@ -471,6 +493,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Externals\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -478,6 +504,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
 			};
 			name = Debug;
@@ -487,11 +514,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Externals\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Notitas_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
 			};
 			name = Release;
@@ -515,11 +547,16 @@
 				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adrian Kosmaczewski";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Externals\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Notitas_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1BF0AF99-4EB7-4D57-92AB-6A5E0F2566FC";
 			};
@@ -544,11 +581,16 @@
 				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adrian Kosmaczewski";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Externals\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Notitas_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Notitas-Info.plist";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01DDA876-C541-41E3-8F3E-EB3E7913E151";
 			};

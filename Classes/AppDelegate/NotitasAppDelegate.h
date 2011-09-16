@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AKOLibrary/SoundEffect.h>
 
 @class RootViewController;
-@class SoundEffect;
 
 @interface NotitasAppDelegate : NSObject <UIApplicationDelegate,
                                           UIAccelerometerDelegate> 
