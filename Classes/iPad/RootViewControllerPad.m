@@ -15,8 +15,11 @@
 
 @property (nonatomic, retain) NSArray *notes;
 @property (nonatomic, retain) NSMutableArray *noteViews;
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic) BOOL locationInformationAvailable;
 
 - (void)refresh;
+- (Note *)createNote;
 
 @end
 
@@ -28,9 +31,12 @@
 @synthesize noteViews = _noteViews;
 @synthesize trashButton = _trashButton;
 @synthesize locationButton = _locationButton;
+@synthesize locationManager = _locationManager;
+@synthesize locationInformationAvailable = _locationInformationAvailable;
 
 - (void)dealloc
 {
+    [_locationManager release];
     [_trashButton release];
     [_locationButton release];
     [_notes release];
@@ -44,7 +50,14 @@
 {
     [super viewDidLoad];
     
-    self.noteViews = [NSMutableArray array];
+    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = 100;
+    [self.locationManager startUpdatingLocation];
+    
+    self.locationInformationAvailable = NO;
+    
     [self refresh];
 }
 
@@ -75,12 +88,128 @@
     }
 }
 
+#pragma mark - CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager 
+    didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation
+{
+    int latitude = (int)newLocation.coordinate.latitude;
+    int longitude = (int)newLocation.coordinate.longitude;
+    if (latitude != 0 && longitude != 0)
+    {
+        self.locationInformationAvailable = YES;
+        self.locationButton.enabled = YES;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [self.locationManager stopUpdatingLocation];
+    self.locationInformationAvailable = NO;
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
+    {
+        case 0:
+            // Cancel
+            break;
+            
+        case 1:
+        {
+            // OK
+            [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
+            [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+            [self refresh];
+            self.trashButton.enabled = NO;
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Public methods
+
+- (void)createNewNoteWithContents:(NSString *)contents
+{
+	Note *newNote = [self createNote];
+    newNote.contents = contents;
+    
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self refresh];
+    self.trashButton.enabled = YES;
+}
+
+- (IBAction)shakeNotes:(id)sender
+{
+    [[MNOCoreDataManager sharedMNOCoreDataManager] shakeNotes];
+    [self refresh];
+}
+
+- (IBAction)newNoteWithLocation:(id)sender
+{
+    if (self.locationInformationAvailable)
+    {
+        Note *newNote = [self createNote];
+        CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
+        CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
+        NSString *template = NSLocalizedString(@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", @"Message created by the 'location' button");
+        newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
+        
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [self refresh];
+        self.trashButton.enabled = YES;
+    }
+}
+
+- (IBAction)removeAllNotes:(id)sender
+{
+    NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
+    NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
+    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:self
+                                          cancelButtonTitle:cancelText
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    [alert release];
+}
+
+- (IBAction)about:(id)sender
+{
+	Note *newNote = [self createNote];
+    
+    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009-2011 © akosma software\nAll Rights Reserved", @"Copyright text");
+    newNote.contents = copyright;
+    
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self refresh];
+    self.trashButton.enabled = YES;
+}
+
+- (IBAction)insertNewObject:(id)sender
+{
+	[self createNote];
+    
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [self refresh];
+    self.trashButton.enabled = YES;
+}
+
 #pragma mark - Private methods
 
 - (void)refresh
 {
     self.notes = [[MNOCoreDataManager sharedMNOCoreDataManager] allNotes];
-    self.noteViews = nil;
+    [self.noteViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.noteViews = [NSMutableArray array];
     for (Note *note in self.notes)
     {
         NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:CGRectMake(0.0, 0.0, 150.0, 150.0)] autorelease];
@@ -102,6 +231,19 @@
         [self.noteViews addObject:thumb];
         [self.view addSubview:thumb];
     }
+}
+
+- (Note *)createNote
+{
+	Note *newNote = [[MNOCoreDataManager sharedMNOCoreDataManager] createNote];
+    
+    newNote.hasLocation = [NSNumber numberWithBool:self.locationInformationAvailable];
+    if (self.locationInformationAvailable)
+    {
+        newNote.latitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
+        newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+    }
+    return newNote;
 }
 
 @end
