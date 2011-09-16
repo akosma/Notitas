@@ -86,7 +86,6 @@
 		3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClientManager.h; sourceTree = "<group>"; };
 		3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClientManager.m; sourceTree = "<group>"; };
 		3A4E1B91108BA8E300FF1E9F /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
-		3A4E1BB8108BAD6B00FF1E9F /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		3A60092D142381B9003B5B43 /* AKOLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AKOLibrary.framework; path = Externals/AKOLibrary.framework; sourceTree = "<group>"; };
 		3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		3A60093114238209003B5B43 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -338,7 +337,6 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3A4E1BB8108BAD6B00FF1E9F /* SynthesizeSingleton.h */,
 				3A4E1B8B108BA8D700FF1E9F /* TwitterClient.h */,
 				3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */,
 				3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */,

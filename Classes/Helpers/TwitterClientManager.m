@@ -9,7 +9,7 @@
 #import "TwitterClientManager.h"
 #import "TwitterClient.h"
 #import "Definitions.h"
-#import "SynthesizeSingleton.h"
+#import <AKOLibrary/SynthesizeSingleton.h>
 
 @interface TwitterClientManager (Private)
 - (void)initializeClients;
