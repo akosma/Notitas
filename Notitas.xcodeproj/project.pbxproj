@@ -31,6 +31,7 @@
 		3A6009381423822C003B5B43 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6009371423822C003B5B43 /* MobileCoreServices.framework */; };
 		3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093914238239003B5B43 /* QuartzCore.framework */; };
 		3A60093C14238239003B5B43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093A14238239003B5B43 /* Security.framework */; };
+		3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */; };
 		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
@@ -95,6 +96,8 @@
 		3A60093914238239003B5B43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3A60093A14238239003B5B43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A60093D14238244003B5B43 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3A68EFF014238B83008DC819 /* MNOCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOCoreDataManager.h; sourceTree = "<group>"; };
+		3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOCoreDataManager.m; sourceTree = "<group>"; };
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 		3AC5BF971015986900D062A4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3A68EFF014238B83008DC819 /* MNOCoreDataManager.h */,
+				3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */,
 				3A4E1B8B108BA8D700FF1E9F /* TwitterClient.h */,
 				3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */,
 				3A4E1B8D108BA8D700FF1E9F /* TwitterClientManager.h */,
@@ -466,6 +471,7 @@
 				3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */,
 				3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */,
 				3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */,
+				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

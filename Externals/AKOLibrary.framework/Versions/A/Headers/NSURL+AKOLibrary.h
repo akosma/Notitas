@@ -21,13 +21,31 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+/**
+ @file NSURL+AKOLibrary.h
+ Contains a category on top of NSURL.
+ */
+
 #import <Foundation/Foundation.h>
 
 
-@interface NSURL (AKOLibrary)
+/**
+ @category NSURL(AKOLibrary)
+ Set of helper methods on top of the NSURL class.
+ */
+@interface NSURL(AKOLibrary)
 
+/**
+ Returns the NSURL that corresponds to a filename in the current resource bundle.
+ @param filename The name of the file contained the resource.
+ @return A file NSURL instance.
+ */
 + (NSURL *)ako_fileURLForFilename:(NSString *)filename;
 
+/**
+ Returns the SHA hash of the current URL.
+ @return An NSString with a SHA hash.
+ */
 - (NSString *)ako_hash;
 
 @end
