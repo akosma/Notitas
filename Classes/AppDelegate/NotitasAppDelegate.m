@@ -40,8 +40,7 @@
 {
     [Appirater appLaunched];
     
-    self.toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0); 
-
+    self.toolbar.frame = CGRectMake(0.0, 436.0, 320.0, 44.0);
     self.window.rootViewController = self.rootController;
     [self.window addSubview:self.toolbar];
     [self.window makeKeyAndVisible];
@@ -58,8 +57,7 @@
                                                                            (CFStringRef)parameter, 
                                                                            CFSTR(""));
             
-            [[MNOCoreDataManager sharedMNOCoreDataManager] createNewNoteWithContents:(NSString *)clean];
-            [self.rootController.tableView reloadData];
+            [self.rootController createNewNoteWithContents:(NSString *)clean];
             CFRelease(clean);
             return YES;
         }

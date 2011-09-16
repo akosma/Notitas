@@ -292,6 +292,7 @@
     }
     self.thumbnail.frame = realFrame;
     self.thumbnail.color = self.currentNote.colorCode;
+    [self.thumbnail setNeedsDisplay];
     if (self.editor == nil)
     {
         self.editor = [[[NoteEditor alloc] init] autorelease];

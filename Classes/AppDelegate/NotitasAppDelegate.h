@@ -10,8 +10,7 @@
 
 @class RootViewController;
 
-@interface NotitasAppDelegate : NSObject <UIApplicationDelegate,
-                                          UIAccelerometerDelegate> 
+@interface NotitasAppDelegate : NSObject <UIApplicationDelegate> 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet RootViewController *rootController;

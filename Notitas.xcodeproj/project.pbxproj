@@ -42,10 +42,6 @@
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AA7543210179E51007B3E5C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7543110179E51007B3E5C /* color.png */; };
 		3AA7544710179F6E007B3E5C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7544610179F6E007B3E5C /* Note.m */; };
-		3AA7544F1017A0D9007B3E5C /* thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544B1017A0D9007B3E5C /* thumbnail0.png */; };
-		3AA754501017A0D9007B3E5C /* thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544C1017A0D9007B3E5C /* thumbnail1.png */; };
-		3AA754511017A0D9007B3E5C /* thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544D1017A0D9007B3E5C /* thumbnail2.png */; };
-		3AA754521017A0D9007B3E5C /* thumbnail3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7544E1017A0D9007B3E5C /* thumbnail3.png */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
 		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
 		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
@@ -112,10 +108,6 @@
 		3AA7543110179E51007B3E5C /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
 		3AA7544510179F6E007B3E5C /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		3AA7544610179F6E007B3E5C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
-		3AA7544B1017A0D9007B3E5C /* thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail0.png; sourceTree = "<group>"; };
-		3AA7544C1017A0D9007B3E5C /* thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail1.png; sourceTree = "<group>"; };
-		3AA7544D1017A0D9007B3E5C /* thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail2.png; sourceTree = "<group>"; };
-		3AA7544E1017A0D9007B3E5C /* thumbnail3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail3.png; sourceTree = "<group>"; };
 		3AA7545D1017A1B7007B3E5C /* ColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCode.h; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
@@ -280,10 +272,6 @@
 				3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */,
 				3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */,
 				3A9BA4BB10183B8E006F7A3F /* small_thumbnail3.png */,
-				3AA7544B1017A0D9007B3E5C /* thumbnail0.png */,
-				3AA7544C1017A0D9007B3E5C /* thumbnail1.png */,
-				3AA7544D1017A0D9007B3E5C /* thumbnail2.png */,
-				3AA7544E1017A0D9007B3E5C /* thumbnail3.png */,
 				3AA7543110179E51007B3E5C /* color.png */,
 				3A1BDFED10177D3800775127 /* location.png */,
 				3AC5C3F31015EEE300D062A4 /* Default.png */,
@@ -443,10 +431,6 @@
 				3A1BDFEE10177D3800775127 /* location.png in Resources */,
 				3AA753C310179559007B3E5C /* Erase.caf in Resources */,
 				3AA7543210179E51007B3E5C /* color.png in Resources */,
-				3AA7544F1017A0D9007B3E5C /* thumbnail0.png in Resources */,
-				3AA754501017A0D9007B3E5C /* thumbnail1.png in Resources */,
-				3AA754511017A0D9007B3E5C /* thumbnail2.png in Resources */,
-				3AA754521017A0D9007B3E5C /* thumbnail3.png in Resources */,
 				3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */,
 				3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */,
 				3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */,

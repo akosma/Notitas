@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ColorCode.h"
-#import "FontCode.h"
+#import "MNOHelpers.h"
 
 @interface NoteThumbnail : UIView 
 {
