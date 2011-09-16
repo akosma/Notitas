@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import <AKOLibrary/AKOLibrary.h>
 #import "MNOHelpers.h"
 
 @interface NoteThumbnail : UIView 
-{
-@private
-    UILabel *_summaryLabel;
-    UIImageView *_backgroundView;
-    ColorCode _color;
-    FontCode _font;
-}
 
 @property (nonatomic) FontCode font;
 @property (nonatomic) ColorCode color;

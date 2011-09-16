@@ -8,36 +8,41 @@
 
 #import "NoteThumbnail.h"
 
-static CGFloat kMyViewWidth = 300.0f;
-static CGFloat kMyViewHeight = 300.0f;
+CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
+{
+    // Adapted from 
+    // http://stackoverflow.com/questions/422066/gradients-on-uiview-and-uilabels-on-iphone/1931498#1931498
+    
+    id start = (id)startColor.CGColor;
+    id end = (id)endColor.CGColor;
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.colors = [NSArray arrayWithObjects:start, end, nil];
+    return gradient;
+}
+
 
 @interface NoteThumbnail ()
 
-@property (nonatomic, retain) UIColor *lightBlueColor;
-@property (nonatomic, retain) UIColor *darkBlueColor;
-@property (nonatomic, retain) UIColor *lightGreenColor;
-@property (nonatomic, retain) UIColor *darkGreenColor;
-@property (nonatomic, retain) UIColor *lightRoseColor;
-@property (nonatomic, retain) UIColor *darkRoseColor;
-@property (nonatomic, retain) UIColor *lightYellowColor;
-@property (nonatomic, retain) UIColor *darkYellowColor;
+@property (nonatomic, retain) CALayer *blueLayer;
+@property (nonatomic, retain) CALayer *redLayer;
+@property (nonatomic, retain) CALayer *greenLayer;
+@property (nonatomic, retain) CALayer *yellowLayer;
+@property (nonatomic, retain) UILabel *summaryLabel;
 
 @end
 
 
 @implementation NoteThumbnail
 
-@dynamic text;
-@dynamic font;
+@synthesize text = _text;
+@synthesize font = _font;
 @synthesize color = _color;
-@synthesize lightBlueColor = _lightBlueColor;
-@synthesize darkBlueColor = _darkBlueColor;
-@synthesize lightGreenColor = _lightGreenColor;
-@synthesize darkGreenColor = _darkGreenColor;
-@synthesize lightRoseColor = _lightRoseColor;
-@synthesize darkRoseColor = _darkRoseColor;
-@synthesize lightYellowColor = _lightYellowColor;
-@synthesize darkYellowColor = _darkYellowColor;
+@synthesize summaryLabel = _summaryLabel;
+@synthesize blueLayer = _blueLayer;
+@synthesize redLayer = _redLayer;
+@synthesize greenLayer = _greenLayer;
+@synthesize yellowLayer = _yellowLayer;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -52,15 +57,38 @@ static CGFloat kMyViewHeight = 300.0f;
         _summaryLabel.numberOfLines = 0;
         [self addSubview:_summaryLabel];
         
-        self.lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
-        self.darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
-        self.lightGreenColor = [UIColor colorWithRed:0.664 green:1.000 blue:0.493 alpha:1.000];
-        self.darkGreenColor = [UIColor colorWithRed:0.599 green:0.841 blue:0.438 alpha:1.000];
-        self.lightRoseColor = [UIColor colorWithRed:1.000 green:0.791 blue:0.923 alpha:1.000];
-        self.darkRoseColor = [UIColor colorWithRed:0.999 green:0.673 blue:0.798 alpha:1.000];
-        self.lightYellowColor = [UIColor colorWithRed:0.966 green:0.931 blue:0.387 alpha:1.000];
-        self.darkYellowColor = [UIColor colorWithRed:0.831 green:0.784 blue:0.382 alpha:1.000];
+        UIColor *lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
+        UIColor *darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
+        UIColor *lightGreenColor = [UIColor colorWithRed:0.664 green:1.000 blue:0.493 alpha:1.000];
+        UIColor *darkGreenColor = [UIColor colorWithRed:0.599 green:0.841 blue:0.438 alpha:1.000];
+        UIColor *lightRoseColor = [UIColor colorWithRed:1.000 green:0.791 blue:0.923 alpha:1.000];
+        UIColor *darkRoseColor = [UIColor colorWithRed:0.999 green:0.673 blue:0.798 alpha:1.000];
+        UIColor *lightYellowColor = [UIColor colorWithRed:0.966 green:0.931 blue:0.387 alpha:1.000];
+        UIColor *darkYellowColor = [UIColor colorWithRed:0.831 green:0.784 blue:0.382 alpha:1.000];
         
+        self.blueLayer = gradientWithColors(lightBlueColor, darkBlueColor);
+        self.redLayer = gradientWithColors(lightRoseColor, darkRoseColor);
+        self.greenLayer = gradientWithColors(lightGreenColor, darkGreenColor);
+        self.yellowLayer = gradientWithColors(lightYellowColor, darkYellowColor);
+        
+        rect = CGRectMake(rect.origin.x - 10.0,
+                          rect.origin.y - 10.0,
+                          rect.size.width + 20.0,
+                          rect.size.height + 20.0);
+        self.blueLayer.frame = rect;
+        self.redLayer.frame = rect;
+        self.greenLayer.frame = rect;
+        self.yellowLayer.frame = rect;
+
+        self.layer.shadowOffset = CGSizeMake(1.0, 1.0);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
+        self.layer.shadowPath = path.CGPath;
+        self.layer.shadowOpacity = 1.0;
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        // Do not rasterize on the iPhone or the iPod. 
+        // The font rendering is very ugly if rasterized!
+        self.layer.shouldRasterize = [[[UIDevice currentDevice] ako_platform] hasPrefix:@"iPad"];
+
         self.backgroundColor = [UIColor clearColor];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -78,127 +106,61 @@ static CGFloat kMyViewHeight = 300.0f;
 
 - (void)dealloc 
 {
-    [_lightBlueColor release];
-    [_darkBlueColor release];
-    [_lightGreenColor release];
-    [_darkGreenColor release];
-    [_lightRoseColor release];
-    [_darkRoseColor release];
-    [_lightYellowColor release];
-    [_darkYellowColor release];
+    [_blueLayer release];
+    [_greenLayer release];
+    [_redLayer release];
+    [_yellowLayer release];
     [_summaryLabel release];
-    [_backgroundView release];
     [super dealloc];
 }
 
-- (void)drawRect:(CGRect)dirtyRect
-{
-	CGRect imageBounds = CGRectMake(0.0f, 0.0f, kMyViewWidth, kMyViewHeight);
-	CGRect bounds = [self bounds];
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	UIColor *color;
-	CGFloat resolution;
-	CGFloat alignStroke;
-	CGMutablePathRef path;
-	CGRect drawRect;
-	CGGradientRef gradient;
-	NSMutableArray *colors;
-	CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
-	CGPoint point;
-	CGPoint point2;
-	CGAffineTransform transform;
-	CGMutablePathRef tempPath;
-	CGRect pathBounds;
-	CGFloat locations[2];
-	resolution = 0.5f * (bounds.size.width / imageBounds.size.width + bounds.size.height / imageBounds.size.height);
-	
-	CGContextSaveGState(context);
-	CGContextTranslateCTM(context, bounds.origin.x, bounds.origin.y);
-	CGContextScaleCTM(context, (bounds.size.width / imageBounds.size.width), (bounds.size.height / imageBounds.size.height));
-	
-	// Setup for Shadow Effect
-	color = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
-	CGContextSaveGState(context);
-	CGContextSetShadowWithColor(context, CGSizeMake(7.071f * resolution, 7.071f * resolution), 3.0f * resolution, [color CGColor]);
-	CGContextBeginTransparencyLayer(context, NULL);
-	
-	// Layer 1
-	
-	alignStroke = 0.0f;
-	path = CGPathCreateMutable();
-	drawRect = CGRectMake(38.0f, 38.0f, 224.0f, 224.0f);
-	drawRect.origin.x = (roundf(resolution * drawRect.origin.x + alignStroke) - alignStroke) / resolution;
-	drawRect.origin.y = (roundf(resolution * drawRect.origin.y + alignStroke) - alignStroke) / resolution;
-	drawRect.size.width = roundf(resolution * drawRect.size.width) / resolution;
-	drawRect.size.height = roundf(resolution * drawRect.size.height) / resolution;
-	CGPathAddRect(path, NULL, drawRect);
-	colors = [NSMutableArray arrayWithCapacity:2];
-    
-    // Gradient
-    switch (_color) 
-    {
-        case ColorCodeBlue:
-        {
-            [colors addObject:(id)[self.lightBlueColor CGColor]];
-            [colors addObject:(id)[self.darkBlueColor CGColor]];
-            break;
-        }
-            
-        case ColorCodeRed:
-        {
-            [colors addObject:(id)[self.lightRoseColor CGColor]];
-            [colors addObject:(id)[self.darkRoseColor CGColor]];
-            break;
-        }
-        
-        case ColorCodeGreen:
-        {
-            [colors addObject:(id)[self.lightGreenColor CGColor]];
-            [colors addObject:(id)[self.darkGreenColor CGColor]];
-            break;
-        }
-            
-        case ColorCodeYellow:
-        {
-            [colors addObject:(id)[self.lightYellowColor CGColor]];
-            [colors addObject:(id)[self.darkYellowColor CGColor]];
-            break;
-        }
+#pragma mark - Public properties
 
-        default:
-            break;
-    }
-    
-	locations[0] = 0.0f;
-	locations[1] = 1.0f;
-	gradient = CGGradientCreateWithColors(space, (CFArrayRef)colors, locations);
-	CGContextAddPath(context, path);
-	CGContextSaveGState(context);
-	CGContextEOClip(context);
-	transform = CGAffineTransformMakeRotation(-1.047f);
-	tempPath = CGPathCreateMutable();
-	CGPathAddPath(tempPath, &transform, path);
-	pathBounds = CGPathGetPathBoundingBox(tempPath);
-	point = pathBounds.origin;
-	point2 = CGPointMake(CGRectGetMaxX(pathBounds), CGRectGetMinY(pathBounds));
-	transform = CGAffineTransformInvert(transform);
-	point = CGPointApplyAffineTransform(point, transform);
-	point2 = CGPointApplyAffineTransform(point2, transform);
-	CGPathRelease(tempPath);
-	CGContextDrawLinearGradient(context, gradient, point, point2, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
-	CGContextRestoreGState(context);
-	CGGradientRelease(gradient);
-	CGPathRelease(path);
-	
-	// Shadow Effect
-	CGContextEndTransparencyLayer(context);
-	CGContextRestoreGState(context);
-	
-	CGContextRestoreGState(context);
-	CGColorSpaceRelease(space);
+- (ColorCode)color
+{
+    return _color;
 }
 
-#pragma mark - Public properties
+- (void)setColor:(ColorCode)color
+{
+    if (color != _color)
+    {
+        _color = color;
+        CALayer *background = nil;
+        switch (_color) 
+        {
+            case ColorCodeBlue:
+            {
+                background = self.blueLayer;
+                break;
+            }
+                
+            case ColorCodeRed:
+            {
+                background = self.redLayer; 
+                break;
+            }
+                
+            case ColorCodeGreen:
+            {
+                background = self.greenLayer;
+                break;
+            }
+                
+            case ColorCodeYellow:
+            {
+                background = self.yellowLayer;
+                break;
+            }
+                
+            default:
+                break;
+        }
+        
+        [background removeFromSuperlayer];
+        [self.layer insertSublayer:background atIndex:0];
+    }
+}
 
 - (NSString *)text
 {
