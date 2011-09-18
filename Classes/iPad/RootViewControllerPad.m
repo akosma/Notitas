@@ -46,9 +46,15 @@
 @synthesize locationView = _locationView;
 @synthesize mapView = _mapView;
 @synthesize flipView = _flipView;
+@synthesize undoButton = _undoButton;
+@synthesize redoButton = _redoButton;
+@synthesize modalBlockerView = _modalBlockerView;
 
 - (void)dealloc
 {
+    [_modalBlockerView release];
+    [_undoButton release];
+    [_redoButton release];
     [_flipView release];
     [_locationView release];
     [_mapView release];
@@ -80,6 +86,11 @@
     self.scrollView.contentSize = CGSizeMake(1024.0, 1004.0);
 
     self.locationInformationAvailable = NO;
+    self.modalBlockerView.alpha = 0.0;
+    
+    UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                           action:@selector(hideLocationView:)] autorelease];
+    [self.modalBlockerView addGestureRecognizer:tap];
     
     [self refresh];
     [self checkTrashIconEnabled];
@@ -145,8 +156,11 @@
 {
     [UIView transitionWithView:self.locationView
                       duration:0.3
-                       options:UIViewAnimationOptionTransitionFlipFromLeft + UIViewAnimationOptionCurveEaseInOut
+                       options:UIViewAnimationOptionAllowAnimatedContent + 
+                               UIViewAnimationOptionTransitionFlipFromLeft + 
+                               UIViewAnimationOptionCurveEaseInOut
                     animations:^{
+                        self.modalBlockerView.alpha = 1.0;
                         [self.locationView addSubview:self.flipView];
                         [self.currentThumbnail removeFromSuperview];
                     }
@@ -243,15 +257,15 @@
     }    
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
-        CGFloat scale = recognizer.scale;
         if (thumb.note.scale > 0.5 && thumb.note.scale < 2.0)
         {
+            CGFloat scale = recognizer.scale;
             thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
+            thumb.note.scale = recognizer.scale;
         }
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
-        thumb.note.scale = recognizer.scale;
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     }
 }
@@ -270,11 +284,10 @@
     {
         CGFloat angle = recognizer.rotation;
         thumb.transform = CGAffineTransformRotate(thumb.originalTransform, angle);
+        thumb.note.angleRadians = angle;
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
-        CGFloat angle = recognizer.rotation;
-        thumb.note.angleRadians = angle;
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     }
 }
@@ -328,13 +341,26 @@
 
 #pragma mark - Public methods
 
+- (IBAction)undo:(id)sender
+{
+    [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] undo];
+}
+
+- (IBAction)redo:(id)sender
+{
+    [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] redo];
+}
+
 - (IBAction)hideLocationView:(id)sender
 {
     [self.locationView mno_removeShadow];
     [UIView transitionWithView:self.locationView
                       duration:0.3
-                       options:UIViewAnimationOptionTransitionFlipFromRight + UIViewAnimationOptionCurveEaseInOut
+                       options:UIViewAnimationOptionAllowAnimatedContent + 
+                               UIViewAnimationOptionTransitionFlipFromRight + 
+                               UIViewAnimationOptionCurveEaseInOut
                     animations:^{
+                        self.modalBlockerView.alpha = 0.0;
                         [self.locationView addSubview:self.currentThumbnail];
                         [self.flipView removeFromSuperview];
                     }

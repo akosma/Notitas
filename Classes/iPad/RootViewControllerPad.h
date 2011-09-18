@@ -20,6 +20,9 @@
 @property (nonatomic, retain) IBOutlet UIView *locationView;
 @property (nonatomic, retain) IBOutlet UIView *flipView;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *undoButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *redoButton;
+@property (nonatomic, retain) IBOutlet UIView *modalBlockerView;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
@@ -30,5 +33,8 @@
 - (IBAction)about:(id)sender;
 
 - (IBAction)hideLocationView:(id)sender;
+
+- (IBAction)undo:(id)sender;
+- (IBAction)redo:(id)sender;
 
 @end
