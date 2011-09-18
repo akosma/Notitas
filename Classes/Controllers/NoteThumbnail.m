@@ -7,6 +7,7 @@
 //
 
 #import "NoteThumbnail.h"
+#import "Note.h"
 
 CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 {
@@ -29,14 +30,12 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @property (nonatomic, retain) CALayer *greenLayer;
 @property (nonatomic, retain) CALayer *yellowLayer;
 @property (nonatomic, assign) CALayer *currentLayer;
-@property (nonatomic, retain) UILabel *summaryLabel;
 
 @end
 
 
 @implementation NoteThumbnail
 
-@synthesize text = _text;
 @synthesize font = _font;
 @synthesize color = _color;
 @synthesize summaryLabel = _summaryLabel;
@@ -47,7 +46,6 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @synthesize currentLayer = _currentLayer;
 @synthesize note = _note;
 @synthesize originalTransform = _originalTransform;
-@synthesize originalFrame = _originalFrame;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -56,19 +54,11 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 {
     if (self = [super initWithFrame:frame]) 
     {
-        CGRect rect = CGRectMake(22.0, 32.0, frame.size.width - 42.0, frame.size.height - 42.0);
+        CGRect rect = CGRectInset(self.bounds, 10.0, 10.0);
         _summaryLabel = [[UILabel alloc] initWithFrame:rect];
         _summaryLabel.backgroundColor = [UIColor clearColor];
         _summaryLabel.numberOfLines = 0;
         [self addSubview:_summaryLabel];
-        
-        _summaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | 
-                                         UIViewAutoresizingFlexibleHeight;
-        
-        self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
-                                UIViewAutoresizingFlexibleRightMargin | 
-                                UIViewAutoresizingFlexibleTopMargin | 
-                                UIViewAutoresizingFlexibleBottomMargin;
 
         UIColor *lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
         UIColor *darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
@@ -91,8 +81,6 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         
         self.currentLayer = self.yellowLayer;
         [self.layer insertSublayer:self.currentLayer atIndex:0];
-
-        self.backgroundColor = [UIColor clearColor];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeColor:) 
@@ -119,18 +107,30 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
     [super dealloc];
 }
 
-#pragma mark - Public properties
-
-- (CGRect)frame
-{
-    return [super frame];
-}
+#pragma mark - Public methods
 
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
     self.currentLayer.frame = self.bounds;
 }
+
+- (void)refreshDisplay
+{
+//    CGFloat size = [self.note.size floatValue];
+//    CGAffineTransform trans = CGAffineTransformMakeScale(size, size);
+    CGAffineTransform trans = CGAffineTransformMakeRotation(self.note.angleRadians);
+    self.transform = trans;
+    self.color = self.note.colorCode;
+    self.font = self.note.fontCode;
+    
+    // This must come last, so that the size calculation
+    // of the label inside the thumbnail is done!
+    self.summaryLabel.text = self.note.contents;
+    self.center = self.note.position;
+}
+
+#pragma mark - Public properties
 
 - (ColorCode)color
 {
@@ -186,10 +186,6 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 - (void)setText:(NSString *)newText
 {
-    CGFloat width = _summaryLabel.frame.size.width;
-    CGSize constraints = CGSizeMake(width, 90.0);
-    CGSize size = [newText sizeWithFont:_summaryLabel.font constrainedToSize:constraints];
-    _summaryLabel.frame = CGRectMake(22.0, 32.0, width, size.height);
     _summaryLabel.text = newText;
 }
 

@@ -10,6 +10,7 @@
 #import "Note.h"
 #import "NoteThumbnail.h"
 #import "ColorCode.h"
+#import "MNOHelpers.h"
 
 @implementation NoteCell
 
@@ -26,15 +27,19 @@
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        _leftFrame = CGRectMake(5.0, 5.0, 150.0, 150.0);
+        _leftFrame = CGRectMake(20.0, 20.0, 130.0, 130.0);
         _leftView = [[NoteThumbnail alloc] initWithFrame:_leftFrame];
         _leftView.hidden = YES;
+        [_leftView mno_addShadow];
         [self.contentView addSubview:_leftView];
 
-        _rightFrame = CGRectMake(165.0, 5.0, 150.0, 150.0);
+        _rightFrame = CGRectMake(170.0, 20.0, 130.0, 130.0);
         _rightView = [[NoteThumbnail alloc] initWithFrame:_rightFrame];
         _rightView.hidden = YES;
+        [_rightView mno_addShadow];
         [self.contentView addSubview:_rightView];
+        
+        self.contentView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -77,7 +82,7 @@
         
         // This must come last, so that the size calculation
         // of the label inside the thumbnail is done!
-        _leftView.text = _leftNote.contents;
+        _leftView.summaryLabel.text = _leftNote.contents;
         _leftView.hidden = NO;
     }
 }
@@ -107,7 +112,7 @@
 
         // This must come last, so that the size calculation
         // of the label inside the thumbnail is done!
-        _rightView.text = _rightNote.contents;
+        _rightView.summaryLabel.text = _rightNote.contents;
         _rightView.hidden = NO;
     }
 }

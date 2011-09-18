@@ -11,18 +11,21 @@
 #import <MapKit/MapKit.h>
 
 @interface RootViewControllerPad : UIViewController <UIAlertViewDelegate,
-                                                     CLLocationManagerDelegate>
+                                                     CLLocationManagerDelegate,
+                                                     UITextViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
 @property (nonatomic, retain) IBOutlet UIView *holderView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIView *locationView;
+@property (nonatomic, retain) IBOutlet UIView *auxiliaryView;
 @property (nonatomic, retain) IBOutlet UIView *flipView;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *undoButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *redoButton;
 @property (nonatomic, retain) IBOutlet UIView *modalBlockerView;
+@property (nonatomic, retain) IBOutlet UIView *editorView;
+@property (nonatomic, retain) IBOutlet UITextView *textView;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
@@ -33,7 +36,7 @@
 - (IBAction)about:(id)sender;
 - (IBAction)showMapWithAllNotes:(id)sender;
 
-- (IBAction)hideLocationView:(id)sender;
+- (IBAction)dismissBlockerView:(id)sender;
 
 - (IBAction)undo:(id)sender;
 - (IBAction)redo:(id)sender;
