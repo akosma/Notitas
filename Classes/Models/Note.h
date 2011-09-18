@@ -34,5 +34,6 @@
 @property (nonatomic, readonly) FontCode fontCode;
 @property (nonatomic, readonly) NSString *timeString;
 @property (nonatomic) CGPoint position;
+@property (nonatomic) CGFloat scale;
 
 @end

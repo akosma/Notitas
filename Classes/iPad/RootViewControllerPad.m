@@ -17,6 +17,9 @@
 @property (nonatomic, retain) NSMutableArray *noteViews;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic) BOOL locationInformationAvailable;
+@property (nonatomic, assign) NoteThumbnail *currentThumbnail;
+@property (nonatomic, retain) UIAlertView *deleteAllNotesAlertView;
+@property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
 
 - (void)refresh;
 - (Note *)createNote;
@@ -37,9 +40,15 @@
 @synthesize locationInformationAvailable = _locationInformationAvailable;
 @synthesize holderView = _holderView;
 @synthesize scrollView = _scrollView;
+@synthesize currentThumbnail = _currentThumbnail;
+@synthesize deleteAllNotesAlertView = _deleteAllNotesAlertView;
+@synthesize deleteNoteAlertView = _deleteNoteAlertView;
 
 - (void)dealloc
 {
+    _currentThumbnail = nil;
+    [_deleteAllNotesAlertView release];
+    [_deleteNoteAlertView release];
     [_scrollView release];
     [_holderView release];
     [_locationManager release];
@@ -75,12 +84,86 @@
 	return YES;
 }
 
+#pragma mark - UIResponderStandardEditActions methods
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)delete:(id)sender
+{
+    if (self.deleteNoteAlertView == nil)
+    {
+        NSString *title = NSLocalizedString(@"Are you sure?", @"Title of the 'trash' dialog of the editor controller");
+        NSString *message = NSLocalizedString(@"This action cannot be undone.", @"Explanation of the 'trash' dialog of the editor controller");
+        NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+        self.deleteNoteAlertView = [[[UIAlertView alloc] initWithTitle:title
+                                                               message:message
+                                                              delegate:self
+                                                     cancelButtonTitle:cancelText
+                                                     otherButtonTitles:@"OK", nil] autorelease];
+    }
+    [self.deleteNoteAlertView show];
+}
+
+- (void)showMap:(id)sender
+{
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) 
+    {
+        case 0:
+            // Cancel
+            break;
+            
+        case 1:
+        {
+            // OK
+            if (alertView == self.deleteNoteAlertView)
+            {
+                [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentThumbnail.note];
+                [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+                
+                [UIView animateWithDuration:0.5
+                                 animations:^{
+                                     self.currentThumbnail.alpha = 0.0;
+                                 } 
+                                 completion:^(BOOL finished){
+                                     [self.currentThumbnail removeFromSuperview];
+                                 }];
+                
+                self.currentThumbnail = nil;
+                [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+                [self refresh];
+                [self checkTrashIconEnabled];
+            }
+            else if (alertView == self.deleteAllNotesAlertView)
+            {
+                [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
+                [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+                [self refresh];
+                self.trashButton.enabled = NO;
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Gesture recognizer handlers
 
 - (void)drag:(UIPanGestureRecognizer *)recognizer
 {
     NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-    
+    self.currentThumbnail = thumb;
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         [self.holderView bringSubviewToFront:thumb];
@@ -100,7 +183,8 @@
 - (void)pinch:(UIPinchGestureRecognizer *)recognizer
 {
     NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-    
+    self.currentThumbnail = thumb;
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         [self.holderView bringSubviewToFront:thumb];
@@ -109,11 +193,14 @@
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
         CGFloat scale = recognizer.scale;
-        thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
+        if (thumb.note.scale > 0.5 && thumb.note.scale < 2.0)
+        {
+            thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
+        }
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
-        thumb.note.size = [NSNumber numberWithFloat:recognizer.scale];
+        thumb.note.scale = recognizer.scale;
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     }
 }
@@ -121,7 +208,8 @@
 - (void)rotate:(UIRotationGestureRecognizer *)recognizer
 {
     NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-    
+    self.currentThumbnail = thumb;
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         [self.holderView bringSubviewToFront:thumb];
@@ -143,11 +231,38 @@
 - (void)tap:(UITapGestureRecognizer *)recognizer
 {
     NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    self.currentThumbnail = thumb;
 
     if (recognizer.state == UIGestureRecognizerStateRecognized)
     {
         [self.holderView bringSubviewToFront:thumb];
     }
+}
+
+- (void)longPressure:(UILongPressGestureRecognizer *)recognizer
+{
+    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    self.currentThumbnail = thumb;
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [self becomeFirstResponder];
+        [self.holderView bringSubviewToFront:thumb];
+        
+        NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
+        BOOL locationAvailable = [thumb.note.hasLocation boolValue];
+        if (locationAvailable)
+        {
+            UIMenuItem *locationItem = [[[UIMenuItem alloc] initWithTitle:locationText action:@selector(showMap:)] autorelease];
+            NSArray *items = [NSArray arrayWithObjects:locationItem, nil];
+            [UIMenuController sharedMenuController].menuItems = items;
+        }
+        
+        [[UIMenuController sharedMenuController] setTargetRect:CGRectInset(thumb.frame, 50.0, 50.0)
+                                                        inView:self.holderView];
+        [[UIMenuController sharedMenuController] setMenuVisible:YES 
+                                                       animated:YES];
+    }    
 }
 
 #pragma mark - CLLocationManagerDelegate methods
@@ -169,31 +284,6 @@
 {
     [self.locationManager stopUpdatingLocation];
     self.locationInformationAvailable = NO;
-}
-
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) 
-    {
-        case 0:
-            // Cancel
-            break;
-            
-        case 1:
-        {
-            // OK
-            [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
-            [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
-            [self refresh];
-            self.trashButton.enabled = NO;
-            break;
-        }
-            
-        default:
-            break;
-    }
 }
 
 #pragma mark - Public methods
@@ -233,16 +323,18 @@
 
 - (IBAction)removeAllNotes:(id)sender
 {
-    NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
-    NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
-    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:self
-                                          cancelButtonTitle:cancelText
-                                          otherButtonTitles:@"OK", nil];
-    [alert show];
-    [alert release];
+    if (self.deleteAllNotesAlertView == nil)
+    {
+        NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
+        NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
+        NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+        self.deleteAllNotesAlertView = [[[UIAlertView alloc] initWithTitle:title
+                                                                   message:message
+                                                                  delegate:self
+                                                         cancelButtonTitle:cancelText
+                                                         otherButtonTitles:@"OK", nil] autorelease];
+    }
+    [self.deleteAllNotesAlertView show];
 }
 
 - (IBAction)about:(id)sender
@@ -307,6 +399,10 @@
         UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                                action:@selector(tap:)] autorelease];
         [thumb addGestureRecognizer:tap];
+        
+        UILongPressGestureRecognizer *longPressure = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
+                                                                                                    action:@selector(longPressure:)] autorelease];
+        [thumb addGestureRecognizer:longPressure];
         
         [self.noteViews addObject:thumb];
         [self.holderView addSubview:thumb];

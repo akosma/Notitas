@@ -29,6 +29,7 @@
 @dynamic fontCode;
 @dynamic timeString;
 @dynamic position;
+@dynamic scale;
 
 - (ColorCode)colorCode
 {
@@ -83,6 +84,16 @@
     NSNumber *y = [NSNumber numberWithFloat:position.y];
     self.xcoord = x;
     self.ycoord = y;
+}
+
+- (CGFloat)scale
+{
+    return [self.size floatValue];
+}
+
+- (void)setScale:(CGFloat)scale
+{
+    self.size = [NSNumber numberWithFloat:scale];
 }
 
 @end
