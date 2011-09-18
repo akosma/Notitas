@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     self = [super initWithFilename:@"Notitas"];
     if (self) 
     {
-        [self.managedObjectContext.undoManager setLevelsOfUndo:3];
+        [self.managedObjectContext.undoManager setLevelsOfUndo:10];
     }
     return self;
 }

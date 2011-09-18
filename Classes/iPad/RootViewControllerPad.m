@@ -10,6 +10,7 @@
 #import "MNOHelpers.h"
 #import "Note.h"
 #import "NoteThumbnail.h"
+#import "MapControllerPad.h"
 
 @interface RootViewControllerPad ()
 
@@ -344,11 +345,20 @@
 - (IBAction)undo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] undo];
+    [self refresh];
 }
 
 - (IBAction)redo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] redo];
+    [self refresh];
+}
+
+- (IBAction)showMapWithAllNotes:(id)sender
+{
+    MapControllerPad *map = [[[MapControllerPad alloc] init] autorelease];
+    map.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    [self presentModalViewController:map animated:YES];
 }
 
 - (IBAction)hideLocationView:(id)sender

@@ -31,6 +31,7 @@
 
 - (void)createNewNoteWithContents:(NSString *)contents;
 - (IBAction)about:(id)sender;
+- (IBAction)showMapWithAllNotes:(id)sender;
 
 - (IBAction)hideLocationView:(id)sender;
 

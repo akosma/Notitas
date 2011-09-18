@@ -62,6 +62,9 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         _summaryLabel.numberOfLines = 0;
         [self addSubview:_summaryLabel];
         
+        _summaryLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | 
+                                         UIViewAutoresizingFlexibleHeight;
+        
         self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
                                 UIViewAutoresizingFlexibleRightMargin | 
                                 UIViewAutoresizingFlexibleTopMargin | 

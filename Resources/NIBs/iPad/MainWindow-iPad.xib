@@ -55,7 +55,6 @@
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="966381162">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -129,7 +128,6 @@
 									<string key="NSFrame">{{738, 13}, {18, 19}}</string>
 									<reference key="NSSuperview" ref="1060554267"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -288,7 +286,6 @@
 						<string key="NSFrameSize">{450, 450}</string>
 						<reference key="NSSuperview" ref="59218463"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:774</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -465,6 +462,14 @@
 						<reference key="destination" ref="825915037"/>
 					</object>
 					<int key="connectionID">100</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showMapWithAllNotes:</string>
+						<reference key="source" ref="1042835520"/>
+						<reference key="destination" ref="884716538"/>
+					</object>
+					<int key="connectionID">101</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -761,7 +766,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100</int>
+			<int key="maxID">101</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -820,10 +825,12 @@
 							<string>redo:</string>
 							<string>removeAllNotes:</string>
 							<string>shakeNotes:</string>
+							<string>showMapWithAllNotes:</string>
 							<string>undo:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -845,6 +852,7 @@
 							<string>redo:</string>
 							<string>removeAllNotes:</string>
 							<string>shakeNotes:</string>
+							<string>showMapWithAllNotes:</string>
 							<string>undo:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -875,6 +883,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">shakeNotes:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showMapWithAllNotes:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

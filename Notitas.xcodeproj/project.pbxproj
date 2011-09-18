@@ -48,6 +48,8 @@
 		3A7892361425F94E004B07F0 /* background_ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892341425F94E004B07F0 /* background_ipad.jpg */; };
 		3A7892371425F94E004B07F0 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892351425F94E004B07F0 /* Default-Landscape.png */; };
 		3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */; };
+		3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7892441426552A004B07F0 /* MapControllerPad.m */; };
+		3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892461426556B004B07F0 /* MapControllerPad.xib */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -127,6 +129,9 @@
 		3A7892351425F94E004B07F0 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "Resources/NIBs/iPad/Default-Landscape.png"; sourceTree = "<group>"; };
 		3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNOExtensions.h"; sourceTree = "<group>"; };
 		3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNOExtensions.m"; sourceTree = "<group>"; };
+		3A7892431426552A004B07F0 /* MapControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControllerPad.h; sourceTree = "<group>"; };
+		3A7892441426552A004B07F0 /* MapControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControllerPad.m; sourceTree = "<group>"; };
+		3A7892461426556B004B07F0 /* MapControllerPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapControllerPad.xib; path = Resources/NIBs/iPad/MapControllerPad.xib; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -255,6 +260,7 @@
 				3A7892351425F94E004B07F0 /* Default-Landscape.png */,
 				3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */,
 				3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */,
+				3A7892461426556B004B07F0 /* MapControllerPad.xib */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 			children = (
 				3A1F0D391423D54500BEBE5E /* RootViewControllerPad.h */,
 				3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */,
+				3A7892431426552A004B07F0 /* MapControllerPad.h */,
+				3A7892441426552A004B07F0 /* MapControllerPad.m */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -505,6 +513,7 @@
 				3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */,
 				3A7892361425F94E004B07F0 /* background_ipad.jpg in Resources */,
 				3A7892371425F94E004B07F0 /* Default-Landscape.png in Resources */,
+				3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +540,7 @@
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
 				3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */,
 				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
+				3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
