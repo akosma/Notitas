@@ -21,5 +21,6 @@
 @property (nonatomic) ColorCode color;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, retain) Note *note;
+@property (nonatomic) CGAffineTransform originalTransform;
 
 @end

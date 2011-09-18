@@ -28,6 +28,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @property (nonatomic, retain) CALayer *redLayer;
 @property (nonatomic, retain) CALayer *greenLayer;
 @property (nonatomic, retain) CALayer *yellowLayer;
+@property (nonatomic, assign) CALayer *currentLayer;
 @property (nonatomic, retain) UILabel *summaryLabel;
 
 @end
@@ -43,7 +44,9 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @synthesize redLayer = _redLayer;
 @synthesize greenLayer = _greenLayer;
 @synthesize yellowLayer = _yellowLayer;
+@synthesize currentLayer = _currentLayer;
 @synthesize note = _note;
+@synthesize originalTransform = _originalTransform;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -80,6 +83,9 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         self.redLayer.frame = rect;
         self.greenLayer.frame = rect;
         self.yellowLayer.frame = rect;
+        
+        self.currentLayer = self.yellowLayer;
+        [self.layer insertSublayer:self.currentLayer atIndex:0];
 
         self.layer.shadowOffset = CGSizeMake(1.0, 1.0);
         UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
@@ -107,6 +113,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 - (void)dealloc 
 {
+    _currentLayer = nil;
     [_note release];
     [_blueLayer release];
     [_greenLayer release];
@@ -128,30 +135,31 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
     if (color != _color)
     {
         _color = color;
-        CALayer *background = nil;
+        
+        [self.currentLayer removeFromSuperlayer];
         switch (_color) 
         {
             case ColorCodeBlue:
             {
-                background = self.blueLayer;
+                self.currentLayer = self.blueLayer;
                 break;
             }
                 
             case ColorCodeRed:
             {
-                background = self.redLayer; 
+                self.currentLayer = self.redLayer; 
                 break;
             }
                 
             case ColorCodeGreen:
             {
-                background = self.greenLayer;
+                self.currentLayer = self.greenLayer;
                 break;
             }
                 
             case ColorCodeYellow:
             {
-                background = self.yellowLayer;
+                self.currentLayer = self.yellowLayer;
                 break;
             }
                 
@@ -159,8 +167,8 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
                 break;
         }
         
-        [background removeFromSuperlayer];
-        [self.layer insertSublayer:background atIndex:0];
+        [self.layer insertSublayer:self.currentLayer 
+                           atIndex:0];
     }
 }
 
@@ -186,7 +194,9 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 - (void)setFont:(FontCode)newCode
 {
     _font = newCode;
-    _summaryLabel.font = [UIFont fontWithName:fontNameForCode(_font) size:12.0];
+    CGFloat size = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 16.0 : 12.0;
+    _summaryLabel.font = [UIFont fontWithName:fontNameForCode(_font) 
+                                         size:size];
 }
 
 #pragma mark -

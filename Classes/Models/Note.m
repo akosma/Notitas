@@ -21,6 +21,7 @@
 @dynamic hasLocation;
 @dynamic xcoord;
 @dynamic ycoord;
+@dynamic size;
 
 @dynamic colorCode;
 @dynamic location;
@@ -41,9 +42,14 @@
     return [location autorelease];
 }
 
-- (double)angleRadians
+- (CGFloat)angleRadians
 {
     return [self.angle doubleValue];
+}
+
+- (void)setAngleRadians:(CGFloat)angleRadians
+{
+    self.angle = [NSNumber numberWithFloat:angleRadians];
 }
 
 - (FontCode)fontCode

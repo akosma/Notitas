@@ -9,11 +9,12 @@
         <attribute name="hasLocation" optional="YES" attributeType="Boolean" defaultValueString="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0"/>
+        <attribute name="size" optional="YES" attributeType="Float" defaultValueString="1"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date"/>
-        <attribute name="xcoord" optional="YES" attributeType="Float" defaultValueString="0.0"/>
-        <attribute name="ycoord" optional="YES" attributeType="Float" defaultValueString="0.0"/>
+        <attribute name="xcoord" optional="YES" attributeType="Float" defaultValueString="100"/>
+        <attribute name="ycoord" optional="YES" attributeType="Float" defaultValueString="100"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-63" positionY="-27" width="128" height="210"/>
+        <element name="Note" positionX="-63" positionY="-27" width="128" height="225"/>
     </elements>
 </model>

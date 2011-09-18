@@ -83,17 +83,70 @@
     
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-        [self.view bringSubviewToFront:thumb];
+        [self.holderView bringSubviewToFront:thumb];
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
-        CGPoint point = [recognizer locationInView:self.view];
+        CGPoint point = [recognizer locationInView:self.holderView];
         thumb.center = point;
         thumb.note.position = point;
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    }
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)recognizer
+{
+    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self.holderView bringSubviewToFront:thumb];
+        thumb.originalTransform = thumb.transform;
+    }    
+    else if (recognizer.state == UIGestureRecognizerStateChanged)
+    {
+        CGFloat scale = recognizer.scale;
+        thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        thumb.note.size = [NSNumber numberWithFloat:recognizer.scale];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    }
+}
+
+- (void)rotate:(UIRotationGestureRecognizer *)recognizer
+{
+    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self.holderView bringSubviewToFront:thumb];
+        thumb.originalTransform = thumb.transform;
+    }    
+    else if (recognizer.state == UIGestureRecognizerStateChanged)
+    {
+        CGFloat angle = recognizer.rotation;
+        thumb.transform = CGAffineTransformRotate(thumb.originalTransform, angle);
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        CGFloat angle = recognizer.rotation;
+        thumb.note.angleRadians = angle;
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer *)recognizer
+{
+    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+
+    if (recognizer.state == UIGestureRecognizerStateRecognized)
+    {
+        [self.holderView bringSubviewToFront:thumb];
     }
 }
 
@@ -227,6 +280,8 @@
     {
         NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)] autorelease];
         CGAffineTransform trans = CGAffineTransformMakeRotation(note.angleRadians);
+        CGFloat size = [note.size floatValue];
+        trans = CGAffineTransformScale(trans, size, size);
         thumb.transform = trans;
         thumb.color = note.colorCode;
         thumb.font = note.fontCode;
@@ -240,6 +295,18 @@
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
         [thumb addGestureRecognizer:pan];
+        
+        UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
+                                                                                     action:@selector(pinch:)] autorelease];
+        [thumb addGestureRecognizer:pinch];
+        
+        UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
+                                                                                              action:@selector(rotate:)] autorelease];
+        [thumb addGestureRecognizer:rotation];
+        
+        UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                               action:@selector(tap:)] autorelease];
+        [thumb addGestureRecognizer:tap];
         
         [self.noteViews addObject:thumb];
         [self.holderView addSubview:thumb];

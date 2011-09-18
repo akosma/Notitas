@@ -26,10 +26,11 @@
 @property (nonatomic, retain) NSNumber *hasLocation;
 @property (nonatomic, retain) NSNumber *xcoord;
 @property (nonatomic, retain) NSNumber *ycoord;
+@property (nonatomic, retain) NSNumber *size;
 
 @property (nonatomic, readonly) ColorCode colorCode;
 @property (nonatomic, readonly) CLLocation *location;
-@property (nonatomic, readonly) double angleRadians;
+@property (nonatomic) CGFloat angleRadians;
 @property (nonatomic, readonly) FontCode fontCode;
 @property (nonatomic, readonly) NSString *timeString;
 @property (nonatomic) CGPoint position;
