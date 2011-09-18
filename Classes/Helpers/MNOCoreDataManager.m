@@ -33,13 +33,13 @@ static ColorCode randomColorCode()
 
 static float randomXPosition()
 {
-    float position = (float)(arc4random() % 768);
+    float position = (float)(arc4random() % 824) + 100;
     return position;
 }
 
 static float randomYPosition()
 {
-    float position = (float)(arc4random() % 1024);
+    float position = (float)(arc4random() % 804) + 100;
     return position;
 }
 

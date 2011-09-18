@@ -20,6 +20,8 @@
 
 - (void)refresh;
 - (Note *)createNote;
+- (void)checkTrashIconEnabled;
+- (void)scrollNoteIntoView:(Note *)note;
 
 @end
 
@@ -33,9 +35,13 @@
 @synthesize locationButton = _locationButton;
 @synthesize locationManager = _locationManager;
 @synthesize locationInformationAvailable = _locationInformationAvailable;
+@synthesize holderView = _holderView;
+@synthesize scrollView = _scrollView;
 
 - (void)dealloc
 {
+    [_scrollView release];
+    [_holderView release];
     [_locationManager release];
     [_trashButton release];
     [_locationButton release];
@@ -55,10 +61,13 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = 100;
     [self.locationManager startUpdatingLocation];
-    
+
+    self.scrollView.contentSize = CGSizeMake(1024.0, 1004.0);
+
     self.locationInformationAvailable = NO;
     
     [self refresh];
+    [self checkTrashIconEnabled];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -143,7 +152,7 @@
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     [self refresh];
-    self.trashButton.enabled = YES;
+    [self scrollNoteIntoView:newNote];
 }
 
 - (IBAction)shakeNotes:(id)sender
@@ -165,6 +174,7 @@
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [self refresh];
         self.trashButton.enabled = YES;
+        [self scrollNoteIntoView:newNote];
     }
 }
 
@@ -192,15 +202,18 @@
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     [self refresh];
     self.trashButton.enabled = YES;
+
+    [self scrollNoteIntoView:newNote];
 }
 
 - (IBAction)insertNewObject:(id)sender
 {
-	[self createNote];
+	Note *newNote = [self createNote];
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     [self refresh];
     self.trashButton.enabled = YES;
+    [self scrollNoteIntoView:newNote];
 }
 
 #pragma mark - Private methods
@@ -212,7 +225,7 @@
     self.noteViews = [NSMutableArray array];
     for (Note *note in self.notes)
     {
-        NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:CGRectMake(0.0, 0.0, 150.0, 150.0)] autorelease];
+        NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)] autorelease];
         CGAffineTransform trans = CGAffineTransformMakeRotation(note.angleRadians);
         thumb.transform = trans;
         thumb.color = note.colorCode;
@@ -229,7 +242,7 @@
         [thumb addGestureRecognizer:pan];
         
         [self.noteViews addObject:thumb];
-        [self.view addSubview:thumb];
+        [self.holderView addSubview:thumb];
     }
 }
 
@@ -244,6 +257,19 @@
         newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
     }
     return newNote;
+}
+
+- (void)checkTrashIconEnabled
+{
+    self.trashButton.enabled = ([self.notes count] > 0);
+}
+
+- (void)scrollNoteIntoView:(Note *)note
+{
+    CGPoint point = note.position;
+    CGRect rect = CGRectMake(point.x - 100.0, point.y - 100.0, 200.0, 200.0);
+    [self.scrollView scrollRectToVisible:rect animated:YES];
+    self.trashButton.enabled = YES;
 }
 
 @end

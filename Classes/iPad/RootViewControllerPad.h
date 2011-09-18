@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
+@property (nonatomic, retain) IBOutlet UIView *holderView;
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
