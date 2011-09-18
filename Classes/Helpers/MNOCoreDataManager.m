@@ -54,7 +54,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     self = [super initWithFilename:@"Notitas"];
     if (self) 
     {
-        [self.managedObjectContext.undoManager setLevelsOfUndo:10];
+        NSUndoManager *undoManager = [[[NSUndoManager alloc] init] autorelease];
+        [undoManager setLevelsOfUndo:10];
+        self.managedObjectContext.undoManager = undoManager;
     }
     return self;
 }

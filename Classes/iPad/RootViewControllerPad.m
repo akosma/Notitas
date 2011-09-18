@@ -26,6 +26,8 @@
 - (Note *)createNote;
 - (void)checkTrashIconEnabled;
 - (void)scrollNoteIntoView:(Note *)note;
+- (void)checkUndoButtonEnabled;
+- (void)checkRedoButtonEnabled;
 
 @end
 
@@ -93,8 +95,19 @@
                                                                            action:@selector(hideLocationView:)] autorelease];
     [self.modalBlockerView addGestureRecognizer:tap];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidUndo:) 
+                                                 name:NSUndoManagerDidUndoChangeNotification 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(undoManagerDidRedo:) 
+                                                 name:NSUndoManagerDidRedoChangeNotification 
+                                               object:nil];
+
     [self refresh];
     [self checkTrashIconEnabled];
+    [self checkUndoButtonEnabled];
+    [self checkRedoButtonEnabled];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -192,6 +205,7 @@
             // OK
             if (alertView == self.deleteNoteAlertView)
             {
+                [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
                 [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentThumbnail.note];
                 [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
                 
@@ -210,7 +224,9 @@
             }
             else if (alertView == self.deleteAllNotesAlertView)
             {
+                [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
                 [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
+                [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
                 [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
                 [self refresh];
                 self.trashButton.enabled = NO;
@@ -232,6 +248,7 @@
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
@@ -243,6 +260,9 @@
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+        [self checkUndoButtonEnabled];
+        [self checkRedoButtonEnabled];
     }
 }
 
@@ -253,6 +273,7 @@
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         thumb.originalTransform = thumb.transform;
     }    
@@ -268,6 +289,9 @@
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+        [self checkUndoButtonEnabled];
+        [self checkRedoButtonEnabled];
     }
 }
 
@@ -278,6 +302,7 @@
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         thumb.originalTransform = thumb.transform;
     }    
@@ -290,6 +315,9 @@
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+        [self checkUndoButtonEnabled];
+        [self checkRedoButtonEnabled];
     }
 }
 
@@ -345,13 +373,15 @@
 - (IBAction)undo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] undo];
-    [self refresh];
+    [self checkUndoButtonEnabled];
+    [self checkRedoButtonEnabled];
 }
 
 - (IBAction)redo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] redo];
-    [self refresh];
+    [self checkUndoButtonEnabled];
+    [self checkRedoButtonEnabled];
 }
 
 - (IBAction)showMapWithAllNotes:(id)sender
@@ -399,10 +429,13 @@
 
 - (void)createNewNoteWithContents:(NSString *)contents
 {
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 	Note *newNote = [self createNote];
     newNote.contents = contents;
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+
     [self refresh];
     [self scrollNoteIntoView:newNote];
 }
@@ -417,6 +450,7 @@
 {
     if (self.locationInformationAvailable)
     {
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         Note *newNote = [self createNote];
         CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
         CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
@@ -424,6 +458,7 @@
         newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
         
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         [self refresh];
         self.trashButton.enabled = YES;
         [self scrollNoteIntoView:newNote];
@@ -448,12 +483,14 @@
 
 - (IBAction)about:(id)sender
 {
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 	Note *newNote = [self createNote];
     
     NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009-2011 © akosma software\nAll Rights Reserved", @"Copyright text");
     newNote.contents = copyright;
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
     [self refresh];
     self.trashButton.enabled = YES;
 
@@ -462,12 +499,28 @@
 
 - (IBAction)insertNewObject:(id)sender
 {
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 	Note *newNote = [self createNote];
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
     [self refresh];
     self.trashButton.enabled = YES;
     [self scrollNoteIntoView:newNote];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+}
+
+#pragma mark - Undo support
+
+- (void)undoManagerDidUndo:(NSNotification *)notification 
+{
+	[self refresh];
+    [self checkTrashIconEnabled];
+}
+
+- (void)undoManagerDidRedo:(NSNotification *)notification 
+{
+	[self refresh];
+    [self checkTrashIconEnabled];
 }
 
 #pragma mark - Private methods
@@ -510,6 +563,8 @@
         [self.holderView addSubview:thumb];
         [thumb mno_addShadow];
     }
+    [self checkUndoButtonEnabled];
+    [self checkRedoButtonEnabled];
 }
 
 - (Note *)createNote
@@ -528,6 +583,16 @@
 - (void)checkTrashIconEnabled
 {
     self.trashButton.enabled = ([self.notes count] > 0);
+}
+
+- (void)checkUndoButtonEnabled
+{
+    self.undoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canUndo];
+}
+
+- (void)checkRedoButtonEnabled
+{
+    self.redoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canRedo];
 }
 
 - (void)scrollNoteIntoView:(Note *)note
