@@ -22,5 +22,6 @@
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, retain) Note *note;
 @property (nonatomic) CGAffineTransform originalTransform;
+@property (nonatomic) CGRect originalFrame;
 
 @end

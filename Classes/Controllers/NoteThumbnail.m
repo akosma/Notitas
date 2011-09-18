@@ -47,6 +47,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @synthesize currentLayer = _currentLayer;
 @synthesize note = _note;
 @synthesize originalTransform = _originalTransform;
+@synthesize originalFrame = _originalFrame;
 
 #pragma mark -
 #pragma mark Constructor and destructor
@@ -61,6 +62,11 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         _summaryLabel.numberOfLines = 0;
         [self addSubview:_summaryLabel];
         
+        self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+                                UIViewAutoresizingFlexibleRightMargin | 
+                                UIViewAutoresizingFlexibleTopMargin | 
+                                UIViewAutoresizingFlexibleBottomMargin;
+
         UIColor *lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
         UIColor *darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
         UIColor *lightGreenColor = [UIColor colorWithRed:0.664 green:1.000 blue:0.493 alpha:1.000];
@@ -75,26 +81,13 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         self.greenLayer = gradientWithColors(lightGreenColor, darkGreenColor);
         self.yellowLayer = gradientWithColors(lightYellowColor, darkYellowColor);
         
-        rect = CGRectMake(rect.origin.x - 10.0,
-                          rect.origin.y - 10.0,
-                          rect.size.width + 20.0,
-                          rect.size.height + 20.0);
-        self.blueLayer.frame = rect;
-        self.redLayer.frame = rect;
-        self.greenLayer.frame = rect;
-        self.yellowLayer.frame = rect;
+        self.blueLayer.frame = self.bounds;
+        self.redLayer.frame = self.bounds;
+        self.greenLayer.frame = self.bounds;
+        self.yellowLayer.frame = self.bounds;
         
         self.currentLayer = self.yellowLayer;
         [self.layer insertSublayer:self.currentLayer atIndex:0];
-
-        self.layer.shadowOffset = CGSizeMake(1.0, 1.0);
-        UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
-        self.layer.shadowPath = path.CGPath;
-        self.layer.shadowOpacity = 1.0;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
-        // Do not rasterize on the iPhone or the iPod. 
-        // The font rendering is very ugly if rasterized!
-        self.layer.shouldRasterize = [[[UIDevice currentDevice] ako_platform] hasPrefix:@"iPad"];
 
         self.backgroundColor = [UIColor clearColor];
         
@@ -124,6 +117,17 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 }
 
 #pragma mark - Public properties
+
+- (CGRect)frame
+{
+    return [super frame];
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    self.currentLayer.frame = self.bounds;
+}
 
 - (ColorCode)color
 {

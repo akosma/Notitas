@@ -47,6 +47,7 @@
 		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A7892361425F94E004B07F0 /* background_ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892341425F94E004B07F0 /* background_ipad.jpg */; };
 		3A7892371425F94E004B07F0 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892351425F94E004B07F0 /* Default-Landscape.png */; };
+		3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -124,6 +125,8 @@
 		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A7892341425F94E004B07F0 /* background_ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background_ipad.jpg; path = Resources/NIBs/iPad/background_ipad.jpg; sourceTree = "<group>"; };
 		3A7892351425F94E004B07F0 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "Resources/NIBs/iPad/Default-Landscape.png"; sourceTree = "<group>"; };
+		3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNOExtensions.h"; sourceTree = "<group>"; };
+		3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNOExtensions.m"; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -394,6 +397,8 @@
 				3A4E1B8E108BA8D700FF1E9F /* TwitterClientManager.m */,
 				3AA7545D1017A1B7007B3E5C /* ColorCode.h */,
 				3AE3059F10185B4600D43A02 /* FontCode.h */,
+				3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */,
+				3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				3A68EFFA14238EB1008DC819 /* Notitas.xcdatamodeld in Sources */,
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
 				3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */,
+				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

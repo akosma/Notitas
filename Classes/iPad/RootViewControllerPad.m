@@ -43,9 +43,15 @@
 @synthesize currentThumbnail = _currentThumbnail;
 @synthesize deleteAllNotesAlertView = _deleteAllNotesAlertView;
 @synthesize deleteNoteAlertView = _deleteNoteAlertView;
+@synthesize locationView = _locationView;
+@synthesize mapView = _mapView;
+@synthesize flipView = _flipView;
 
 - (void)dealloc
 {
+    [_flipView release];
+    [_locationView release];
+    [_mapView release];
     _currentThumbnail = nil;
     [_deleteAllNotesAlertView release];
     [_deleteNoteAlertView release];
@@ -109,6 +115,51 @@
 
 - (void)showMap:(id)sender
 {
+    [self.currentThumbnail mno_removeShadow];
+    self.currentThumbnail.originalTransform = self.currentThumbnail.transform;
+    self.currentThumbnail.originalFrame = self.currentThumbnail.frame;
+    [self.view addSubview:self.currentThumbnail];
+    CGRect rect = [self.view convertRect:self.currentThumbnail.frame
+                                fromView:self.holderView];
+    self.currentThumbnail.frame = rect;
+
+    [UIView animateWithDuration:0.3 
+                     animations:^{
+                         self.currentThumbnail.transform = CGAffineTransformIdentity;
+                         self.currentThumbnail.frame = self.locationView.frame;
+                     } 
+                     completion:^(BOOL finished) {
+                         if (finished)
+                         {
+                             self.locationView.hidden = NO;
+                             [self.locationView addSubview:self.currentThumbnail];
+                             self.currentThumbnail.frame = self.locationView.bounds;
+                             [self performSelector:@selector(transition) 
+                                        withObject:nil
+                                        afterDelay:0.1];
+                         }
+                     }];
+}
+
+- (void)transition
+{
+    [UIView transitionWithView:self.locationView
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionFlipFromLeft + UIViewAnimationOptionCurveEaseInOut
+                    animations:^{
+                        [self.locationView addSubview:self.flipView];
+                        [self.currentThumbnail removeFromSuperview];
+                    }
+                    completion:^(BOOL finished) {
+                        if (finished)
+                        {
+                            CLLocationCoordinate2D coordinate = self.currentThumbnail.note.location.coordinate;
+                            self.mapView.centerCoordinate = coordinate;
+                            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
+                            self.mapView.region = region;
+                            [self.locationView mno_addShadow];
+                        }
+                    }];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -232,19 +283,8 @@
 {
     NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
     self.currentThumbnail = thumb;
-
-    if (recognizer.state == UIGestureRecognizerStateRecognized)
-    {
-        [self.holderView bringSubviewToFront:thumb];
-    }
-}
-
-- (void)longPressure:(UILongPressGestureRecognizer *)recognizer
-{
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-    self.currentThumbnail = thumb;
     
-    if (recognizer.state == UIGestureRecognizerStateEnded)
+    if (recognizer.state == UIGestureRecognizerStateRecognized)
     {
         [self becomeFirstResponder];
         [self.holderView bringSubviewToFront:thumb];
@@ -287,6 +327,39 @@
 }
 
 #pragma mark - Public methods
+
+- (IBAction)hideLocationView:(id)sender
+{
+    [self.locationView mno_removeShadow];
+    [UIView transitionWithView:self.locationView
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionFlipFromRight + UIViewAnimationOptionCurveEaseInOut
+                    animations:^{
+                        [self.locationView addSubview:self.currentThumbnail];
+                        [self.flipView removeFromSuperview];
+                    }
+                    completion:^(BOOL finished) {
+                        if (finished)
+                        {
+                            self.locationView.hidden = YES;
+                            [self.holderView addSubview:self.currentThumbnail];
+                            CGRect rect = [self.holderView convertRect:self.locationView.frame
+                                                              fromView:self.view];
+                            self.currentThumbnail.frame = rect;
+                            [UIView animateWithDuration:0.3 
+                                             animations:^{
+                                                 self.currentThumbnail.frame = self.currentThumbnail.originalFrame;
+                                                 self.currentThumbnail.transform = self.currentThumbnail.originalTransform;
+                                             } 
+                                             completion:^(BOOL finished) {
+                                                 if (finished)
+                                                 {
+                                                     [self.currentThumbnail mno_addShadow];
+                                                 }
+                                             }];
+                        }
+                    }];
+}
 
 - (void)createNewNoteWithContents:(NSString *)contents
 {
@@ -386,26 +459,20 @@
         
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
-        [thumb addGestureRecognizer:pan];
-        
         UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
                                                                                      action:@selector(pinch:)] autorelease];
-        [thumb addGestureRecognizer:pinch];
-        
         UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
                                                                                               action:@selector(rotate:)] autorelease];
-        [thumb addGestureRecognizer:rotation];
-        
         UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                                action:@selector(tap:)] autorelease];
+        [thumb addGestureRecognizer:pan];
+        [thumb addGestureRecognizer:pinch];
+        [thumb addGestureRecognizer:rotation];
         [thumb addGestureRecognizer:tap];
-        
-        UILongPressGestureRecognizer *longPressure = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
-                                                                                                    action:@selector(longPressure:)] autorelease];
-        [thumb addGestureRecognizer:longPressure];
         
         [self.noteViews addObject:thumb];
         [self.holderView addSubview:thumb];
+        [thumb mno_addShadow];
     }
 }
 
