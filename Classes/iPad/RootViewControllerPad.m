@@ -28,6 +28,7 @@
 - (void)scrollNoteIntoView:(Note *)note;
 - (void)checkUndoButtonEnabled;
 - (void)checkRedoButtonEnabled;
+- (void)deleteCurrentNote;
 
 @end
 
@@ -138,6 +139,26 @@
     [self.deleteNoteAlertView show];
 }
 
+- (void)copy:(id)sender
+{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.currentThumbnail.note.contents;
+    self.currentThumbnail = nil;
+}
+
+- (void)cut:(id)sender
+{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.currentThumbnail.note.contents;
+    [self deleteCurrentNote];
+}
+
+- (void)paste:(id)sender
+{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    [self createNewNoteWithContents:board.string];
+}
+
 - (void)showMap:(id)sender
 {
     [self.currentThumbnail mno_removeShadow];
@@ -205,22 +226,7 @@
             // OK
             if (alertView == self.deleteNoteAlertView)
             {
-                [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
-                [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentThumbnail.note];
-                [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
-                
-                [UIView animateWithDuration:0.5
-                                 animations:^{
-                                     self.currentThumbnail.alpha = 0.0;
-                                 } 
-                                 completion:^(BOOL finished){
-                                     [self.currentThumbnail removeFromSuperview];
-                                 }];
-                
-                self.currentThumbnail = nil;
-                [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
-                [self refresh];
-                [self checkTrashIconEnabled];
+                [self deleteCurrentNote];
             }
             else if (alertView == self.deleteAllNotesAlertView)
             {
@@ -601,6 +607,28 @@
     CGRect rect = CGRectMake(point.x - 100.0, point.y - 100.0, 200.0, 200.0);
     [self.scrollView scrollRectToVisible:rect animated:YES];
     self.trashButton.enabled = YES;
+}
+
+- (void)deleteCurrentNote
+{
+    if (self.currentThumbnail != nil)
+    {
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentThumbnail.note];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+
+        [UIView animateWithDuration:0.5
+                      animations:^{
+                          self.currentThumbnail.alpha = 0.0;
+                      } 
+                      completion:^(BOOL finished){
+                          [self.currentThumbnail removeFromSuperview];
+                          self.currentThumbnail = nil;
+                          [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
+                          [self refresh];
+                          [self checkTrashIconEnabled];
+                      }];
+    }
 }
 
 @end
