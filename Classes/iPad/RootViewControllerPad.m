@@ -37,6 +37,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 - (void)editCurrentNote;
 - (void)animateThumbnailAndPerformSelector:(SEL)selector;
 - (void)returnCurrentThumbnailToOriginalPosition;
+- (void)positionEditorAndAuxiliaryViews;
 
 @end
 
@@ -137,6 +138,16 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 	return YES;
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self positionEditorAndAuxiliaryViews];
+                     }];
+}
+
 #pragma mark - UIResponderStandardEditActions methods
 
 - (BOOL)canBecomeFirstResponder
@@ -176,6 +187,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)showMap:(id)sender
 {
+    self.showingLocationView = YES;
+    [self positionEditorAndAuxiliaryViews];
     [self animateThumbnailAndPerformSelector:@selector(transitionToMap)];
 }
 
@@ -594,6 +607,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)editCurrentNote
 {
+    self.showingEditionView = YES;
+    [self positionEditorAndAuxiliaryViews];
     [self animateThumbnailAndPerformSelector:@selector(transitionToEdition)];
 }
 
@@ -653,7 +668,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                         {
                             [self.auxiliaryView bringSubviewToFront:self.mapView];
                             [self.auxiliaryView mno_addShadow];
-                            self.showingLocationView = YES;
                         }
                     }];
 }
@@ -676,7 +690,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                      } 
                      completion:^(BOOL finished) {
                          [self.textView becomeFirstResponder];
-                         self.showingEditionView = YES;
                          [self.auxiliaryView mno_addShadow];
                      }];
 }
@@ -738,6 +751,24 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                              [self becomeFirstResponder];
                          }
                      }];
+}
+
+- (void)positionEditorAndAuxiliaryViews
+{
+    if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+    {
+        self.textView.frame = CGRectMake(20.0, 20.0, 410.0, 390.0);
+        self.auxiliaryView.frame = CGRectMake(159.0, 277.0, 450.0, 450.0);
+    }
+    else
+    {
+        self.textView.frame = CGRectMake(20.0, 20.0, 410.0, 300.0);
+        self.auxiliaryView.frame = CGRectMake(287.0, 149.0, 450.0, 450.0);
+        if (self.isShowingEditionView)
+        {
+            self.auxiliaryView.frame = CGRectMake(287.0, 30.0, 450.0, 450.0);
+        }
+    }
 }
 
 #pragma mark - Toolbar edition actions
