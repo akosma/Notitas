@@ -38,11 +38,5 @@
 		<key>template</key>
 		<string>twitter://post?message=%@</string>
 	</dict>
-	<dict>
-		<key>name</key>
-		<string>Twitter</string>
-		<key>template</key>
-		<string>twitter://post?message=%@</string>
-	</dict>
 </array>
 </plist>
