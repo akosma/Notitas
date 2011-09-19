@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface MapControllerPad : UIViewController
+@interface MapControllerPad : UIViewController <MKMapViewDelegate>
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
 @property (nonatomic, assign) UIViewController *parent;
 
 - (IBAction)done:(id)sender;
+- (IBAction)changeMapType:(id)sender;
 
 @end

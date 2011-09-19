@@ -8,10 +8,11 @@
 
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 #import "ColorCode.h"
 #import "FontCode.h"
 
-@interface Note :  NSManagedObject  
+@interface Note :  NSManagedObject <MKAnnotation>
 {
 }
 
@@ -35,6 +36,10 @@
 @property (nonatomic, readonly) NSString *timeString;
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat scale;
+
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+- (NSString *)subtitle;
+- (NSString *)title;
 
 - (CGRect)frameForWidth:(CGFloat)width;
 

@@ -31,6 +31,8 @@
 @dynamic position;
 @dynamic scale;
 
+@dynamic coordinate;
+
 - (ColorCode)colorCode
 {
     return (ColorCode)[self.color intValue];
@@ -60,13 +62,16 @@
 
 - (NSString *)timeString
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
+    static NSDateFormatter *dateFormatter;
+    if (dateFormatter == nil)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setLocale:[NSLocale currentLocale]];
+    }
     
     NSString *result = [dateFormatter stringFromDate:self.timeStamp];
-    [dateFormatter release];
     return result;
 }
 
@@ -103,6 +108,23 @@
     CGRect rect = CGRectMake(position.x - halfWidth, 
                              position.y - halfWidth, width, width);
     return rect;
+}
+
+- (CLLocationCoordinate2D)coordinate
+{
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.latitude doubleValue], 
+                                                                   [self.longitude doubleValue]);
+    return coordinate;
+}
+
+- (NSString *)subtitle
+{
+    return self.timeString;
+}
+
+- (NSString *)title
+{
+    return self.contents;
 }
 
 @end

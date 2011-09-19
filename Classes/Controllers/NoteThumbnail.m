@@ -31,6 +31,8 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @property (nonatomic, retain) CALayer *yellowLayer;
 @property (nonatomic, assign) CALayer *currentLayer;
 
+- (void)setup;
+
 @end
 
 
@@ -54,45 +56,60 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 {
     if (self = [super initWithFrame:frame]) 
     {
-        CGRect rect = CGRectInset(self.bounds, 10.0, 10.0);
-        _summaryLabel = [[UILabel alloc] initWithFrame:rect];
-        _summaryLabel.backgroundColor = [UIColor clearColor];
-        _summaryLabel.numberOfLines = 0;
-        [self addSubview:_summaryLabel];
-
-        UIColor *lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
-        UIColor *darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
-        UIColor *lightGreenColor = [UIColor colorWithRed:0.664 green:1.000 blue:0.493 alpha:1.000];
-        UIColor *darkGreenColor = [UIColor colorWithRed:0.599 green:0.841 blue:0.438 alpha:1.000];
-        UIColor *lightRoseColor = [UIColor colorWithRed:1.000 green:0.791 blue:0.923 alpha:1.000];
-        UIColor *darkRoseColor = [UIColor colorWithRed:0.999 green:0.673 blue:0.798 alpha:1.000];
-        UIColor *lightYellowColor = [UIColor colorWithRed:0.966 green:0.931 blue:0.387 alpha:1.000];
-        UIColor *darkYellowColor = [UIColor colorWithRed:0.831 green:0.784 blue:0.382 alpha:1.000];
-        
-        self.blueLayer = gradientWithColors(lightBlueColor, darkBlueColor);
-        self.redLayer = gradientWithColors(lightRoseColor, darkRoseColor);
-        self.greenLayer = gradientWithColors(lightGreenColor, darkGreenColor);
-        self.yellowLayer = gradientWithColors(lightYellowColor, darkYellowColor);
-        
-        self.blueLayer.frame = self.bounds;
-        self.redLayer.frame = self.bounds;
-        self.greenLayer.frame = self.bounds;
-        self.yellowLayer.frame = self.bounds;
-        
-        self.currentLayer = self.yellowLayer;
-        [self.layer insertSublayer:self.currentLayer atIndex:0];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeColor:) 
-                                                     name:@"ChangeColorNotification"
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeFont:)
-                                                     name:@"ChangeFontNotification"
-                                                   object:nil];
+        [self setup];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    CGRect rect = CGRectInset(self.bounds, 10.0, 10.0);
+    _summaryLabel = [[UILabel alloc] initWithFrame:rect];
+    _summaryLabel.backgroundColor = [UIColor clearColor];
+    _summaryLabel.numberOfLines = 0;
+    [self addSubview:_summaryLabel];
+    
+    UIColor *lightBlueColor = [UIColor colorWithRed:0.847 green:0.902 blue:0.996 alpha:1.000];
+    UIColor *darkBlueColor = [UIColor colorWithRed:0.704 green:0.762 blue:1.000 alpha:1.000];
+    UIColor *lightGreenColor = [UIColor colorWithRed:0.664 green:1.000 blue:0.493 alpha:1.000];
+    UIColor *darkGreenColor = [UIColor colorWithRed:0.599 green:0.841 blue:0.438 alpha:1.000];
+    UIColor *lightRoseColor = [UIColor colorWithRed:1.000 green:0.791 blue:0.923 alpha:1.000];
+    UIColor *darkRoseColor = [UIColor colorWithRed:0.999 green:0.673 blue:0.798 alpha:1.000];
+    UIColor *lightYellowColor = [UIColor colorWithRed:0.966 green:0.931 blue:0.387 alpha:1.000];
+    UIColor *darkYellowColor = [UIColor colorWithRed:0.831 green:0.784 blue:0.382 alpha:1.000];
+    
+    self.blueLayer = gradientWithColors(lightBlueColor, darkBlueColor);
+    self.redLayer = gradientWithColors(lightRoseColor, darkRoseColor);
+    self.greenLayer = gradientWithColors(lightGreenColor, darkGreenColor);
+    self.yellowLayer = gradientWithColors(lightYellowColor, darkYellowColor);
+    
+    self.blueLayer.frame = self.bounds;
+    self.redLayer.frame = self.bounds;
+    self.greenLayer.frame = self.bounds;
+    self.yellowLayer.frame = self.bounds;
+    
+    self.currentLayer = self.yellowLayer;
+    [self.layer insertSublayer:self.currentLayer atIndex:0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeColor:) 
+                                                 name:@"ChangeColorNotification"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeFont:)
+                                                 name:@"ChangeFontNotification"
+                                               object:nil];
 }
 
 - (void)dealloc 
@@ -109,9 +126,8 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 #pragma mark - Public methods
 
-- (void)setFrame:(CGRect)frame
+- (void)layoutSubviews 
 {
-    [super setFrame:frame];
     self.currentLayer.frame = self.bounds;
 }
 

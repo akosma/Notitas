@@ -10,16 +10,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
+@class NoteThumbnail;
+
 @interface RootViewControllerPad : UIViewController <UIAlertViewDelegate,
                                                      CLLocationManagerDelegate,
-                                                     UITextViewDelegate>
+                                                     UITextViewDelegate,
+                                                     MKMapViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
 @property (nonatomic, retain) IBOutlet UIView *holderView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIView *auxiliaryView;
-@property (nonatomic, retain) IBOutlet UIView *flipView;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *undoButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *redoButton;

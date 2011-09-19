@@ -21,22 +21,22 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, retain) NSMutableArray *noteViews;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic) BOOL locationInformationAvailable;
-@property (nonatomic, assign) NoteThumbnail *currentThumbnail;
+@property (nonatomic, retain) NoteThumbnail *currentThumbnail;
 @property (nonatomic, retain) UIAlertView *deleteAllNotesAlertView;
 @property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
 @property (nonatomic, getter = isShowingLocationView) BOOL showingLocationView;
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
 @property (nonatomic, retain) MapControllerPad *map;
+@property (nonatomic, retain) NoteThumbnail *animationThumbnail;
 
 - (void)refresh;
 - (Note *)createNote;
-- (void)checkTrashIconEnabled;
 - (void)scrollNoteIntoView:(Note *)note;
-- (void)checkUndoButtonEnabled;
-- (void)checkRedoButtonEnabled;
+- (void)checkToolbarButtonsEnabled;
 - (void)deleteCurrentNote;
 - (void)editCurrentNote;
 - (void)animateThumbnailAndPerformSelector:(SEL)selector;
+- (void)returnCurrentThumbnailToOriginalPosition;
 
 @end
 
@@ -57,7 +57,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize deleteNoteAlertView = _deleteNoteAlertView;
 @synthesize auxiliaryView = _auxiliaryView;
 @synthesize mapView = _mapView;
-@synthesize flipView = _flipView;
 @synthesize undoButton = _undoButton;
 @synthesize redoButton = _redoButton;
 @synthesize modalBlockerView = _modalBlockerView;
@@ -66,6 +65,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize editorView = _editorView;
 @synthesize textView = _textView;
 @synthesize map = _map;
+@synthesize animationThumbnail = _animationThumbnail;
 
 - (void)dealloc
 {
@@ -75,10 +75,9 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [_modalBlockerView release];
     [_undoButton release];
     [_redoButton release];
-    [_flipView release];
     [_auxiliaryView release];
     [_mapView release];
-    _currentThumbnail = nil;
+    [_currentThumbnail release];
     [_deleteAllNotesAlertView release];
     [_deleteNoteAlertView release];
     [_scrollView release];
@@ -88,6 +87,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [_locationButton release];
     [_notes release];
     [_noteViews release];
+    [_animationThumbnail release];
     [super dealloc];
 }
 
@@ -109,7 +109,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.showingLocationView = NO;
     self.showingEditionView = NO;
     self.modalBlockerView.alpha = 0.0;
-    
+    self.animationThumbnail = [[[NoteThumbnail alloc] initWithFrame:CGRectZero] autorelease];
+
     UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                            action:@selector(dismissBlockerView:)] autorelease];
     [self.modalBlockerView addGestureRecognizer:tap];
@@ -124,9 +125,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                                                object:nil];
 
     [self refresh];
-    [self checkTrashIconEnabled];
-    [self checkUndoButtonEnabled];
-    [self checkRedoButtonEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -169,12 +168,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.currentThumbnail.note.contents;
     [self deleteCurrentNote];
-}
-
-- (void)paste:(id)sender
-{
-    UIPasteboard *board = [UIPasteboard generalPasteboard];
-    [self createNewNoteWithContents:board.string];
 }
 
 - (void)showMap:(id)sender
@@ -238,39 +231,9 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
-        [self checkUndoButtonEnabled];
-        [self checkRedoButtonEnabled];
+        [self checkToolbarButtonsEnabled];
     }
 }
-
-//- (void)pinch:(UIPinchGestureRecognizer *)recognizer
-//{
-//    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-//    self.currentThumbnail = thumb;
-//
-//    if (recognizer.state == UIGestureRecognizerStateBegan)
-//    {
-//        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
-//        [self.holderView bringSubviewToFront:thumb];
-//        thumb.originalTransform = thumb.transform;
-//    }    
-//    else if (recognizer.state == UIGestureRecognizerStateChanged)
-//    {
-//        if (thumb.note.scale > 0.5 && thumb.note.scale < 2.0)
-//        {
-//            CGFloat scale = recognizer.scale;
-//            thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
-//            thumb.note.scale = recognizer.scale;
-//        }
-//    }
-//    else if (recognizer.state == UIGestureRecognizerStateEnded)
-//    {
-//        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-//        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
-//        [self checkUndoButtonEnabled];
-//        [self checkRedoButtonEnabled];
-//    }
-//}
 
 - (void)rotate:(UIRotationGestureRecognizer *)recognizer
 {
@@ -294,8 +257,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         thumb.note.angleRadians += angle;
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
-        [self checkUndoButtonEnabled];
-        [self checkRedoButtonEnabled];
+        [self checkToolbarButtonsEnabled];
     }
 }
 
@@ -340,77 +302,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     }    
 }
 
-- (void)dismissBlockerView:(UITapGestureRecognizer *)recognizer
-{
-    if (self.isShowingLocationView)
-    {
-        [self.auxiliaryView mno_removeShadow];
-        [UIView transitionWithView:self.auxiliaryView
-                          duration:0.3
-                           options:UIViewAnimationOptionAllowAnimatedContent + 
-                                   UIViewAnimationOptionTransitionFlipFromRight + 
-                                   UIViewAnimationOptionCurveEaseInOut
-                        animations:^{
-                            self.modalBlockerView.alpha = 0.0;
-                            [self.auxiliaryView addSubview:self.currentThumbnail];
-                            [self.flipView removeFromSuperview];
-                        }
-                        completion:^(BOOL finished) {
-                            if (finished)
-                            {
-                                self.auxiliaryView.hidden = YES;
-                                [self.holderView addSubview:self.currentThumbnail];
-                                CGRect rect = [self.holderView convertRect:self.auxiliaryView.frame
-                                                                  fromView:self.view];
-                                self.currentThumbnail.frame = rect;
-                                [UIView animateWithDuration:0.3 
-                                                 animations:^{
-                                                     self.currentThumbnail.frame = [self.currentThumbnail.note frameForWidth:DEFAULT_WIDTH];
-                                                     [self.currentThumbnail refreshDisplay];
-                                                 }
-                                                 completion:^(BOOL finished) {
-                                                     if (finished)
-                                                     {
-                                                         [self.currentThumbnail mno_addShadow];
-                                                         self.showingLocationView = NO;
-                                                     }
-                                                 }];
-                            }
-                        }];
-    }
-    else if (self.isShowingEditionView)
-    {
-        self.currentThumbnail.note.contents = self.textView.text;
-        self.auxiliaryView.hidden = YES;
-        [self.editorView removeFromSuperview];
-        [self.holderView addSubview:self.currentThumbnail];
-        CGRect rect = [self.holderView convertRect:self.auxiliaryView.frame
-                                          fromView:self.view];
-        self.currentThumbnail.frame = rect;
-        [self becomeFirstResponder];
-
-        [UIView animateWithDuration:0.3 
-                         animations:^{
-                             self.textView.alpha = 0.0;
-                             self.modalBlockerView.alpha = 0.0;
-                             self.currentThumbnail.summaryLabel.alpha = 1.0;
-                             self.currentThumbnail.frame = [self.currentThumbnail.note frameForWidth:DEFAULT_WIDTH];
-                             [self.currentThumbnail refreshDisplay];
-                         }
-                         completion:^(BOOL finished) {
-                             if (finished)
-                             {
-                                 [self.currentThumbnail mno_addShadow];
-                                 self.showingEditionView = NO;
-                                 [UIView animateWithDuration:0.3 
-                                                  animations:^{
-                                                      [self.currentThumbnail refreshDisplay];
-                                                  }];
-                             }
-                         }];
-    }
-}
-
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager 
@@ -442,20 +333,22 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     return YES;
 }
 
+#pragma mark - MKMapViewDelegate methods
+
+
+
 #pragma mark - Public methods
 
 - (IBAction)undo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] undo];
-    [self checkUndoButtonEnabled];
-    [self checkRedoButtonEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 - (IBAction)redo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] redo];
-    [self checkUndoButtonEnabled];
-    [self checkRedoButtonEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 - (IBAction)showMapWithAllNotes:(id)sender
@@ -559,13 +452,13 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 - (void)undoManagerDidUndo:(NSNotification *)notification 
 {
 	[self refresh];
-    [self checkTrashIconEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 - (void)undoManagerDidRedo:(NSNotification *)notification 
 {
 	[self refresh];
-    [self checkTrashIconEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 #pragma mark - Private methods
@@ -583,8 +476,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
-//        UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
-//                                                                                     action:@selector(pinch:)] autorelease];
         UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
                                                                                               action:@selector(rotate:)] autorelease];
         UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
@@ -594,7 +485,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         doubleTap.numberOfTapsRequired = 2;
         
         [thumb addGestureRecognizer:pan];
-//        [thumb addGestureRecognizer:pinch];
         [thumb addGestureRecognizer:rotation];
         [thumb addGestureRecognizer:tap];
         [thumb addGestureRecognizer:doubleTap];
@@ -603,8 +493,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         [self.holderView addSubview:thumb];
         [thumb mno_addShadow];
     }
-    [self checkUndoButtonEnabled];
-    [self checkRedoButtonEnabled];
+    [self checkToolbarButtonsEnabled];
 }
 
 - (Note *)createNote
@@ -620,18 +509,10 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     return newNote;
 }
 
-- (void)checkTrashIconEnabled
+- (void)checkToolbarButtonsEnabled
 {
     self.trashButton.enabled = ([self.notes count] > 0);
-}
-
-- (void)checkUndoButtonEnabled
-{
     self.undoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canUndo];
-}
-
-- (void)checkRedoButtonEnabled
-{
     self.redoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canRedo];
 }
 
@@ -660,7 +541,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                           self.currentThumbnail = nil;
                           [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
                           [self refresh];
-                          [self checkTrashIconEnabled];
+                          [self checkToolbarButtonsEnabled];
                       }];
     }
 }
@@ -670,25 +551,31 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [self animateThumbnailAndPerformSelector:@selector(transitionToEdition)];
 }
 
+#pragma mark - Methods to animate the notes for maps and edition
+
 - (void)animateThumbnailAndPerformSelector:(SEL)selector
 {
-    [self.currentThumbnail mno_removeShadow];
-    [self.view addSubview:self.currentThumbnail];
-    CGRect rect = [self.view convertRect:self.currentThumbnail.frame
-                                fromView:self.holderView];
-    self.currentThumbnail.frame = rect;
+    CGRect frame = [self.view convertRect:self.currentThumbnail.frame 
+                                 fromView:self.holderView];
+    self.animationThumbnail.frame = frame;
+    [self.view addSubview:self.animationThumbnail];
+    self.currentThumbnail.hidden = YES;                                   
+    CGAffineTransform trans = CGAffineTransformMakeRotation(self.currentThumbnail.note.angleRadians);
+    self.animationThumbnail.transform = trans;
+    self.animationThumbnail.color = self.currentThumbnail.color;
     
     [UIView animateWithDuration:0.3 
                      animations:^{
-                         self.currentThumbnail.transform = CGAffineTransformIdentity;
-                         self.currentThumbnail.frame = self.auxiliaryView.frame;
+                         self.animationThumbnail.transform = CGAffineTransformIdentity;
+                         self.animationThumbnail.frame = self.auxiliaryView.frame;
+                         self.modalBlockerView.alpha = 1.0;
                      } 
                      completion:^(BOOL finished) {
                          if (finished)
                          {
                              self.auxiliaryView.hidden = NO;
-                             [self.auxiliaryView addSubview:self.currentThumbnail];
-                             self.currentThumbnail.frame = self.auxiliaryView.bounds;
+                             [self.auxiliaryView addSubview:self.animationThumbnail];
+                             self.animationThumbnail.frame = self.auxiliaryView.bounds;
                              [self performSelector:selector
                                         withObject:nil
                                         afterDelay:0.1];
@@ -698,23 +585,21 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)transitionToMap
 {
-    [UIView transitionWithView:self.auxiliaryView
-                      duration:0.3
-                       options:UIViewAnimationOptionAllowAnimatedContent + 
-     UIViewAnimationOptionTransitionFlipFromLeft + 
-     UIViewAnimationOptionCurveEaseInOut
-                    animations:^{
-                        self.modalBlockerView.alpha = 1.0;
-                        [self.auxiliaryView addSubview:self.flipView];
-                        [self.currentThumbnail removeFromSuperview];
-                    }
+    [self.auxiliaryView insertSubview:self.mapView 
+                         belowSubview:self.animationThumbnail];
+    CLLocationCoordinate2D coordinate = self.currentThumbnail.note.location.coordinate;
+    self.mapView.centerCoordinate = coordinate;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
+    self.mapView.region = region;
+
+    [UIView transitionFromView:self.animationThumbnail
+                        toView:self.mapView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionShowHideTransitionViews
                     completion:^(BOOL finished) {
                         if (finished)
                         {
-                            CLLocationCoordinate2D coordinate = self.currentThumbnail.note.location.coordinate;
-                            self.mapView.centerCoordinate = coordinate;
-                            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
-                            self.mapView.region = region;
+                            [self.auxiliaryView bringSubviewToFront:self.mapView];
                             [self.auxiliaryView mno_addShadow];
                             self.showingLocationView = YES;
                         }
@@ -727,16 +612,75 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.editorView.alpha = 0.0;
     self.textView.text = self.currentThumbnail.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.currentThumbnail.note.fontCode) size:30.0];
+    
     [UIView animateWithDuration:0.3
                      animations:^{
                          self.modalBlockerView.alpha = 1.0;
-                         self.currentThumbnail.summaryLabel.alpha = 0.0;
                          self.editorView.alpha = 1.0;
                          self.textView.alpha = 1.0;
                      } 
                      completion:^(BOOL finished) {
                          [self.textView becomeFirstResponder];
                          self.showingEditionView = YES;
+                         [self.auxiliaryView mno_addShadow];
+                     }];
+}
+
+- (void)dismissBlockerView:(UITapGestureRecognizer *)recognizer
+{
+    [self.auxiliaryView mno_removeShadow];
+    if (self.isShowingLocationView)
+    {
+        [UIView transitionFromView:self.mapView
+                            toView:self.animationThumbnail
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionFlipFromRight | UIViewAnimationOptionShowHideTransitionViews
+                        completion:^(BOOL finished) {
+                            if (finished)
+                            {
+                                [self.auxiliaryView bringSubviewToFront:self.animationThumbnail];
+                                [self returnCurrentThumbnailToOriginalPosition];
+                            }
+                        }];
+    }
+    else if (self.isShowingEditionView)
+    {
+        if (![self.textView.text isEqualToString:self.currentThumbnail.note.contents])
+        {
+            [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+            self.currentThumbnail.note.contents = self.textView.text;
+            self.currentThumbnail.summaryLabel.text = self.textView.text;
+            [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+            [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+        }
+        [self checkToolbarButtonsEnabled];
+        [self.editorView removeFromSuperview];
+        [self returnCurrentThumbnailToOriginalPosition];
+    }
+}
+
+- (void)returnCurrentThumbnailToOriginalPosition
+{
+    self.auxiliaryView.hidden = YES;
+    [self.view addSubview:self.animationThumbnail];
+    self.animationThumbnail.center = self.auxiliaryView.center;
+
+    [UIView animateWithDuration:0.3 
+                     animations:^{
+                         self.modalBlockerView.alpha = 0.0;
+                         self.animationThumbnail.frame = [self.view convertRect:self.currentThumbnail.frame fromView:self.holderView];
+                         CGAffineTransform trans = CGAffineTransformMakeRotation(self.currentThumbnail.note.angleRadians);
+                         self.animationThumbnail.transform = trans;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished)
+                         {
+                             self.currentThumbnail.hidden = NO;
+                             [self.animationThumbnail removeFromSuperview];
+                             self.showingLocationView = NO;
+                             self.showingEditionView = NO;
+                             [self becomeFirstResponder];
+                         }
                      }];
 }
 
