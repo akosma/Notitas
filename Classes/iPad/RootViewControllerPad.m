@@ -313,7 +313,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         BOOL locationAvailable = [thumb.note.hasLocation boolValue];
         if (locationAvailable)
         {
-            UIMenuItem *locationItem = [[[UIMenuItem alloc] initWithTitle:locationText action:@selector(showMap:)] autorelease];
+            UIMenuItem *locationItem = [[[UIMenuItem alloc] initWithTitle:locationText 
+                                                                   action:@selector(showMap:)] autorelease];
             NSArray *items = [NSArray arrayWithObjects:locationItem, nil];
             [UIMenuController sharedMenuController].menuItems = items;
         }

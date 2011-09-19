@@ -55,7 +55,6 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="966381162">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -129,6 +128,7 @@
 									<string key="NSFrame">{{738, 13}, {18, 19}}</string>
 									<reference key="NSSuperview" ref="1060554267"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -179,9 +179,12 @@
 									<int key="IBUISystemItemIdentifier">5</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="57561084">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">213-reply.png</string>
+									</object>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
-									<int key="IBUISystemItemIdentifier">8</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="383436239">
 									<object class="NSCustomResource" key="IBUIImage">
@@ -627,6 +630,7 @@
 						<int key="objectID">42</int>
 						<reference key="object" ref="483315466"/>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - compose</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">45</int>
@@ -651,6 +655,7 @@
 							<reference ref="229333897"/>
 						</object>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - about</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">54</int>
@@ -661,6 +666,7 @@
 						<int key="objectID">55</int>
 						<reference key="object" ref="692012288"/>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - location</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
@@ -709,6 +715,7 @@
 						<int key="objectID">90</int>
 						<reference key="object" ref="1042835520"/>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - map</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">91</int>
@@ -719,6 +726,7 @@
 						<int key="objectID">92</int>
 						<reference key="object" ref="57561084"/>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - undo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">93</int>
@@ -729,6 +737,7 @@
 						<int key="objectID">94</int>
 						<reference key="object" ref="383436239"/>
 						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - redo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">99</int>
@@ -1107,6 +1116,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>02-redo.png</string>
 				<string>103-map.png</string>
+				<string>213-reply.png</string>
 				<string>216-compose.png</string>
 				<string>background_ipad.jpg</string>
 				<string>location.png</string>
@@ -1115,6 +1125,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{30, 26}</string>
 				<string>{26, 21}</string>
+				<string>{23, 17}</string>
 				<string>{23, 18}</string>
 				<string>{1024, 1024}</string>
 				<string>{20, 20}</string>
