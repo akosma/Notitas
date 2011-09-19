@@ -128,7 +128,10 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 - (void)layoutSubviews 
 {
-    self.currentLayer.frame = self.bounds;
+    self.blueLayer.frame = self.bounds;
+    self.redLayer.frame = self.bounds;
+    self.greenLayer.frame = self.bounds;
+    self.yellowLayer.frame = self.bounds;
 }
 
 - (void)refreshDisplay
