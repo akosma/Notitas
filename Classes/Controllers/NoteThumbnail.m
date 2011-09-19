@@ -197,7 +197,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 - (void)setFont:(FontCode)newCode
 {
     _font = newCode;
-    CGFloat size = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 16.0 : 12.0;
+    CGFloat size = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 20.0 : 12.0;
     _summaryLabel.font = [UIFont fontWithName:fontNameForCode(_font) 
                                          size:size];
 }

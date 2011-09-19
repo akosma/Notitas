@@ -12,6 +12,7 @@
 @interface MapControllerPad : UIViewController
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, assign) UIViewController *parent;
 
 - (IBAction)done:(id)sender;
 

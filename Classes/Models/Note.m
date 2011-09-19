@@ -96,4 +96,13 @@
     self.size = [NSNumber numberWithFloat:scale];
 }
 
+- (CGRect)frameForWidth:(CGFloat)width
+{
+    CGPoint position = self.position;
+    CGFloat halfWidth = width / 2.0;
+    CGRect rect = CGRectMake(position.x - halfWidth, 
+                             position.y - halfWidth, width, width);
+    return rect;
+}
+
 @end

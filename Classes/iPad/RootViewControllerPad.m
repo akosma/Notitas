@@ -12,6 +12,9 @@
 #import "NoteThumbnail.h"
 #import "MapControllerPad.h"
 
+#define DEFAULT_WIDTH 200.0
+static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
+
 @interface RootViewControllerPad ()
 
 @property (nonatomic, retain) NSArray *notes;
@@ -23,6 +26,7 @@
 @property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
 @property (nonatomic, getter = isShowingLocationView) BOOL showingLocationView;
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
+@property (nonatomic, retain) MapControllerPad *map;
 
 - (void)refresh;
 - (Note *)createNote;
@@ -61,9 +65,11 @@
 @synthesize showingEditionView = _showingEditionView;
 @synthesize editorView = _editorView;
 @synthesize textView = _textView;
+@synthesize map = _map;
 
 - (void)dealloc
 {
+    [_map release];
     [_textView release];
     [_editorView release];
     [_modalBlockerView release];
@@ -237,34 +243,34 @@
     }
 }
 
-- (void)pinch:(UIPinchGestureRecognizer *)recognizer
-{
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
-    self.currentThumbnail = thumb;
-
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
-        [self.holderView bringSubviewToFront:thumb];
-        thumb.originalTransform = thumb.transform;
-    }    
-    else if (recognizer.state == UIGestureRecognizerStateChanged)
-    {
-        if (thumb.note.scale > 0.5 && thumb.note.scale < 2.0)
-        {
-            CGFloat scale = recognizer.scale;
-            thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
-            thumb.note.scale = recognizer.scale;
-        }
-    }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
-        [self checkUndoButtonEnabled];
-        [self checkRedoButtonEnabled];
-    }
-}
+//- (void)pinch:(UIPinchGestureRecognizer *)recognizer
+//{
+//    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+//    self.currentThumbnail = thumb;
+//
+//    if (recognizer.state == UIGestureRecognizerStateBegan)
+//    {
+//        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+//        [self.holderView bringSubviewToFront:thumb];
+//        thumb.originalTransform = thumb.transform;
+//    }    
+//    else if (recognizer.state == UIGestureRecognizerStateChanged)
+//    {
+//        if (thumb.note.scale > 0.5 && thumb.note.scale < 2.0)
+//        {
+//            CGFloat scale = recognizer.scale;
+//            thumb.transform = CGAffineTransformScale(thumb.originalTransform, scale, scale);
+//            thumb.note.scale = recognizer.scale;
+//        }
+//    }
+//    else if (recognizer.state == UIGestureRecognizerStateEnded)
+//    {
+//        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+//        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+//        [self checkUndoButtonEnabled];
+//        [self checkRedoButtonEnabled];
+//    }
+//}
 
 - (void)rotate:(UIRotationGestureRecognizer *)recognizer
 {
@@ -276,15 +282,16 @@
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         thumb.originalTransform = thumb.transform;
-    }    
+    }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
         CGFloat angle = recognizer.rotation;
         thumb.transform = CGAffineTransformRotate(thumb.originalTransform, angle);
-        thumb.note.angleRadians = angle;
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
+        CGFloat angle = recognizer.rotation;
+        thumb.note.angleRadians += angle;
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         [self checkUndoButtonEnabled];
@@ -357,6 +364,7 @@
                                 self.currentThumbnail.frame = rect;
                                 [UIView animateWithDuration:0.3 
                                                  animations:^{
+                                                     self.currentThumbnail.frame = [self.currentThumbnail.note frameForWidth:DEFAULT_WIDTH];
                                                      [self.currentThumbnail refreshDisplay];
                                                  }
                                                  completion:^(BOOL finished) {
@@ -371,6 +379,7 @@
     }
     else if (self.isShowingEditionView)
     {
+        self.currentThumbnail.note.contents = self.textView.text;
         self.auxiliaryView.hidden = YES;
         [self.editorView removeFromSuperview];
         [self.holderView addSubview:self.currentThumbnail];
@@ -384,6 +393,7 @@
                              self.textView.alpha = 0.0;
                              self.modalBlockerView.alpha = 0.0;
                              self.currentThumbnail.summaryLabel.alpha = 1.0;
+                             self.currentThumbnail.frame = [self.currentThumbnail.note frameForWidth:DEFAULT_WIDTH];
                              [self.currentThumbnail refreshDisplay];
                          }
                          completion:^(BOOL finished) {
@@ -449,9 +459,16 @@
 
 - (IBAction)showMapWithAllNotes:(id)sender
 {
-    MapControllerPad *map = [[[MapControllerPad alloc] init] autorelease];
-    map.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-    [self presentModalViewController:map animated:YES];
+    if (self.map == nil)
+    {
+        self.map = [[[MapControllerPad alloc] init] autorelease];
+        self.map.parent = self;
+    }
+    [UIView transitionFromView:self.view 
+                        toView:self.map.view
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    completion:nil];
 }
 
 - (void)createNewNoteWithContents:(NSString *)contents
@@ -559,14 +576,14 @@
     self.noteViews = [NSMutableArray array];
     for (Note *note in self.notes)
     {
-        NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)] autorelease];
+        NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:DEFAULT_RECT] autorelease];
         thumb.note = note;
         [thumb refreshDisplay];
         
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
-        UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
-                                                                                     action:@selector(pinch:)] autorelease];
+//        UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
+//                                                                                     action:@selector(pinch:)] autorelease];
         UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
                                                                                               action:@selector(rotate:)] autorelease];
         UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
@@ -576,7 +593,7 @@
         doubleTap.numberOfTapsRequired = 2;
         
         [thumb addGestureRecognizer:pan];
-        [thumb addGestureRecognizer:pinch];
+//        [thumb addGestureRecognizer:pinch];
         [thumb addGestureRecognizer:rotation];
         [thumb addGestureRecognizer:tap];
         [thumb addGestureRecognizer:doubleTap];

@@ -36,4 +36,6 @@
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat scale;
 
+- (CGRect)frameForWidth:(CGFloat)width;
+
 @end

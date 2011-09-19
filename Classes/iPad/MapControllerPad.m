@@ -11,9 +11,11 @@
 @implementation MapControllerPad
 
 @synthesize mapView = _mapView;
+@synthesize parent = _parent;
 
 - (void)dealloc
 {
+    _parent = nil;
     [_mapView release];
     [super dealloc];
 }
@@ -35,7 +37,11 @@
 
 - (IBAction)done:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [UIView transitionFromView:self.view 
+                        toView:self.parent.view
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    completion:nil];
 }
 
 @end
