@@ -22,6 +22,7 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *mapButton;
 @property (nonatomic, retain) IBOutlet UIView *holderView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIView *auxiliaryView;

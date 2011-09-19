@@ -652,6 +652,14 @@
 					</object>
 					<int key="connectionID">133</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mapButton</string>
+						<reference key="source" ref="884716538"/>
+						<reference key="destination" ref="1042835520"/>
+					</object>
+					<int key="connectionID">134</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1046,7 +1054,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">133</int>
+			<int key="maxID">134</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1213,6 +1221,7 @@
 							<string>holderView</string>
 							<string>locationButton</string>
 							<string>mailButton</string>
+							<string>mapButton</string>
 							<string>mapView</string>
 							<string>modalBlockerView</string>
 							<string>redoButton</string>
@@ -1228,6 +1237,7 @@
 							<string>UIToolbar</string>
 							<string>UIView</string>
 							<string>UIView</string>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>MKMapView</string>
@@ -1250,6 +1260,7 @@
 							<string>holderView</string>
 							<string>locationButton</string>
 							<string>mailButton</string>
+							<string>mapButton</string>
 							<string>mapView</string>
 							<string>modalBlockerView</string>
 							<string>redoButton</string>
@@ -1283,6 +1294,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mailButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mapButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">

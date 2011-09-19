@@ -72,9 +72,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize mailButton = _mailButton;
 @synthesize twitterChoiceSheet = _twitterChoiceSheet;
 @synthesize twitterButton = _twitterButton;
+@synthesize mapButton = _mapButton;
 
 - (void)dealloc
 {
+    [_mapButton release];
     [_mailButton release];
     [_editingToolbar release];
     [_map release];
@@ -153,11 +155,25 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                      }];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    NSString *firstRunKey = @"firstRunKey";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstRun = [defaults boolForKey:firstRunKey];
+    if (!firstRun)
+    {
+        [defaults setBool:YES forKey:firstRunKey];
+        [self about:nil];
+    }
+}
+
 #pragma mark - UIResponderStandardEditActions methods
 
 - (BOOL)canBecomeFirstResponder
 {
-    return YES;
+    return !self.isShowingEditionView;
 }
 
 - (void)delete:(id)sender
@@ -599,6 +615,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 - (void)checkToolbarButtonsEnabled
 {
     self.trashButton.enabled = ([self.notes count] > 0);
+    self.mapButton.enabled = ([self.notes count] > 0);
     self.undoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canUndo];
     self.redoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canRedo];
 }
