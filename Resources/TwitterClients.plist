@@ -6,7 +6,7 @@
 		<key>name</key>
 		<string>Echofon</string>
 		<key>template</key>
-		<string>twitterfon:///message?%@</string>
+		<string>echofon:///message?%@</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -31,6 +31,18 @@
 		<string>Twinkle</string>
 		<key>template</key>
 		<string>twinkle://message=%@</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Twitter</string>
+		<key>template</key>
+		<string>twitter://post?message=%@</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Twitter</string>
+		<key>template</key>
+		<string>twitter://post?message=%@</string>
 	</dict>
 </array>
 </plist>

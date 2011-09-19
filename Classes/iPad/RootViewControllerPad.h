@@ -17,7 +17,8 @@
                                                      CLLocationManagerDelegate,
                                                      UITextViewDelegate,
                                                      MKMapViewDelegate,
-                                                     MFMailComposeViewControllerDelegate>
+                                                     MFMailComposeViewControllerDelegate,
+                                                     UIActionSheetDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UIToolbar *editingToolbar;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *mailButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *twitterButton;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
