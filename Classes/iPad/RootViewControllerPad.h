@@ -31,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UIView *editorView;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UIToolbar *editingToolbar;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *mailButton;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

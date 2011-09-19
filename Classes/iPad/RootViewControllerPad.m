@@ -67,9 +67,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize map = _map;
 @synthesize animationThumbnail = _animationThumbnail;
 @synthesize editingToolbar = _editingToolbar;
+@synthesize mailButton = _mailButton;
 
 - (void)dealloc
 {
+    [_mailButton release];
     [_editingToolbar release];
     [_map release];
     [_textView release];
@@ -177,6 +179,30 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [self animateThumbnailAndPerformSelector:@selector(transitionToMap)];
 }
 
+- (IBAction)sendViaEmail:(id)sender
+{
+    MFMailComposeViewController *composer = [[[MFMailComposeViewController alloc] init] autorelease];
+    composer.modalPresentationStyle = UIModalPresentationFormSheet;
+    composer.mailComposeDelegate = self;
+    
+    NSMutableString *message = [NSMutableString string];
+    if (self.currentThumbnail.note.contents == nil || [self.currentThumbnail.note.contents length] == 0)
+    {
+        NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+        [message appendString:emptyNoteText];
+    }
+    else
+    {
+        [message appendString:self.currentThumbnail.note.contents];
+    }
+    NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+    [message appendString:sentFromText];
+    NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+    [composer setSubject:subject];
+    [composer setMessageBody:message isHTML:NO];
+    [self presentModalViewController:composer animated:YES];
+}
+
 #pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -274,14 +300,25 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         [self.holderView bringSubviewToFront:thumb];
         
         NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
+        NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
+//        NSString *twitterrifficText = NSLocalizedString(@"Send via Twitter", @"Button to send notes via Twitter");
+        NSMutableArray *items = [NSMutableArray array];
         BOOL locationAvailable = [thumb.note.hasLocation boolValue];
         if (locationAvailable)
         {
             UIMenuItem *locationItem = [[[UIMenuItem alloc] initWithTitle:locationText 
                                                                    action:@selector(showMap:)] autorelease];
-            NSArray *items = [NSArray arrayWithObjects:locationItem, nil];
-            [UIMenuController sharedMenuController].menuItems = items;
+            [items addObject:locationItem];
         }
+
+        if ([MFMailComposeViewController canSendMail])
+        {
+            UIMenuItem *emailItem = [[[UIMenuItem alloc] initWithTitle:emailText 
+                                                                action:@selector(sendViaEmail:)] autorelease];
+            [items addObject:emailItem];
+        }
+
+        [UIMenuController sharedMenuController].menuItems = items;
         
         [[UIMenuController sharedMenuController] setTargetRect:CGRectInset(thumb.frame, 50.0, 50.0)
                                                         inView:self.holderView];
@@ -626,6 +663,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [self.auxiliaryView addSubview:self.editorView];
     self.editorView.alpha = 0.0;
     self.textView.inputAccessoryView = self.editingToolbar;
+    self.mailButton.enabled = [MFMailComposeViewController canSendMail];
+    
     self.textView.text = self.currentThumbnail.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.currentThumbnail.note.fontCode) size:30.0];
     
@@ -720,30 +759,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.currentThumbnail.font = value;
     self.textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
 //    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
-}
-
-- (IBAction)sendViaEmail:(id)sender
-{
-    MFMailComposeViewController *composer = [[[MFMailComposeViewController alloc] init] autorelease];
-    composer.modalPresentationStyle = UIModalPresentationFormSheet;
-    composer.mailComposeDelegate = self;
-    
-    NSMutableString *message = [NSMutableString string];
-    if (self.currentThumbnail.note.contents == nil || [self.currentThumbnail.note.contents length] == 0)
-    {
-        NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
-        [message appendString:emptyNoteText];
-    }
-    else
-    {
-        [message appendString:self.currentThumbnail.note.contents];
-    }
-    NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
-    [message appendString:sentFromText];
-    NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
-    [composer setSubject:subject];
-    [composer setMessageBody:message isHTML:NO];
-    [self presentModalViewController:composer animated:YES];
 }
 
 - (IBAction)sendToTwitter:(id)sender
