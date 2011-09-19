@@ -66,9 +66,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize textView = _textView;
 @synthesize map = _map;
 @synthesize animationThumbnail = _animationThumbnail;
+@synthesize editingToolbar = _editingToolbar;
 
 - (void)dealloc
 {
+    [_editingToolbar release];
     [_map release];
     [_textView release];
     [_editorView release];
@@ -333,6 +335,15 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     return YES;
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)composer 
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError *)error
+{
+    [composer dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark - Public methods
 
 - (IBAction)undo:(id)sender
@@ -469,6 +480,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:DEFAULT_RECT] autorelease];
         thumb.note = note;
         [thumb refreshDisplay];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:thumb];
         
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
@@ -612,6 +625,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 {
     [self.auxiliaryView addSubview:self.editorView];
     self.editorView.alpha = 0.0;
+    self.textView.inputAccessoryView = self.editingToolbar;
     self.textView.text = self.currentThumbnail.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.currentThumbnail.note.fontCode) size:30.0];
     
@@ -685,6 +699,55 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                              [self becomeFirstResponder];
                          }
                      }];
+}
+
+#pragma mark - Toolbar edition actions
+
+- (IBAction)changeColor:(id)sender
+{
+    int value = self.currentThumbnail.note.colorCode + 1;
+    value = value % 4;
+    self.currentThumbnail.note.color = [NSNumber numberWithInt:value];
+    self.animationThumbnail.color = value;
+    self.currentThumbnail.color = value;
+}
+
+- (IBAction)changeFont:(id)sender
+{
+    int value = self.currentThumbnail.note.fontCode + 1;
+    value = value % 4;
+    self.currentThumbnail.note.fontFamily = [NSNumber numberWithInt:value];
+    self.currentThumbnail.font = value;
+    self.textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
+//    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
+}
+
+- (IBAction)sendViaEmail:(id)sender
+{
+    MFMailComposeViewController *composer = [[[MFMailComposeViewController alloc] init] autorelease];
+    composer.modalPresentationStyle = UIModalPresentationFormSheet;
+    composer.mailComposeDelegate = self;
+    
+    NSMutableString *message = [NSMutableString string];
+    if (self.currentThumbnail.note.contents == nil || [self.currentThumbnail.note.contents length] == 0)
+    {
+        NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+        [message appendString:emptyNoteText];
+    }
+    else
+    {
+        [message appendString:self.currentThumbnail.note.contents];
+    }
+    NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+    [message appendString:sentFromText];
+    NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+    [composer setSubject:subject];
+    [composer setMessageBody:message isHTML:NO];
+    [self presentModalViewController:composer animated:YES];
+}
+
+- (IBAction)sendToTwitter:(id)sender
+{
 }
 
 @end

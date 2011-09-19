@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @class NoteThumbnail;
 
 @interface RootViewControllerPad : UIViewController <UIAlertViewDelegate,
                                                      CLLocationManagerDelegate,
                                                      UITextViewDelegate,
-                                                     MKMapViewDelegate>
+                                                     MKMapViewDelegate,
+                                                     MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
@@ -28,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet UIView *modalBlockerView;
 @property (nonatomic, retain) IBOutlet UIView *editorView;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, retain) IBOutlet UIToolbar *editingToolbar;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;
@@ -42,5 +45,10 @@
 
 - (IBAction)undo:(id)sender;
 - (IBAction)redo:(id)sender;
+
+- (IBAction)changeColor:(id)sender;
+- (IBAction)changeFont:(id)sender;
+- (IBAction)sendViaEmail:(id)sender;
+- (IBAction)sendToTwitter:(id)sender;
 
 @end
