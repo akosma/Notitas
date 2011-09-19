@@ -50,10 +50,12 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIWindow" id="380026005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="966381162">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -127,7 +129,6 @@
 									<string key="NSFrame">{{738, 13}, {18, 19}}</string>
 									<reference key="NSSuperview" ref="1060554267"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -165,9 +166,12 @@
 							<object class="NSMutableArray" key="IBUIItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="IBUIBarButtonItem" id="483315466">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">216-compose.png</string>
+									</object>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
-									<int key="IBUISystemItemIdentifier">4</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="102027899">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -177,12 +181,15 @@
 								<object class="IBUIBarButtonItem" id="57561084">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
-									<int key="IBUISystemItemIdentifier">21</int>
+									<int key="IBUISystemItemIdentifier">8</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="383436239">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">02-redo.png</string>
+									</object>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
-									<int key="IBUISystemItemIdentifier">22</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="726418744">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -215,9 +222,12 @@
 									<int key="IBUISystemItemIdentifier">5</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="1042835520">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">103-map.png</string>
+									</object>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
-									<int key="IBUISystemItemIdentifier">23</int>
 								</object>
 								<object class="IBUIBarButtonItem" id="255393712">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -304,7 +314,7 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIView" id="434307557">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">301</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -333,7 +343,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{450, 450}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="838981523"/>
 				<string key="NSReuseIdentifierKey">_NS:195</string>
 				<reference key="IBUIBackgroundColor" ref="210091815"/>
@@ -1096,11 +1105,17 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>02-redo.png</string>
+				<string>103-map.png</string>
+				<string>216-compose.png</string>
 				<string>background_ipad.jpg</string>
 				<string>location.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{30, 26}</string>
+				<string>{26, 21}</string>
+				<string>{23, 18}</string>
 				<string>{1024, 1024}</string>
 				<string>{20, 20}</string>
 			</object>
