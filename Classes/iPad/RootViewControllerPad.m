@@ -333,10 +333,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     return YES;
 }
 
-#pragma mark - MKMapViewDelegate methods
-
-
-
 #pragma mark - Public methods
 
 - (IBAction)undo:(id)sender
@@ -356,8 +352,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     if (self.map == nil)
     {
         self.map = [[[MapControllerPad alloc] init] autorelease];
-        self.map.parent = self;
     }
+    self.map.parent = self;
     [UIView transitionFromView:self.view 
                         toView:self.map.view
                       duration:0.5
@@ -589,8 +585,14 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                          belowSubview:self.animationThumbnail];
     CLLocationCoordinate2D coordinate = self.currentThumbnail.note.location.coordinate;
     self.mapView.centerCoordinate = coordinate;
+    if (self.map == nil)
+    {
+        self.map = [[[MapControllerPad alloc] init] autorelease];
+    }
+    self.mapView.delegate = self.map;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
     self.mapView.region = region;
+    [self.mapView addAnnotation:self.currentThumbnail.note];
 
     [UIView transitionFromView:self.animationThumbnail
                         toView:self.mapView
@@ -631,6 +633,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [self.auxiliaryView mno_removeShadow];
     if (self.isShowingLocationView)
     {
+        [self.mapView removeAnnotation:self.currentThumbnail.note];
         [UIView transitionFromView:self.mapView
                             toView:self.animationThumbnail
                           duration:0.5

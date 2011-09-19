@@ -56,13 +56,14 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBMKShowsUserLocation">YES</bool>
 					</object>
 					<object class="IBUIToolbar" id="520843608">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">266</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUISegmentedControl" id="384582547">
+							<object class="IBUISegmentedControl" id="271870380">
 								<reference key="NSNextResponder" ref="520843608"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{7, 8}, {207, 30}}</string>
@@ -110,7 +111,7 @@
 						<string key="NSFrame">{{0, 960}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="384582547"/>
+						<reference key="NSNextKeyView" ref="271870380"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -118,9 +119,9 @@
 						<int key="IBUIBarStyle">2</int>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="327002465">
+							<object class="IBUIBarButtonItem" id="190554419">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<reference key="IBUICustomView" ref="384582547"/>
+								<reference key="IBUICustomView" ref="271870380"/>
 								<reference key="IBUIToolbar" ref="520843608"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="922256410">
@@ -193,14 +194,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">segmentedControl</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="384582547"/>
+						<reference key="destination" ref="271870380"/>
 					</object>
 					<int key="connectionID">14</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">changeMapType:</string>
-						<reference key="source" ref="384582547"/>
+						<reference key="source" ref="271870380"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -249,7 +250,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="922256410"/>
 							<reference ref="1032758951"/>
-							<reference ref="327002465"/>
+							<reference ref="190554419"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -265,17 +266,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="327002465"/>
+						<reference key="object" ref="190554419"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="384582547"/>
+							<reference ref="271870380"/>
 						</object>
 						<reference key="parent" ref="520843608"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="384582547"/>
-						<reference key="parent" ref="327002465"/>
+						<reference key="object" ref="271870380"/>
+						<reference key="parent" ref="190554419"/>
 					</object>
 				</object>
 			</object>
