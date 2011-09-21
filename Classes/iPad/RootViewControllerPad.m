@@ -352,7 +352,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
             [items addObject:emailItem];
         }
         
-        TwitterClientManager *clientManager = [TwitterClientManager sharedTwitterClientManager];
+        MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
         if ([[clientManager availableClients] count] > 0)
         {
             UIMenuItem *twitterItem = [[[UIMenuItem alloc] initWithTitle:twitterText
@@ -429,7 +429,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 {
     if (actionSheet == self.twitterChoiceSheet)
     {
-        TwitterClientManager *clientManager = [TwitterClientManager sharedTwitterClientManager];
+        MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
         NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
         [clientManager setSelectedClientName:buttonTitle];
         [clientManager send:self.currentThumbnail.note.contents];
@@ -723,7 +723,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.editorView.alpha = 0.0;
     self.textView.inputAccessoryView = self.editingToolbar;
     self.mailButton.enabled = [MFMailComposeViewController canSendMail];
-    TwitterClientManager *clientManager = [TwitterClientManager sharedTwitterClientManager];
+    MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
     self.twitterButton.enabled = ([[clientManager availableClients] count] > 0);
     
     self.textView.text = self.currentThumbnail.note.contents;
@@ -841,7 +841,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (IBAction)sendToTwitter:(id)sender
 {
-    TwitterClientManager *clientManager = [TwitterClientManager sharedTwitterClientManager];
+    MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
     if ([clientManager canSendMessage])
     {
         // A client is installed and ready to be used!

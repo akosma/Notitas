@@ -1,5 +1,5 @@
 //
-//  FontCodes.h
+//  MNOFontCode.h
 //  Notitas
 //
 //  Created by Adrian on 7/23/09.
@@ -8,30 +8,30 @@
 
 typedef enum 
 {
-    FontCodeHelvetica = 0,
-    FontCodeTimes = 1,
-    FontCodeCourier = 2,
-    FontCodeComic = 3
-} FontCode;
+    MNOFontCodeHelvetica = 0,
+    MNOFontCodeTimes = 1,
+    MNOFontCodeCourier = 2,
+    MNOFontCodeComic = 3
+} MNOFontCode;
 
-static NSString *fontNameForCode(FontCode code)
+static NSString *fontNameForCode(MNOFontCode code)
 {
     NSString *result = @"Helvetica";
     switch (code) 
     {
-        case FontCodeHelvetica:
+        case MNOFontCodeHelvetica:
             result = @"Helvetica";
             break;
             
-        case FontCodeTimes:
+        case MNOFontCodeTimes:
             result = @"TimesNewRomanPSMT";
             break;
             
-        case FontCodeCourier:
+        case MNOFontCodeCourier:
             result = @"Courier";
             break;
             
-        case FontCodeComic:
+        case MNOFontCodeComic:
             result = @"MarkerFelt-Thin";
             break;
             

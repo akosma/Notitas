@@ -1,5 +1,5 @@
 //
-//  TwitterClient.h
+//  MNOTwitterClient.h
 //  TwitThis
 //
 //  Created by Adrian on 9/11/09.
@@ -8,12 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TwitterClient : NSObject 
-{
-@private
-    NSString *_urlTemplate;
-    NSString *_name;
-}
+@interface MNOTwitterClient : NSObject 
 
 @property (nonatomic, readonly) NSString *urlTemplate;
 @property (nonatomic, readonly) NSString *name;

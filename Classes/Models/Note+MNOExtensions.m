@@ -20,9 +20,9 @@
 
 @dynamic coordinate;
 
-- (ColorCode)colorCode
+- (MNOColorCode)colorCode
 {
-    return (ColorCode)[self.color intValue];
+    return (MNOColorCode)[self.color intValue];
 }
 
 - (CLLocation *)location
@@ -42,9 +42,9 @@
     self.angle = [NSNumber numberWithFloat:angleRadians];
 }
 
-- (FontCode)fontCode
+- (MNOFontCode)fontCode
 {
-    return (FontCode)[self.fontFamily intValue];
+    return (MNOFontCode)[self.fontFamily intValue];
 }
 
 - (NSString *)timeString

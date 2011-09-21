@@ -9,15 +9,15 @@
 #import "Note.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#import "ColorCode.h"
-#import "FontCode.h"
+#import "MNOColorCode.h"
+#import "MNOFontCode.h"
 
 @interface Note (MNOExtensions) <MKAnnotation>
 
-@property (nonatomic, readonly) ColorCode colorCode;
+@property (nonatomic, readonly) MNOColorCode colorCode;
 @property (nonatomic, readonly) CLLocation *location;
 @property (nonatomic) CGFloat angleRadians;
-@property (nonatomic, readonly) FontCode fontCode;
+@property (nonatomic, readonly) MNOFontCode fontCode;
 @property (nonatomic, readonly) NSString *timeString;
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat scale;

@@ -20,15 +20,15 @@ static double randomAngle()
     return angle;
 }
 
-static FontCode randomFont()
+static MNOFontCode randomFont()
 {
-    FontCode code = (FontCode)(arc4random() % 4);
+    MNOFontCode code = (MNOFontCode)(arc4random() % 4);
     return code;
 }
 
-static ColorCode randomColorCode()
+static MNOColorCode randomColorCode()
 {
-    ColorCode code = (ColorCode)(arc4random() % 4);
+    MNOColorCode code = (MNOColorCode)(arc4random() % 4);
     return code;
 }
 

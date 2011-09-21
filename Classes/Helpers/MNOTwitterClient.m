@@ -1,20 +1,17 @@
 //
-//  TwitterClient.m
+//  MNOTwitterClient.m
 //  TwitThis
 //
 //  Created by Adrian on 9/11/09.
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import "TwitterClient.h"
+#import "MNOTwitterClient.h"
 
-@implementation TwitterClient
+@implementation MNOTwitterClient
 
 @synthesize urlTemplate = _urlTemplate;
 @synthesize name = _name;
-
-#pragma mark -
-#pragma mark Init and dealloc
 
 - (id)init
 {
@@ -43,28 +40,27 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - Public methods
 
 - (BOOL)isAvailable
 {
-    if (_name == nil)
+    if (self.name == nil)
     {
         return NO;
     }
-    NSString *stringURL = [NSString stringWithFormat:_urlTemplate, @"test"];
+    NSString *stringURL = [NSString stringWithFormat:self.urlTemplate, @"test"];
     NSURL *url = [NSURL URLWithString:stringURL];
     return [[UIApplication sharedApplication] canOpenURL:url];
 }
 
 - (BOOL)canSendMessage
 {
-    return (_name != nil);
+    return (self.name != nil);
 }
 
 - (void)send:(NSString *)text
 {
-    if (_name != nil)
+    if (self.name != nil)
     {
         NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
                                                                                 (CFStringRef)text,
@@ -72,7 +68,7 @@
                                                                                 (CFStringRef)@";/?:@&=+$,", 
                                                                                 kCFStringEncodingUTF8);
         
-        NSString *stringURL = [NSString stringWithFormat:_urlTemplate, message];
+        NSString *stringURL = [NSString stringWithFormat:self.urlTemplate, message];
         [message release];
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];    

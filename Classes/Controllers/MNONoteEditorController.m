@@ -18,7 +18,7 @@
 @property (nonatomic) NSInteger locationButtonIndex;
 @property (nonatomic) CGAffineTransform hidingTransformation;
 @property (nonatomic, retain) MNOMapController *mapController;
-@property (nonatomic, assign) TwitterClientManager *clientManager;
+@property (nonatomic, assign) MNOTwitterClientManager *clientManager;
 
 - (void)disappear;
 - (void)updateLabel;
@@ -65,7 +65,7 @@
     self.toolbar.transform = self.hidingTransformation;
     self.twitterrifficButtonIndex = -1;
     self.locationButtonIndex = -1;
-    self.clientManager = [TwitterClientManager sharedTwitterClientManager];
+    self.clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -283,7 +283,7 @@
                                                        reuseIdentifier:identifier] autorelease];
     }
     
-    ColorCode code = self.note.colorCode;
+    MNOColorCode code = self.note.colorCode;
     NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d.png", code];
     annotationView.image = [UIImage imageNamed:imageName];
     annotationView.transform = CGAffineTransformMakeRotation(self.note.angleRadians);

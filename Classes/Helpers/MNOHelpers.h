@@ -8,9 +8,9 @@
 
 #import "MNOCoreDataManager.h"
 #import "MNOSoundManager.h"
-#import "ColorCode.h"
-#import "FontCode.h"
-#import "TwitterClient.h"
-#import "TwitterClientManager.h"
+#import "MNOColorCode.h"
+#import "MNOFontCode.h"
+#import "MNOTwitterClient.h"
+#import "MNOTwitterClientManager.h"
 #import "UIView+MNOExtensions.h"
 #import "MNONotifications.h"

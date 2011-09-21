@@ -1,29 +1,31 @@
 //
-//  TwitterClientManager.m
+//  MNOTwitterClientManager.m
 //  TwitThis
 //
 //  Created by Adrian on 9/11/09.
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import "TwitterClientManager.h"
-#import "TwitterClient.h"
+#import "MNOTwitterClientManager.h"
+#import "MNOTwitterClient.h"
 #import "Definitions.h"
 #import <AKOLibrary/SynthesizeSingleton.h>
 
-@interface TwitterClientManager (Private)
+@interface MNOTwitterClientManager ()
+
+@property (nonatomic, retain) NSMutableDictionary *clients;
+
 - (void)initializeClients;
+
 @end
 
 
-@implementation TwitterClientManager
+@implementation MNOTwitterClientManager
 
 @synthesize currentClient = _currentClient;
+@synthesize clients = _clients;
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(TwitterClientManager)
-
-#pragma mark -
-#pragma mark Init and dealloc
+SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
 
 - (id)init
 {
@@ -42,24 +44,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TwitterClientManager)
         }
 
         [self initializeClients];
-        _currentClient = [_supportedClients objectForKey:currentClientOption];
+        _currentClient = [_clients objectForKey:currentClientOption];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [_clients release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - Public methods
 
 - (NSArray *)supportedClients
 {
-    NSArray *clients = [_supportedClients allValues];
+    NSArray *clients = [self.clients allValues];
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
-    for (TwitterClient *client in clients)
+    for (MNOTwitterClient *client in clients)
     {
         if (client.name != nil)
         {
@@ -77,9 +79,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TwitterClientManager)
 - (NSArray *)availableClients
 {
     NSMutableArray *availableClients = [[NSMutableArray alloc] init];
-    for (NSString *clientName in _supportedClients)
+    for (NSString *clientName in self.clients)
     {
-        TwitterClient *client = [_supportedClients objectForKey:clientName];
+        MNOTwitterClient *client = [self.clients objectForKey:clientName];
         if ([client isAvailable])
         {
             [availableClients addObject:client.name];
@@ -96,24 +98,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TwitterClientManager)
 
 - (BOOL)canSendMessage
 {
-    return [_currentClient isAvailable] && [_currentClient canSendMessage];
+    return [self.currentClient isAvailable] && [self.currentClient canSendMessage];
 }
 
 - (void)send:(NSString *)text
 {
-    [_currentClient send:text];
+    [self.currentClient send:text];
 }
 
 - (void)setSelectedClientName:(NSString *)name
 {
-    _currentClient = [_supportedClients objectForKey:name];
+    self.currentClient = [self.clients objectForKey:name];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:name forKey:TWITTER_CLIENT_KEY];
     [defaults synchronize];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)initializeClients
 {
@@ -122,16 +123,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TwitterClientManager)
     NSArray *clients = [NSArray arrayWithContentsOfFile:path];
 
     // Populate the array with the clients
-    TwitterClient *none = [[TwitterClient alloc] init];
-    _supportedClients = [[NSMutableDictionary alloc] init];
-    [_supportedClients setObject:none forKey:TWITTER_CLIENT_CODE_NONE];
+    MNOTwitterClient *none = [[MNOTwitterClient alloc] init];
+    self.clients = [NSMutableDictionary dictionary];
+    [self.clients setObject:none forKey:TWITTER_CLIENT_CODE_NONE];
     [none release];
     
     for (NSDictionary *dict in clients)
     {
         NSString *name = [dict objectForKey:@"name"];
-        TwitterClient *client = [[TwitterClient alloc] initWithDictionary:dict];
-        [_supportedClients setObject:client forKey:name];
+        MNOTwitterClient *client = [[MNOTwitterClient alloc] initWithDictionary:dict];
+        [self.clients setObject:client forKey:name];
         [client release];
     }
 }

@@ -151,12 +151,12 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 #pragma mark - Public properties
 
-- (ColorCode)color
+- (MNOColorCode)color
 {
     return _color;
 }
 
-- (void)setColor:(ColorCode)color
+- (void)setColor:(MNOColorCode)color
 {
     if (color != _color)
     {
@@ -165,25 +165,25 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
         [self.currentLayer removeFromSuperlayer];
         switch (_color) 
         {
-            case ColorCodeBlue:
+            case MNOColorCodeBlue:
             {
                 self.currentLayer = self.blueLayer;
                 break;
             }
                 
-            case ColorCodeRed:
+            case MNOColorCodeRed:
             {
                 self.currentLayer = self.redLayer; 
                 break;
             }
                 
-            case ColorCodeGreen:
+            case MNOColorCodeGreen:
             {
                 self.currentLayer = self.greenLayer;
                 break;
             }
                 
-            case ColorCodeYellow:
+            case MNOColorCodeYellow:
             {
                 self.currentLayer = self.yellowLayer;
                 break;
@@ -208,12 +208,12 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
     _summaryLabel.text = newText;
 }
 
-- (FontCode)font
+- (MNOFontCode)font
 {
     return _font;
 }
 
-- (void)setFont:(FontCode)newCode
+- (void)setFont:(MNOFontCode)newCode
 {
     _font = newCode;
     CGFloat size = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 20.0 : 12.0;
@@ -227,14 +227,14 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 - (void)changeFont:(NSNotification *)notification
 {
     int value = (int)_font + 1;
-    FontCode newColor = (FontCode)(value % 4);
+    MNOFontCode newColor = (MNOFontCode)(value % 4);
     [self setFont:newColor];
 }
 
 - (void)changeColor:(NSNotification *)notification
 {
     int value = (int)_color + 1;
-    ColorCode newColor = (ColorCode)(value % 4);
+    MNOColorCode newColor = (MNOColorCode)(value % 4);
     [self setColor:newColor];
     [self setNeedsDisplay];
 }

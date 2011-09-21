@@ -18,8 +18,8 @@
 @interface MNONoteThumbnail : UIView 
 
 @property (nonatomic, retain) UILabel *summaryLabel;
-@property (nonatomic) FontCode font;
-@property (nonatomic) ColorCode color;
+@property (nonatomic) MNOFontCode font;
+@property (nonatomic) MNOColorCode color;
 @property (nonatomic, retain) Note *note;
 @property (nonatomic) CGAffineTransform originalTransform;
 
