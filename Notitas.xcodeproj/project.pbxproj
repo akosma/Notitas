@@ -29,7 +29,6 @@
 		3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */; };
 		3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */; };
 		3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7D1098280000F3DB45 /* Appirater.m */; };
-		3A4D6B801098280000F3DB45 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7E1098280000F3DB45 /* README */; };
 		3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */; };
 		3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */; };
 		3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E1B8C108BA8D700FF1E9F /* TwitterClient.m */; };
@@ -118,7 +117,6 @@
 		3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerPad.m; sourceTree = "<group>"; };
 		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		3A4D6B7E1098280000F3DB45 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3A4E1B14108B9B7700FF1E9F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterClients.plist; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 			children = (
 				3A4D6B7C1098280000F3DB45 /* Appirater.h */,
 				3A4D6B7D1098280000F3DB45 /* Appirater.m */,
-				3A4D6B7E1098280000F3DB45 /* README */,
 			);
 			path = appirater;
 			sourceTree = "<group>";
@@ -551,7 +548,6 @@
 				3AE3059910185A6800D43A02 /* font.png in Resources */,
 				3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */,
 				3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */,
-				3A4D6B801098280000F3DB45 /* README in Resources */,
 				3A1F0D0E1423C27F00BEBE5E /* Default@2x.png in Resources */,
 				3A1F0D161423C5E800BEBE5E /* Icon-72.png in Resources */,
 				3A1F0D171423C5E800BEBE5E /* Icon-Small-50.png in Resources */,
