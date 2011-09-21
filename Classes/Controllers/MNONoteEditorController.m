@@ -83,10 +83,10 @@
     [self.textView becomeFirstResponder];
     [self updateLabel];
     
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
-    self.toolbar.transform = CGAffineTransformIdentity;
-	[UIView commitAnimations];
+    [UIView animateWithDuration:0.3 
+                     animations:^{
+                         self.toolbar.transform = CGAffineTransformIdentity;
+                     }];
 }
 
 #pragma mark - IBAction methods
@@ -353,10 +353,11 @@
 - (void)disappear
 {
     [self.textView resignFirstResponder];
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
-    self.toolbar.transform = self.hidingTransformation;
-	[UIView commitAnimations];    
+    
+    [UIView animateWithDuration:0.3 
+                     animations:^{
+                         self.toolbar.transform = self.hidingTransformation;
+                     }];
 }
 
 - (void)updateLabel
