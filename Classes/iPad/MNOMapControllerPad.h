@@ -1,5 +1,5 @@
 //
-//  MapControllerPad.h
+//  MNOMapControllerPad.h
 //  Notitas
 //
 //  Created by Adrian on 9/18/11.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface MapControllerPad : UIViewController <MKMapViewDelegate>
+@interface MNOMapControllerPad : UIViewController <MKMapViewDelegate>
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;

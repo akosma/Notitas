@@ -1,23 +1,23 @@
 //
-//  MapControllerPad.m
+//  MNOMapControllerPad.m
 //  Notitas
 //
 //  Created by Adrian on 9/18/11.
 //  Copyright 2011 akosma software. All rights reserved.
 //
 
-#import "MapControllerPad.h"
+#import "MNOMapControllerPad.h"
 #import "MNOModels.h"
 #import "MNOHelpers.h"
 
-@interface MapControllerPad ()
+@interface MNOMapControllerPad ()
 
 @property (nonatomic, retain) NSArray *notes;
 
 @end
 
 
-@implementation MapControllerPad
+@implementation MNOMapControllerPad
 
 @synthesize mapView = _mapView;
 @synthesize parent = _parent;

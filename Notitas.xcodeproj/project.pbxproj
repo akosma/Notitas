@@ -26,7 +26,6 @@
 		3A1F0D1C1423C5E800BEBE5E /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D151423C5E800BEBE5E /* iTunesArtwork */; };
 		3A1F0D351423D41800BEBE5E /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */; };
 		3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */; };
-		3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */; };
 		3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7D1098280000F3DB45 /* Appirater.m */; };
 		3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B81108BA8BA00FF1E9F /* Settings.bundle */; };
 		3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E1B82108BA8BA00FF1E9F /* TwitterClients.plist */; };
@@ -44,8 +43,6 @@
 		3A7892361425F94E004B07F0 /* background_ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892341425F94E004B07F0 /* background_ipad.jpg */; };
 		3A7892371425F94E004B07F0 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892351425F94E004B07F0 /* Default-Landscape.png */; };
 		3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */; };
-		3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7892441426552A004B07F0 /* MapControllerPad.m */; };
-		3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892461426556B004B07F0 /* MapControllerPad.xib */; };
 		3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E361429BD6F00649B27 /* MNOAppDelegate.m */; };
 		3A860E471429BF1000649B27 /* MNOMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E3B1429BF1000649B27 /* MNOMapController.m */; };
 		3A860E481429BF1000649B27 /* MNONoteEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E3D1429BF1000649B27 /* MNONoteEditorController.m */; };
@@ -58,6 +55,9 @@
 		3A860E571429C9B600649B27 /* Note+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E561429C9B600649B27 /* Note+MNOExtensions.m */; };
 		3A860E5A1429CB6500649B27 /* MNOTwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E591429CB6300649B27 /* MNOTwitterClient.m */; };
 		3A860E5D1429CB8900649B27 /* MNOTwitterClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E5C1429CB8900649B27 /* MNOTwitterClientManager.m */; };
+		3A860E641429CF3900649B27 /* MNOMapControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E611429CF3900649B27 /* MNOMapControllerPad.m */; };
+		3A860E651429CF3900649B27 /* MNORootControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E631429CF3900649B27 /* MNORootControllerPad.m */; };
+		3A860E671429CF9C00649B27 /* MNOMapControllerPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860E661429CF9C00649B27 /* MNOMapControllerPad.xib */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -113,8 +113,6 @@
 		3A1F0D1D1423C8A500BEBE5E /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources/NIBs/iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait.png"; path = "Resources/NIBs/iPad/Default-Portrait.png"; sourceTree = "<group>"; };
-		3A1F0D391423D54500BEBE5E /* RootViewControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewControllerPad.h; sourceTree = "<group>"; };
-		3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerPad.m; sourceTree = "<group>"; };
 		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		3A4E1B14108B9B7700FF1E9F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -140,9 +138,6 @@
 		3A7892351425F94E004B07F0 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "Resources/NIBs/iPad/Default-Landscape.png"; sourceTree = "<group>"; };
 		3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNOExtensions.h"; sourceTree = "<group>"; };
 		3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNOExtensions.m"; sourceTree = "<group>"; };
-		3A7892431426552A004B07F0 /* MapControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControllerPad.h; sourceTree = "<group>"; };
-		3A7892441426552A004B07F0 /* MapControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControllerPad.m; sourceTree = "<group>"; };
-		3A7892461426556B004B07F0 /* MapControllerPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapControllerPad.xib; path = Resources/NIBs/iPad/MapControllerPad.xib; sourceTree = "<group>"; };
 		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
 		3A860E361429BD6F00649B27 /* MNOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOAppDelegate.m; sourceTree = "<group>"; };
 		3A860E381429BDF400649B27 /* MNOExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOExternals.h; sourceTree = "<group>"; };
@@ -172,6 +167,11 @@
 		3A860E5C1429CB8900649B27 /* MNOTwitterClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOTwitterClientManager.m; sourceTree = "<group>"; };
 		3A860E5E1429CE0600649B27 /* MNOColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOColorCode.h; sourceTree = "<group>"; };
 		3A860E5F1429CE2700649B27 /* MNOFontCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOFontCode.h; sourceTree = "<group>"; };
+		3A860E601429CF3900649B27 /* MNOMapControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOMapControllerPad.h; sourceTree = "<group>"; };
+		3A860E611429CF3900649B27 /* MNOMapControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOMapControllerPad.m; sourceTree = "<group>"; };
+		3A860E621429CF3900649B27 /* MNORootControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNORootControllerPad.h; sourceTree = "<group>"; };
+		3A860E631429CF3900649B27 /* MNORootControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNORootControllerPad.m; sourceTree = "<group>"; };
+		3A860E661429CF9C00649B27 /* MNOMapControllerPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MNOMapControllerPad.xib; path = Resources/NIBs/iPad/MNOMapControllerPad.xib; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 				3A7892351425F94E004B07F0 /* Default-Landscape.png */,
 				3A1F0D361423D4EF00BEBE5E /* Default-Portrait.png */,
 				3A1F0D341423D41800BEBE5E /* MainWindow-iPad.xib */,
-				3A7892461426556B004B07F0 /* MapControllerPad.xib */,
+				3A860E661429CF9C00649B27 /* MNOMapControllerPad.xib */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -319,10 +319,10 @@
 		3A1F0D381423D52A00BEBE5E /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				3A1F0D391423D54500BEBE5E /* RootViewControllerPad.h */,
-				3A1F0D3A1423D54500BEBE5E /* RootViewControllerPad.m */,
-				3A7892431426552A004B07F0 /* MapControllerPad.h */,
-				3A7892441426552A004B07F0 /* MapControllerPad.m */,
+				3A860E621429CF3900649B27 /* MNORootControllerPad.h */,
+				3A860E631429CF3900649B27 /* MNORootControllerPad.m */,
+				3A860E601429CF3900649B27 /* MNOMapControllerPad.h */,
+				3A860E611429CF3900649B27 /* MNOMapControllerPad.m */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -582,7 +582,6 @@
 				3A1F0D371423D4EF00BEBE5E /* Default-Portrait.png in Resources */,
 				3A7892361425F94E004B07F0 /* background_ipad.jpg in Resources */,
 				3A7892371425F94E004B07F0 /* Default-Landscape.png in Resources */,
-				3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */,
 				3ADFDB7814271BF800EC98C6 /* 02-redo.png in Resources */,
 				3ADFDB7914271BF800EC98C6 /* 02-redo@2x.png in Resources */,
 				3ADFDB7A14271BF800EC98C6 /* 103-map.png in Resources */,
@@ -602,6 +601,7 @@
 				3ADFDBA01427632600EC98C6 /* 209-twitter@2x.png in Resources */,
 				3A860E4D1429C09E00649B27 /* MNOMapController.xib in Resources */,
 				3A860E4F1429C0FB00649B27 /* MNONoteEditorController.xib in Resources */,
+				3A860E671429CF9C00649B27 /* MNOMapControllerPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,9 +618,7 @@
 				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
 				3A68EFFA14238EB1008DC819 /* Notitas.xcdatamodeld in Sources */,
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
-				3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */,
 				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
-				3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */,
 				3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */,
 				3A860E471429BF1000649B27 /* MNOMapController.m in Sources */,
 				3A860E481429BF1000649B27 /* MNONoteEditorController.m in Sources */,
@@ -631,6 +629,8 @@
 				3A860E571429C9B600649B27 /* Note+MNOExtensions.m in Sources */,
 				3A860E5A1429CB6500649B27 /* MNOTwitterClient.m in Sources */,
 				3A860E5D1429CB8900649B27 /* MNOTwitterClientManager.m in Sources */,
+				3A860E641429CF3900649B27 /* MNOMapControllerPad.m in Sources */,
+				3A860E651429CF3900649B27 /* MNORootControllerPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

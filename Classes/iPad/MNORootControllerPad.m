@@ -1,21 +1,21 @@
 //
-//  RootViewControllerPad.m
+//  MNORootControllerPad.m
 //  Notitas
 //
 //  Created by Adrian on 9/16/11.
 //  Copyright 2011 akosma software. All rights reserved.
 //
 
-#import "RootViewControllerPad.h"
+#import "MNORootControllerPad.h"
 #import "MNOHelpers.h"
 #import "MNOModels.h"
 #import "MNONoteThumbnail.h"
-#import "MapControllerPad.h"
+#import "MNOMapControllerPad.h"
 
 #define DEFAULT_WIDTH 200.0
 static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
-@interface RootViewControllerPad ()
+@interface MNORootControllerPad ()
 
 @property (nonatomic, retain) NSArray *notes;
 @property (nonatomic, retain) NSMutableArray *noteViews;
@@ -26,7 +26,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
 @property (nonatomic, getter = isShowingLocationView) BOOL showingLocationView;
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
-@property (nonatomic, retain) MapControllerPad *map;
+@property (nonatomic, retain) MNOMapControllerPad *map;
 @property (nonatomic, retain) MNONoteThumbnail *animationThumbnail;
 @property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
 
@@ -44,7 +44,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 
 
-@implementation RootViewControllerPad
+@implementation MNORootControllerPad
 
 @synthesize notes = _notes;
 @synthesize noteViews = _noteViews;
@@ -456,7 +456,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 {
     if (self.map == nil)
     {
-        self.map = [[[MapControllerPad alloc] init] autorelease];
+        self.map = [[[MNOMapControllerPad alloc] init] autorelease];
     }
     self.map.parent = self;
     [UIView transitionFromView:self.view 
@@ -697,7 +697,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.mapView.centerCoordinate = coordinate;
     if (self.map == nil)
     {
-        self.map = [[[MapControllerPad alloc] init] autorelease];
+        self.map = [[[MNOMapControllerPad alloc] init] autorelease];
     }
     self.mapView.delegate = self.map;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);

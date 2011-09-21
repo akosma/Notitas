@@ -1,5 +1,5 @@
 //
-//  RootViewControllerPad.h
+//  MNORootControllerPad.h
 //  Notitas
 //
 //  Created by Adrian on 9/16/11.
@@ -11,12 +11,12 @@
 #import <MapKit/MapKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface RootViewControllerPad : UIViewController <UIAlertViewDelegate,
-                                                     CLLocationManagerDelegate,
-                                                     UITextViewDelegate,
-                                                     MKMapViewDelegate,
-                                                     MFMailComposeViewControllerDelegate,
-                                                     UIActionSheetDelegate>
+@interface MNORootControllerPad : UIViewController <UIAlertViewDelegate,
+                                                    CLLocationManagerDelegate,
+                                                    UITextViewDelegate,
+                                                    MKMapViewDelegate,
+                                                    MFMailComposeViewControllerDelegate,
+                                                    UIActionSheetDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
