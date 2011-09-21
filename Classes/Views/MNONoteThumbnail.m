@@ -7,7 +7,7 @@
 //
 
 #import "MNONoteThumbnail.h"
-#import "Note.h"
+#import "MNOModels.h"
 
 CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 {

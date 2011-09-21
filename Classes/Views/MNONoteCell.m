@@ -7,9 +7,8 @@
 //
 
 #import "MNONoteCell.h"
-#import "Note.h"
+#import "MNOModels.h"
 #import "MNONoteThumbnail.h"
-#import "ColorCode.h"
 #import "MNOHelpers.h"
 
 @interface MNONoteCell ()

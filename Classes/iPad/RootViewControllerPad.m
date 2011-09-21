@@ -8,7 +8,7 @@
 
 #import "RootViewControllerPad.h"
 #import "MNOHelpers.h"
-#import "Note.h"
+#import "MNOModels.h"
 #import "MNONoteThumbnail.h"
 #import "MapControllerPad.h"
 

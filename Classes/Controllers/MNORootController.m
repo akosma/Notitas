@@ -9,7 +9,7 @@
 #import "MNORootController.h"
 #import "MNOHelpers.h"
 #import "MNOViews.h"
-#import "Note.h"
+#import "MNOModels.h"
 #import "MNONoteEditorController.h"
 
 

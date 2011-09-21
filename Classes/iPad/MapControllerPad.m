@@ -7,7 +7,7 @@
 //
 
 #import "MapControllerPad.h"
-#import "Note.h"
+#import "MNOModels.h"
 #import "MNOHelpers.h"
 
 @interface MapControllerPad ()

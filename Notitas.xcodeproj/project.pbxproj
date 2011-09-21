@@ -57,6 +57,7 @@
 		3A860E4D1429C09E00649B27 /* MNOMapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860E4C1429C09E00649B27 /* MNOMapController.xib */; };
 		3A860E4F1429C0FB00649B27 /* MNONoteEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860E4E1429C0FB00649B27 /* MNONoteEditorController.xib */; };
 		3A860E531429C53400649B27 /* MNONotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E521429C53400649B27 /* MNONotifications.m */; };
+		3A860E571429C9B600649B27 /* Note+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E561429C9B600649B27 /* Note+MNOExtensions.m */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -166,6 +167,9 @@
 		3A860E501429C25A00649B27 /* MNOViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOViews.h; sourceTree = "<group>"; };
 		3A860E511429C53400649B27 /* MNONotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONotifications.h; sourceTree = "<group>"; };
 		3A860E521429C53400649B27 /* MNONotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONotifications.m; sourceTree = "<group>"; };
+		3A860E541429C99100649B27 /* MNOModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOModels.h; sourceTree = "<group>"; };
+		3A860E551429C9B600649B27 /* Note+MNOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+MNOExtensions.h"; sourceTree = "<group>"; };
+		3A860E561429C9B600649B27 /* Note+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+MNOExtensions.m"; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -479,8 +483,11 @@
 		3AC5BF981015986900D062A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A860E541429C99100649B27 /* MNOModels.h */,
 				3AA7544510179F6E007B3E5C /* Note.h */,
 				3AA7544610179F6E007B3E5C /* Note.m */,
+				3A860E551429C9B600649B27 /* Note+MNOExtensions.h */,
+				3A860E561429C9B600649B27 /* Note+MNOExtensions.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -623,6 +630,7 @@
 				3A860E4A1429BF1000649B27 /* MNONoteCell.m in Sources */,
 				3A860E4B1429BF1000649B27 /* MNONoteThumbnail.m in Sources */,
 				3A860E531429C53400649B27 /* MNONotifications.m in Sources */,
+				3A860E571429C9B600649B27 /* Note+MNOExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

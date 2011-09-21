@@ -7,7 +7,7 @@
 //
 
 #import "MNONoteEditorController.h"
-#import "Note.h"
+#import "MNOModels.h"
 #import "MNOMapController.h"
 #import "MNOHelpers.h"
 

@@ -7,7 +7,7 @@
 //
 
 #import "MNOMapController.h"
-#import "Note.h"
+#import "MNOModels.h"
 
 @interface MNOMapController ()
 

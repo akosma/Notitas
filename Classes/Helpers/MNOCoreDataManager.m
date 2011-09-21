@@ -7,7 +7,8 @@
 //
 
 #import "MNOCoreDataManager.h"
-#import "Note.h"
+#import "MNOModels.h"
+#import "MNOHelpers.h"
 
 static NSString *cacheName = @"Root";
 
