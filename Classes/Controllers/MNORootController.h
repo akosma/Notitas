@@ -1,5 +1,5 @@
 //
-//  RootViewController.h
+//  MNORootController.h
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -8,20 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "NoteCellDelegate.h"
-#import "NoteEditorDelegate.h"
+#import "MNONoteCellDelegate.h"
+#import "MNONoteEditorControllerDelegate.h"
 
-@class NoteEditor;
-@class Note;
-@class NoteThumbnail;
-
-@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,
-                                                  NoteCellDelegate,
-                                                  NoteEditorDelegate,
-                                                  CLLocationManagerDelegate,
-                                                  UIAlertViewDelegate,
-                                                  UITableViewDelegate,
-                                                  UITableViewDataSource> 
+@interface MNORootController : UIViewController <NSFetchedResultsControllerDelegate,
+                                                 NoteCellDelegate,
+                                                 MNONoteEditorControllerDelegate,
+                                                 CLLocationManagerDelegate,
+                                                 UIAlertViewDelegate,
+                                                 UITableViewDelegate,
+                                                 UITableViewDataSource> 
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;

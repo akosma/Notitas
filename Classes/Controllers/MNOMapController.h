@@ -1,5 +1,5 @@
 //
-//  Map.h
+//  MNOMapController.h
 //  Notitas
 //
 //  Created by Adrian on 7/22/09.
@@ -12,16 +12,10 @@
 
 @class Note;
 
-@interface Map : UIViewController 
-{
-@private
-    IBOutlet MKMapView *_mapView;
-    IBOutlet UINavigationItem *_titleItem;
-    Note *_note;
-    id<MKMapViewDelegate> _delegate;
-    MKPlacemark *_placemark;
-}
+@interface MNOMapController : UIViewController 
 
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) IBOutlet UINavigationItem *titleItem;
 @property (nonatomic, retain) Note *note;
 @property (nonatomic, assign) id<MKMapViewDelegate> delegate;
 

@@ -6,7 +6,7 @@
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import "NoteThumbnail.h"
+#import "MNONoteThumbnail.h"
 #import "Note.h"
 
 CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
@@ -103,12 +103,12 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeColor:) 
-                                                 name:@"ChangeColorNotification"
+                                                 name:MNOChangeColorNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeFont:)
-                                                 name:@"ChangeFontNotification"
+                                                 name:MNOChangeFontNotification
                                                object:nil];
 }
 

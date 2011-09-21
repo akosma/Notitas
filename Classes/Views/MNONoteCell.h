@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NoteCellDelegate.h"
+#import "MNONoteCellDelegate.h"
 
 @class Note;
 @class NoteThumbnail;

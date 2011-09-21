@@ -15,7 +15,6 @@
 		3A15C47D101754B600ECB335 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C47C101754B600ECB335 /* MessageUI.framework */; };
 		3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4BE10175AA500ECB335 /* CoreLocation.framework */; };
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
-		3A15C50110175D8C00ECB335 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15C50010175D8B00ECB335 /* Map.m */; };
 		3A1BDFEE10177D3800775127 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1BDFED10177D3800775127 /* location.png */; };
 		3A1F0D0E1423C27F00BEBE5E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D0D1423C27F00BEBE5E /* Default@2x.png */; };
 		3A1F0D161423C5E800BEBE5E /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F0D0F1423C5E800BEBE5E /* Icon-72.png */; };
@@ -50,6 +49,14 @@
 		3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7892441426552A004B07F0 /* MapControllerPad.m */; };
 		3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892461426556B004B07F0 /* MapControllerPad.xib */; };
 		3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E361429BD6F00649B27 /* MNOAppDelegate.m */; };
+		3A860E471429BF1000649B27 /* MNOMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E3B1429BF1000649B27 /* MNOMapController.m */; };
+		3A860E481429BF1000649B27 /* MNONoteEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E3D1429BF1000649B27 /* MNONoteEditorController.m */; };
+		3A860E491429BF1000649B27 /* MNORootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E401429BF1000649B27 /* MNORootController.m */; };
+		3A860E4A1429BF1000649B27 /* MNONoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E431429BF1000649B27 /* MNONoteCell.m */; };
+		3A860E4B1429BF1000649B27 /* MNONoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E461429BF1000649B27 /* MNONoteThumbnail.m */; };
+		3A860E4D1429C09E00649B27 /* MNOMapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860E4C1429C09E00649B27 /* MNOMapController.xib */; };
+		3A860E4F1429C0FB00649B27 /* MNONoteEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860E4E1429C0FB00649B27 /* MNONoteEditorController.xib */; };
+		3A860E531429C53400649B27 /* MNONotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E521429C53400649B27 /* MNONotifications.m */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -59,11 +66,6 @@
 		3AA7543210179E51007B3E5C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7543110179E51007B3E5C /* color.png */; };
 		3AA7544710179F6E007B3E5C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7544610179F6E007B3E5C /* Note.m */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
-		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
-		3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C01B1015AEC300D062A4 /* NoteCell.m */; };
-		3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0551015B64600D062A4 /* NoteThumbnail.m */; };
-		3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */; };
-		3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */; };
 		3AC5C3F41015EEE300D062A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5C3F31015EEE300D062A4 /* Default.png */; };
 		3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3F63F142391B600812023 /* MNOSoundManager.m */; };
 		3ADFDB7814271BF800EC98C6 /* 02-redo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ADFDB7414271BF800EC98C6 /* 02-redo.png */; };
@@ -84,7 +86,6 @@
 		3ADFDB9F1427632600EC98C6 /* 209-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ADFDB9B1427632500EC98C6 /* 209-twitter.png */; };
 		3ADFDBA01427632600EC98C6 /* 209-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ADFDB9C1427632600EC98C6 /* 209-twitter@2x.png */; };
 		3AE3056C1018544400D43A02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3056B1018544400D43A02 /* Localizable.strings */; };
-		3AE3057F1018572600D43A02 /* Map.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3057E1018572600D43A02 /* Map.xib */; };
 		3AE3059910185A6800D43A02 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE3059810185A6800D43A02 /* font.png */; };
 /* End PBXBuildFile section */
 
@@ -99,8 +100,6 @@
 		3A15C47C101754B600ECB335 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3A15C4BE10175AA500ECB335 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3A15C4C210175AB700ECB335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3A15C4FF10175D8B00ECB335 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		3A15C50010175D8B00ECB335 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		3A1BDFED10177D3800775127 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		3A1F0D0D1423C27F00BEBE5E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3A1F0D0F1423C5E800BEBE5E /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -150,6 +149,23 @@
 		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
 		3A860E361429BD6F00649B27 /* MNOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOAppDelegate.m; sourceTree = "<group>"; };
 		3A860E381429BDF400649B27 /* MNOExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOExternals.h; sourceTree = "<group>"; };
+		3A860E3A1429BF1000649B27 /* MNOMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOMapController.h; sourceTree = "<group>"; };
+		3A860E3B1429BF1000649B27 /* MNOMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOMapController.m; sourceTree = "<group>"; };
+		3A860E3C1429BF1000649B27 /* MNONoteEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteEditorController.h; sourceTree = "<group>"; };
+		3A860E3D1429BF1000649B27 /* MNONoteEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONoteEditorController.m; sourceTree = "<group>"; };
+		3A860E3E1429BF1000649B27 /* MNONoteEditorControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteEditorControllerDelegate.h; sourceTree = "<group>"; };
+		3A860E3F1429BF1000649B27 /* MNORootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNORootController.h; sourceTree = "<group>"; };
+		3A860E401429BF1000649B27 /* MNORootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNORootController.m; sourceTree = "<group>"; };
+		3A860E421429BF1000649B27 /* MNONoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteCell.h; sourceTree = "<group>"; };
+		3A860E431429BF1000649B27 /* MNONoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONoteCell.m; sourceTree = "<group>"; };
+		3A860E441429BF1000649B27 /* MNONoteCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteCellDelegate.h; sourceTree = "<group>"; };
+		3A860E451429BF1000649B27 /* MNONoteThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteThumbnail.h; sourceTree = "<group>"; };
+		3A860E461429BF1000649B27 /* MNONoteThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONoteThumbnail.m; sourceTree = "<group>"; };
+		3A860E4C1429C09E00649B27 /* MNOMapController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MNOMapController.xib; sourceTree = "<group>"; };
+		3A860E4E1429C0FB00649B27 /* MNONoteEditorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MNONoteEditorController.xib; sourceTree = "<group>"; };
+		3A860E501429C25A00649B27 /* MNOViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOViews.h; sourceTree = "<group>"; };
+		3A860E511429C53400649B27 /* MNONotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONotifications.h; sourceTree = "<group>"; };
+		3A860E521429C53400649B27 /* MNONotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONotifications.m; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -161,17 +177,6 @@
 		3AA7544610179F6E007B3E5C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AA7545D1017A1B7007B3E5C /* ColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCode.h; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		3AC5BF951015986900D062A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		3AC5BF961015986900D062A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		3AC5C01A1015AEC300D062A4 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
-		3AC5C01B1015AEC300D062A4 /* NoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteCell.m; sourceTree = "<group>"; };
-		3AC5C0541015B64600D062A4 /* NoteThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteThumbnail.h; sourceTree = "<group>"; };
-		3AC5C0551015B64600D062A4 /* NoteThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteThumbnail.m; sourceTree = "<group>"; };
-		3AC5C1C11015D18300D062A4 /* NoteCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCellDelegate.h; sourceTree = "<group>"; };
-		3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditor.xib; sourceTree = "<group>"; };
-		3AC5C29C1015DD0E00D062A4 /* NoteEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditor.h; sourceTree = "<group>"; };
-		3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteEditor.m; sourceTree = "<group>"; };
-		3AC5C2F01015E21400D062A4 /* NoteEditorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteEditorDelegate.h; sourceTree = "<group>"; };
 		3AC5C3F31015EEE300D062A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3AD3F63E142391B600812023 /* MNOSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOSoundManager.h; sourceTree = "<group>"; };
 		3AD3F63F142391B600812023 /* MNOSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOSoundManager.m; sourceTree = "<group>"; };
@@ -195,7 +200,6 @@
 		3AE3056D1018544A00D43A02 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3056E1018544D00D43A02 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AE3056F1018546C00D43A02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3AE3057E1018572600D43A02 /* Map.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Map.xib; sourceTree = "<group>"; };
 		3AE3059810185A6800D43A02 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		3AE3059F10185B4600D43A02 /* FontCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontCode.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Notitas-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Notitas-Info.plist"; path = "../Notitas-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -337,6 +341,33 @@
 			path = appirater;
 			sourceTree = "<group>";
 		};
+		3A860E391429BF1000649B27 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A860E3F1429BF1000649B27 /* MNORootController.h */,
+				3A860E401429BF1000649B27 /* MNORootController.m */,
+				3A860E3C1429BF1000649B27 /* MNONoteEditorController.h */,
+				3A860E3D1429BF1000649B27 /* MNONoteEditorController.m */,
+				3A860E3E1429BF1000649B27 /* MNONoteEditorControllerDelegate.h */,
+				3A860E3A1429BF1000649B27 /* MNOMapController.h */,
+				3A860E3B1429BF1000649B27 /* MNOMapController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3A860E411429BF1000649B27 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A860E501429C25A00649B27 /* MNOViews.h */,
+				3A860E421429BF1000649B27 /* MNONoteCell.h */,
+				3A860E431429BF1000649B27 /* MNONoteCell.m */,
+				3A860E441429BF1000649B27 /* MNONoteCellDelegate.h */,
+				3A860E451429BF1000649B27 /* MNONoteThumbnail.h */,
+				3A860E461429BF1000649B27 /* MNONoteThumbnail.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3AA753BA1017953B007B3E5C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,9 +425,9 @@
 		3AC5BF78101597BA00D062A4 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
-				3AE3057E1018572600D43A02 /* Map.xib */,
 				3AC5BF79101597BA00D062A4 /* MainWindow.xib */,
-				3AC5C2951015DC6D00D062A4 /* NoteEditor.xib */,
+				3A860E4C1429C09E00649B27 /* MNOMapController.xib */,
+				3A860E4E1429C0FB00649B27 /* MNONoteEditorController.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -405,7 +436,8 @@
 			isa = PBXGroup;
 			children = (
 				3AC5BF911015986900D062A4 /* AppDelegate */,
-				3AC5BF941015986900D062A4 /* Controllers */,
+				3A860E391429BF1000649B27 /* Controllers */,
+				3A860E411429BF1000649B27 /* Views */,
 				3AC5BF971015986900D062A4 /* Helpers */,
 				3AC5BF981015986900D062A4 /* Models */,
 				3A1F0D381423D52A00BEBE5E /* iPad */,
@@ -420,25 +452,6 @@
 				3A860E361429BD6F00649B27 /* MNOAppDelegate.m */,
 			);
 			path = AppDelegate;
-			sourceTree = "<group>";
-		};
-		3AC5BF941015986900D062A4 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3AC5BF951015986900D062A4 /* RootViewController.h */,
-				3AC5BF961015986900D062A4 /* RootViewController.m */,
-				3AC5C01A1015AEC300D062A4 /* NoteCell.h */,
-				3AC5C01B1015AEC300D062A4 /* NoteCell.m */,
-				3AC5C1C11015D18300D062A4 /* NoteCellDelegate.h */,
-				3AC5C0541015B64600D062A4 /* NoteThumbnail.h */,
-				3AC5C0551015B64600D062A4 /* NoteThumbnail.m */,
-				3AC5C29C1015DD0E00D062A4 /* NoteEditor.h */,
-				3AC5C29D1015DD0E00D062A4 /* NoteEditor.m */,
-				3AC5C2F01015E21400D062A4 /* NoteEditorDelegate.h */,
-				3A15C4FF10175D8B00ECB335 /* Map.h */,
-				3A15C50010175D8B00ECB335 /* Map.m */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		3AC5BF971015986900D062A4 /* Helpers */ = {
@@ -457,6 +470,8 @@
 				3AE3059F10185B4600D43A02 /* FontCode.h */,
 				3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */,
 				3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */,
+				3A860E511429C53400649B27 /* MNONotifications.h */,
+				3A860E521429C53400649B27 /* MNONotifications.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -536,7 +551,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */,
-				3AC5C2971015DC6D00D062A4 /* NoteEditor.xib in Resources */,
 				3AC5C3F41015EEE300D062A4 /* Default.png in Resources */,
 				3A1BDFEE10177D3800775127 /* location.png in Resources */,
 				3AA753C310179559007B3E5C /* Erase.caf in Resources */,
@@ -546,7 +560,6 @@
 				3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */,
 				3A9BA4BF10183B8E006F7A3F /* small_thumbnail3.png in Resources */,
 				3AE3056C1018544400D43A02 /* Localizable.strings in Resources */,
-				3AE3057F1018572600D43A02 /* Map.xib in Resources */,
 				3AE3059910185A6800D43A02 /* font.png in Resources */,
 				3A4E1B83108BA8BA00FF1E9F /* Settings.bundle in Resources */,
 				3A4E1B84108BA8BA00FF1E9F /* TwitterClients.plist in Resources */,
@@ -580,6 +593,8 @@
 				3ADFDB9E1427632600EC98C6 /* 18-envelope@2x.png in Resources */,
 				3ADFDB9F1427632600EC98C6 /* 209-twitter.png in Resources */,
 				3ADFDBA01427632600EC98C6 /* 209-twitter@2x.png in Resources */,
+				3A860E4D1429C09E00649B27 /* MNOMapController.xib in Resources */,
+				3A860E4F1429C0FB00649B27 /* MNONoteEditorController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,11 +606,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */,
-				3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */,
-				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
-				3AC5C29E1015DD0E00D062A4 /* NoteEditor.m in Sources */,
-				3A15C50110175D8C00ECB335 /* Map.m in Sources */,
 				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
 				3A4E1B8F108BA8D700FF1E9F /* TwitterClient.m in Sources */,
 				3A4E1B90108BA8D700FF1E9F /* TwitterClientManager.m in Sources */,
@@ -607,6 +617,12 @@
 				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
 				3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */,
 				3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */,
+				3A860E471429BF1000649B27 /* MNOMapController.m in Sources */,
+				3A860E481429BF1000649B27 /* MNONoteEditorController.m in Sources */,
+				3A860E491429BF1000649B27 /* MNORootController.m in Sources */,
+				3A860E4A1429BF1000649B27 /* MNONoteCell.m in Sources */,
+				3A860E4B1429BF1000649B27 /* MNONoteThumbnail.m in Sources */,
+				3A860E531429C53400649B27 /* MNONotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +662,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -667,6 +684,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = Notitas;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

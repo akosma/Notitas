@@ -6,9 +6,9 @@
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import "NoteCell.h"
+#import "MNONoteCell.h"
 #import "Note.h"
-#import "NoteThumbnail.h"
+#import "MNONoteThumbnail.h"
 #import "ColorCode.h"
 #import "MNOHelpers.h"
 

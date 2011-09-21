@@ -7,7 +7,7 @@
 //
 
 #import "MNOAppDelegate.h"
-#import "RootViewController.h"
+#import "MNORootController.h"
 #import "MNOExternals.h"
 #import "MNOHelpers.h"
 

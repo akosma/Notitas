@@ -1,47 +1,92 @@
 //
-//  NoteEditor.m
+//  MNONoteEditorController.m
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import "NoteEditor.h"
+#import "MNONoteEditorController.h"
 #import "Note.h"
-#import "Map.h"
-#import "ColorCode.h"
-#import "TwitterClientManager.h"
+#import "MNOMapController.h"
+#import "MNOHelpers.h"
 
-@interface NoteEditor (Private)
+@interface MNONoteEditorController ()
+
+@property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
+@property (nonatomic) NSInteger twitterrifficButtonIndex;
+@property (nonatomic) NSInteger locationButtonIndex;
+@property (nonatomic) CGAffineTransform hidingTransformation;
+@property (nonatomic, retain) MNOMapController *mapController;
+@property (nonatomic, assign) TwitterClientManager *clientManager;
+
 - (void)disappear;
 - (void)updateLabel;
+
 @end
 
 
-@implementation NoteEditor
+@implementation MNONoteEditorController
 
+@synthesize textView = _textView;
+@synthesize toolbar = _toolbar;
+@synthesize timeStampLabel = _timeStampLabel;
 @synthesize note = _note;
 @synthesize delegate = _delegate;
-
-#pragma mark -
-#pragma mark Constructor and destructor
-
-- (id)init
-{
-    if (self = [super initWithNibName:@"NoteEditor" bundle:nil]) 
-    {
-        _clientManager = [TwitterClientManager sharedTwitterClientManager];
-    }
-    return self;
-}
+@synthesize twitterChoiceSheet = _twitterChoiceSheet;
+@synthesize twitterrifficButtonIndex = _twitterrifficButtonIndex;
+@synthesize locationButtonIndex = _locationButtonIndex;
+@synthesize hidingTransformation = _hidingTransformation;
+@synthesize mapController = _mapController;
+@synthesize clientManager = _clientManager;
 
 - (void)dealloc 
 {
-    _map.delegate = nil;
-    [_map release];
+    [_textView release];
+    [_toolbar release];
+    [_timeStampLabel release];
     [_note release];
     _delegate = nil;
+    [_twitterChoiceSheet release];
+    _mapController.delegate = nil;
+    [_mapController release];
+    _clientManager = nil;
     [super dealloc];
+}
+
+#pragma mark - UIViewController methods
+
+- (void)viewDidLoad 
+{
+    // This line is required; otherwise, after calling dismissModalViewControllerAnimated:
+    // the whole editor appears 20 pixels down... weird!
+    self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
+    self.hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
+    self.toolbar.transform = self.hidingTransformation;
+    self.twitterrifficButtonIndex = -1;
+    self.locationButtonIndex = -1;
+    self.clientManager = [TwitterClientManager sharedTwitterClientManager];
+}
+
+- (void)didReceiveMemoryWarning 
+{
+    [super didReceiveMemoryWarning];
+    self.mapController.delegate = nil;
+    self.mapController = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated 
+{
+    self.timeStampLabel.font = [UIFont fontWithName:fontNameForCode(self.note.fontCode) size:12.0];
+    self.textView.text = self.note.contents;
+    self.textView.font = [UIFont fontWithName:fontNameForCode(self.note.fontCode) size:24.0];
+    [self.textView becomeFirstResponder];
+    [self updateLabel];
+    
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+    self.toolbar.transform = CGAffineTransformIdentity;
+	[UIView commitAnimations];
 }
 
 #pragma mark -
@@ -49,32 +94,32 @@
 
 - (IBAction)changeFont:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFontNotification" 
+    [[NSNotificationCenter defaultCenter] postNotificationName:MNOChangeFontNotification
                                                         object:self];
-    int value = _note.fontCode + 1;
+    int value = self.note.fontCode + 1;
     value = value % 4;
-    _note.fontFamily = [NSNumber numberWithInt:value];
-    _textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
-    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
+    self.note.fontFamily = [NSNumber numberWithInt:value];
+    self.textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
+    self.timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
 }
 
 - (IBAction)changeColor:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeColorNotification" 
+    [[NSNotificationCenter defaultCenter] postNotificationName:MNOChangeColorNotification 
                                                         object:self];
-    int value = _note.colorCode + 1;
+    int value = self.note.colorCode + 1;
     value = value % 4;
-    _note.color = [NSNumber numberWithInt:value];
+    self.note.color = [NSNumber numberWithInt:value];
 }
 
 - (IBAction)done:(id)sender
 {
     [self disappear];
     
-    _note.contents = _textView.text;
-    if ([_delegate respondsToSelector:@selector(noteEditorDidFinishedEditing:)])
+    self.note.contents = self.textView.text;
+    if ([self.delegate respondsToSelector:@selector(noteEditorDidFinishedEditing:)])
     {
-        [_delegate noteEditorDidFinishedEditing:self];
+        [self.delegate noteEditorDidFinishedEditing:self];
     }
 }
 
@@ -95,7 +140,7 @@
 - (IBAction)action:(id)sender
 {
     // Make sure that the latest contents are available for the actions
-    _note.contents = _textView.text;
+    self.note.contents = self.textView.text;
 
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil 
                                                        delegate:self 
@@ -111,23 +156,22 @@
     [sheet addButtonWithTitle:emailText];
     NSInteger sheetButtonCount = 1;
     
-    if ([_clientManager isAnyClientAvailable])
+    if ([self.clientManager isAnyClientAvailable])
     {
         [sheet addButtonWithTitle:twitterrifficText];
-        _twitterrifficButtonIndex = sheetButtonCount;
+        self.twitterrifficButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
     }    
     
-    BOOL locationAvailable = [_note.hasLocation boolValue];
+    BOOL locationAvailable = [self.note.hasLocation boolValue];
     if (locationAvailable)
     {
         [sheet addButtonWithTitle:locationText];
-        _locationButtonIndex = sheetButtonCount;
+        self.locationButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
     }
     [sheet addButtonWithTitle:cancelText];
     sheet.cancelButtonIndex = sheetButtonCount;
-    sheetButtonCount += 1;
     
     [sheet showInView:self.view];
     [sheet release];
@@ -138,14 +182,13 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet == _twitterChoiceSheet)
+    if (actionSheet == self.twitterChoiceSheet)
     {
         NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-        [_clientManager setSelectedClientName:buttonTitle];
-        [_clientManager send:_note.contents];
+        [self.clientManager setSelectedClientName:buttonTitle];
+        [self.clientManager send:self.note.contents];
 
-        [_twitterChoiceSheet release];
-        _twitterChoiceSheet = nil;
+        self.twitterChoiceSheet = nil;
     }
     else 
     {
@@ -156,14 +199,14 @@
             composer.mailComposeDelegate = self;
 
             NSMutableString *message = [[NSMutableString alloc] init];
-            if (_note.contents == nil || [_note.contents length] == 0)
+            if (self.note.contents == nil || [self.note.contents length] == 0)
             {
                 NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
                 [message appendString:emptyNoteText];
             }
             else
             {
-                [message appendString:_note.contents];
+                [message appendString:self.note.contents];
             }
             NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
             [message appendString:sentFromText];
@@ -179,47 +222,47 @@
         }
         else
         {
-            if (_twitterrifficButtonIndex == buttonIndex)
+            if (self.twitterrifficButtonIndex == buttonIndex)
             {
-                if ([_clientManager canSendMessage])
+                if ([self.clientManager canSendMessage])
                 {
                     // A client is installed and ready to be used!
                     // Let's send a message using it. We don't care which client this is!
-                    [_clientManager send:_note.contents];
+                    [self.clientManager send:self.note.contents];
                 }
                 else 
                 {
                     // This path means that a client has been installed in the device,
                     // but the current value in the preferences is "None" or other device not installed.
                     NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
-                    _twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
-                                                                      delegate:self
-                                                             cancelButtonTitle:nil
-                                                        destructiveButtonTitle:nil
-                                                             otherButtonTitles:nil];
-                    NSArray *availableClients = [_clientManager availableClients];
+                    self.twitterChoiceSheet = [[[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
+                                                                           delegate:self
+                                                                  cancelButtonTitle:nil
+                                                             destructiveButtonTitle:nil
+                                                                  otherButtonTitles:nil] autorelease];
+                    NSArray *availableClients = [self.clientManager availableClients];
                     for (NSString *client in availableClients)
                     {
-                        [_twitterChoiceSheet addButtonWithTitle:client];
+                        [self.twitterChoiceSheet addButtonWithTitle:client];
                     }
-                    [_twitterChoiceSheet addButtonWithTitle:cancelText];
-                    _twitterChoiceSheet.cancelButtonIndex = [availableClients count];
-                    [_twitterChoiceSheet showInView:self.view];
+                    [self.twitterChoiceSheet addButtonWithTitle:cancelText];
+                    self.twitterChoiceSheet.cancelButtonIndex = [availableClients count];
+                    [self.twitterChoiceSheet showInView:self.view];
                 }
             }
-            else if (_locationButtonIndex == buttonIndex)
+            else if (self.locationButtonIndex == buttonIndex)
             {
-                if ([_note.hasLocation boolValue])
+                if ([self.note.hasLocation boolValue])
                 {
-                    if (_map == nil)
+                    if (self.mapController == nil)
                     {
-                        _map = [[Map alloc] init];
-                        _map.delegate = self;
+                        self.mapController = [[[MNOMapController alloc] init] autorelease];
+                        self.mapController.delegate = self;
                     }
-                    _map.note = _note;
+                    self.mapController.note = self.note;
                     
                     [self disappear];
-                    [self presentModalViewController:_map animated:YES];
+                    [self presentModalViewController:self.mapController animated:YES];
                 }
             }
         }
@@ -243,10 +286,10 @@
                                                        reuseIdentifier:identifier] autorelease];
     }
     
-    ColorCode code = _note.colorCode;
+    ColorCode code = self.note.colorCode;
     NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d.png", code];
     annotationView.image = [UIImage imageNamed:imageName];
-    annotationView.transform = CGAffineTransformMakeRotation(_note.angleRadians);
+    annotationView.transform = CGAffineTransformMakeRotation(self.note.angleRadians);
     return annotationView;
 }
 
@@ -289,9 +332,9 @@
             // OK
             [self disappear];
             
-            if ([_delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
+            if ([self.delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
             {
-                [_delegate noteEditorDidSendNoteToTrash:self];
+                [self.delegate noteEditorDidSendNoteToTrash:self];
             }
             break;
         }
@@ -312,57 +355,23 @@
 }
              
 #pragma mark -
-#pragma mark UIViewController methods
-
-- (void)viewDidLoad 
-{
-    // This line is required; otherwise, after calling dismissModalViewControllerAnimated:
-    // the whole editor appears 20 pixels down... weird!
-    self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
-    _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
-    _toolbar.transform = _hidingTransformation;
-    _twitterrifficButtonIndex = -1;
-    _locationButtonIndex = -1;
-}
-
-- (void)didReceiveMemoryWarning 
-{
-    [super didReceiveMemoryWarning];
-    _map.delegate = nil;
-    [_map release];
-    _map = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated 
-{
-    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:12.0];
-    _textView.text = _note.contents;
-    _textView.font = [UIFont fontWithName:fontNameForCode(_note.fontCode) size:24.0];
-    [_textView becomeFirstResponder];
-    [self updateLabel];
-
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.3];
-    _toolbar.transform = CGAffineTransformIdentity;
-	[UIView commitAnimations];
-}
-
-#pragma mark -
 #pragma mark Private methods
 
 - (void)disappear
 {
-    [_textView resignFirstResponder];
+    [self.textView resignFirstResponder];
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-    _toolbar.transform = _hidingTransformation;
+    self.toolbar.transform = self.hidingTransformation;
 	[UIView commitAnimations];    
 }
 
 - (void)updateLabel
 {
     NSString *characters = NSLocalizedString(@"characters", @"The 'characters' word");
-    _timeStampLabel.text = [NSString stringWithFormat:@"%d %@ - %@", [_textView.text length], characters, _note.timeString];
+    self.timeStampLabel.text = [NSString stringWithFormat:@"%d %@ - %@", [self.textView.text length], 
+                                characters, 
+                                self.note.timeString];
 }
      
 @end

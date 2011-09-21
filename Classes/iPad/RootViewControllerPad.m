@@ -9,7 +9,7 @@
 #import "RootViewControllerPad.h"
 #import "MNOHelpers.h"
 #import "Note.h"
-#import "NoteThumbnail.h"
+#import "MNONoteThumbnail.h"
 #import "MapControllerPad.h"
 
 #define DEFAULT_WIDTH 200.0

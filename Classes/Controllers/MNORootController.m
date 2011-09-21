@@ -1,23 +1,22 @@
 //
-//  RootViewController.m
+//  MNORootViewController.m
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
 //  Copyright akosma software 2009. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "MNORootController.h"
 #import "MNOHelpers.h"
-#import "NoteCell.h"
+#import "MNOViews.h"
 #import "Note.h"
-#import "NoteThumbnail.h"
-#import "NoteEditor.h"
+#import "MNONoteEditorController.h"
 
 
-@interface RootViewController ()
+@interface MNORootController ()
 
 @property (nonatomic, retain) Note *currentNote;
-@property (nonatomic, retain) NoteEditor *editor;
+@property (nonatomic, retain) MNONoteEditorController *editor;
 @property (nonatomic, retain) NoteThumbnail *thumbnail;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -30,7 +29,7 @@
 @end
 
 
-@implementation RootViewController
+@implementation MNORootController
 
 @synthesize locationInformationAvailable = _locationInformationAvailable;
 @synthesize currentNote = _currentNote;
@@ -309,7 +308,7 @@
     [self.thumbnail setNeedsDisplay];
     if (self.editor == nil)
     {
-        self.editor = [[[NoteEditor alloc] init] autorelease];
+        self.editor = [[[MNONoteEditorController alloc] init] autorelease];
         self.editor.view.alpha = 0.0;
         self.editor.delegate = self;
     }
@@ -334,7 +333,7 @@
 
 #pragma mark - NoteEditorDelegate methods
 
-- (void)noteEditorDidFinishedEditing:(NoteEditor *)editor
+- (void)noteEditorDidFinishedEditing:(MNONoteEditorController *)editor
 {
 	[self becomeFirstResponder];
 
@@ -355,7 +354,7 @@
     [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
 }
 
-- (void)noteEditorDidSendNoteToTrash:(NoteEditor *)editor
+- (void)noteEditorDidSendNoteToTrash:(MNONoteEditorController *)editor
 {
 	[self becomeFirstResponder];
     [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentNote];
