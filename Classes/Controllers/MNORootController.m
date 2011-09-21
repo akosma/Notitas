@@ -256,12 +256,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    static NSString *cellIdentifier = @"NoteCell";
+    static NSString *cellIdentifier = @"MNONoteCell";
     
-    NoteCell *cell = (NoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MNONoteCell *cell = (MNONoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) 
     {
-        cell = [[[NoteCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+        cell = [[[MNONoteCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
     }
 
     cell.delegate = self;
@@ -290,9 +290,9 @@
     return cell;
 }
 
-#pragma mark - NoteCellDelegate methods
+#pragma mark - MNONoteCellDelegate methods
 
-- (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
+- (void)noteCell:(MNONoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
 {
 	[self resignFirstResponder];
     [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];

@@ -12,7 +12,7 @@
 #import "MNONoteEditorControllerDelegate.h"
 
 @interface MNORootController : UIViewController <NSFetchedResultsControllerDelegate,
-                                                 NoteCellDelegate,
+                                                 MNONoteCellDelegate,
                                                  MNONoteEditorControllerDelegate,
                                                  CLLocationManagerDelegate,
                                                  UIAlertViewDelegate,

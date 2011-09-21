@@ -1,5 +1,5 @@
 //
-//  NoteCell.h
+//  MNONoteCell.h
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -10,26 +10,12 @@
 #import "MNONoteCellDelegate.h"
 
 @class Note;
-@class NoteThumbnail;
 
-@interface NoteCell : UITableViewCell 
-{
-@private
-    Note *_leftNote;
-    Note *_rightNote;
-    
-    NoteThumbnail *_leftView;
-    NoteThumbnail *_rightView;
-    
-    id<NoteCellDelegate> _delegate;
-    
-    CGRect _leftFrame;
-    CGRect _rightFrame;
-}
+@interface MNONoteCell : UITableViewCell 
 
 @property (nonatomic, retain) Note *leftNote;
 @property (nonatomic, retain) Note *rightNote;
-@property (nonatomic, assign) id<NoteCellDelegate> delegate;
+@property (nonatomic, assign) id<MNONoteCellDelegate> delegate;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 

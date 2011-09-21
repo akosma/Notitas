@@ -1,5 +1,5 @@
 //
-//  NoteCellDelegate.h
+//  MNONoteCellDelegate.h
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class NoteCell;
+@class MNONoteCell;
 @class Note;
 
-@protocol NoteCellDelegate <NSObject>
+@protocol MNONoteCellDelegate <NSObject>
 
 @required
-- (void)noteCell:(NoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame;
+- (void)noteCell:(MNONoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame;
 
 @end

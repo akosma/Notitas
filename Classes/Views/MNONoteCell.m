@@ -12,14 +12,25 @@
 #import "ColorCode.h"
 #import "MNOHelpers.h"
 
-@implementation NoteCell
+@interface MNONoteCell ()
 
-@dynamic leftNote;
-@dynamic rightNote;
+@property (nonatomic, retain) NoteThumbnail *leftView;
+@property (nonatomic, retain) NoteThumbnail *rightView;
+@property (nonatomic) CGRect leftFrame;
+@property (nonatomic) CGRect rightFrame;
+
+@end
+
+
+@implementation MNONoteCell
+
+@synthesize leftNote = _leftNote;
+@synthesize rightNote = _rightNote;
 @synthesize delegate = _delegate;
-
-#pragma mark -
-#pragma mark Constructor and destructor
+@synthesize leftView = _leftView;
+@synthesize rightView = _rightView;
+@synthesize leftFrame = _leftFrame;
+@synthesize rightFrame = _rightFrame;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -54,8 +65,7 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public properties
+#pragma mark - Public properties
 
 - (Note *)leftNote
 {
@@ -117,8 +127,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Touch management
+#pragma mark - Touch management
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
