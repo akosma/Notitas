@@ -1,5 +1,5 @@
 //
-//  NotitasAppDelegate.h
+//  MNOAppDelegate.h
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface NotitasAppDelegate : NSObject <UIApplicationDelegate> 
+@interface MNOAppDelegate : NSObject <UIApplicationDelegate> 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet id rootController;

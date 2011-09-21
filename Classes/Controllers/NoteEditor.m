@@ -10,7 +10,6 @@
 #import "Note.h"
 #import "Map.h"
 #import "ColorCode.h"
-#import "NotitasAppDelegate.h"
 #import "TwitterClientManager.h"
 
 @interface NoteEditor (Private)

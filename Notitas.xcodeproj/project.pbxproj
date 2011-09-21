@@ -49,6 +49,7 @@
 		3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */; };
 		3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7892441426552A004B07F0 /* MapControllerPad.m */; };
 		3A7892471426556B004B07F0 /* MapControllerPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7892461426556B004B07F0 /* MapControllerPad.xib */; };
+		3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E361429BD6F00649B27 /* MNOAppDelegate.m */; };
 		3A9BA4BC10183B8E006F7A3F /* small_thumbnail0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */; };
 		3A9BA4BD10183B8E006F7A3F /* small_thumbnail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */; };
 		3A9BA4BE10183B8E006F7A3F /* small_thumbnail2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */; };
@@ -58,7 +59,6 @@
 		3AA7543210179E51007B3E5C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7543110179E51007B3E5C /* color.png */; };
 		3AA7544710179F6E007B3E5C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7544610179F6E007B3E5C /* Note.m */; };
 		3AC5BF7C101597BA00D062A4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5BF79101597BA00D062A4 /* MainWindow.xib */; };
-		3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */; };
 		3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5BF961015986900D062A4 /* RootViewController.m */; };
 		3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C01B1015AEC300D062A4 /* NoteCell.m */; };
 		3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5C0551015B64600D062A4 /* NoteThumbnail.m */; };
@@ -147,6 +147,8 @@
 		3A7892431426552A004B07F0 /* MapControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControllerPad.h; sourceTree = "<group>"; };
 		3A7892441426552A004B07F0 /* MapControllerPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControllerPad.m; sourceTree = "<group>"; };
 		3A7892461426556B004B07F0 /* MapControllerPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapControllerPad.xib; path = Resources/NIBs/iPad/MapControllerPad.xib; sourceTree = "<group>"; };
+		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
+		3A860E361429BD6F00649B27 /* MNOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOAppDelegate.m; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -158,8 +160,6 @@
 		3AA7544610179F6E007B3E5C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AA7545D1017A1B7007B3E5C /* ColorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCode.h; sourceTree = "<group>"; };
 		3AC5BF79101597BA00D062A4 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotitasAppDelegate.h; sourceTree = "<group>"; };
-		3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotitasAppDelegate.m; sourceTree = "<group>"; };
 		3AC5BF951015986900D062A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		3AC5BF961015986900D062A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		3AC5C01A1015AEC300D062A4 /* NoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteCell.h; sourceTree = "<group>"; };
@@ -414,8 +414,8 @@
 		3AC5BF911015986900D062A4 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				3AC5BF921015986900D062A4 /* NotitasAppDelegate.h */,
-				3AC5BF931015986900D062A4 /* NotitasAppDelegate.m */,
+				3A860E351429BD6F00649B27 /* MNOAppDelegate.h */,
+				3A860E361429BD6F00649B27 /* MNOAppDelegate.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -589,7 +589,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3AC5BF991015986900D062A4 /* NotitasAppDelegate.m in Sources */,
 				3AC5BF9A1015986900D062A4 /* RootViewController.m in Sources */,
 				3AC5C01C1015AEC300D062A4 /* NoteCell.m in Sources */,
 				3AC5C0561015B64600D062A4 /* NoteThumbnail.m in Sources */,
@@ -605,6 +604,7 @@
 				3A1F0D3B1423D54500BEBE5E /* RootViewControllerPad.m in Sources */,
 				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
 				3A7892451426552A004B07F0 /* MapControllerPad.m in Sources */,
+				3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

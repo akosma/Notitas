@@ -1,24 +1,24 @@
 //
-//  NotitasAppDelegate.m
+//  MNOAppDelegate.m
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
 //  Copyright akosma software 2009. All rights reserved.
 //
 
-#import "NotitasAppDelegate.h"
+#import "MNOAppDelegate.h"
 #import "RootViewController.h"
 #import "Appirater.h"
 #import "MNOHelpers.h"
 
-@interface NotitasAppDelegate ()
+@interface MNOAppDelegate ()
 
 @property (nonatomic) CFTimeInterval lastTime;
 
 @end
 
 
-@implementation NotitasAppDelegate
+@implementation MNOAppDelegate
 
 @synthesize window = _window;
 @synthesize rootController = _rootController;
