@@ -1,6 +1,6 @@
 //
 //  MNOTwitterClientManager.m
-//  TwitThis
+//  Notitas
 //
 //  Created by Adrian on 9/11/09.
 //  Copyright 2009 akosma software. All rights reserved.
@@ -8,8 +8,10 @@
 
 #import "MNOTwitterClientManager.h"
 #import "MNOTwitterClient.h"
-#import "Definitions.h"
 #import <AKOLibrary/SynthesizeSingleton.h>
+
+static NSString *TWITTER_CLIENT_KEY = @"TwitterClient";
+static NSString *TWITTER_CLIENT_CODE_NONE = @"None";
 
 @interface MNOTwitterClientManager ()
 

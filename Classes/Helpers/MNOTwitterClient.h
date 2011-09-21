@@ -1,6 +1,6 @@
 //
 //  MNOTwitterClient.h
-//  TwitThis
+//  Notitas
 //
 //  Created by Adrian on 9/11/09.
 //  Copyright 2009 akosma software. All rights reserved.
