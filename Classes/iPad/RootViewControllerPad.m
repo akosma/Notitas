@@ -21,13 +21,13 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, retain) NSMutableArray *noteViews;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic) BOOL locationInformationAvailable;
-@property (nonatomic, retain) NoteThumbnail *currentThumbnail;
+@property (nonatomic, retain) MNONoteThumbnail *currentThumbnail;
 @property (nonatomic, retain) UIAlertView *deleteAllNotesAlertView;
 @property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
 @property (nonatomic, getter = isShowingLocationView) BOOL showingLocationView;
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
 @property (nonatomic, retain) MapControllerPad *map;
-@property (nonatomic, retain) NoteThumbnail *animationThumbnail;
+@property (nonatomic, retain) MNONoteThumbnail *animationThumbnail;
 @property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
 
 - (void)refresh;
@@ -121,7 +121,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.showingLocationView = NO;
     self.showingEditionView = NO;
     self.modalBlockerView.alpha = 0.0;
-    self.animationThumbnail = [[[NoteThumbnail alloc] initWithFrame:CGRectZero] autorelease];
+    self.animationThumbnail = [[[MNONoteThumbnail alloc] initWithFrame:CGRectZero] autorelease];
 
     UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                            action:@selector(dismissBlockerView:)] autorelease];
@@ -275,7 +275,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)drag:(UIPanGestureRecognizer *)recognizer
 {
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    MNONoteThumbnail *thumb = (MNONoteThumbnail *)recognizer.view;
     self.currentThumbnail = thumb;
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
@@ -299,7 +299,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)rotate:(UIRotationGestureRecognizer *)recognizer
 {
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    MNONoteThumbnail *thumb = (MNONoteThumbnail *)recognizer.view;
     self.currentThumbnail = thumb;
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
@@ -325,7 +325,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)tap:(UITapGestureRecognizer *)recognizer
 {
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    MNONoteThumbnail *thumb = (MNONoteThumbnail *)recognizer.view;
     self.currentThumbnail = thumb;
     
     if (recognizer.state == UIGestureRecognizerStateRecognized)
@@ -371,7 +371,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)doubleTap:(UITapGestureRecognizer *)recognizer
 {
-    NoteThumbnail *thumb = (NoteThumbnail *)recognizer.view;
+    MNONoteThumbnail *thumb = (MNONoteThumbnail *)recognizer.view;
     self.currentThumbnail = thumb;
 
     if (recognizer.state == UIGestureRecognizerStateRecognized)
@@ -571,7 +571,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.noteViews = [NSMutableArray array];
     for (Note *note in self.notes)
     {
-        NoteThumbnail *thumb = [[[NoteThumbnail alloc] initWithFrame:DEFAULT_RECT] autorelease];
+        MNONoteThumbnail *thumb = [[[MNONoteThumbnail alloc] initWithFrame:DEFAULT_RECT] autorelease];
         thumb.note = note;
         [thumb refreshDisplay];
         

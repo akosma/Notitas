@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain) Note *currentNote;
 @property (nonatomic, retain) MNONoteEditorController *editor;
-@property (nonatomic, retain) NoteThumbnail *thumbnail;
+@property (nonatomic, retain) MNONoteThumbnail *thumbnail;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) BOOL locationInformationAvailable;
@@ -301,7 +301,7 @@
     CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
     if (self.thumbnail == nil)
     {
-        self.thumbnail = [[[NoteThumbnail alloc] initWithFrame:realFrame] autorelease];
+        self.thumbnail = [[[MNONoteThumbnail alloc] initWithFrame:realFrame] autorelease];
     }
     self.thumbnail.frame = realFrame;
     self.thumbnail.color = self.currentNote.colorCode;

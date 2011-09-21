@@ -89,8 +89,7 @@
 	[UIView commitAnimations];
 }
 
-#pragma mark -
-#pragma mark IBAction methods
+#pragma mark - IBAction methods
 
 - (IBAction)changeFont:(id)sender
 {
@@ -177,8 +176,7 @@
     [sheet release];
 }
 
-#pragma mark -
-#pragma mark UIActionSheetDelegate methods
+#pragma mark - UIActionSheetDelegate methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -269,8 +267,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark MKMapViewDelegate methods
+#pragma mark - MKMapViewDelegate methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
@@ -308,16 +305,14 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-#pragma mark -
-#pragma mark UITextViewDelegate methods
+#pragma mark - UITextViewDelegate methods
 
 - (void)textViewDidChange:(UITextView *)textView
 {
     [self updateLabel];
 }
 
-#pragma mark -
-#pragma mark UIAlertViewDelegate methods
+#pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -344,8 +339,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark MFMailComposeViewControllerDelegate methods
+#pragma mark - MFMailComposeViewControllerDelegate methods
              
 - (void)mailComposeController:(MFMailComposeViewController *)composer 
           didFinishWithResult:(MFMailComposeResult)result 
@@ -354,8 +348,7 @@
     [composer dismissModalViewControllerAnimated:YES];
 }
              
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)disappear
 {

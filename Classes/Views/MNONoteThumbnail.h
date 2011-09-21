@@ -1,5 +1,5 @@
 //
-//  NoteThumbnail.h
+//  MNONoteThumbnail.h
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -15,7 +15,7 @@
 @class Note;
 
 
-@interface NoteThumbnail : UIView 
+@interface MNONoteThumbnail : UIView 
 
 @property (nonatomic, retain) UILabel *summaryLabel;
 @property (nonatomic) FontCode font;

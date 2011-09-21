@@ -1,5 +1,5 @@
 //
-//  NoteCell.m
+//  MNONoteCell.m
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -14,8 +14,8 @@
 
 @interface MNONoteCell ()
 
-@property (nonatomic, retain) NoteThumbnail *leftView;
-@property (nonatomic, retain) NoteThumbnail *rightView;
+@property (nonatomic, retain) MNONoteThumbnail *leftView;
+@property (nonatomic, retain) MNONoteThumbnail *rightView;
 @property (nonatomic) CGRect leftFrame;
 @property (nonatomic) CGRect rightFrame;
 
@@ -39,13 +39,13 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         _leftFrame = CGRectMake(20.0, 20.0, 130.0, 130.0);
-        _leftView = [[NoteThumbnail alloc] initWithFrame:_leftFrame];
+        _leftView = [[MNONoteThumbnail alloc] initWithFrame:_leftFrame];
         _leftView.hidden = YES;
         [_leftView mno_addShadow];
         [self.contentView addSubview:_leftView];
 
         _rightFrame = CGRectMake(170.0, 20.0, 130.0, 130.0);
-        _rightView = [[NoteThumbnail alloc] initWithFrame:_rightFrame];
+        _rightView = [[MNONoteThumbnail alloc] initWithFrame:_rightFrame];
         _rightView.hidden = YES;
         [_rightView mno_addShadow];
         [self.contentView addSubview:_rightView];
@@ -81,19 +81,19 @@
     }
     if (_leftNote == nil)
     {
-        _leftView.hidden = YES;
+        self.leftView.hidden = YES;
     }
     else
     {
         CGAffineTransform trans = CGAffineTransformMakeRotation(_leftNote.angleRadians);
-        _leftView.transform = trans;
-        _leftView.color = _leftNote.colorCode;
-        _leftView.font = _leftNote.fontCode;
+        self.leftView.transform = trans;
+        self.leftView.color = _leftNote.colorCode;
+        self.leftView.font = _leftNote.fontCode;
         
         // This must come last, so that the size calculation
         // of the label inside the thumbnail is done!
-        _leftView.summaryLabel.text = _leftNote.contents;
-        _leftView.hidden = NO;
+        self.leftView.summaryLabel.text = _leftNote.contents;
+        self.leftView.hidden = NO;
     }
 }
 
@@ -111,19 +111,19 @@
     }
     if (_rightNote == nil)
     {
-        _rightView.hidden = YES;
+        self.rightView.hidden = YES;
     }
     else
     {
         CGAffineTransform trans = CGAffineTransformMakeRotation(_rightNote.angleRadians);
-        _rightView.transform = trans;
-        _rightView.color = _rightNote.colorCode;
-        _rightView.font = _rightNote.fontCode;
+        self.rightView.transform = trans;
+        self.rightView.color = _rightNote.colorCode;
+        self.rightView.font = _rightNote.fontCode;
 
         // This must come last, so that the size calculation
         // of the label inside the thumbnail is done!
-        _rightView.summaryLabel.text = _rightNote.contents;
-        _rightView.hidden = NO;
+        self.rightView.summaryLabel.text = _rightNote.contents;
+        self.rightView.hidden = NO;
     }
 }
 
@@ -136,17 +136,17 @@
     if (location.x > 170)
     {
         // Touch on the right side, only if the view is visible
-        if (!_rightView.hidden && [_delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
+        if (!self.rightView.hidden && [self.delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
         {
-            [_delegate noteCell:self didSelectNote:_rightNote atFrame:_rightFrame];
+            [self.delegate noteCell:self didSelectNote:self.rightNote atFrame:self.rightFrame];
         }
     }
     else if (location.x < 150)
     {
         // Touch on the left side
-        if ([_delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
+        if ([self.delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
         {
-            [_delegate noteCell:self didSelectNote:_leftNote atFrame:_leftFrame];
+            [self.delegate noteCell:self didSelectNote:self.leftNote atFrame:self.leftFrame];
         }
     }
 }

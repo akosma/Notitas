@@ -11,8 +11,6 @@
 #import <MapKit/MapKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@class NoteThumbnail;
-
 @interface RootViewControllerPad : UIViewController <UIAlertViewDelegate,
                                                      CLLocationManagerDelegate,
                                                      UITextViewDelegate,

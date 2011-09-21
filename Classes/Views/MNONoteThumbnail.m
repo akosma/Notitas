@@ -1,5 +1,5 @@
 //
-//  NoteThumbnail.m
+//  MNONoteThumbnail.m
 //  Notitas
 //
 //  Created by Adrian on 7/21/09.
@@ -23,7 +23,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 }
 
 
-@interface NoteThumbnail ()
+@interface MNONoteThumbnail ()
 
 @property (nonatomic, retain) CALayer *blueLayer;
 @property (nonatomic, retain) CALayer *redLayer;
@@ -36,7 +36,7 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 @end
 
 
-@implementation NoteThumbnail
+@implementation MNONoteThumbnail
 
 @synthesize font = _font;
 @synthesize color = _color;
