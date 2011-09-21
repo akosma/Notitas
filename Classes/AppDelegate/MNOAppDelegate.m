@@ -8,7 +8,7 @@
 
 #import "MNOAppDelegate.h"
 #import "RootViewController.h"
-#import "Appirater.h"
+#import "MNOExternals.h"
 #import "MNOHelpers.h"
 
 @interface MNOAppDelegate ()

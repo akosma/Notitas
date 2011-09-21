@@ -149,6 +149,7 @@
 		3A7892461426556B004B07F0 /* MapControllerPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapControllerPad.xib; path = Resources/NIBs/iPad/MapControllerPad.xib; sourceTree = "<group>"; };
 		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
 		3A860E361429BD6F00649B27 /* MNOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOAppDelegate.m; sourceTree = "<group>"; };
+		3A860E381429BDF400649B27 /* MNOExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOExternals.h; sourceTree = "<group>"; };
 		3A9BA4B810183B8E006F7A3F /* small_thumbnail0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail0.png; sourceTree = "<group>"; };
 		3A9BA4B910183B8E006F7A3F /* small_thumbnail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail1.png; sourceTree = "<group>"; };
 		3A9BA4BA10183B8E006F7A3F /* small_thumbnail2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_thumbnail2.png; sourceTree = "<group>"; };
@@ -322,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4D6B7B1098280000F3DB45 /* appirater */,
+				3A860E381429BDF400649B27 /* MNOExternals.h */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
