@@ -29,6 +29,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, retain) MNOMapControllerPad *map;
 @property (nonatomic, retain) MNONoteThumbnail *animationThumbnail;
 @property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
+@property (nonatomic) CGPoint handlePointOffset;
 
 - (void)refresh;
 - (Note *)createNote;
@@ -73,6 +74,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize twitterChoiceSheet = _twitterChoiceSheet;
 @synthesize twitterButton = _twitterButton;
 @synthesize mapButton = _mapButton;
+@synthesize handlePointOffset = _handlePointOffset;
 
 - (void)dealloc
 {
@@ -282,15 +284,41 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
+        [thumb mno_removeShadow];
+        CGPoint gestureCenter = [recognizer locationInView:thumb];
+        self.handlePointOffset = CGPointMake(thumb.frame.size.width / 2.0 - gestureCenter.x, 
+                                             thumb.frame.size.height / 2.0 - gestureCenter.y);
+        CGAffineTransform transform = thumb.transform;
+        transform = CGAffineTransformScale(transform, 1.25, 1.25);
+        [UIView animateWithDuration:0.1
+                         animations:^{
+                             thumb.transform = transform;
+                             thumb.alpha = 0.75;
+                         }];
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
-        CGPoint point = [recognizer locationInView:self.holderView];
-        thumb.center = point;
-        thumb.note.position = point;
+        CGPoint gestureLocation = [recognizer locationInView:self.holderView];
+        CGPoint newCenter = CGPointMake(gestureLocation.x + self.handlePointOffset.x, 
+                                        gestureLocation.y + self.handlePointOffset.y);
+        thumb.center = newCenter;
+        thumb.note.position = newCenter;
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
+        CGAffineTransform transform = thumb.transform;
+        transform = CGAffineTransformScale(transform, 0.8, 0.8);
+        [UIView animateWithDuration:0.1 
+                         animations:^{
+                             thumb.transform = transform;
+                             thumb.alpha = 1.0;
+                         }
+                         completion:^(BOOL finished) {
+                             if (finished)
+                             {
+                                 [thumb mno_addShadow];
+                             }
+                         }];
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         [self checkToolbarButtonsEnabled];
