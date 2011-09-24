@@ -284,7 +284,7 @@
     }
     
     MNOColorCode code = self.note.colorCode;
-    NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d.png", code];
+    NSString *imageName = [NSString stringWithFormat:@"small_thumbnail%d", code];
     annotationView.image = [UIImage imageNamed:imageName];
     annotationView.transform = CGAffineTransformMakeRotation(self.note.angleRadians);
     return annotationView;
