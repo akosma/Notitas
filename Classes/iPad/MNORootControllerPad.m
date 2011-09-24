@@ -137,6 +137,14 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                                              selector:@selector(undoManagerDidRedo:) 
                                                  name:NSUndoManagerDidRedoChangeNotification 
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(noteImported:)
+                                                 name:MNOCoreDataManagerNoteImportedNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applicationDidBecomeActive:) 
+                                                 name:UIApplicationDidBecomeActiveNotification 
+                                               object:nil];
 
     [self refresh];
     [self checkToolbarButtonsEnabled];
@@ -595,6 +603,18 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 }
 
 - (void)undoManagerDidRedo:(NSNotification *)notification 
+{
+	[self refresh];
+    [self checkToolbarButtonsEnabled];
+}
+
+- (void)noteImported:(NSNotification *)notification 
+{
+	[self refresh];
+    [self checkToolbarButtonsEnabled];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
 {
 	[self refresh];
     [self checkToolbarButtonsEnabled];

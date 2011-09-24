@@ -8,3 +8,4 @@
 
 extern NSString * const MNOChangeColorNotification;
 extern NSString * const MNOChangeFontNotification;
+extern NSString * const MNOCoreDataManagerNoteImportedNotification;

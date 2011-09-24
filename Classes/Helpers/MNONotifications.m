@@ -10,3 +10,4 @@
 
 NSString * const MNOChangeColorNotification = @"MNOChangeColorNotification";
 NSString * const MNOChangeFontNotification = @"MNOChangeFontNotification";
+NSString * const MNOCoreDataManagerNoteImportedNotification = @"MNOCoreDataManagerNoteImportedNotification";

@@ -143,7 +143,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 {
     Note *note = [self createObjectOfType:@"Note"];
     [note importDataFromDictionary:dict];
+    note.xcoord = [NSNumber numberWithFloat:randomXPosition()];
+    note.ycoord = [NSNumber numberWithFloat:randomYPosition()];
+    note.angle = [NSNumber numberWithDouble:randomAngle()];
     [self save];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MNOCoreDataManagerNoteImportedNotification 
+                                                        object:self];
 }
 
 #pragma mark - Overridden methods
