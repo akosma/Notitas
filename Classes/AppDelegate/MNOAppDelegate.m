@@ -34,12 +34,24 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {
     [Appirater appLaunched];
     
     self.window.rootViewController = self.rootController;
     [self.window makeKeyAndVisible];
+
+    // Check for 'notita' files opened from other applications
+    NSURL *openedURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    if (openedURL != nil)
+    {
+        if ([openedURL isFileURL])
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
@@ -58,6 +70,12 @@
             return YES;
         }
         return NO;
+    }
+    else if ([url isFileURL])
+    {
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL:url];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] createNoteFromDictionary:dict];
+        return YES;
     }
     return NO;
 }

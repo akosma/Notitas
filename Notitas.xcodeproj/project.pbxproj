@@ -351,6 +351,7 @@
 		3A860EDD1429D1DF00649B27 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
 				3A860EE31429D1E000649B27 /* Entitlements.entitlements */,
 				3A860F171429D1E000649B27 /* Settings.bundle */,
 				3A860EDE1429D1E000649B27 /* Data */,
@@ -475,7 +476,6 @@
 		3AC5BF901015986900D062A4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107310486CEB800E47090 /* Notitas-Info.plist */,
 				3AC5BF911015986900D062A4 /* AppDelegate */,
 				3A860E391429BF1000649B27 /* Controllers */,
 				3A860E411429BF1000649B27 /* Views */,

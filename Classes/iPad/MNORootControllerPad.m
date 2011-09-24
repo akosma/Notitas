@@ -217,7 +217,17 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (IBAction)sendViaEmail:(id)sender
 {
+    NSDictionary *dict = [self.currentThumbnail.note exportAsDictionary];
+    NSError *error = nil;
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:dict 
+                                                              format:NSPropertyListXMLFormat_v1_0 
+                                                             options:0
+                                                               error:&error];
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@.notita", self.currentThumbnail.note.filename];
+    
     MFMailComposeViewController *composer = [[[MFMailComposeViewController alloc] init] autorelease];
+    [composer addAttachmentData:data mimeType:@"application/octet-stream" fileName:fileName];
     composer.modalPresentationStyle = UIModalPresentationFormSheet;
     composer.mailComposeDelegate = self;
     

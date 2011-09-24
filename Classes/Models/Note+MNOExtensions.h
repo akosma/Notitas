@@ -21,11 +21,15 @@
 @property (nonatomic, readonly) NSString *timeString;
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat scale;
+@property (nonatomic, readonly) NSString *filename;
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 - (NSString *)subtitle;
 - (NSString *)title;
 
 - (CGRect)frameForWidth:(CGFloat)width;
+
+- (void)importDataFromDictionary:(NSDictionary *)dict;
+- (NSDictionary *)exportAsDictionary;
 
 @end

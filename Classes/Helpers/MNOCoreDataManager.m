@@ -139,6 +139,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     [self.managedObjectContext.undoManager endUndoGrouping];
 }
 
+- (void)createNoteFromDictionary:(NSDictionary *)dict
+{
+    Note *note = [self createObjectOfType:@"Note"];
+    [note importDataFromDictionary:dict];
+    [self save];
+}
+
 #pragma mark - Overridden methods
 
 - (void)save

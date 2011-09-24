@@ -8,6 +8,19 @@
 
 #import "Note+MNOExtensions.h"
 
+static NSString *ANGLE_KEY = @"angle";
+static NSString *COLOR_KEY = @"color";
+static NSString *CONTENTS_KEY = @"contents";
+static NSString *FONT_FAMILY_KEY = @"fontFamily";
+static NSString *FONT_SIZE_KEY = @"fontSize";
+static NSString *HAS_LOCATION_KEY = @"hasLocation";
+static NSString *LATITUDE_KEY = @"latitude";
+static NSString *LONGITUDE_KEY = @"longitude";
+static NSString *SIZE_KEY = @"size";
+static NSString *X_COORD_KEY = @"xcoord";
+static NSString *Y_COORD_KEY = @"ycoord";
+static NSInteger FILENAME_LENGTH = 15;
+
 @implementation Note (MNOExtensions)
 
 @dynamic colorCode;
@@ -17,8 +30,11 @@
 @dynamic timeString;
 @dynamic position;
 @dynamic scale;
+@dynamic filename;
 
 @dynamic coordinate;
+
+#pragma mark - Properties
 
 - (MNOColorCode)colorCode
 {
@@ -88,14 +104,22 @@
     self.size = [NSNumber numberWithFloat:scale];
 }
 
-- (CGRect)frameForWidth:(CGFloat)width
+- (NSString *)filename
 {
-    CGPoint position = self.position;
-    CGFloat halfWidth = width / 2.0;
-    CGRect rect = CGRectMake(position.x - halfWidth, 
-                             position.y - halfWidth, width, width);
-    return rect;
+    NSString *filename = [self.contents stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    filename = [filename stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if ([filename length] == 0)
+    {
+        filename = @"Notita";
+    }
+    else if ([filename length] > FILENAME_LENGTH)
+    {
+        filename = [filename substringToIndex:FILENAME_LENGTH];
+    }
+    return [filename stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
+
+#pragma mark - MKAnnotation protocol
 
 - (CLLocationCoordinate2D)coordinate
 {
@@ -111,7 +135,32 @@
 
 - (NSString *)title
 {
-    return self.contents;
+    return self.filename;
+}
+
+#pragma mark - Public methods
+
+- (CGRect)frameForWidth:(CGFloat)width
+{
+    CGPoint position = self.position;
+    CGFloat halfWidth = width / 2.0;
+    CGRect rect = CGRectMake(position.x - halfWidth, 
+                             position.y - halfWidth, width, width);
+    return rect;
+}
+
+- (NSDictionary *)exportAsDictionary
+{
+    NSArray *keys = [NSArray arrayWithObjects:ANGLE_KEY, COLOR_KEY, CONTENTS_KEY, 
+                     FONT_FAMILY_KEY, FONT_SIZE_KEY, HAS_LOCATION_KEY, LATITUDE_KEY, 
+                     LONGITUDE_KEY, SIZE_KEY, X_COORD_KEY, Y_COORD_KEY, nil];
+    NSDictionary *export = [self dictionaryWithValuesForKeys:keys];
+    return export;
+}
+
+- (void)importDataFromDictionary:(NSDictionary *)dict
+{
+    [self setValuesForKeysWithDictionary:dict];
 }
 
 @end

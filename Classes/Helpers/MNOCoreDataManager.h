@@ -26,5 +26,6 @@
 - (void)beginUndoGrouping;
 - (void)endUndoGrouping;
 - (NSArray *)allNotes;
+- (void)createNoteFromDictionary:(NSDictionary *)dict;
 
 @end
