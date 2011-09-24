@@ -193,8 +193,18 @@
         if (buttonIndex == 0)
         {
             // E-mail
+            NSDictionary *dict = [self.note exportAsDictionary];
+            NSError *error = nil;
+            NSData *data = [NSPropertyListSerialization dataWithPropertyList:dict 
+                                                                      format:NSPropertyListXMLFormat_v1_0 
+                                                                     options:0
+                                                                       error:&error];
+            
+            NSString *fileName = [NSString stringWithFormat:@"%@.notita", self.note.filename];
+
             MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
             composer.mailComposeDelegate = self;
+            [composer addAttachmentData:data mimeType:@"application/octet-stream" fileName:fileName];
 
             NSMutableString *message = [[NSMutableString alloc] init];
             if (self.note.contents == nil || [self.note.contents length] == 0)

@@ -102,7 +102,15 @@
                                              selector:@selector(undoManagerDidRedo:) 
                                                  name:NSUndoManagerDidRedoChangeNotification 
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(noteImported:)
+                                                 name:MNOCoreDataManagerNoteImportedNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(applicationDidBecomeActive:) 
+                                                 name:UIApplicationDidBecomeActiveNotification 
+                                               object:nil];
+
     [self checkTrashIconEnabled];
     
     self.locationManager = [[[CLLocationManager alloc] init] autorelease];
@@ -431,6 +439,18 @@
 }
 
 - (void)undoManagerDidRedo:(NSNotification *)notification 
+{
+	[self.tableView reloadData];
+    [self checkTrashIconEnabled];
+}
+
+- (void)noteImported:(NSNotification *)notification
+{
+	[self.tableView reloadData];
+    [self checkTrashIconEnabled];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
 {
 	[self.tableView reloadData];
     [self checkTrashIconEnabled];
