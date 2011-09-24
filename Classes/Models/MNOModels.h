@@ -7,4 +7,5 @@
 //
 
 #import "Note.h"
+#import "MNOBoard.h"
 #import "Note+MNOExtensions.h"

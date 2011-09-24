@@ -85,7 +85,8 @@
 		3A860F501429D1E000649B27 /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F191429D1E000649B27 /* Erase.caf */; };
 		3A860F511429D1E000649B27 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F1B1429D1E000649B27 /* Localizable.strings */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
-		3AA7544710179F6E007B3E5C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7544610179F6E007B3E5C /* Note.m */; };
+		3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2056F142E2E8100DF256C /* MNOBoard.m */; };
+		3AC20573142E2E8200DF256C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC20572142E2E8200DF256C /* Note.m */; };
 		3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3F63F142391B600812023 /* MNOSoundManager.m */; };
 /* End PBXBuildFile section */
 
@@ -198,8 +199,11 @@
 		3A860F1E1429D1E000649B27 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1F1429D1E000649B27 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		3AA7544510179F6E007B3E5C /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		3AA7544610179F6E007B3E5C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notitas 3.xcdatamodel"; sourceTree = "<group>"; };
+		3AC2056E142E2E8100DF256C /* MNOBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOBoard.h; sourceTree = "<group>"; };
+		3AC2056F142E2E8100DF256C /* MNOBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOBoard.m; sourceTree = "<group>"; };
+		3AC20571142E2E8200DF256C /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		3AC20572142E2E8200DF256C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		3AD3F63E142391B600812023 /* MNOSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOSoundManager.h; sourceTree = "<group>"; };
 		3AD3F63F142391B600812023 /* MNOSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOSoundManager.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Notitas-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Notitas-Info.plist"; path = "../Notitas-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -517,8 +521,10 @@
 			isa = PBXGroup;
 			children = (
 				3A860E541429C99100649B27 /* MNOModels.h */,
-				3AA7544510179F6E007B3E5C /* Note.h */,
-				3AA7544610179F6E007B3E5C /* Note.m */,
+				3AC20571142E2E8200DF256C /* Note.h */,
+				3AC20572142E2E8200DF256C /* Note.m */,
+				3AC2056E142E2E8100DF256C /* MNOBoard.h */,
+				3AC2056F142E2E8100DF256C /* MNOBoard.m */,
 				3A860E551429C9B600649B27 /* Note+MNOExtensions.h */,
 				3A860E561429C9B600649B27 /* Note+MNOExtensions.m */,
 			);
@@ -637,7 +643,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3AA7544710179F6E007B3E5C /* Note.m in Sources */,
 				3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */,
 				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
@@ -655,6 +660,8 @@
 				3A860E641429CF3900649B27 /* MNOMapControllerPad.m in Sources */,
 				3A860E651429CF3900649B27 /* MNORootControllerPad.m in Sources */,
 				3A860F201429D1E000649B27 /* Notitas.xcdatamodeld in Sources */,
+				3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */,
+				3AC20573142E2E8200DF256C /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,10 +781,11 @@
 		3A860EDF1429D1E000649B27 /* Notitas.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */,
 				3A860EE01429D1E000649B27 /* Notitas 2.xcdatamodel */,
 				3A860EE11429D1E000649B27 /* Notitas.xcdatamodel */,
 			);
-			currentVersion = 3A860EE01429D1E000649B27 /* Notitas 2.xcdatamodel */;
+			currentVersion = 3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */;
 			path = Notitas.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

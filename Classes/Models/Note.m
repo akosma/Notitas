@@ -1,26 +1,30 @@
-// 
+//
 //  Note.m
 //  Notitas
 //
-//  Created by Adrian on 7/22/09.
-//  Copyright 2009 akosma software. All rights reserved.
+//  Created by Adrian on 9/24/11.
+//  Copyright (c) 2011 akosma software. All rights reserved.
 //
 
 #import "Note.h"
+#import "MNOBoard.h"
 
-@implementation Note 
+
+@implementation Note
 
 @dynamic angle;
-@dynamic fontSize;
-@dynamic longitude;
 @dynamic color;
-@dynamic timeStamp;
-@dynamic latitude;
 @dynamic contents;
 @dynamic fontFamily;
+@dynamic fontSize;
 @dynamic hasLocation;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic size;
+@dynamic timeStamp;
 @dynamic xcoord;
 @dynamic ycoord;
-@dynamic size;
+@dynamic lastModificationTime;
+@dynamic board;
 
 @end
