@@ -1,44 +1,44 @@
 /* To be used when en empty note is sent via e-mail */
-"(empty note)" = "(nota vacía)";
+"EMPTY_NOTE" = "(nota vacía)";
 
 /* Some marketing here */
-"\n\nSent from Notitas by akosma - http://akosma.com/" = "\n\nEnviado desde Notitas por akosma - http://muchasnotitas.com/";
+"SENT_BY_NOTITAS" = "\n\nEnviado desde Notitas por akosma - http://muchasnotitas.com/";
 
 /* Title of the 'trash' dialog of the editor controller */
-"Are you sure?" = "Está seguro?";
+"ARE_YOU_SURE" = "Está seguro?";
 
 /* The 'cancel' word */
-"Cancel" = "Cancelar";
+"CANCEL" = "Cancelar";
 
 /* Message created by the 'location' button */
-"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f" = "Posición actual:\n\nLatitud: %1$.3f\nLongitud: %2$.3f";
+"CURRENT_LOCATION" = "Posición actual:\n\nLatitud: %1$.3f\nLongitud: %2$.3f";
 
 /* Title of the e-mail sent by the application */
-"Note sent from Notitas by akosma" = "Nota enviada desde Notitas por akosma";
+"EMAIL_SUBJECT" = "Nota enviada desde Notitas por akosma";
 
 /* Copyright text */
-"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas por akosma\nhttp://muchasnotitas.com/\nCopyright 2009 © akosma software\nTodos Derechos Reservados";
+"COPYRIGHT_TEXT" = "Notitas por akosma\nhttp://muchasnotitas.com/\nCopyright 2009 - 2011 © akosma software\nTodos Derechos Reservados";
 
 /* Button to send notes via Twitter */
-"Send via Twitter" = "Enviar por Twitter";
+"SEND_VIA_TWITTER" = "Enviar por Twitter";
 
 /* Title of the 'remove all notes' dialog */
-"Remove all the notes?" = "Borrar todas las notas?";
+"REMOVE_ALL_NOTES_QUESTION" = "Borrar todas las notas?";
 
 /* Button to send notes via e-mail */
-"Send via e-mail" = "Enviar por e-mail";
+"SEND_VIA_EMAIL" = "Enviar por e-mail";
 
 /* Explanation of the 'trash' dialog of the editor controller */
-"This action cannot be undone." = "Esta acción se puede revertir.";
+"UNDO_POSSIBLE" = "Esta acción se puede revertir.";
 
 /* Button to view the note location */
-"View location" = "Ver posición";
+"VIEW_LOCATION" = "Ver posición";
 
 /* Warning message of the 'remove all notes' dialog */
-"You will remove all the notes!\nThis action cannot be undone." = "Va a borrar todas las notas!\nEsta acción se puede revertir.";
+"ALL_NOTES_UNDO_POSSIBLE" = "Va a borrar todas las notas!\nEsta acción se puede revertir.";
 
 /* Title of the map view */
-"Map" = "Mapa";
+"MAP_TITLE" = "Mapa";
 
 /* The 'characters' word */
-"characters" = "caracteres";
+"CHARACTERS_WORD" = "caracteres";

@@ -181,7 +181,7 @@
         Note *newNote = [self createNote];
         CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
         CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
-        NSString *template = NSLocalizedString(@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", @"Message created by the 'location' button");
+        NSString *template = NSLocalizedString(@"CURRENT_LOCATION", @"Message created by the 'location' button");
         newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
 
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
@@ -193,9 +193,9 @@
 
 - (IBAction)removeAllNotes:(id)sender
 {
-    NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
-    NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
-    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+    NSString *title = NSLocalizedString(@"REMOVE_ALL_NOTES_QUESTION", @"Title of the 'remove all notes' dialog");
+    NSString *message = NSLocalizedString(@"ALL_NOTES_UNDO_POSSIBLE", @"Warning message of the 'remove all notes' dialog");
+    NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:self
@@ -209,7 +209,7 @@
 {
 	Note *newNote = [self createNote];
     
-    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009-2011 © akosma software\nAll Rights Reserved", @"Copyright text");
+    NSString *copyright = NSLocalizedString(@"COPYRIGHT_TEXT", @"Copyright text");
     newNote.contents = copyright;
 
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];

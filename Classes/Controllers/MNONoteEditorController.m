@@ -124,9 +124,9 @@
 
 - (IBAction)trash:(id)sender
 {
-    NSString *title = NSLocalizedString(@"Are you sure?", @"Title of the 'trash' dialog of the editor controller");
-    NSString *message = NSLocalizedString(@"This action cannot be undone.", @"Explanation of the 'trash' dialog of the editor controller");
-    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+    NSString *title = NSLocalizedString(@"ARE_YOU_SURE", @"Title of the 'trash' dialog of the editor controller");
+    NSString *message = NSLocalizedString(@"UNDO_POSSIBLE", @"Explanation of the 'trash' dialog of the editor controller");
+    NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:self
@@ -147,10 +147,10 @@
                                          destructiveButtonTitle:nil 
                                               otherButtonTitles:nil];
 
-    NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
-    NSString *twitterrifficText = NSLocalizedString(@"Send via Twitter", @"Button to send notes via Twitter");
-    NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
-    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+    NSString *emailText = NSLocalizedString(@"SEND_VIA_EMAIL", @"Button to send notes via e-mail");
+    NSString *twitterrifficText = NSLocalizedString(@"SEND_VIA_TWITTER", @"Button to send notes via Twitter");
+    NSString *locationText = NSLocalizedString(@"VIEW_LOCATION", @"Button to view the note location");
+    NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
     
     [sheet addButtonWithTitle:emailText];
     NSInteger sheetButtonCount = 1;
@@ -209,16 +209,16 @@
             NSMutableString *message = [[NSMutableString alloc] init];
             if (self.note.contents == nil || [self.note.contents length] == 0)
             {
-                NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+                NSString *emptyNoteText = NSLocalizedString(@"EMPTY_NOTE", @"To be used when en empty note is sent via e-mail");
                 [message appendString:emptyNoteText];
             }
             else
             {
                 [message appendString:self.note.contents];
             }
-            NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+            NSString *sentFromText = NSLocalizedString(@"SENT_BY_NOTITAS", @"Some marketing here");
             [message appendString:sentFromText];
-            NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+            NSString *subject = NSLocalizedString(@"EMAIL_SUBJECT", @"Title of the e-mail sent by the application");
             [composer setSubject:subject];
             [composer setMessageBody:message isHTML:NO];
 
@@ -242,7 +242,7 @@
                 {
                     // This path means that a client has been installed in the device,
                     // but the current value in the preferences is "None" or other device not installed.
-                    NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+                    NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
                     self.twitterChoiceSheet = [[[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
                                                                            delegate:self
                                                                   cancelButtonTitle:nil
@@ -372,7 +372,7 @@
 
 - (void)updateLabel
 {
-    NSString *characters = NSLocalizedString(@"characters", @"The 'characters' word");
+    NSString *characters = NSLocalizedString(@"CHARACTERS_WORD", @"The 'characters' word");
     self.timeStampLabel.text = [NSString stringWithFormat:@"%d %@ - %@", [self.textView.text length], 
                                 characters, 
                                 self.note.timeString];

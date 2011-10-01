@@ -1,44 +1,44 @@
 /* To be used when en empty note is sent via e-mail */
-"(empty note)" = "(Keine Notiz)";
+"EMPTY_NOTE" = "(Keine Notiz)";
 
 /* Some marketing here */
-"\n\nSent from Notitas by akosma - http://akosma.com/" = "\n\nVon Notitas gesendet - http://muchasnotitas.com/";
+"SENT_BY_NOTITAS" = "\n\nVon Notitas gesendet - http://muchasnotitas.com/";
 
 /* Title of the 'trash' dialog of the editor controller */
-"Are you sure?" = "Sind Sie sicher?";
+"ARE_YOU_SURE" = "Sind Sie sicher?";
 
 /* The 'cancel' word */
-"Cancel" = "Abbrechen";
+"CANCEL" = "Abbrechen";
 
 /* Message created by the 'location' button */
-"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f" = "Aktueller Ort:\n\nLat.: %1$.3f\nlong.: %2$.3f";
+"CURRENT_LOCATION" = "Aktueller Ort:\n\nLat.: %1$.3f\nlong.: %2$.3f";
 
 /* Title of the e-mail sent by the application */
-"Note sent from Notitas by akosma" = "Von Notitas by akosma gesendet";
+"EMAIL_SUBJECT" = "Von Notitas by akosma gesendet";
 
 /* Copyright text */
-"Notitas by akosma\nhttp://akosma.com\nCopyright 2009 © akosma software\nAll Rights Reserved" = "Notitas by akosma\nhttp://muchasnotitas.com/\nCopyright 2009 © akosma software\nAll Rights Reserved";
+"COPYRIGHT_TEXT" = "Notitas by akosma\nhttp://muchasnotitas.com/\nCopyright 2009 - 2011 © akosma software\nAll Rights Reserved";
 
 /* Button to send notes via Twitter */
-"Send via Twitter" = "Per Twitter senden";
+"SEND_VIA_TWITTER" = "Per Twitter senden";
 
 /* Title of the 'remove all notes' dialog */
-"Remove all the notes?" = "Alle Notizen entfernen?";
+"REMOVE_ALL_NOTES_QUESTION" = "Alle Notizen entfernen?";
 
 /* Button to send notes via e-mail */
-"Send via e-mail" = "Per E-Mail senden";
+"SEND_VIA_EMAIL" = "Per E-Mail senden";
 
 /* Explanation of the 'trash' dialog of the editor controller */
-"This action cannot be undone." = "Dieser Vorgang kann wiederrufen werden.";
+"UNDO_POSSIBLE" = "Dieser Vorgang kann wiederrufen werden.";
 
 /* Button to view the note location */
-"View location" = "Ort anzeigen";
+"VIEW_LOCATION" = "Ort anzeigen";
 
 /* Warning message of the 'remove all notes' dialog */
-"You will remove all the notes!\nThis action cannot be undone." = "Hiermit werden alle Notizen gelöscht!\nDieser Vorgang kann wiederrufen werden.";
+"ALL_NOTES_UNDO_POSSIBLE" = "Hiermit werden alle Notizen gelöscht!\nDieser Vorgang kann wiederrufen werden.";
 
 /* Title of the map view */
-"Map" = "Karte";
+"MAP_TITLE" = "Karte";
 
 /* The 'characters' word, showing the length of a word */
-"characters" = "Zeichen";
+"CHARACTERS_WORD" = "Zeichen";

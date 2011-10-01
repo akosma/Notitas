@@ -196,9 +196,9 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 {
     if (self.deleteNoteAlertView == nil)
     {
-        NSString *title = NSLocalizedString(@"Are you sure?", @"Title of the 'trash' dialog of the editor controller");
-        NSString *message = NSLocalizedString(@"This action cannot be undone.", @"Explanation of the 'trash' dialog of the editor controller");
-        NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+        NSString *title = NSLocalizedString(@"ARE_YOU_SURE", @"Title of the 'trash' dialog of the editor controller");
+        NSString *message = NSLocalizedString(@"UNDO_POSSIBLE", @"Explanation of the 'trash' dialog of the editor controller");
+        NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
         self.deleteNoteAlertView = [[[UIAlertView alloc] initWithTitle:title
                                                                message:message
                                                               delegate:self
@@ -248,16 +248,16 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     NSMutableString *message = [NSMutableString string];
     if (self.currentThumbnail.note.contents == nil || [self.currentThumbnail.note.contents length] == 0)
     {
-        NSString *emptyNoteText = NSLocalizedString(@"(empty note)", @"To be used when en empty note is sent via e-mail");
+        NSString *emptyNoteText = NSLocalizedString(@"EMPTY_NOTE", @"To be used when en empty note is sent via e-mail");
         [message appendString:emptyNoteText];
     }
     else
     {
         [message appendString:self.currentThumbnail.note.contents];
     }
-    NSString *sentFromText = NSLocalizedString(@"\n\nSent from Notitas by akosma - http://akosma.com/", @"Some marketing here");
+    NSString *sentFromText = NSLocalizedString(@"SENT_BY_NOTITAS", @"Some marketing here");
     [message appendString:sentFromText];
-    NSString *subject = NSLocalizedString(@"Note sent from Notitas by akosma", @"Title of the e-mail sent by the application");
+    NSString *subject = NSLocalizedString(@"EMAIL_SUBJECT", @"Title of the e-mail sent by the application");
     [composer setSubject:subject];
     [composer setMessageBody:message isHTML:NO];
     [self presentModalViewController:composer animated:YES];
@@ -381,9 +381,9 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         
-        NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
-        NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
-        NSString *twitterText = NSLocalizedString(@"Send via Twitter", @"Button to send notes via Twitter");
+        NSString *locationText = NSLocalizedString(@"VIEW_LOCATION", @"Button to view the note location");
+        NSString *emailText = NSLocalizedString(@"SEND_VIA_EMAIL", @"Button to send notes via e-mail");
+        NSString *twitterText = NSLocalizedString(@"SEND_VIA_TWITTER", @"Button to send notes via Twitter");
         NSMutableArray *items = [NSMutableArray array];
         BOOL locationAvailable = [thumb.note.hasLocation boolValue];
         if (locationAvailable)
@@ -626,7 +626,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         Note *newNote = [self createNote];
         CLLocationDegrees latitude = _locationManager.location.coordinate.latitude;
         CLLocationDegrees longitude = _locationManager.location.coordinate.longitude;
-        NSString *template = NSLocalizedString(@"Current location:\n\nLatitude: %1.3f\nLongitude: %1.3f", @"Message created by the 'location' button");
+        NSString *template = NSLocalizedString(@"CURRENT_LOCATION", @"Message created by the 'location' button");
         newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
         
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
@@ -641,9 +641,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     if (self.deleteAllNotesAlertView == nil)
     {
-        NSString *title = NSLocalizedString(@"Remove all the notes?", @"Title of the 'remove all notes' dialog");
-        NSString *message = NSLocalizedString(@"You will remove all the notes!\nThis action cannot be undone.", @"Warning message of the 'remove all notes' dialog");
-        NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+        NSString *title = NSLocalizedString(@"REMOVE_ALL_NOTES_QUESTION", @"Title of the 'remove all notes' dialog");
+        NSString *message = NSLocalizedString(@"ALL_NOTES_UNDO_POSSIBLE", @"Warning message of the 'remove all notes' dialog");
+        NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
         self.deleteAllNotesAlertView = [[[UIAlertView alloc] initWithTitle:title
                                                                    message:message
                                                                   delegate:self
@@ -658,7 +658,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 	Note *newNote = [self createNote];
     
-    NSString *copyright = NSLocalizedString(@"Notitas by akosma\nhttp://akosma.com\nCopyright 2009-2011 © akosma software\nAll Rights Reserved", @"Copyright text");
+    NSString *copyright = NSLocalizedString(@"COPYRIGHT_TEXT", @"Copyright text");
     newNote.contents = copyright;
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
@@ -1026,7 +1026,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     {
         // This path means that a client has been installed in the device,
         // but the current value in the preferences is "None" or other device not installed.
-        NSString *cancelText = NSLocalizedString(@"Cancel", @"The 'cancel' word");
+        NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
         self.twitterChoiceSheet = [[[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
                                                                delegate:self
                                                       cancelButtonTitle:nil
