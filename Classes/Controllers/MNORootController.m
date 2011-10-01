@@ -336,6 +336,12 @@
                          CGAffineTransform rotation = CGAffineTransformRotate(scale, -note.angleRadians);
                          self.thumbnail.transform = rotation;
                          self.editor.view.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished)
+                         {
+                             self.editing = YES;
+                         }
                      }];
 }
 
@@ -357,6 +363,7 @@
                          self.thumbnail.transform = CGAffineTransformIdentity;
                          [self.thumbnail removeFromSuperview];
                          [self.editor.view removeFromSuperview];
+                         self.editing = NO;
                      }];
 
     [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
@@ -430,7 +437,7 @@
     }
 }
 
-#pragma mark - Undo support
+#pragma mark - Notification handlers
 
 - (void)undoManagerDidUndo:(NSNotification *)notification 
 {
@@ -452,8 +459,11 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-	[self.tableView reloadData];
-    [self checkTrashIconEnabled];
+    if (!self.editing)
+    {
+        [self.tableView reloadData];
+        [self checkTrashIconEnabled];
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate methods
