@@ -56,7 +56,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     if (self) 
     {
         NSUndoManager *undoManager = [[[NSUndoManager alloc] init] autorelease];
-        [undoManager setLevelsOfUndo:10];
+        [undoManager setLevelsOfUndo:30];
         self.managedObjectContext.undoManager = undoManager;
     }
     return self;
