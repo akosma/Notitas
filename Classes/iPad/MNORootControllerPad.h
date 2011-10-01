@@ -34,6 +34,8 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *editingToolbar;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *mailButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *twitterButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *gridButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *stackButton;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

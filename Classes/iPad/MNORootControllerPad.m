@@ -79,6 +79,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize handlePointOffset = _handlePointOffset;
 @synthesize newlyCreatedNoteThumbnail = _newlyCreatedNoteThumbnail;
 @synthesize newlyCreatedNote = _newlyCreatedNote;
+@synthesize gridButton = _gridButton;
+@synthesize stackButton = _stackButton;
 
 - (void)dealloc
 {
@@ -106,6 +108,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [_animationThumbnail release];
     [_twitterChoiceSheet release];
     [_twitterButton release];
+    [_stackButton release];
+    [_gridButton release];
     _newlyCreatedNoteThumbnail = nil;
     _newlyCreatedNote = nil;
     [super dealloc];
@@ -786,8 +790,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (void)checkToolbarButtonsEnabled
 {
-    self.trashButton.enabled = ([self.notes count] > 0);
-    self.mapButton.enabled = ([self.notes count] > 0);
+    BOOL moreThanOneNote = ([self.notes count] > 0);
+    self.trashButton.enabled = moreThanOneNote;
+    self.mapButton.enabled = moreThanOneNote;
+    self.stackButton.enabled = moreThanOneNote;
+    self.gridButton.enabled = moreThanOneNote;
     self.undoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canUndo];
     self.redoButton.enabled = [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] canRedo];
 }

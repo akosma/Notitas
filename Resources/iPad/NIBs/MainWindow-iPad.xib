@@ -701,6 +701,22 @@
 					</object>
 					<int key="connectionID">143</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">stackButton</string>
+						<reference key="source" ref="884716538"/>
+						<reference key="destination" ref="1073701422"/>
+					</object>
+					<int key="connectionID">144</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">gridButton</string>
+						<reference key="source" ref="884716538"/>
+						<reference key="destination" ref="633189909"/>
+					</object>
+					<int key="connectionID">145</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -985,7 +1001,7 @@
 						<int key="objectID">135</int>
 						<reference key="object" ref="633189909"/>
 						<reference key="parent" ref="1060554267"/>
-						<string key="objectName">Bar Button Item - order</string>
+						<string key="objectName">Bar Button Item - grid</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">138</int>
@@ -1129,7 +1145,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">143</int>
+			<int key="maxID">145</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1307,6 +1323,7 @@
 							<string>auxiliaryView</string>
 							<string>editingToolbar</string>
 							<string>editorView</string>
+							<string>gridButton</string>
 							<string>holderView</string>
 							<string>locationButton</string>
 							<string>mailButton</string>
@@ -1315,6 +1332,7 @@
 							<string>modalBlockerView</string>
 							<string>redoButton</string>
 							<string>scrollView</string>
+							<string>stackButton</string>
 							<string>textView</string>
 							<string>trashButton</string>
 							<string>twitterButton</string>
@@ -1325,6 +1343,7 @@
 							<string>UIView</string>
 							<string>UIToolbar</string>
 							<string>UIView</string>
+							<string>UIBarButtonItem</string>
 							<string>UIView</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
@@ -1333,6 +1352,7 @@
 							<string>UIView</string>
 							<string>UIBarButtonItem</string>
 							<string>UIScrollView</string>
+							<string>UIBarButtonItem</string>
 							<string>UITextView</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
@@ -1346,6 +1366,7 @@
 							<string>auxiliaryView</string>
 							<string>editingToolbar</string>
 							<string>editorView</string>
+							<string>gridButton</string>
 							<string>holderView</string>
 							<string>locationButton</string>
 							<string>mailButton</string>
@@ -1354,6 +1375,7 @@
 							<string>modalBlockerView</string>
 							<string>redoButton</string>
 							<string>scrollView</string>
+							<string>stackButton</string>
 							<string>textView</string>
 							<string>trashButton</string>
 							<string>twitterButton</string>
@@ -1372,6 +1394,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">editorView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">gridButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">holderView</string>
@@ -1404,6 +1430,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>
 								<string key="candidateClassName">UIScrollView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">stackButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">textView</string>
