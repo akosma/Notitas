@@ -16,7 +16,8 @@
                                                     UITextViewDelegate,
                                                     MKMapViewDelegate,
                                                     MFMailComposeViewControllerDelegate,
-                                                    UIActionSheetDelegate>
+                                                    UIActionSheetDelegate,
+                                                    UIGestureRecognizerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;

@@ -300,20 +300,15 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
+        self.scrollView.scrollEnabled = NO;
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         [thumb mno_removeShadow];
         thumb.note.lastModificationTime = [NSDate date];
+        thumb.alpha = 0.75;
         CGPoint gestureCenter = [recognizer locationInView:thumb];
         self.handlePointOffset = CGPointMake(thumb.frame.size.width / 2.0 - gestureCenter.x, 
                                              thumb.frame.size.height / 2.0 - gestureCenter.y);
-        CGAffineTransform transform = thumb.transform;
-        transform = CGAffineTransformScale(transform, 1.25, 1.25);
-        [UIView animateWithDuration:0.1
-                         animations:^{
-                             thumb.transform = transform;
-                             thumb.alpha = 0.75;
-                         }];
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
     {
@@ -326,19 +321,9 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     else if (recognizer.state == UIGestureRecognizerStateEnded || 
              recognizer.state == UIGestureRecognizerStateCancelled)
     {
-        CGAffineTransform transform = thumb.transform;
-        transform = CGAffineTransformScale(transform, 0.8, 0.8);
-        [UIView animateWithDuration:0.1 
-                         animations:^{
-                             thumb.transform = transform;
-                             thumb.alpha = 1.0;
-                         }
-                         completion:^(BOOL finished) {
-                             if (finished)
-                             {
-                                 [thumb mno_addShadow];
-                             }
-                         }];
+        self.scrollView.scrollEnabled = YES;
+        thumb.alpha = 1.0;
+        [thumb mno_addShadow];
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         [self checkToolbarButtonsEnabled];
@@ -352,6 +337,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
+        self.scrollView.scrollEnabled = NO;
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         thumb.note.lastModificationTime = [NSDate date];
@@ -370,6 +356,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
         [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         [self checkToolbarButtonsEnabled];
+        self.scrollView.scrollEnabled = YES;
     }
 }
 
@@ -495,6 +482,14 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         
         self.twitterChoiceSheet = nil;
     }
+}
+
+#pragma mark - UIGestureRecognizerDelegate methods
+
+-                          (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 #pragma mark - Public methods
@@ -650,8 +645,12 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         
         UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                action:@selector(drag:)] autorelease];
+        pan.delegate = self;
+        
         UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
                                                                                               action:@selector(rotate:)] autorelease];
+        rotation.delegate = self;
+
         UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                                action:@selector(tap:)] autorelease];
         UITapGestureRecognizer *doubleTap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
