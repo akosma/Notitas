@@ -6,6 +6,26 @@
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>notitas_appicon_320x320.png</string>
+				<string>notitas_appicon_64x64.png</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Notitas File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.akosma.Notitas</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -41,7 +61,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -79,26 +99,6 @@
 				<key>public.filename-extension</key>
 				<string>notita</string>
 			</dict>
-		</dict>
-	</array>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>notitas_appicon_320x320.png</string>
-				<string>notitas_appicon_64x64.png</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>Notitas File</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.akosma.Notitas</string>
-			</array>
 		</dict>
 	</array>
 </dict>

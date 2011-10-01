@@ -322,7 +322,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         thumb.center = newCenter;
         thumb.note.position = newCenter;
     }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    else if (recognizer.state == UIGestureRecognizerStateEnded || 
+             recognizer.state == UIGestureRecognizerStateCancelled)
     {
         CGAffineTransform transform = thumb.transform;
         transform = CGAffineTransformScale(transform, 0.8, 0.8);
@@ -359,7 +360,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         CGFloat angle = recognizer.rotation;
         thumb.transform = CGAffineTransformRotate(thumb.originalTransform, angle);
     }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    else if (recognizer.state == UIGestureRecognizerStateEnded || 
+             recognizer.state == UIGestureRecognizerStateCancelled)
     {
         CGFloat angle = recognizer.rotation;
         thumb.note.angleRadians += angle;
