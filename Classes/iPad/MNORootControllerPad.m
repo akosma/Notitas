@@ -30,6 +30,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, retain) MNONoteThumbnail *animationThumbnail;
 @property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
 @property (nonatomic) CGPoint handlePointOffset;
+@property (nonatomic, assign) Note *newlyCreatedNote;
+@property (nonatomic, assign) MNONoteThumbnail *newlyCreatedNoteThumbnail;
 
 - (void)refresh;
 - (Note *)createNote;
@@ -75,6 +77,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @synthesize twitterButton = _twitterButton;
 @synthesize mapButton = _mapButton;
 @synthesize handlePointOffset = _handlePointOffset;
+@synthesize newlyCreatedNoteThumbnail = _newlyCreatedNoteThumbnail;
+@synthesize newlyCreatedNote = _newlyCreatedNote;
 
 - (void)dealloc
 {
@@ -102,6 +106,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     [_animationThumbnail release];
     [_twitterChoiceSheet release];
     [_twitterButton release];
+    _newlyCreatedNoteThumbnail = nil;
+    _newlyCreatedNote = nil;
     [super dealloc];
 }
 
@@ -737,9 +743,31 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         
         [self.noteViews addObject:thumb];
         [self.holderView addSubview:thumb];
-        [thumb mno_addShadow];
+        
+        if (note == self.newlyCreatedNote)
+        {
+            self.newlyCreatedNoteThumbnail = thumb;
+            thumb.center = CGPointMake(-128.0f, -128.0f);
+        }
+        else
+        {
+            [thumb mno_addShadow];
+        }
     }
     [self checkToolbarButtonsEnabled];
+    
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         self.newlyCreatedNoteThumbnail.center = self.newlyCreatedNote.position;
+                     } 
+                     completion:^(BOOL finished){
+                         if (finished)
+                         {
+                             [self.newlyCreatedNoteThumbnail mno_addShadow];
+                             self.newlyCreatedNoteThumbnail = nil;
+                             self.newlyCreatedNote = nil;
+                         }
+                     }];
 }
 
 - (Note *)createNote
@@ -752,6 +780,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         newNote.latitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
         newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
     }
+    self.newlyCreatedNote = newNote;
     return newNote;
 }
 
