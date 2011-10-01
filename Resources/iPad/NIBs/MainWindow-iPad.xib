@@ -231,6 +231,32 @@
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
 								</object>
+								<object class="IBUIBarButtonItem" id="49392872">
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+									<reference key="IBUIToolbar" ref="1060554267"/>
+									<int key="IBUISystemItemIdentifier">5</int>
+								</object>
+								<object class="IBUIBarButtonItem" id="633189909">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">300-orgchart.png</string>
+									</object>
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+									<reference key="IBUIToolbar" ref="1060554267"/>
+								</object>
+								<object class="IBUIBarButtonItem" id="857782185">
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+									<reference key="IBUIToolbar" ref="1060554267"/>
+									<int key="IBUISystemItemIdentifier">5</int>
+								</object>
+								<object class="IBUIBarButtonItem" id="1073701422">
+									<object class="NSCustomResource" key="IBUIImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">42-photos.png</string>
+									</object>
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+									<reference key="IBUIToolbar" ref="1060554267"/>
+								</object>
 								<object class="IBUIBarButtonItem" id="255393712">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<reference key="IBUIToolbar" ref="1060554267"/>
@@ -288,7 +314,7 @@
 				<bool key="IBUIHorizontal">YES</bool>
 			</object>
 			<object class="IBUIView" id="434307557">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">301</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -297,8 +323,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{20, 20}, {410, 410}}</string>
 						<reference key="NSSuperview" ref="434307557"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:615</string>
 						<reference key="IBUIBackgroundColor" ref="210091815"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -319,8 +343,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{450, 450}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="838981523"/>
 				<string key="NSReuseIdentifierKey">_NS:195</string>
 				<reference key="IBUIBackgroundColor" ref="210091815"/>
@@ -663,6 +685,22 @@
 					</object>
 					<int key="connectionID">134</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">orderNotes:</string>
+						<reference key="source" ref="633189909"/>
+						<reference key="destination" ref="884716538"/>
+					</object>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">makeStacks:</string>
+						<reference key="source" ref="1073701422"/>
+						<reference key="destination" ref="884716538"/>
+					</object>
+					<int key="connectionID">143</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -746,6 +784,10 @@
 							<reference ref="57561084"/>
 							<reference ref="102027899"/>
 							<reference ref="383436239"/>
+							<reference ref="633189909"/>
+							<reference ref="49392872"/>
+							<reference ref="1073701422"/>
+							<reference ref="857782185"/>
 						</object>
 						<reference key="parent" ref="449909023"/>
 					</object>
@@ -939,6 +981,28 @@
 						<reference key="object" ref="920060150"/>
 						<reference key="parent" ref="384302851"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">135</int>
+						<reference key="object" ref="633189909"/>
+						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - order</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">138</int>
+						<reference key="object" ref="49392872"/>
+						<reference key="parent" ref="1060554267"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">140</int>
+						<reference key="object" ref="1073701422"/>
+						<reference key="parent" ref="1060554267"/>
+						<string key="objectName">Bar Button Item - stack</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">142</int>
+						<reference key="object" ref="857782185"/>
+						<reference key="parent" ref="1060554267"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -961,6 +1025,10 @@
 					<string>129.IBPluginDependency</string>
 					<string>131.IBPluginDependency</string>
 					<string>132.IBPluginDependency</string>
+					<string>135.IBPluginDependency</string>
+					<string>138.IBPluginDependency</string>
+					<string>140.IBPluginDependency</string>
+					<string>142.IBPluginDependency</string>
 					<string>2.IBAttributePlaceholdersKey</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.CustomClassName</string>
@@ -995,6 +1063,10 @@
 					<string>UIApplication</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1057,7 +1129,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">134</int>
+			<int key="maxID">143</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1114,7 +1186,9 @@
 							<string>changeFont:</string>
 							<string>dismissBlockerView:</string>
 							<string>insertNewObject:</string>
+							<string>makeStacks:</string>
 							<string>newNoteWithLocation:</string>
+							<string>orderNotes:</string>
 							<string>redo:</string>
 							<string>removeAllNotes:</string>
 							<string>sendToTwitter:</string>
@@ -1125,6 +1199,8 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1149,7 +1225,9 @@
 							<string>changeFont:</string>
 							<string>dismissBlockerView:</string>
 							<string>insertNewObject:</string>
+							<string>makeStacks:</string>
 							<string>newNoteWithLocation:</string>
+							<string>orderNotes:</string>
 							<string>redo:</string>
 							<string>removeAllNotes:</string>
 							<string>sendToTwitter:</string>
@@ -1181,7 +1259,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">makeStacks:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">newNoteWithLocation:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">orderNotes:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -1366,6 +1452,8 @@
 				<string>209-twitter.png</string>
 				<string>213-reply.png</string>
 				<string>216-compose.png</string>
+				<string>300-orgchart.png</string>
+				<string>42-photos.png</string>
 				<string>background_ipad.jpg</string>
 				<string>color.png</string>
 				<string>font.png</string>
@@ -1379,6 +1467,8 @@
 				<string>{22, 22}</string>
 				<string>{23, 17}</string>
 				<string>{23, 18}</string>
+				<string>{28, 28}</string>
+				<string>{22, 24}</string>
 				<string>{1024, 1024}</string>
 				<string>{24, 20}</string>
 				<string>{26, 26}</string>

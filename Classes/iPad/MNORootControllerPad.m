@@ -494,6 +494,79 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 #pragma mark - Public methods
 
+- (IBAction)orderNotes:(id)sender
+{
+    __block CGPoint currentPoint = CGPointMake(-128.0f, 128.0f);
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(256.0f, 0.0f);
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         for (MNONoteThumbnail *noteView in self.noteViews)
+                         {
+                             currentPoint = CGPointApplyAffineTransform(currentPoint, transform);
+                             if (currentPoint.x > 1024.0f)
+                             {
+                                 currentPoint = CGPointMake(128.0f, currentPoint.y + 256.0f);
+                                 
+                                 if (currentPoint.y > 1024.0f)
+                                 {
+                                     currentPoint = CGPointMake(128.0f, 128.0f);
+                                 }
+                             }
+                             noteView.center = currentPoint;
+                             noteView.note.position = currentPoint;
+                         }    
+                     }];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+    [self checkToolbarButtonsEnabled];
+}
+
+- (IBAction)makeStacks:(id)sender
+{
+    CGPoint bluePoint = CGPointMake(128.0f, 128.0f);
+    CGPoint redPoint = CGPointMake(128.0f, 384.0f);
+    CGPoint yellowPoint = CGPointMake(384.0f, 128.0f);
+    CGPoint greenPoint = CGPointMake(384.0f, 384.0f);
+    [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         for (MNONoteThumbnail *noteView in self.noteViews)
+                         {
+                             switch (noteView.color) 
+                             {
+                                 case MNOColorCodeRed:
+                                     noteView.center = redPoint;
+                                     noteView.note.position = redPoint;
+                                     break;
+                                     
+                                 case MNOColorCodeGreen:
+                                     noteView.center = greenPoint;
+                                     noteView.note.position = greenPoint;
+                                     break;
+                                     
+                                 case MNOColorCodeYellow:
+                                     noteView.center = yellowPoint;
+                                     noteView.note.position = yellowPoint;
+                                     break;
+                                     
+                                 case MNOColorCodeBlue:
+                                     noteView.center = bluePoint;
+                                     noteView.note.position = bluePoint;
+                                     break;
+                                     
+                                 default:
+                                     break;
+                             }
+                         }    
+                     }];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+    [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+    [self checkToolbarButtonsEnabled];
+    [self.scrollView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 128.0f, 128.0f) 
+                                animated:YES];
+}
+
 - (IBAction)undo:(id)sender
 {
     [[[MNOCoreDataManager sharedMNOCoreDataManager] undoManager] undo];

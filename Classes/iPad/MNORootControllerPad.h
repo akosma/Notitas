@@ -39,6 +39,8 @@
 - (IBAction)insertNewObject:(id)sender;
 - (IBAction)removeAllNotes:(id)sender;
 - (IBAction)newNoteWithLocation:(id)sender;
+- (IBAction)orderNotes:(id)sender;
+- (IBAction)makeStacks:(id)sender;
 
 - (void)createNewNoteWithContents:(NSString *)contents;
 - (IBAction)about:(id)sender;
