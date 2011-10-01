@@ -90,6 +90,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 - (NSArray *)allNotes
 {
     NSFetchRequest *fetchRequest = [self fetchRequestForType:@"Note"];
+
+    // Order the notes by descending modification time
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastModificationTime" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+
     NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     return notes;
 }
@@ -101,6 +107,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 	Note *newNote = [self createObjectOfType:@"Note"];
 	
     newNote.timeStamp = [NSDate date];
+    newNote.lastModificationTime = [NSDate date];
     newNote.angle = [NSNumber numberWithDouble:randomAngle()];
     newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
     newNote.color = [NSNumber numberWithInt:randomColorCode()];
@@ -146,6 +153,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     note.xcoord = [NSNumber numberWithFloat:randomXPosition()];
     note.ycoord = [NSNumber numberWithFloat:randomYPosition()];
     note.angle = [NSNumber numberWithDouble:randomAngle()];
+    note.lastModificationTime = [NSDate date];
+    note.timeStamp = [NSDate date];
     [self save];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:MNOCoreDataManagerNoteImportedNotification 

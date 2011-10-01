@@ -303,6 +303,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
         [thumb mno_removeShadow];
+        thumb.note.lastModificationTime = [NSDate date];
         CGPoint gestureCenter = [recognizer locationInView:thumb];
         self.handlePointOffset = CGPointMake(thumb.frame.size.width / 2.0 - gestureCenter.x, 
                                              thumb.frame.size.height / 2.0 - gestureCenter.y);
@@ -353,6 +354,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     {
         [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
         [self.holderView bringSubviewToFront:thumb];
+        thumb.note.lastModificationTime = [NSDate date];
         thumb.originalTransform = thumb.transform;
     }
     else if (recognizer.state == UIGestureRecognizerStateChanged)
@@ -380,6 +382,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     {
         [self becomeFirstResponder];
         [self.holderView bringSubviewToFront:thumb];
+
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+        thumb.note.lastModificationTime = [NSDate date];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         
         NSString *locationText = NSLocalizedString(@"View location", @"Button to view the note location");
         NSString *emailText = NSLocalizedString(@"Send via e-mail", @"Button to send notes via e-mail");
@@ -426,6 +433,10 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     {
         [self becomeFirstResponder];
         [self.holderView bringSubviewToFront:thumb];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
+        thumb.note.lastModificationTime = [NSDate date];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] save];
+        [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
         
         [self editCurrentNote];
     }    
@@ -825,9 +836,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         {
             [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
             self.currentThumbnail.note.contents = self.textView.text;
-            self.currentThumbnail.summaryLabel.text = self.textView.text;
+            self.currentThumbnail.note.lastModificationTime = [NSDate date];
             [[MNOCoreDataManager sharedMNOCoreDataManager] save];
             [[MNOCoreDataManager sharedMNOCoreDataManager] endUndoGrouping];
+
+            self.currentThumbnail.summaryLabel.text = self.textView.text;
         }
         [self checkToolbarButtonsEnabled];
         [self.editorView removeFromSuperview];
