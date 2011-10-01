@@ -92,8 +92,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     NSFetchRequest *fetchRequest = [self fetchRequestForType:@"Note"];
 
     // Order the notes by descending modification time
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastModificationTime" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSSortDescriptor *sortDescriptor1 = [NSSortDescriptor sortDescriptorWithKey:@"lastModificationTime" 
+                                                                     ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"timeStamp" 
+                                                                     ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
