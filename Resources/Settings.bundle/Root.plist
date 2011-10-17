@@ -50,14 +50,14 @@
 			<key>Key</key>
 			<string>AppVersionNumber</string>
 			<key>DefaultValue</key>
-			<string>2.0</string>
+			<string>2.3</string>
 			<key>Values</key>
 			<array>
-				<string>1.1</string>
+				<string>2.3</string>
 			</array>
 			<key>Titles</key>
 			<array>
-				<string>1.1</string>
+				<string>2.3</string>
 			</array>
 		</dict>
 	</array>
