@@ -66,6 +66,11 @@
     self.twitterrifficButtonIndex = -1;
     self.locationButtonIndex = -1;
     self.clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tweetSent:) 
+                                                 name:MNOTwitterMessageSent 
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -356,6 +361,13 @@
                         error:(NSError *)error
 {
     [composer dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Notification handlers
+
+- (void)tweetSent:(NSNotification *)notification
+{
+    [self.textView becomeFirstResponder];
 }
              
 #pragma mark - Private methods

@@ -8,14 +8,17 @@
 
 #import "MNOTwitterClientManager.h"
 #import "MNOTwitterClient.h"
+#import "MNONativeTwitterClient.h"
 #import <AKOLibrary/SynthesizeSingleton.h>
 
 static NSString *TWITTER_CLIENT_KEY = @"TwitterClient";
 static NSString *TWITTER_CLIENT_CODE_NONE = @"None";
+static NSString *TWITTER_CLIENT_CODE_NATIVE = @"Notitas";
 
 @interface MNOTwitterClientManager ()
 
 @property (nonatomic, retain) NSMutableDictionary *clients;
+@property (nonatomic, readonly) BOOL canSendTweet;
 
 - (void)initializeClients;
 
@@ -24,8 +27,9 @@ static NSString *TWITTER_CLIENT_CODE_NONE = @"None";
 
 @implementation MNOTwitterClientManager
 
-@synthesize currentClient = _currentClient;
+@dynamic currentClient;
 @synthesize clients = _clients;
+@dynamic canSendTweet;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
 
@@ -35,18 +39,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *value = [defaults stringForKey:TWITTER_CLIENT_KEY];
-        NSString *currentClientOption = TWITTER_CLIENT_CODE_NONE;
         if (value == nil)
         {
             [defaults setObject:TWITTER_CLIENT_CODE_NONE forKey:TWITTER_CLIENT_KEY];
         }
-        else
-        {
-            currentClientOption = value;
-        }
 
         [self initializeClients];
-        _currentClient = [_clients objectForKey:currentClientOption];
     }
     return self;
 }
@@ -110,10 +108,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
 
 - (void)setSelectedClientName:(NSString *)name
 {
-    self.currentClient = [self.clients objectForKey:name];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:name forKey:TWITTER_CLIENT_KEY];
     [defaults synchronize];
+}
+
+- (MNOTwitterClient *)currentClient
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *name = [defaults objectForKey:TWITTER_CLIENT_KEY];
+    return [self.clients objectForKey:name];
 }
 
 #pragma mark - Private methods
@@ -125,18 +129,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     NSArray *clients = [NSArray arrayWithContentsOfFile:path];
 
     // Populate the array with the clients
-    MNOTwitterClient *none = [[MNOTwitterClient alloc] init];
     self.clients = [NSMutableDictionary dictionary];
+    MNOTwitterClient *none = [[[MNOTwitterClient alloc] init] autorelease];
     [self.clients setObject:none forKey:TWITTER_CLIENT_CODE_NONE];
-    [none release];
     
     for (NSDictionary *dict in clients)
     {
         NSString *name = [dict objectForKey:@"name"];
-        MNOTwitterClient *client = [[MNOTwitterClient alloc] initWithDictionary:dict];
+        MNOTwitterClient *client = [[[MNOTwitterClient alloc] initWithDictionary:dict] autorelease];
         [self.clients setObject:client forKey:name];
-        [client release];
     }
+    
+    // If possible, we should be able to send tweets natively
+    if (self.canSendTweet)
+    {
+        MNONativeTwitterClient *native = [[[MNONativeTwitterClient alloc] init] autorelease];
+        [self.clients setObject:native forKey:TWITTER_CLIENT_CODE_NATIVE];
+    }
+}
+
+- (BOOL)canSendTweet
+{
+    Class klass = NSClassFromString(@"TWTweetComposeViewController");
+    if (nil != klass)
+    {
+        return [TWTweetComposeViewController canSendTweet];
+    }
+    return NO;
 }
 
 @end

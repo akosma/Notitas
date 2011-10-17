@@ -88,6 +88,8 @@
 		3A860F501429D1E000649B27 /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F191429D1E000649B27 /* Erase.caf */; };
 		3A860F511429D1E000649B27 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F1B1429D1E000649B27 /* Localizable.strings */; };
 		3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8DBBD3144C4C2400DA46EC /* libz.dylib */; };
+		3A8DBBD6144C4F8B00DA46EC /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8DBBD5144C4F8B00DA46EC /* Twitter.framework */; };
+		3A8DBBD9144C6C8100DA46EC /* MNONativeTwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8DBBD8144C6C8100DA46EC /* MNONativeTwitterClient.m */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2056F142E2E8100DF256C /* MNOBoard.m */; };
 		3AC20573142E2E8200DF256C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC20572142E2E8200DF256C /* Note.m */; };
@@ -206,6 +208,9 @@
 		3A860F1E1429D1E000649B27 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1F1429D1E000649B27 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A8DBBD3144C4C2400DA46EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3A8DBBD5144C4F8B00DA46EC /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		3A8DBBD7144C6C8100DA46EC /* MNONativeTwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONativeTwitterClient.h; sourceTree = "<group>"; };
+		3A8DBBD8144C6C8100DA46EC /* MNONativeTwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNONativeTwitterClient.m; sourceTree = "<group>"; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notitas 3.xcdatamodel"; sourceTree = "<group>"; };
 		3AC2056E142E2E8100DF256C /* MNOBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOBoard.h; sourceTree = "<group>"; };
@@ -222,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8DBBD6144C4F8B00DA46EC /* Twitter.framework in Frameworks */,
 				3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */,
 				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
 				3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */,
@@ -279,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8DBBD3144C4C2400DA46EC /* libz.dylib */,
+				3A8DBBD5144C4F8B00DA46EC /* Twitter.framework */,
 				3A60092D142381B9003B5B43 /* AKOLibrary.framework */,
 				3A60093D14238244003B5B43 /* SystemConfiguration.framework */,
 				3A60093914238239003B5B43 /* QuartzCore.framework */,
@@ -517,6 +524,8 @@
 				3AD3F63F142391B600812023 /* MNOSoundManager.m */,
 				3A860E581429CB6300649B27 /* MNOTwitterClient.h */,
 				3A860E591429CB6300649B27 /* MNOTwitterClient.m */,
+				3A8DBBD7144C6C8100DA46EC /* MNONativeTwitterClient.h */,
+				3A8DBBD8144C6C8100DA46EC /* MNONativeTwitterClient.m */,
 				3A860E5B1429CB8900649B27 /* MNOTwitterClientManager.h */,
 				3A860E5C1429CB8900649B27 /* MNOTwitterClientManager.m */,
 				3A860E5E1429CE0600649B27 /* MNOColorCode.h */,
@@ -678,6 +687,7 @@
 				3A860F201429D1E000649B27 /* Notitas.xcdatamodeld in Sources */,
 				3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */,
 				3AC20573142E2E8200DF256C /* Note.m in Sources */,
+				3A8DBBD9144C6C8100DA46EC /* MNONativeTwitterClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

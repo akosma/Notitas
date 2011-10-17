@@ -11,7 +11,7 @@
 @interface MNOTwitterClient : NSObject 
 
 @property (nonatomic, readonly) NSString *urlTemplate;
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (BOOL)isAvailable;
