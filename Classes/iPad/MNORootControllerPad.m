@@ -534,36 +534,80 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (IBAction)makeStacks:(id)sender
 {
-    CGPoint bluePoint = CGPointMake(128.0f, 128.0f);
-    CGPoint redPoint = CGPointMake(128.0f, 384.0f);
-    CGPoint yellowPoint = CGPointMake(384.0f, 128.0f);
-    CGPoint greenPoint = CGPointMake(384.0f, 384.0f);
     [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
     [UIView animateWithDuration:0.4 
                      animations:^{
+                         CGPoint point1 = CGPointMake(128.0f, 128.0f);
+                         CGPoint point2 = CGPointMake(128.0f, 384.0f);
+                         CGPoint point3 = CGPointMake(384.0f, 128.0f);
+                         CGPoint point4 = CGPointMake(384.0f, 384.0f);
+                         
+                         NSValue *value1 = [NSValue valueWithCGPoint:point1];
+                         NSValue *value2 = [NSValue valueWithCGPoint:point2];
+                         NSValue *value3 = [NSValue valueWithCGPoint:point3];
+                         NSValue *value4 = [NSValue valueWithCGPoint:point4];
+                         
+                         NSMutableArray *stack = [NSMutableArray arrayWithObjects:value4, value3, value2, value1, nil];
+
+                         CGPoint redPoint = CGPointZero;
+                         CGPoint greenPoint = CGPointZero;
+                         CGPoint yellowPoint = CGPointZero;
+                         CGPoint bluePoint = CGPointZero;
                          for (MNONoteThumbnail *noteView in self.noteViews)
                          {
                              switch (noteView.color) 
                              {
                                  case MNOColorCodeRed:
+                                 {
+                                     if (CGPointEqualToPoint(redPoint, CGPointZero))
+                                     {
+                                         NSValue *value = [stack lastObject];
+                                         redPoint = [value CGPointValue];
+                                         [stack removeLastObject];
+                                     }
                                      noteView.center = redPoint;
                                      noteView.note.position = redPoint;
                                      break;
+                                 }
                                      
                                  case MNOColorCodeGreen:
+                                 {
+                                     if (CGPointEqualToPoint(greenPoint, CGPointZero))
+                                     {
+                                         NSValue *value = [stack lastObject];
+                                         greenPoint = [value CGPointValue];
+                                         [stack removeLastObject];
+                                     }
                                      noteView.center = greenPoint;
                                      noteView.note.position = greenPoint;
                                      break;
+                                 }
                                      
                                  case MNOColorCodeYellow:
+                                 {
+                                     if (CGPointEqualToPoint(yellowPoint, CGPointZero))
+                                     {
+                                         NSValue *value = [stack lastObject];
+                                         yellowPoint = [value CGPointValue];
+                                         [stack removeLastObject];
+                                     }
                                      noteView.center = yellowPoint;
                                      noteView.note.position = yellowPoint;
                                      break;
+                                 }
                                      
                                  case MNOColorCodeBlue:
+                                 {
+                                     if (CGPointEqualToPoint(bluePoint, CGPointZero))
+                                     {
+                                         NSValue *value = [stack lastObject];
+                                         bluePoint = [value CGPointValue];
+                                         [stack removeLastObject];
+                                     }
                                      noteView.center = bluePoint;
                                      noteView.note.position = bluePoint;
                                      break;
+                                 }
                                      
                                  default:
                                      break;
