@@ -21,7 +21,6 @@
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
 		3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7D1098280000F3DB45 /* Appirater.m */; };
 		3A60092E142381B9003B5B43 /* AKOLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60092D142381B9003B5B43 /* AKOLibrary.framework */; };
-		3A600930142381FC003B5B43 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */; };
 		3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093114238209003B5B43 /* MediaPlayer.framework */; };
 		3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093314238218003B5B43 /* CFNetwork.framework */; };
 		3A60093614238222003B5B43 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093514238222003B5B43 /* CoreText.framework */; };
@@ -88,6 +87,7 @@
 		3A860F4F1429D1E000649B27 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F171429D1E000649B27 /* Settings.bundle */; };
 		3A860F501429D1E000649B27 /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F191429D1E000649B27 /* Erase.caf */; };
 		3A860F511429D1E000649B27 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F1B1429D1E000649B27 /* Localizable.strings */; };
+		3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8DBBD3144C4C2400DA46EC /* libz.dylib */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2056F142E2E8100DF256C /* MNOBoard.m */; };
 		3AC20573142E2E8200DF256C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC20572142E2E8200DF256C /* Note.m */; };
@@ -112,7 +112,6 @@
 		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		3A60092D142381B9003B5B43 /* AKOLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AKOLibrary.framework; path = Externals/AKOLibrary.framework; sourceTree = "<group>"; };
-		3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		3A60093114238209003B5B43 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3A60093314238218003B5B43 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3A60093514238222003B5B43 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -206,6 +205,7 @@
 		3A860F1D1429D1E000649B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1E1429D1E000649B27 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1F1429D1E000649B27 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A8DBBD3144C4C2400DA46EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notitas 3.xcdatamodel"; sourceTree = "<group>"; };
 		3AC2056E142E2E8100DF256C /* MNOBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOBoard.h; sourceTree = "<group>"; };
@@ -222,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */,
 				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
 				3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */,
 				3A60093C14238239003B5B43 /* Security.framework in Frameworks */,
@@ -229,7 +230,6 @@
 				3A60093614238222003B5B43 /* CoreText.framework in Frameworks */,
 				3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */,
 				3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */,
-				3A600930142381FC003B5B43 /* libz.1.2.3.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -278,8 +278,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A8DBBD3144C4C2400DA46EC /* libz.dylib */,
 				3A60092D142381B9003B5B43 /* AKOLibrary.framework */,
-				3A60092F142381FC003B5B43 /* libz.1.2.3.dylib */,
 				3A60093D14238244003B5B43 /* SystemConfiguration.framework */,
 				3A60093914238239003B5B43 /* QuartzCore.framework */,
 				3A60093A14238239003B5B43 /* Security.framework */,
