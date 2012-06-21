@@ -19,11 +19,6 @@
 
 @implementation MNOAppDelegate
 
-@synthesize window = _window;
-@synthesize rootController = _rootController;
-@synthesize lastTime = _lastTime;
-
-
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -33,7 +28,7 @@
     [self.window makeKeyAndVisible];
 
     // Check for 'notita' files opened from other applications
-    NSURL *openedURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    NSURL *openedURL = launchOptions[UIApplicationLaunchOptionsURLKey];
     if (openedURL != nil)
     {
         if ([openedURL isFileURL])

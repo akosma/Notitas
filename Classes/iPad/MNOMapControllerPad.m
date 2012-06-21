@@ -19,11 +19,6 @@
 
 @implementation MNOMapControllerPad
 
-@synthesize mapView = _mapView;
-@synthesize parent = _parent;
-@synthesize notes = _notes;
-@synthesize segmentedControl = _segmentedControl;
-
 - (void)dealloc
 {
     _parent = nil;

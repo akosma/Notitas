@@ -21,8 +21,6 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(MNOSoundManager)
 
-@synthesize eraseSound = _eraseSound;
-
 - (id)init
 {
     self = [super init];

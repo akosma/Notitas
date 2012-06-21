@@ -31,17 +31,6 @@
 
 @implementation MNORootController
 
-@synthesize locationInformationAvailable = _locationInformationAvailable;
-@synthesize currentNote = _currentNote;
-@synthesize editor = _editor;
-@synthesize thumbnail = _thumbnail;
-@synthesize locationManager = _locationManager;
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize trashButton = _trashButton;
-@synthesize locationButton = _locationButton;
-@synthesize toolbar = _toolbar;
-@synthesize tableView = _tableView;
-
 - (void)dealloc 
 {
     _locationManager.delegate = nil;
@@ -224,7 +213,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-	id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+	id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
     return rowsCount;
 }
@@ -268,7 +257,7 @@
     cell.leftNote = leftNote;
 
     // Let's check whether we need to add a note at the right:
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][indexPath.section];
     NSInteger notesCount = [sectionInfo numberOfObjects];
     if (notesCount > (noteIndex + 1))
     {
@@ -469,11 +458,11 @@
 {
 	Note *newNote = [[MNOCoreDataManager sharedMNOCoreDataManager] createNote];
 
-    newNote.hasLocation = [NSNumber numberWithBool:self.locationInformationAvailable];
+    newNote.hasLocation = @(self.locationInformationAvailable);
     if (self.locationInformationAvailable)
     {
-        newNote.latitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
-        newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+        newNote.latitude = @(self.locationManager.location.coordinate.latitude);
+        newNote.longitude = @(self.locationManager.location.coordinate.longitude);
     }
     return newNote;
 }
@@ -483,7 +472,7 @@
     NSArray *sections = [self.fetchedResultsController sections];
     if ([sections count] > 0)
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
         NSInteger itemCount = [sectionInfo numberOfObjects];
         NSInteger rowsCount = ceil(itemCount / 2.0);
         NSInteger row = rowsCount - 1;
@@ -502,7 +491,7 @@
     NSArray *sections = [self.fetchedResultsController sections];
     if ([sections count] > 0)
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
         NSInteger itemCount = [sectionInfo numberOfObjects];
         self.trashButton.enabled = (itemCount > 0);
     }

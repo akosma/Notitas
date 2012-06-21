@@ -49,39 +49,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 @implementation MNORootControllerPad
 
-@synthesize notes = _notes;
-@synthesize noteViews = _noteViews;
-@synthesize trashButton = _trashButton;
-@synthesize locationButton = _locationButton;
-@synthesize locationManager = _locationManager;
-@synthesize locationInformationAvailable = _locationInformationAvailable;
-@synthesize holderView = _holderView;
-@synthesize scrollView = _scrollView;
-@synthesize currentThumbnail = _currentThumbnail;
-@synthesize deleteAllNotesAlertView = _deleteAllNotesAlertView;
-@synthesize deleteNoteAlertView = _deleteNoteAlertView;
-@synthesize auxiliaryView = _auxiliaryView;
-@synthesize mapView = _mapView;
-@synthesize undoButton = _undoButton;
-@synthesize redoButton = _redoButton;
-@synthesize modalBlockerView = _modalBlockerView;
-@synthesize showingLocationView = _showingLocationView;
-@synthesize showingEditionView = _showingEditionView;
-@synthesize editorView = _editorView;
-@synthesize textView = _textView;
-@synthesize map = _map;
-@synthesize animationThumbnail = _animationThumbnail;
-@synthesize editingToolbar = _editingToolbar;
-@synthesize mailButton = _mailButton;
-@synthesize twitterChoiceSheet = _twitterChoiceSheet;
-@synthesize twitterButton = _twitterButton;
-@synthesize mapButton = _mapButton;
-@synthesize handlePointOffset = _handlePointOffset;
-@synthesize newlyCreatedNoteThumbnail = _newlyCreatedNoteThumbnail;
-@synthesize newlyCreatedNote = _newlyCreatedNote;
-@synthesize gridButton = _gridButton;
-@synthesize stackButton = _stackButton;
-
 - (void)dealloc
 {
     _newlyCreatedNoteThumbnail = nil;
@@ -795,11 +762,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
 	Note *newNote = [[MNOCoreDataManager sharedMNOCoreDataManager] createNote];
     
-    newNote.hasLocation = [NSNumber numberWithBool:self.locationInformationAvailable];
+    newNote.hasLocation = @(self.locationInformationAvailable);
     if (self.locationInformationAvailable)
     {
-        newNote.latitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
-        newNote.longitude = [NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+        newNote.latitude = @(self.locationManager.location.coordinate.latitude);
+        newNote.longitude = @(self.locationManager.location.coordinate.longitude);
     }
     self.newlyCreatedNote = newNote;
     return newNote;
@@ -1022,7 +989,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     int value = self.currentThumbnail.note.colorCode + 1;
     value = value % 4;
-    self.currentThumbnail.note.color = [NSNumber numberWithInt:value];
+    self.currentThumbnail.note.color = @(value);
     self.animationThumbnail.color = value;
     self.currentThumbnail.color = value;
 }
@@ -1031,7 +998,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     int value = self.currentThumbnail.note.fontCode + 1;
     value = value % 4;
-    self.currentThumbnail.note.fontFamily = [NSNumber numberWithInt:value];
+    self.currentThumbnail.note.fontFamily = @(value);
     self.currentThumbnail.font = value;
     self.textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
 //    _timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];

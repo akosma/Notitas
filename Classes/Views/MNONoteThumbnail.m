@@ -18,12 +18,16 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
     id end = (id)endColor.CGColor;
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.colors = [NSArray arrayWithObjects:start, end, nil];
+    gradient.colors = @[start, end];
     return gradient;
 }
 
 
 @interface MNONoteThumbnail ()
+{
+    MNOColorCode _color;
+    MNOFontCode _font;
+}
 
 @property (nonatomic, strong) CALayer *blueLayer;
 @property (nonatomic, strong) CALayer *redLayer;
@@ -37,17 +41,6 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 
 @implementation MNONoteThumbnail
-
-@synthesize font = _font;
-@synthesize color = _color;
-@synthesize summaryLabel = _summaryLabel;
-@synthesize blueLayer = _blueLayer;
-@synthesize redLayer = _redLayer;
-@synthesize greenLayer = _greenLayer;
-@synthesize yellowLayer = _yellowLayer;
-@synthesize currentLayer = _currentLayer;
-@synthesize note = _note;
-@synthesize originalTransform = _originalTransform;
 
 #pragma mark -
 #pragma mark Constructor and destructor

@@ -55,7 +55,7 @@ static NSInteger FILENAME_LENGTH = 15;
 
 - (void)setAngleRadians:(CGFloat)angleRadians
 {
-    self.angle = [NSNumber numberWithFloat:angleRadians];
+    self.angle = @(angleRadians);
 }
 
 - (MNOFontCode)fontCode
@@ -88,8 +88,8 @@ static NSInteger FILENAME_LENGTH = 15;
 
 - (void)setPosition:(CGPoint)position
 {
-    NSNumber *x = [NSNumber numberWithFloat:position.x];
-    NSNumber *y = [NSNumber numberWithFloat:position.y];
+    NSNumber *x = @(position.x);
+    NSNumber *y = @(position.y);
     self.xcoord = x;
     self.ycoord = y;
 }
@@ -101,7 +101,7 @@ static NSInteger FILENAME_LENGTH = 15;
 
 - (void)setScale:(CGFloat)scale
 {
-    self.size = [NSNumber numberWithFloat:scale];
+    self.size = @(scale);
 }
 
 - (NSString *)filename
@@ -151,9 +151,9 @@ static NSInteger FILENAME_LENGTH = 15;
 
 - (NSDictionary *)exportAsDictionary
 {
-    NSArray *keys = [NSArray arrayWithObjects:ANGLE_KEY, COLOR_KEY, CONTENTS_KEY, 
+    NSArray *keys = @[ANGLE_KEY, COLOR_KEY, CONTENTS_KEY, 
                      FONT_FAMILY_KEY, FONT_SIZE_KEY, HAS_LOCATION_KEY, LATITUDE_KEY, 
-                     LONGITUDE_KEY, SIZE_KEY, X_COORD_KEY, Y_COORD_KEY, nil];
+                     LONGITUDE_KEY, SIZE_KEY, X_COORD_KEY, Y_COORD_KEY];
     NSDictionary *export = [self dictionaryWithValuesForKeys:keys];
     return export;
 }

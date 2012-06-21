@@ -18,12 +18,6 @@
 
 @implementation MNOMapController
 
-@synthesize note = _note;
-@synthesize delegate = _delegate;
-@synthesize placemark = _placemark;
-@synthesize mapView = _mapView;
-@synthesize titleItem = _titleItem;
-
 - (void)dealloc 
 {
     [_mapView removeAnnotation:_placemark];

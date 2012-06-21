@@ -10,9 +10,6 @@
 
 @implementation MNOTwitterClient
 
-@synthesize urlTemplate = _urlTemplate;
-@synthesize name = _name;
-
 - (id)init
 {
     if (self = [super init])
@@ -27,8 +24,8 @@
 {
     if (self = [self init])
     {
-        _urlTemplate = [[dict objectForKey:@"template"] copy];
-        _name = [[dict objectForKey:@"name"] copy];
+        _urlTemplate = [dict[@"template"] copy];
+        _name = [dict[@"name"] copy];
     }
     return self;
 }

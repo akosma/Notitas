@@ -28,18 +28,6 @@
 
 @implementation MNONoteEditorController
 
-@synthesize textView = _textView;
-@synthesize toolbar = _toolbar;
-@synthesize timeStampLabel = _timeStampLabel;
-@synthesize note = _note;
-@synthesize delegate = _delegate;
-@synthesize twitterChoiceSheet = _twitterChoiceSheet;
-@synthesize twitterrifficButtonIndex = _twitterrifficButtonIndex;
-@synthesize locationButtonIndex = _locationButtonIndex;
-@synthesize hidingTransformation = _hidingTransformation;
-@synthesize mapController = _mapController;
-@synthesize clientManager = _clientManager;
-
 - (void)dealloc 
 {
     _delegate = nil;
@@ -95,7 +83,7 @@
                                                         object:self];
     int value = self.note.fontCode + 1;
     value = value % 4;
-    self.note.fontFamily = [NSNumber numberWithInt:value];
+    self.note.fontFamily = @(value);
     self.textView.font = [UIFont fontWithName:fontNameForCode(value) size:24.0];
     self.timeStampLabel.font = [UIFont fontWithName:fontNameForCode(value) size:12.0];
 }
@@ -106,7 +94,7 @@
                                                         object:self];
     int value = self.note.colorCode + 1;
     value = value % 4;
-    self.note.color = [NSNumber numberWithInt:value];
+    self.note.color = @(value);
 }
 
 - (IBAction)done:(id)sender

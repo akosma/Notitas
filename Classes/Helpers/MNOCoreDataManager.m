@@ -77,7 +77,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 	[fetchRequest setEntity:entity];
 	
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
-	NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+	NSArray *sortDescriptors = @[sortDescriptor];
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
 	NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
@@ -96,7 +96,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
                                                                      ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [NSSortDescriptor sortDescriptorWithKey:@"timeStamp" 
                                                                      ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil];
+    NSArray *sortDescriptors = @[sortDescriptor1, sortDescriptor2];
     [fetchRequest setSortDescriptors:sortDescriptors];
 
     NSArray *notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
@@ -111,15 +111,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 	
     newNote.timeStamp = [NSDate date];
     newNote.lastModificationTime = [NSDate date];
-    newNote.angle = [NSNumber numberWithDouble:randomAngle()];
+    newNote.angle = @(randomAngle());
     newNote.fontFamily = [NSNumber numberWithDouble:randomFont()];
     newNote.color = [NSNumber numberWithInt:randomColorCode()];
     newNote.contents = @"";
     
     float xpos = randomXPosition();
     float ypos = randomYPosition();
-    newNote.xcoord = [NSNumber numberWithFloat:xpos];
-    newNote.ycoord = [NSNumber numberWithFloat:ypos];
+    newNote.xcoord = @(xpos);
+    newNote.ycoord = @(ypos);
     
     return newNote;
 }
@@ -131,7 +131,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     NSArray *notes = [self allNotes];
     for (Note *note in notes)
     {
-        note.angle = [NSNumber numberWithDouble:randomAngle()];
+        note.angle = @(randomAngle());
     }
     [self save];
     
@@ -153,9 +153,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 {
     Note *note = [self createObjectOfType:@"Note"];
     [note importDataFromDictionary:dict];
-    note.xcoord = [NSNumber numberWithFloat:randomXPosition()];
-    note.ycoord = [NSNumber numberWithFloat:randomYPosition()];
-    note.angle = [NSNumber numberWithDouble:randomAngle()];
+    note.xcoord = @(randomXPosition());
+    note.ycoord = @(randomYPosition());
+    note.angle = @(randomAngle());
     note.lastModificationTime = [NSDate date];
     note.timeStamp = [NSDate date];
     [self save];

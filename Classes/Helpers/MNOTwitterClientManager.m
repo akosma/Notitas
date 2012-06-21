@@ -28,7 +28,6 @@ static NSString *TWITTER_CLIENT_CODE_NATIVE = @"Notitas";
 @implementation MNOTwitterClientManager
 
 @dynamic currentClient;
-@synthesize clients = _clients;
 @dynamic canSendTweet;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
@@ -74,7 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     NSMutableArray *availableClients = [[NSMutableArray alloc] init];
     for (NSString *clientName in self.clients)
     {
-        MNOTwitterClient *client = [self.clients objectForKey:clientName];
+        MNOTwitterClient *client = (self.clients)[clientName];
         if ([client isAvailable])
         {
             [availableClients addObject:client.name];
@@ -110,7 +109,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *name = [defaults objectForKey:TWITTER_CLIENT_KEY];
-    return [self.clients objectForKey:name];
+    return (self.clients)[name];
 }
 
 #pragma mark - Private methods
@@ -124,20 +123,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     // Populate the array with the clients
     self.clients = [NSMutableDictionary dictionary];
     MNOTwitterClient *none = [[MNOTwitterClient alloc] init];
-    [self.clients setObject:none forKey:TWITTER_CLIENT_CODE_NONE];
+    (self.clients)[TWITTER_CLIENT_CODE_NONE] = none;
     
     for (NSDictionary *dict in clients)
     {
-        NSString *name = [dict objectForKey:@"name"];
+        NSString *name = dict[@"name"];
         MNOTwitterClient *client = [[MNOTwitterClient alloc] initWithDictionary:dict];
-        [self.clients setObject:client forKey:name];
+        (self.clients)[name] = client;
     }
     
     // If possible, we should be able to send tweets natively
     if (self.canSendTweet)
     {
         MNONativeTwitterClient *native = [[MNONativeTwitterClient alloc] init];
-        [self.clients setObject:native forKey:TWITTER_CLIENT_CODE_NATIVE];
+        (self.clients)[TWITTER_CLIENT_CODE_NATIVE] = native;
     }
 }
 

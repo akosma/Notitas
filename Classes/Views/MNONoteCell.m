@@ -12,6 +12,10 @@
 #import "MNOHelpers.h"
 
 @interface MNONoteCell ()
+{
+    Note *_leftNote;
+    Note *_rightNote;
+}
 
 @property (nonatomic, strong) MNONoteThumbnail *leftView;
 @property (nonatomic, strong) MNONoteThumbnail *rightView;
@@ -22,14 +26,6 @@
 
 
 @implementation MNONoteCell
-
-@synthesize leftNote = _leftNote;
-@synthesize rightNote = _rightNote;
-@synthesize delegate = _delegate;
-@synthesize leftView = _leftView;
-@synthesize rightView = _rightView;
-@synthesize leftFrame = _leftFrame;
-@synthesize rightFrame = _rightFrame;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
