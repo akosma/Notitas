@@ -14,10 +14,10 @@
 
 @interface MNOMapController : UIViewController 
 
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) IBOutlet UINavigationItem *titleItem;
-@property (nonatomic, retain) Note *note;
-@property (nonatomic, assign) id<MKMapViewDelegate> delegate;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) IBOutlet UINavigationItem *titleItem;
+@property (nonatomic, strong) Note *note;
+@property (nonatomic, weak) id<MKMapViewDelegate> delegate;
 
 - (IBAction)done:(id)sender;
 

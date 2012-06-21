@@ -12,7 +12,7 @@
 
 @interface MNOTwitterClientManager : NSObject
 
-@property (nonatomic, readonly) MNOTwitterClient *currentClient;
+@property (weak, nonatomic, readonly) MNOTwitterClient *currentClient;
 
 + (MNOTwitterClientManager *)sharedMNOTwitterClientManager;
 - (void)send:(NSString *)text;

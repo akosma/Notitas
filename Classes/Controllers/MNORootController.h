@@ -19,10 +19,10 @@
                                                  UITableViewDelegate,
                                                  UITableViewDataSource> 
 
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *trashButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *locationButton;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

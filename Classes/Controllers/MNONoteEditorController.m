@@ -13,12 +13,12 @@
 
 @interface MNONoteEditorController ()
 
-@property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
+@property (nonatomic, strong) UIActionSheet *twitterChoiceSheet;
 @property (nonatomic) NSInteger twitterrifficButtonIndex;
 @property (nonatomic) NSInteger locationButtonIndex;
 @property (nonatomic) CGAffineTransform hidingTransformation;
-@property (nonatomic, retain) MNOMapController *mapController;
-@property (nonatomic, assign) MNOTwitterClientManager *clientManager;
+@property (nonatomic, strong) MNOMapController *mapController;
+@property (nonatomic, weak) MNOTwitterClientManager *clientManager;
 
 - (void)disappear;
 - (void)updateLabel;
@@ -42,16 +42,9 @@
 
 - (void)dealloc 
 {
-    [_textView release];
-    [_toolbar release];
-    [_timeStampLabel release];
-    [_note release];
     _delegate = nil;
-    [_twitterChoiceSheet release];
     _mapController.delegate = nil;
-    [_mapController release];
     _clientManager = nil;
-    [super dealloc];
 }
 
 #pragma mark - UIViewController methods
@@ -138,7 +131,6 @@
                                           cancelButtonTitle:cancelText
                                           otherButtonTitles:@"OK", nil];
     [alert show];
-    [alert release];
 }
 
 - (IBAction)action:(id)sender
@@ -178,7 +170,6 @@
     sheet.cancelButtonIndex = sheetButtonCount;
     
     [sheet showInView:self.view];
-    [sheet release];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -229,9 +220,7 @@
 
             [self disappear];
 
-            [self presentModalViewController:composer animated:YES];
-            [composer release];
-            [message release];
+            [self presentViewController:composer animated:YES completion:nil];
         }
         else
         {
@@ -248,11 +237,11 @@
                     // This path means that a client has been installed in the device,
                     // but the current value in the preferences is "None" or other device not installed.
                     NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-                    self.twitterChoiceSheet = [[[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
+                    self.twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
                                                                            delegate:self
                                                                   cancelButtonTitle:nil
                                                              destructiveButtonTitle:nil
-                                                                  otherButtonTitles:nil] autorelease];
+                                                                  otherButtonTitles:nil];
                     NSArray *availableClients = [self.clientManager availableClients];
                     for (NSString *client in availableClients)
                     {
@@ -269,13 +258,13 @@
                 {
                     if (self.mapController == nil)
                     {
-                        self.mapController = [[[MNOMapController alloc] init] autorelease];
+                        self.mapController = [[MNOMapController alloc] init];
                         self.mapController.delegate = self;
                     }
                     self.mapController.note = self.note;
                     
                     [self disappear];
-                    [self presentModalViewController:self.mapController animated:YES];
+                    [self presentViewController:self.mapController animated:YES completion:nil];
                 }
             }
         }
@@ -294,8 +283,8 @@
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (annotationView == nil)
     {
-        annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation 
-                                                       reuseIdentifier:identifier] autorelease];
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation 
+                                                       reuseIdentifier:identifier];
     }
     
     MNOColorCode code = self.note.colorCode;
@@ -360,7 +349,7 @@
           didFinishWithResult:(MFMailComposeResult)result 
                         error:(NSError *)error
 {
-    [composer dismissModalViewControllerAnimated:YES];
+    [composer dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Notification handlers

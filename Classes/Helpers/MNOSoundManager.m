@@ -12,7 +12,7 @@
 
 @interface MNOSoundManager ()
 
-@property (nonatomic, retain) SoundEffect *eraseSound;
+@property (nonatomic, strong) SoundEffect *eraseSound;
 
 @end
 
@@ -30,16 +30,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOSoundManager)
     {
         NSBundle *mainBundle = [NSBundle mainBundle];
         NSString *path = [mainBundle pathForResource:@"Erase" ofType:@"caf"];
-        self.eraseSound = [[[SoundEffect alloc] initWithContentsOfFile:path] autorelease];
+        self.eraseSound = [[SoundEffect alloc] initWithContentsOfFile:path];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [_eraseSound release];
-    [super dealloc];
-}
 
 #pragma mark - Public methods
 

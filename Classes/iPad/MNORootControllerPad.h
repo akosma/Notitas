@@ -19,23 +19,23 @@
                                                     UIActionSheetDelegate,
                                                     UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *trashButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *mapButton;
-@property (nonatomic, retain) IBOutlet UIView *holderView;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIView *auxiliaryView;
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *undoButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *redoButton;
-@property (nonatomic, retain) IBOutlet UIView *modalBlockerView;
-@property (nonatomic, retain) IBOutlet UIView *editorView;
-@property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, retain) IBOutlet UIToolbar *editingToolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *mailButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *twitterButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *gridButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *stackButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *trashButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *locationButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *mapButton;
+@property (nonatomic, strong) IBOutlet UIView *holderView;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIView *auxiliaryView;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *undoButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *redoButton;
+@property (nonatomic, strong) IBOutlet UIView *modalBlockerView;
+@property (nonatomic, strong) IBOutlet UIView *editorView;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (nonatomic, strong) IBOutlet UIToolbar *editingToolbar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *mailButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *twitterButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *gridButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *stackButton;
 
 - (IBAction)shakeNotes:(id)sender;
 - (IBAction)insertNewObject:(id)sender;

@@ -11,9 +11,9 @@
 
 @interface MNOMapControllerPad : UIViewController <MKMapViewDelegate>
 
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
-@property (nonatomic, assign) UIViewController *parent;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, weak) UIViewController *parent;
 
 - (IBAction)done:(id)sender;
 - (IBAction)changeMapType:(id)sender;

@@ -15,7 +15,7 @@
 
 @interface MNOCoreDataManager : AKOCoreDataManager
 
-@property (nonatomic, readonly) NSUndoManager *undoManager;
+@property (weak, nonatomic, readonly) NSUndoManager *undoManager;
 
 
 + (id)sharedMNOCoreDataManager;

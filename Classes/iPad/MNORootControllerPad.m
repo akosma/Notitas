@@ -17,21 +17,21 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 @interface MNORootControllerPad ()
 
-@property (nonatomic, retain) NSArray *notes;
-@property (nonatomic, retain) NSMutableArray *noteViews;
-@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSArray *notes;
+@property (nonatomic, strong) NSMutableArray *noteViews;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic) BOOL locationInformationAvailable;
-@property (nonatomic, retain) MNONoteThumbnail *currentThumbnail;
-@property (nonatomic, retain) UIAlertView *deleteAllNotesAlertView;
-@property (nonatomic, retain) UIAlertView *deleteNoteAlertView;
+@property (nonatomic, strong) MNONoteThumbnail *currentThumbnail;
+@property (nonatomic, strong) UIAlertView *deleteAllNotesAlertView;
+@property (nonatomic, strong) UIAlertView *deleteNoteAlertView;
 @property (nonatomic, getter = isShowingLocationView) BOOL showingLocationView;
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
-@property (nonatomic, retain) MNOMapControllerPad *map;
-@property (nonatomic, retain) MNONoteThumbnail *animationThumbnail;
-@property (nonatomic, retain) UIActionSheet *twitterChoiceSheet;
+@property (nonatomic, strong) MNOMapControllerPad *map;
+@property (nonatomic, strong) MNONoteThumbnail *animationThumbnail;
+@property (nonatomic, strong) UIActionSheet *twitterChoiceSheet;
 @property (nonatomic) CGPoint handlePointOffset;
-@property (nonatomic, assign) Note *newlyCreatedNote;
-@property (nonatomic, assign) MNONoteThumbnail *newlyCreatedNoteThumbnail;
+@property (nonatomic, weak) Note *newlyCreatedNote;
+@property (nonatomic, weak) MNONoteThumbnail *newlyCreatedNoteThumbnail;
 
 - (void)refresh;
 - (Note *)createNote;
@@ -84,35 +84,8 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 
 - (void)dealloc
 {
-    [_mapButton release];
-    [_mailButton release];
-    [_editingToolbar release];
-    [_map release];
-    [_textView release];
-    [_editorView release];
-    [_modalBlockerView release];
-    [_undoButton release];
-    [_redoButton release];
-    [_auxiliaryView release];
-    [_mapView release];
-    [_currentThumbnail release];
-    [_deleteAllNotesAlertView release];
-    [_deleteNoteAlertView release];
-    [_scrollView release];
-    [_holderView release];
-    [_locationManager release];
-    [_trashButton release];
-    [_locationButton release];
-    [_notes release];
-    [_noteViews release];
-    [_animationThumbnail release];
-    [_twitterChoiceSheet release];
-    [_twitterButton release];
-    [_stackButton release];
-    [_gridButton release];
     _newlyCreatedNoteThumbnail = nil;
     _newlyCreatedNote = nil;
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -121,7 +94,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 {
     [super viewDidLoad];
     
-    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = 100;
@@ -133,10 +106,10 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     self.showingLocationView = NO;
     self.showingEditionView = NO;
     self.modalBlockerView.alpha = 0.0;
-    self.animationThumbnail = [[[MNONoteThumbnail alloc] initWithFrame:CGRectZero] autorelease];
+    self.animationThumbnail = [[MNONoteThumbnail alloc] initWithFrame:CGRectZero];
 
-    UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
-                                                                           action:@selector(dismissBlockerView:)] autorelease];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                           action:@selector(dismissBlockerView:)];
     [self.modalBlockerView addGestureRecognizer:tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -203,11 +176,11 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         NSString *title = NSLocalizedString(@"ARE_YOU_SURE", @"Title of the 'trash' dialog of the editor controller");
         NSString *message = NSLocalizedString(@"UNDO_POSSIBLE", @"Explanation of the 'trash' dialog of the editor controller");
         NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-        self.deleteNoteAlertView = [[[UIAlertView alloc] initWithTitle:title
+        self.deleteNoteAlertView = [[UIAlertView alloc] initWithTitle:title
                                                                message:message
                                                               delegate:self
                                                      cancelButtonTitle:cancelText
-                                                     otherButtonTitles:@"OK", nil] autorelease];
+                                                     otherButtonTitles:@"OK", nil];
     }
     [self.deleteNoteAlertView show];
 }
@@ -244,7 +217,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     
     NSString *fileName = [NSString stringWithFormat:@"%@.notita", self.currentThumbnail.note.filename];
     
-    MFMailComposeViewController *composer = [[[MFMailComposeViewController alloc] init] autorelease];
+    MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
     [composer addAttachmentData:data mimeType:@"application/octet-stream" fileName:fileName];
     composer.modalPresentationStyle = UIModalPresentationFormSheet;
     composer.mailComposeDelegate = self;
@@ -264,7 +237,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
     NSString *subject = NSLocalizedString(@"EMAIL_SUBJECT", @"Title of the e-mail sent by the application");
     [composer setSubject:subject];
     [composer setMessageBody:message isHTML:NO];
-    [self presentModalViewController:composer animated:YES];
+    [self presentViewController:composer animated:YES completion:nil];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -392,23 +365,23 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
         BOOL locationAvailable = [thumb.note.hasLocation boolValue];
         if (locationAvailable)
         {
-            UIMenuItem *locationItem = [[[UIMenuItem alloc] initWithTitle:locationText 
-                                                                   action:@selector(showMap:)] autorelease];
+            UIMenuItem *locationItem = [[UIMenuItem alloc] initWithTitle:locationText 
+                                                                   action:@selector(showMap:)];
             [items addObject:locationItem];
         }
 
         if ([MFMailComposeViewController canSendMail])
         {
-            UIMenuItem *emailItem = [[[UIMenuItem alloc] initWithTitle:emailText 
-                                                                action:@selector(sendViaEmail:)] autorelease];
+            UIMenuItem *emailItem = [[UIMenuItem alloc] initWithTitle:emailText 
+                                                                action:@selector(sendViaEmail:)];
             [items addObject:emailItem];
         }
         
         MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
         if ([[clientManager availableClients] count] > 0)
         {
-            UIMenuItem *twitterItem = [[[UIMenuItem alloc] initWithTitle:twitterText
-                                                                action:@selector(sendToTwitter:)] autorelease];
+            UIMenuItem *twitterItem = [[UIMenuItem alloc] initWithTitle:twitterText
+                                                                action:@selector(sendToTwitter:)];
             [items addObject:twitterItem];
         }
 
@@ -476,7 +449,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
           didFinishWithResult:(MFMailComposeResult)result 
                         error:(NSError *)error
 {
-    [composer dismissModalViewControllerAnimated:YES];
+    [composer dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -637,7 +610,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     if (self.map == nil)
     {
-        self.map = [[[MNOMapControllerPad alloc] init] autorelease];
+        self.map = [[MNOMapControllerPad alloc] init];
     }
     self.map.parent = self;
     [UIView transitionFromView:self.view 
@@ -692,11 +665,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         NSString *title = NSLocalizedString(@"REMOVE_ALL_NOTES_QUESTION", @"Title of the 'remove all notes' dialog");
         NSString *message = NSLocalizedString(@"ALL_NOTES_UNDO_POSSIBLE", @"Warning message of the 'remove all notes' dialog");
         NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-        self.deleteAllNotesAlertView = [[[UIAlertView alloc] initWithTitle:title
+        self.deleteAllNotesAlertView = [[UIAlertView alloc] initWithTitle:title
                                                                    message:message
                                                                   delegate:self
                                                          cancelButtonTitle:cancelText
-                                                         otherButtonTitles:@"OK", nil] autorelease];
+                                                         otherButtonTitles:@"OK", nil];
     }
     [self.deleteAllNotesAlertView show];
 }
@@ -764,24 +737,24 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.noteViews = [NSMutableArray array];
     for (Note *note in self.notes)
     {
-        MNONoteThumbnail *thumb = [[[MNONoteThumbnail alloc] initWithFrame:DEFAULT_RECT] autorelease];
+        MNONoteThumbnail *thumb = [[MNONoteThumbnail alloc] initWithFrame:DEFAULT_RECT];
         thumb.note = note;
         [thumb refreshDisplay];
         
         [[NSNotificationCenter defaultCenter] removeObserver:thumb];
         
-        UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                               action:@selector(drag:)] autorelease];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                               action:@selector(drag:)];
         pan.delegate = self;
         
-        UIRotationGestureRecognizer *rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self 
-                                                                                              action:@selector(rotate:)] autorelease];
+        UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self 
+                                                                                              action:@selector(rotate:)];
         rotation.delegate = self;
 
-        UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
-                                                                               action:@selector(tap:)] autorelease];
-        UITapGestureRecognizer *doubleTap = [[[UITapGestureRecognizer alloc] initWithTarget:self 
-                                                                                     action:@selector(doubleTap:)] autorelease];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                               action:@selector(tap:)];
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                     action:@selector(doubleTap:)];
         doubleTap.numberOfTapsRequired = 2;
         
         [thumb addGestureRecognizer:pan];
@@ -920,7 +893,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.mapView.centerCoordinate = coordinate;
     if (self.map == nil)
     {
-        self.map = [[[MNOMapControllerPad alloc] init] autorelease];
+        self.map = [[MNOMapControllerPad alloc] init];
     }
     self.mapView.delegate = self.map;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 10000.0, 10000.0);
@@ -1078,11 +1051,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         // This path means that a client has been installed in the device,
         // but the current value in the preferences is "None" or other device not installed.
         NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-        self.twitterChoiceSheet = [[[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
+        self.twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
                                                                delegate:self
                                                       cancelButtonTitle:nil
                                                  destructiveButtonTitle:nil
-                                                      otherButtonTitles:nil] autorelease];
+                                                      otherButtonTitles:nil];
         NSArray *availableClients = [clientManager availableClients];
         for (NSString *client in availableClients)
         {

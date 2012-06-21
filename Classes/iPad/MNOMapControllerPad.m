@@ -12,7 +12,7 @@
 
 @interface MNOMapControllerPad ()
 
-@property (nonatomic, retain) NSArray *notes;
+@property (nonatomic, strong) NSArray *notes;
 
 @end
 
@@ -27,10 +27,6 @@
 - (void)dealloc
 {
     _parent = nil;
-    [_notes release];
-    [_segmentedControl release];
-    [_mapView release];
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -105,8 +101,8 @@
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (annotationView == nil)
     {
-        annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation 
-                                                       reuseIdentifier:identifier] autorelease];
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation 
+                                                       reuseIdentifier:identifier];
         annotationView.canShowCallout = YES;
     }
     

@@ -25,11 +25,11 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 
 @interface MNONoteThumbnail ()
 
-@property (nonatomic, retain) CALayer *blueLayer;
-@property (nonatomic, retain) CALayer *redLayer;
-@property (nonatomic, retain) CALayer *greenLayer;
-@property (nonatomic, retain) CALayer *yellowLayer;
-@property (nonatomic, assign) CALayer *currentLayer;
+@property (nonatomic, strong) CALayer *blueLayer;
+@property (nonatomic, strong) CALayer *redLayer;
+@property (nonatomic, strong) CALayer *greenLayer;
+@property (nonatomic, strong) CALayer *yellowLayer;
+@property (nonatomic, weak) CALayer *currentLayer;
 
 - (void)setup;
 
@@ -115,13 +115,6 @@ CAGradientLayer *gradientWithColors(UIColor *startColor, UIColor *endColor)
 - (void)dealloc 
 {
     _currentLayer = nil;
-    [_note release];
-    [_blueLayer release];
-    [_greenLayer release];
-    [_redLayer release];
-    [_yellowLayer release];
-    [_summaryLabel release];
-    [super dealloc];
 }
 
 #pragma mark - Public methods

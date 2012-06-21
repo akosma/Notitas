@@ -33,12 +33,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_urlTemplate release];
-    [_name release];
-    [super dealloc];
-}
 
 #pragma mark - Public methods
 
@@ -62,14 +56,13 @@
 {
     if (self.name != nil)
     {
-        NSString *message = (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
+        NSString *message = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
                                                                                 (CFStringRef)text,
                                                                                 NULL, 
                                                                                 (CFStringRef)@";/?:@&=+$,", 
                                                                                 kCFStringEncodingUTF8);
         
         NSString *stringURL = [NSString stringWithFormat:self.urlTemplate, message];
-        [message release];
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];    
     }

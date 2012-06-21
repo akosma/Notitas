@@ -13,9 +13,9 @@
 
 @interface MNONoteCell : UITableViewCell 
 
-@property (nonatomic, retain) Note *leftNote;
-@property (nonatomic, retain) Note *rightNote;
-@property (nonatomic, assign) id<MNONoteCellDelegate> delegate;
+@property (nonatomic, strong) Note *leftNote;
+@property (nonatomic, strong) Note *rightNote;
+@property (nonatomic, weak) id<MNONoteCellDelegate> delegate;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 

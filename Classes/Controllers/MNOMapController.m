@@ -11,7 +11,7 @@
 
 @interface MNOMapController ()
 
-@property (nonatomic, retain) MKPlacemark *placemark;
+@property (nonatomic, strong) MKPlacemark *placemark;
 
 @end
 
@@ -27,20 +27,15 @@
 - (void)dealloc 
 {
     [_mapView removeAnnotation:_placemark];
-    [_mapView release];
-    [_placemark release];
-    [_titleItem release];
 
     _delegate = nil;
-    [_note release];
-    [super dealloc];
 }
 
 #pragma mark - IBAction methods
 
 - (IBAction)done:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIViewController methods
@@ -65,8 +60,8 @@
     [self.mapView removeAnnotation:self.placemark];
     self.placemark = nil;
 
-    self.placemark = [[[MKPlacemark alloc] initWithCoordinate:coordinate 
-                                            addressDictionary:nil] autorelease];
+    self.placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate 
+                                            addressDictionary:nil];
     [self.mapView addAnnotation:self.placemark];
 }
 

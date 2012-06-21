@@ -36,7 +36,8 @@
 {
     if (self.canSendMessage)
     {
-        TWTweetComposeViewController *controller = [[[TWTweetComposeViewController alloc] init] autorelease];
+        TWTweetComposeViewController *controller = [[TWTweetComposeViewController alloc] init];
+        __weak TWTweetComposeViewController *weakController = controller;
         [controller setInitialText:text];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -45,7 +46,7 @@
             // the editor should regain its focus
             // when the tweet is finally sent
             [controller setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
-                [controller dismissModalViewControllerAnimated:YES];
+                [weakController dismissViewControllerAnimated:YES completion:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:MNOTwitterMessageSent object:nil];
             }];
         }
@@ -53,7 +54,7 @@
         // This is a hack. Awful. But it works :)
         id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
         UIViewController *rootController = [appDelegate performSelector:@selector(rootController)];
-        [rootController presentModalViewController:controller animated:YES];
+        [rootController presentViewController:controller animated:YES completion:nil];
     }
 }
 

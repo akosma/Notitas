@@ -55,7 +55,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
     self = [super initWithFilename:@"Notitas"];
     if (self) 
     {
-        NSUndoManager *undoManager = [[[NSUndoManager alloc] init] autorelease];
+        NSUndoManager *undoManager = [[NSUndoManager alloc] init];
         [undoManager setLevelsOfUndo:30];
         self.managedObjectContext.undoManager = undoManager;
     }
@@ -71,19 +71,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOCoreDataManager)
 
 - (NSFetchedResultsController *)createFetchedResultsController 
 {
-	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" 
                                               inManagedObjectContext:self.managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
-	NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES] autorelease];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
 	NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
 	[fetchRequest setSortDescriptors:sortDescriptors];
 	
-	NSFetchedResultsController *fetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+	NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                                                                                 managedObjectContext:self.managedObjectContext 
                                                                                                   sectionNameKeyPath:nil 
-                                                                                                           cacheName:cacheName] autorelease];
+                                                                                                           cacheName:cacheName];
 	return fetchedResultsController;
 }
 

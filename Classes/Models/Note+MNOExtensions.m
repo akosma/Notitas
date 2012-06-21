@@ -45,7 +45,7 @@ static NSInteger FILENAME_LENGTH = 15;
 {
     CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue]
                                                       longitude:[self.longitude doubleValue]];
-    return [location autorelease];
+    return location;
 }
 
 - (CGFloat)angleRadians

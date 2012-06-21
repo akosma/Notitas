@@ -21,11 +21,11 @@
                                                        MKMapViewDelegate,
                                                        UITextViewDelegate>
 
-@property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UILabel *timeStampLabel;
-@property (nonatomic, retain) Note *note;
-@property (nonatomic, assign) id<MNONoteEditorControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet UILabel *timeStampLabel;
+@property (nonatomic, strong) Note *note;
+@property (nonatomic, weak) id<MNONoteEditorControllerDelegate> delegate;
 
 - (IBAction)changeColor:(id)sender;
 - (IBAction)done:(id)sender;

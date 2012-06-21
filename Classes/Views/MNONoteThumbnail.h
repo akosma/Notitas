@@ -17,10 +17,10 @@
 
 @interface MNONoteThumbnail : UIView 
 
-@property (nonatomic, retain) UILabel *summaryLabel;
+@property (nonatomic, strong) UILabel *summaryLabel;
 @property (nonatomic) MNOFontCode font;
 @property (nonatomic) MNOColorCode color;
-@property (nonatomic, retain) Note *note;
+@property (nonatomic, strong) Note *note;
 @property (nonatomic) CGAffineTransform originalTransform;
 
 - (void)refreshDisplay;

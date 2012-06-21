@@ -15,11 +15,11 @@
 
 @interface MNORootController ()
 
-@property (nonatomic, retain) Note *currentNote;
-@property (nonatomic, retain) MNONoteEditorController *editor;
-@property (nonatomic, retain) MNONoteThumbnail *thumbnail;
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) Note *currentNote;
+@property (nonatomic, strong) MNONoteEditorController *editor;
+@property (nonatomic, strong) MNONoteThumbnail *thumbnail;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) BOOL locationInformationAvailable;
 
 - (void)scrollToBottomRowAnimated:(BOOL)animated;
@@ -44,19 +44,9 @@
 
 - (void)dealloc 
 {
-    [_locationButton release];
-    [_currentNote release];
     _locationManager.delegate = nil;
-    [_locationManager release];
-    [_toolbar release];
-    [_tableView release];
 
-    [_thumbnail release];
     _editor.delegate = nil;
-    [_editor release];
-	[_fetchedResultsController release];
-    [_trashButton release];
-    [super dealloc];
 }
 
 #pragma mark - UIViewController methods
@@ -113,7 +103,7 @@
 
     [self checkTrashIconEnabled];
     
-    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.distanceFilter = 100;
@@ -140,11 +130,9 @@
 - (void)didReceiveMemoryWarning 
 {
     [super didReceiveMemoryWarning];
-    [_thumbnail release];
     _thumbnail = nil;
     
     _editor.delegate = nil;
-    [_editor release];
     _editor = nil;
 }
 
@@ -202,7 +190,6 @@
                                           cancelButtonTitle:cancelText
                                           otherButtonTitles:@"OK", nil];
     [alert show];
-    [alert release];
 }
 
 - (IBAction)about:(id)sender
@@ -249,7 +236,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)] autorelease];
+    return [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -259,7 +246,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
+    return [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -269,7 +256,7 @@
     MNONoteCell *cell = (MNONoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) 
     {
-        cell = [[[MNONoteCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+        cell = [[MNONoteCell alloc] initWithReuseIdentifier:cellIdentifier];
     }
 
     cell.delegate = self;
@@ -309,14 +296,14 @@
     CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
     if (self.thumbnail == nil)
     {
-        self.thumbnail = [[[MNONoteThumbnail alloc] initWithFrame:realFrame] autorelease];
+        self.thumbnail = [[MNONoteThumbnail alloc] initWithFrame:realFrame];
     }
     self.thumbnail.frame = realFrame;
     self.thumbnail.color = self.currentNote.colorCode;
     [self.thumbnail setNeedsDisplay];
     if (self.editor == nil)
     {
-        self.editor = [[[MNONoteEditorController alloc] init] autorelease];
+        self.editor = [[MNONoteEditorController alloc] init];
         self.editor.view.alpha = 0.0;
         self.editor.delegate = self;
     }

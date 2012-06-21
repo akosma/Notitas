@@ -17,7 +17,7 @@ static NSString *TWITTER_CLIENT_CODE_NATIVE = @"Notitas";
 
 @interface MNOTwitterClientManager ()
 
-@property (nonatomic, retain) NSMutableDictionary *clients;
+@property (nonatomic, strong) NSMutableDictionary *clients;
 @property (nonatomic, readonly) BOOL canSendTweet;
 
 - (void)initializeClients;
@@ -49,11 +49,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     return self;
 }
 
-- (void)dealloc
-{
-    [_clients release];
-    [super dealloc];
-}
 
 #pragma mark - Public methods
 
@@ -71,9 +66,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *descriptors = [[NSArray alloc] initWithObjects:descriptor, nil];
     [returnArray sortUsingDescriptors:descriptors];
-    [descriptors release];
-    [descriptor release];
-    return [returnArray autorelease];
+    return returnArray;
 }
 
 - (NSArray *)availableClients
@@ -87,7 +80,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
             [availableClients addObject:client.name];
         }
     }
-    return [availableClients autorelease];
+    return availableClients;
 }
 
 - (BOOL)isAnyClientAvailable
@@ -130,20 +123,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(MNOTwitterClientManager)
 
     // Populate the array with the clients
     self.clients = [NSMutableDictionary dictionary];
-    MNOTwitterClient *none = [[[MNOTwitterClient alloc] init] autorelease];
+    MNOTwitterClient *none = [[MNOTwitterClient alloc] init];
     [self.clients setObject:none forKey:TWITTER_CLIENT_CODE_NONE];
     
     for (NSDictionary *dict in clients)
     {
         NSString *name = [dict objectForKey:@"name"];
-        MNOTwitterClient *client = [[[MNOTwitterClient alloc] initWithDictionary:dict] autorelease];
+        MNOTwitterClient *client = [[MNOTwitterClient alloc] initWithDictionary:dict];
         [self.clients setObject:client forKey:name];
     }
     
     // If possible, we should be able to send tweets natively
     if (self.canSendTweet)
     {
-        MNONativeTwitterClient *native = [[[MNONativeTwitterClient alloc] init] autorelease];
+        MNONativeTwitterClient *native = [[MNONativeTwitterClient alloc] init];
         [self.clients setObject:native forKey:TWITTER_CLIENT_CODE_NATIVE];
     }
 }

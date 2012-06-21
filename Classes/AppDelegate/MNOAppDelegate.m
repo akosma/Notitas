@@ -23,12 +23,6 @@
 @synthesize rootController = _rootController;
 @synthesize lastTime = _lastTime;
 
-- (void)dealloc 
-{
-    [_window release];
-    [_rootController release];
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -62,7 +56,7 @@
                                                                            (CFStringRef)parameter, 
                                                                            CFSTR(""));
             
-            [self.rootController createNewNoteWithContents:(NSString *)clean];
+            [self.rootController createNewNoteWithContents:(__bridge NSString *)clean];
             CFRelease(clean);
             return YES;
         }

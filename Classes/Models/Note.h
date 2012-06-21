@@ -13,19 +13,19 @@
 
 @interface Note : NSManagedObject 
 
-@property (nonatomic, retain) NSNumber * angle;
-@property (nonatomic, retain) NSNumber * color;
-@property (nonatomic, retain) NSString * contents;
-@property (nonatomic, retain) NSNumber * fontFamily;
-@property (nonatomic, retain) NSNumber * fontSize;
-@property (nonatomic, retain) NSNumber * hasLocation;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSNumber * size;
-@property (nonatomic, retain) NSDate * timeStamp;
-@property (nonatomic, retain) NSNumber * xcoord;
-@property (nonatomic, retain) NSNumber * ycoord;
-@property (nonatomic, retain) NSDate * lastModificationTime;
-@property (nonatomic, retain) MNOBoard *board;
+@property (nonatomic, strong) NSNumber * angle;
+@property (nonatomic, strong) NSNumber * color;
+@property (nonatomic, strong) NSString * contents;
+@property (nonatomic, strong) NSNumber * fontFamily;
+@property (nonatomic, strong) NSNumber * fontSize;
+@property (nonatomic, strong) NSNumber * hasLocation;
+@property (nonatomic, strong) NSNumber * latitude;
+@property (nonatomic, strong) NSNumber * longitude;
+@property (nonatomic, strong) NSNumber * size;
+@property (nonatomic, strong) NSDate * timeStamp;
+@property (nonatomic, strong) NSNumber * xcoord;
+@property (nonatomic, strong) NSNumber * ycoord;
+@property (nonatomic, strong) NSDate * lastModificationTime;
+@property (nonatomic, strong) MNOBoard *board;
 
 @end

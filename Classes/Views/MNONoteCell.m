@@ -13,8 +13,8 @@
 
 @interface MNONoteCell ()
 
-@property (nonatomic, retain) MNONoteThumbnail *leftView;
-@property (nonatomic, retain) MNONoteThumbnail *rightView;
+@property (nonatomic, strong) MNONoteThumbnail *leftView;
+@property (nonatomic, strong) MNONoteThumbnail *rightView;
 @property (nonatomic) CGRect leftFrame;
 @property (nonatomic) CGRect rightFrame;
 
@@ -57,11 +57,6 @@
 - (void)dealloc 
 {
     _delegate = nil;
-    [_leftNote release];
-    [_rightNote release];
-    [_leftView release];
-    [_rightView release];
-    [super dealloc];
 }
 
 #pragma mark - Public properties
@@ -75,8 +70,7 @@
 {
     if (newNote != _leftNote)
     {
-        [_leftNote release];
-        _leftNote = [newNote retain];
+        _leftNote = newNote;
     }
     if (_leftNote == nil)
     {
@@ -105,8 +99,7 @@
 {
     if (newNote != _rightNote)
     {
-        [_rightNote release];
-        _rightNote = [newNote retain];
+        _rightNote = newNote;
     }
     if (_rightNote == nil)
     {

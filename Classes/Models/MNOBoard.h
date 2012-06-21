@@ -13,10 +13,10 @@
 
 @interface MNOBoard : NSManagedObject 
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSDate * creationTime;
-@property (nonatomic, retain) NSDate * lastModificationTime;
-@property (nonatomic, retain) NSSet *notes;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSDate * creationTime;
+@property (nonatomic, strong) NSDate * lastModificationTime;
+@property (nonatomic, strong) NSSet *notes;
 
 @end
 
