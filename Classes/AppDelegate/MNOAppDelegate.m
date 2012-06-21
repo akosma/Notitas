@@ -8,7 +8,6 @@
 
 #import "MNOAppDelegate.h"
 #import "MNORootController.h"
-#import "MNOExternals.h"
 #import "MNOHelpers.h"
 
 @interface MNOAppDelegate ()
@@ -34,10 +33,8 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Appirater appLaunched];
-    
     self.window.rootViewController = self.rootController;
     [self.window makeKeyAndVisible];
 

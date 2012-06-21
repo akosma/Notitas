@@ -19,7 +19,6 @@
 		3A15C47D101754B600ECB335 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C47C101754B600ECB335 /* MessageUI.framework */; };
 		3A15C4BF10175AA500ECB335 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4BE10175AA500ECB335 /* CoreLocation.framework */; };
 		3A15C4C310175AB700ECB335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15C4C210175AB700ECB335 /* MapKit.framework */; };
-		3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D6B7D1098280000F3DB45 /* Appirater.m */; };
 		3A60092E142381B9003B5B43 /* AKOLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60092D142381B9003B5B43 /* AKOLibrary.framework */; };
 		3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093114238209003B5B43 /* MediaPlayer.framework */; };
 		3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093314238218003B5B43 /* CFNetwork.framework */; };
@@ -111,8 +110,6 @@
 		3A15C47C101754B600ECB335 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3A15C4BE10175AA500ECB335 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3A15C4C210175AB700ECB335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3A4D6B7C1098280000F3DB45 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
-		3A4D6B7D1098280000F3DB45 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		3A60092D142381B9003B5B43 /* AKOLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AKOLibrary.framework; path = Externals/AKOLibrary.framework; sourceTree = "<group>"; };
 		3A60093114238209003B5B43 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3A60093314238218003B5B43 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -129,7 +126,6 @@
 		3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNOExtensions.m"; sourceTree = "<group>"; };
 		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
 		3A860E361429BD6F00649B27 /* MNOAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOAppDelegate.m; sourceTree = "<group>"; };
-		3A860E381429BDF400649B27 /* MNOExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOExternals.h; sourceTree = "<group>"; };
 		3A860E3A1429BF1000649B27 /* MNOMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOMapController.h; sourceTree = "<group>"; };
 		3A860E3B1429BF1000649B27 /* MNOMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOMapController.m; sourceTree = "<group>"; };
 		3A860E3C1429BF1000649B27 /* MNONoteEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNONoteEditorController.h; sourceTree = "<group>"; };
@@ -262,7 +258,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				3A4D6B7A1098280000F3DB45 /* Externals */,
 				3AC5BF901015986900D062A4 /* Classes */,
 				3A860EDD1429D1DF00649B27 /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -316,24 +311,6 @@
 				3A860E611429CF3900649B27 /* MNOMapControllerPad.m */,
 			);
 			path = iPad;
-			sourceTree = "<group>";
-		};
-		3A4D6B7A1098280000F3DB45 /* Externals */ = {
-			isa = PBXGroup;
-			children = (
-				3A4D6B7B1098280000F3DB45 /* appirater */,
-				3A860E381429BDF400649B27 /* MNOExternals.h */,
-			);
-			path = Externals;
-			sourceTree = "<group>";
-		};
-		3A4D6B7B1098280000F3DB45 /* appirater */ = {
-			isa = PBXGroup;
-			children = (
-				3A4D6B7C1098280000F3DB45 /* Appirater.h */,
-				3A4D6B7D1098280000F3DB45 /* Appirater.m */,
-			);
-			path = appirater;
 			sourceTree = "<group>";
 		};
 		3A860E391429BF1000649B27 /* Controllers */ = {
@@ -668,7 +645,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				3A4D6B7F1098280000F3DB45 /* Appirater.m in Sources */,
 				3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */,
 				3AD3F640142391B600812023 /* MNOSoundManager.m in Sources */,
 				3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */,
