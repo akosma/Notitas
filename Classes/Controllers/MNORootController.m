@@ -63,11 +63,7 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
 {
     [super viewDidLoad];
     
-    self.toolbar.frame = CGRectMake(0.0, 416.0, 320.0, 44.0);
-    [self.view addSubview:self.toolbar];
-
     self.collectionView.backgroundColor = [UIColor clearColor];
-	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
     
     self.fetchedResultsController = [[MNOCoreDataManager sharedMNOCoreDataManager] createFetchedResultsController];
     self.fetchedResultsController.delegate = self;
@@ -229,7 +225,14 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    return CGSizeMake(130.0, 130.0);
+    return CGSizeMake(120.0, 120.0);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(20.0, 30.0, 50.0, 30.0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -435,7 +438,7 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:itemCount inSection:0];
         [self.collectionView scrollToItemAtIndexPath:indexPath
-                                    atScrollPosition:UICollectionViewScrollPositionBottom
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredVertically
                                             animated:YES];
     }
 }
