@@ -21,14 +21,33 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+/**
+ @file UIDevice+AKOLibrary.h
+ Includes extensions to the UIDevice class.
+ */
+
 #import <UIKit/UIKit.h>
 
-// This category was adapted from
-// http://stackoverflow.com/questions/448162/determine-device-iphone-ipod-touch-with-iphone-sdk
-
+/**
+ Extensions to the UIDevice class.
+ */
 @interface UIDevice (AKOLibrary)
 
+/**
+ Returns a hardware-specific string uniquely identifying the kind of device.
+ */
 - (NSString *)ako_platform;
+
+/**
+ Returns a hardware-specific string uniquely identifying the kind of device.
+ This method returns a more human-readable description of the current device,
+ to be used for troubleshooting or reporting purposes.
+ */
 - (NSString *)ako_platformString;
+
+/**
+ Returns a boolean specifying whether the application is running on an iPad or not.
+ */
++ (BOOL)ako_runningInIPad;
 
 @end

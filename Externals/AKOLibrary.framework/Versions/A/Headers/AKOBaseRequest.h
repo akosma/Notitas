@@ -21,11 +21,13 @@
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "ASIHTTPRequest.h"
+#import "AFHTTPRequestOperation.h"
 
 extern NSTimeInterval const AKOBaseRequestTimeout;
 
-@interface AKOBaseRequest : ASIHTTPRequest 
+@interface AKOBaseRequest : AFHTTPRequestOperation 
+
+- (id)initWithURL:(NSURL *)newURL;
 
 - (void)handleResponse;
 - (NSString *)responseDescription;

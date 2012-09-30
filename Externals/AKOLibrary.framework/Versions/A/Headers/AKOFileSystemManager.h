@@ -40,9 +40,26 @@
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 
 /**
+ Contains the value of the application cache directory of the current app.
+ */
+@property (nonatomic, readonly) NSString *applicationCacheDirectory;
+
+/**
+ Contains the value of the application temp directory of the current app.
+ */
+@property (nonatomic, readonly) NSString *applicationTempDirectory;
+
+
+/**
  Returns a pointer to the singleton instance of this class.
  @return A pointer to the singleton instance of this class.
  */
 + (AKOFileSystemManager *)sharedAKOFileSystemManager;
+
+/**
+ Removed the file with the path passed as parameter.
+ @param path An NSString with the path of the file to remove.
+ */
+- (void)removeFile:(NSString *)path;
 
 @end
