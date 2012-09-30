@@ -185,7 +185,9 @@
         [composer setSubject:subject];
         [composer setMessageBody:message isHTML:NO];
 
-        [self presentViewController:composer animated:YES completion:nil];
+        [self presentViewController:composer
+                           animated:YES
+                         completion:nil];
     }
     else
     {
@@ -229,7 +231,9 @@
                 self.mapController.note = self.note;
                 
                 [self.textView resignFirstResponder];
-                [self presentViewController:self.mapController animated:YES completion:nil];
+                [self presentViewController:self.mapController
+                                   animated:YES
+                                 completion:nil];
             }
         }
     }
