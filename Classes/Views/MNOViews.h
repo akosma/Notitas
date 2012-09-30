@@ -7,5 +7,4 @@
 //
 
 #import "MNONoteCell.h"
-#import "MNONoteCellDelegate.h"
 #import "MNONoteThumbnail.h"

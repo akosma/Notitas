@@ -10,7 +10,5 @@
 #import "MNOSoundManager.h"
 #import "MNOColorCode.h"
 #import "MNOFontCode.h"
-#import "MNOTwitterClient.h"
-#import "MNOTwitterClientManager.h"
 #import "UIView+MNOExtensions.h"
 #import "MNONotifications.h"

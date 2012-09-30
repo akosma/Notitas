@@ -28,7 +28,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
 @property (nonatomic, getter = isShowingEditionView) BOOL showingEditionView;
 @property (nonatomic, strong) MNOMapControllerPad *map;
 @property (nonatomic, strong) MNONoteThumbnail *animationThumbnail;
-@property (nonatomic, strong) UIActionSheet *twitterChoiceSheet;
 @property (nonatomic) CGPoint handlePointOffset;
 @property (nonatomic, weak) Note *newlyCreatedNote;
 @property (nonatomic, weak) MNONoteThumbnail *newlyCreatedNoteThumbnail;
@@ -344,8 +343,7 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
             [items addObject:emailItem];
         }
         
-        MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
-        if ([[clientManager availableClients] count] > 0)
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
         {
             UIMenuItem *twitterItem = [[UIMenuItem alloc] initWithTitle:twitterText
                                                                 action:@selector(sendToTwitter:)];
@@ -417,21 +415,6 @@ static CGRect DEFAULT_RECT = {{0.0, 0.0}, {DEFAULT_WIDTH, DEFAULT_WIDTH}};
                         error:(NSError *)error
 {
     [composer dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - UIActionSheetDelegate methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (actionSheet == self.twitterChoiceSheet)
-    {
-        MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
-        NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-        [clientManager setSelectedClientName:buttonTitle];
-        [clientManager send:self.currentThumbnail.note.contents];
-        
-        self.twitterChoiceSheet = nil;
-    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate methods
@@ -886,8 +869,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.editorView.alpha = 0.0;
     self.textView.inputAccessoryView = self.editingToolbar;
     self.mailButton.enabled = [MFMailComposeViewController canSendMail];
-    MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
-    self.twitterButton.enabled = ([[clientManager availableClients] count] > 0);
+    self.twitterButton.enabled = ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]);
     
     self.textView.text = self.currentThumbnail.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.currentThumbnail.note.fontCode) size:30.0];
@@ -1006,42 +988,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (IBAction)sendToTwitter:(id)sender
 {
-    MNOTwitterClientManager *clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
-    if ([clientManager canSendMessage])
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
-        // A client is installed and ready to be used!
-        // Let's send a message using it. We don't care which client this is!
-        [clientManager send:self.currentThumbnail.note.contents];
-    }
-    else 
-    {
-        // This path means that a client has been installed in the device,
-        // but the current value in the preferences is "None" or other device not installed.
-        NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-        self.twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
-                                                               delegate:self
-                                                      cancelButtonTitle:nil
-                                                 destructiveButtonTitle:nil
-                                                      otherButtonTitles:nil];
-        NSArray *availableClients = [clientManager availableClients];
-        for (NSString *client in availableClients)
-        {
-            [self.twitterChoiceSheet addButtonWithTitle:client];
-        }
-        [self.twitterChoiceSheet addButtonWithTitle:cancelText];
-        self.twitterChoiceSheet.cancelButtonIndex = [availableClients count];
-        
-        if (self.isShowingEditionView)
-        {
-            [self.twitterChoiceSheet showFromBarButtonItem:self.twitterButton 
-                                                  animated:YES];
-        }
-        else
-        {
-            [self.twitterChoiceSheet showFromRect:self.currentThumbnail.frame 
-                                           inView:self.holderView 
-                                         animated:YES];
-        }
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [controller setInitialText:self.currentThumbnail.note.contents];
     }
 }
 

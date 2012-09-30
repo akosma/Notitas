@@ -13,12 +13,10 @@
 
 @interface MNONoteEditorController ()
 
-@property (nonatomic, strong) UIActionSheet *twitterChoiceSheet;
-@property (nonatomic) NSInteger twitterrifficButtonIndex;
+@property (nonatomic) NSInteger twitterButtonIndex;
 @property (nonatomic) NSInteger locationButtonIndex;
 @property (nonatomic) CGAffineTransform hidingTransformation;
 @property (nonatomic, strong) MNOMapController *mapController;
-@property (nonatomic, weak) MNOTwitterClientManager *clientManager;
 
 - (void)disappear;
 - (void)updateLabel;
@@ -27,13 +25,6 @@
 
 
 @implementation MNONoteEditorController
-
-- (void)dealloc 
-{
-    _delegate = nil;
-    _mapController.delegate = nil;
-    _clientManager = nil;
-}
 
 #pragma mark - UIViewController methods
 
@@ -44,14 +35,8 @@
     self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
     self.hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
     self.toolbar.transform = self.hidingTransformation;
-    self.twitterrifficButtonIndex = -1;
+    self.twitterButtonIndex = -1;
     self.locationButtonIndex = -1;
-    self.clientManager = [MNOTwitterClientManager sharedMNOTwitterClientManager];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(tweetSent:) 
-                                                 name:MNOTwitterMessageSent 
-                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -140,10 +125,10 @@
     [sheet addButtonWithTitle:emailText];
     NSInteger sheetButtonCount = 1;
     
-    if ([self.clientManager isAnyClientAvailable])
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         [sheet addButtonWithTitle:twitterrifficText];
-        self.twitterrifficButtonIndex = sheetButtonCount;
+        self.twitterButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
     }    
     
@@ -164,96 +149,65 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet == self.twitterChoiceSheet)
+    if (buttonIndex == 0)
     {
-        NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-        [self.clientManager setSelectedClientName:buttonTitle];
-        [self.clientManager send:self.note.contents];
+        // E-mail
+        NSDictionary *dict = [self.note exportAsDictionary];
+        NSError *error = nil;
+        NSData *data = [NSPropertyListSerialization dataWithPropertyList:dict 
+                                                                  format:NSPropertyListXMLFormat_v1_0 
+                                                                 options:0
+                                                                   error:&error];
+        
+        NSString *fileName = [NSString stringWithFormat:@"%@.notita", self.note.filename];
 
-        self.twitterChoiceSheet = nil;
-    }
-    else 
-    {
-        if (buttonIndex == 0)
+        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+        composer.mailComposeDelegate = self;
+        [composer addAttachmentData:data mimeType:@"application/octet-stream" fileName:fileName];
+
+        NSMutableString *message = [[NSMutableString alloc] init];
+        if (self.note.contents == nil || [self.note.contents length] == 0)
         {
-            // E-mail
-            NSDictionary *dict = [self.note exportAsDictionary];
-            NSError *error = nil;
-            NSData *data = [NSPropertyListSerialization dataWithPropertyList:dict 
-                                                                      format:NSPropertyListXMLFormat_v1_0 
-                                                                     options:0
-                                                                       error:&error];
-            
-            NSString *fileName = [NSString stringWithFormat:@"%@.notita", self.note.filename];
-
-            MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
-            composer.mailComposeDelegate = self;
-            [composer addAttachmentData:data mimeType:@"application/octet-stream" fileName:fileName];
-
-            NSMutableString *message = [[NSMutableString alloc] init];
-            if (self.note.contents == nil || [self.note.contents length] == 0)
-            {
-                NSString *emptyNoteText = NSLocalizedString(@"EMPTY_NOTE", @"To be used when en empty note is sent via e-mail");
-                [message appendString:emptyNoteText];
-            }
-            else
-            {
-                [message appendString:self.note.contents];
-            }
-            NSString *sentFromText = NSLocalizedString(@"SENT_BY_NOTITAS", @"Some marketing here");
-            [message appendString:sentFromText];
-            NSString *subject = NSLocalizedString(@"EMAIL_SUBJECT", @"Title of the e-mail sent by the application");
-            [composer setSubject:subject];
-            [composer setMessageBody:message isHTML:NO];
-
-            [self disappear];
-
-            [self presentViewController:composer animated:YES completion:nil];
+            NSString *emptyNoteText = NSLocalizedString(@"EMPTY_NOTE", @"To be used when en empty note is sent via e-mail");
+            [message appendString:emptyNoteText];
         }
         else
         {
-            if (self.twitterrifficButtonIndex == buttonIndex)
+            [message appendString:self.note.contents];
+        }
+        NSString *sentFromText = NSLocalizedString(@"SENT_BY_NOTITAS", @"Some marketing here");
+        [message appendString:sentFromText];
+        NSString *subject = NSLocalizedString(@"EMAIL_SUBJECT", @"Title of the e-mail sent by the application");
+        [composer setSubject:subject];
+        [composer setMessageBody:message isHTML:NO];
+
+        [self disappear];
+
+        [self presentViewController:composer animated:YES completion:nil];
+    }
+    else
+    {
+        if (self.twitterButtonIndex == buttonIndex)
+        {
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
             {
-                if ([self.clientManager canSendMessage])
-                {
-                    // A client is installed and ready to be used!
-                    // Let's send a message using it. We don't care which client this is!
-                    [self.clientManager send:self.note.contents];
-                }
-                else 
-                {
-                    // This path means that a client has been installed in the device,
-                    // but the current value in the preferences is "None" or other device not installed.
-                    NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
-                    self.twitterChoiceSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a Twitter Client"
-                                                                           delegate:self
-                                                                  cancelButtonTitle:nil
-                                                             destructiveButtonTitle:nil
-                                                                  otherButtonTitles:nil];
-                    NSArray *availableClients = [self.clientManager availableClients];
-                    for (NSString *client in availableClients)
-                    {
-                        [self.twitterChoiceSheet addButtonWithTitle:client];
-                    }
-                    [self.twitterChoiceSheet addButtonWithTitle:cancelText];
-                    self.twitterChoiceSheet.cancelButtonIndex = [availableClients count];
-                    [self.twitterChoiceSheet showInView:self.view];
-                }
+                SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+                [controller setInitialText:self.note.contents];
             }
-            else if (self.locationButtonIndex == buttonIndex)
+        }
+        else if (self.locationButtonIndex == buttonIndex)
+        {
+            if ([self.note.hasLocation boolValue])
             {
-                if ([self.note.hasLocation boolValue])
+                if (self.mapController == nil)
                 {
-                    if (self.mapController == nil)
-                    {
-                        self.mapController = [[MNOMapController alloc] init];
-                        self.mapController.delegate = self;
-                    }
-                    self.mapController.note = self.note;
-                    
-                    [self disappear];
-                    [self presentViewController:self.mapController animated:YES completion:nil];
+                    self.mapController = [[MNOMapController alloc] init];
+                    self.mapController.delegate = self;
                 }
+                self.mapController.note = self.note;
+                
+                [self disappear];
+                [self presentViewController:self.mapController animated:YES completion:nil];
             }
         }
     }
@@ -340,13 +294,6 @@
     [composer dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Notification handlers
-
-- (void)tweetSent:(NSNotification *)notification
-{
-    [self.textView becomeFirstResponder];
-}
-             
 #pragma mark - Private methods
 
 - (void)disappear

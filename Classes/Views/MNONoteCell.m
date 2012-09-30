@@ -13,129 +13,59 @@
 
 @interface MNONoteCell ()
 {
-    Note *_leftNote;
-    Note *_rightNote;
+    @private
+    Note *_note;
+    MNONoteThumbnail *_thumbnail;
 }
 
-@property (nonatomic, strong) MNONoteThumbnail *leftView;
-@property (nonatomic, strong) MNONoteThumbnail *rightView;
-@property (nonatomic) CGRect leftFrame;
-@property (nonatomic) CGRect rightFrame;
+@property (nonatomic, strong) MNONoteThumbnail *thumbnail;
 
 @end
 
 
 @implementation MNONoteCell
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithFrame:(CGRect)frame
 {
-    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) 
+    if (self = [super initWithFrame:frame])
     {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.thumbnail = [[MNONoteThumbnail alloc] initWithFrame:self.bounds];
+        [self.thumbnail mno_addShadow];
+        [self.contentView addSubview:self.thumbnail];
 
-        _leftFrame = CGRectMake(20.0, 20.0, 130.0, 130.0);
-        _leftView = [[MNONoteThumbnail alloc] initWithFrame:_leftFrame];
-        _leftView.hidden = YES;
-        [_leftView mno_addShadow];
-        [self.contentView addSubview:_leftView];
-
-        _rightFrame = CGRectMake(170.0, 20.0, 130.0, 130.0);
-        _rightView = [[MNONoteThumbnail alloc] initWithFrame:_rightFrame];
-        _rightView.hidden = YES;
-        [_rightView mno_addShadow];
-        [self.contentView addSubview:_rightView];
-        
         self.contentView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-- (void)dealloc 
-{
-    _delegate = nil;
-}
-
 #pragma mark - Public properties
 
-- (Note *)leftNote
+- (Note *)note
 {
-    return _leftNote;
+    return _note;
 }
 
-- (void)setLeftNote:(Note *)newNote
+- (void)setNote:(Note *)newNote
 {
-    if (newNote != _leftNote)
+    if (newNote != _note)
     {
-        _leftNote = newNote;
+        _note = newNote;
     }
-    if (_leftNote == nil)
+    if (_note == nil)
     {
-        self.leftView.hidden = YES;
+        self.thumbnail.hidden = YES;
     }
     else
     {
-        CGAffineTransform trans = CGAffineTransformMakeRotation(_leftNote.angleRadians);
-        self.leftView.transform = trans;
-        self.leftView.color = _leftNote.colorCode;
-        self.leftView.font = _leftNote.fontCode;
+        CGAffineTransform trans = CGAffineTransformMakeRotation(_note.angleRadians);
+        self.thumbnail.transform = trans;
+        self.thumbnail.color = _note.colorCode;
+        self.thumbnail.font = _note.fontCode;
         
         // This must come last, so that the size calculation
         // of the label inside the thumbnail is done!
-        self.leftView.summaryLabel.text = _leftNote.contents;
-        self.leftView.hidden = NO;
-    }
-}
-
-- (Note *)rightNote
-{
-    return _rightNote;
-}
-
-- (void)setRightNote:(Note *)newNote
-{
-    if (newNote != _rightNote)
-    {
-        _rightNote = newNote;
-    }
-    if (_rightNote == nil)
-    {
-        self.rightView.hidden = YES;
-    }
-    else
-    {
-        CGAffineTransform trans = CGAffineTransformMakeRotation(_rightNote.angleRadians);
-        self.rightView.transform = trans;
-        self.rightView.color = _rightNote.colorCode;
-        self.rightView.font = _rightNote.fontCode;
-
-        // This must come last, so that the size calculation
-        // of the label inside the thumbnail is done!
-        self.rightView.summaryLabel.text = _rightNote.contents;
-        self.rightView.hidden = NO;
-    }
-}
-
-#pragma mark - Touch management
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:self];
-    if (location.x > 170)
-    {
-        // Touch on the right side, only if the view is visible
-        if (!self.rightView.hidden && [self.delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
-        {
-            [self.delegate noteCell:self didSelectNote:self.rightNote atFrame:self.rightFrame];
-        }
-    }
-    else if (location.x < 150)
-    {
-        // Touch on the left side
-        if ([self.delegate respondsToSelector:@selector(noteCell:didSelectNote:atFrame:)])
-        {
-            [self.delegate noteCell:self didSelectNote:self.leftNote atFrame:self.leftFrame];
-        }
+        self.thumbnail.summaryLabel.text = _note.contents;
+        self.thumbnail.hidden = NO;
     }
 }
 

@@ -13,6 +13,8 @@
 #import "MNONoteEditorController.h"
 
 
+static NSString *CELL_IDENTIFIER = @"MNONoteCell";
+
 @interface MNORootController ()
 
 @property (nonatomic, strong) Note *currentNote;
@@ -64,9 +66,7 @@
     self.toolbar.frame = CGRectMake(0.0, 416.0, 320.0, 44.0);
     [self.view addSubview:self.toolbar];
 
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.rowHeight = 160.0;
+    self.collectionView.backgroundColor = [UIColor clearColor];
 	self.view.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
     
     self.fetchedResultsController = [[MNOCoreDataManager sharedMNOCoreDataManager] createFetchedResultsController];
@@ -99,6 +99,9 @@
     [self.locationManager startUpdatingLocation];
     
     self.locationInformationAvailable = NO;
+    
+    [self.collectionView registerClass:[MNONoteCell class]
+            forCellWithReuseIdentifier:CELL_IDENTIFIER];
     
     NSString *firstRunKey = @"firstRunKey";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -140,7 +143,7 @@
     newNote.contents = contents;
 
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
     [self scrollToBottomRowAnimated:YES];
     self.trashButton.enabled = YES;
 }
@@ -148,7 +151,7 @@
 - (IBAction)shakeNotes:(id)sender
 {
     [[MNOCoreDataManager sharedMNOCoreDataManager] shakeNotes];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
 
 - (IBAction)newNoteWithLocation:(id)sender
@@ -162,7 +165,7 @@
         newNote.contents = [NSString stringWithFormat:template, latitude, longitude];
 
         [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
         [self scrollToBottomRowAnimated:YES];
         self.trashButton.enabled = YES;
     }
@@ -189,7 +192,7 @@
     newNote.contents = copyright;
 
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
     [self scrollToBottomRowAnimated:YES];
     self.trashButton.enabled = YES;
 }
@@ -199,90 +202,47 @@
 	[self createNote];
     
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
     [self scrollToBottomRowAnimated:YES];
     self.trashButton.enabled = YES;
 }
 
 #pragma mark - Table view methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
-{
-    return [[self.fetchedResultsController sections] count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    NSInteger rowsCount = ceil([sectionInfo numberOfObjects] / 2.0);
-    return rowsCount;
+    return [sectionInfo numberOfObjects];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 20.0;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 44.0;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    static NSString *cellIdentifier = @"MNONoteCell";
-    
-    MNONoteCell *cell = (MNONoteCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) 
-    {
-        cell = [[MNONoteCell alloc] initWithReuseIdentifier:cellIdentifier];
-    }
-
-    cell.delegate = self;
-
-    // There are two notes per cell. The one on the left always appears.
-    NSInteger noteIndex = (indexPath.row * 2);
-    NSIndexPath *leftIndexPath = [NSIndexPath indexPathForRow:noteIndex inSection:0];
-    Note *leftNote = [self.fetchedResultsController objectAtIndexPath:leftIndexPath];
-    cell.leftNote = leftNote;
-
-    // Let's check whether we need to add a note at the right:
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][indexPath.section];
-    NSInteger notesCount = [sectionInfo numberOfObjects];
-    if (notesCount > (noteIndex + 1))
-    {
-        noteIndex += 1;
-        NSIndexPath *rightIndexPath = [NSIndexPath indexPathForRow:noteIndex inSection:0];
-        Note *rightNote = [self.fetchedResultsController objectAtIndexPath:rightIndexPath];
-        cell.rightNote = rightNote;        
-    }
-    else 
-    {
-        cell.rightNote = nil;
-    }
+    MNONoteCell *cell = (MNONoteCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
+                                                                                 forIndexPath:indexPath];
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.note = note;
 
     return cell;
 }
 
-#pragma mark - MNONoteCellDelegate methods
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return CGSizeMake(130.0, 130.0);
+}
 
-- (void)noteCell:(MNONoteCell *)cell didSelectNote:(Note *)note atFrame:(CGRect)frame
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	[self resignFirstResponder];
     [[MNOCoreDataManager sharedMNOCoreDataManager] beginUndoGrouping];
 
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.currentNote = note;
-    CGRect realFrame = [self.tableView.window convertRect:frame fromView:cell];
+    
+    MNONoteCell *cell = (MNONoteCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    CGRect frame = cell.frame;
+    CGRect realFrame = [self.view convertRect:frame fromView:self.collectionView];
     if (self.thumbnail == nil)
     {
         self.thumbnail = [[MNONoteThumbnail alloc] initWithFrame:realFrame];
@@ -297,15 +257,15 @@
         self.editor.delegate = self;
     }
     self.editor.note = self.currentNote;
-
+    
     self.thumbnail.alpha = 1.0;
     self.thumbnail.transform = CGAffineTransformMakeRotation(note.angleRadians);
-
-    [self.tableView.window addSubview:self.thumbnail];
-    [self.tableView.window addSubview:self.editor.view];
+    
+    [self.collectionView.window addSubview:self.thumbnail];
+    [self.collectionView.window addSubview:self.editor.view];
     [self.editor viewWillAppear:NO];
     
-    [UIView animateWithDuration:0.5 
+    [UIView animateWithDuration:0.5
                      animations:^{
                          CGAffineTransform trans = CGAffineTransformMakeTranslation(-realFrame.origin.x, -realFrame.origin.y);
                          CGAffineTransform scale = CGAffineTransformScale(trans, 10.0, 10.0);
@@ -328,7 +288,7 @@
 	[self becomeFirstResponder];
 
     [[MNOCoreDataManager sharedMNOCoreDataManager] save];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
 
     [UIView animateWithDuration:0.5
                      animations:^{
@@ -349,7 +309,7 @@
 {
 	[self becomeFirstResponder];
     [[MNOCoreDataManager sharedMNOCoreDataManager] deleteObject:self.currentNote];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
     [self checkTrashIconEnabled];
     
     [UIView animateWithDuration:0.5
@@ -403,7 +363,7 @@
             // OK
             [[MNOCoreDataManager sharedMNOCoreDataManager] deleteAllObjectsOfType:@"Note"];
             [[MNOSoundManager sharedMNOSoundManager] playEraseSound];
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
             self.trashButton.enabled = NO;
             break;
         }
@@ -417,19 +377,19 @@
 
 - (void)undoManagerDidUndo:(NSNotification *)notification 
 {
-	[self.tableView reloadData];
+	[self.collectionView reloadData];
     [self checkTrashIconEnabled];
 }
 
 - (void)undoManagerDidRedo:(NSNotification *)notification 
 {
-	[self.tableView reloadData];
+	[self.collectionView reloadData];
     [self checkTrashIconEnabled];
 }
 
 - (void)noteImported:(NSNotification *)notification
 {
-	[self.tableView reloadData];
+	[self.collectionView reloadData];
     [self checkTrashIconEnabled];
 }
 
@@ -437,7 +397,7 @@
 {
     if (!self.editing)
     {
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
         [self checkTrashIconEnabled];
     }
 }
@@ -448,7 +408,7 @@
 {
     if (controller == self.fetchedResultsController)
     {
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     }
 }
 
@@ -469,20 +429,14 @@
 
 - (void)scrollToBottomRowAnimated:(BOOL)animated
 {
-    NSArray *sections = [self.fetchedResultsController sections];
-    if ([sections count] > 0)
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    NSInteger itemCount = [sectionInfo numberOfObjects] - 1;
+    if (itemCount >= 0) // this fixes a crash in the device, but works on the simulator
     {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
-        NSInteger itemCount = [sectionInfo numberOfObjects];
-        NSInteger rowsCount = ceil(itemCount / 2.0);
-        NSInteger row = rowsCount - 1;
-        if (row >= 0) // this fixes a crash in the device, but works on the simulator
-        {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-            [self.tableView scrollToRowAtIndexPath:indexPath
-                                  atScrollPosition:UITableViewScrollPositionNone
-                                          animated:animated];
-        }
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:itemCount inSection:0];
+        [self.collectionView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionBottom
+                                            animated:YES];
     }
 }
 

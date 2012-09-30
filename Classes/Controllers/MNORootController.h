@@ -8,18 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "MNONoteCellDelegate.h"
 #import "MNONoteEditorControllerDelegate.h"
 
 @interface MNORootController : UIViewController <NSFetchedResultsControllerDelegate,
-                                                 MNONoteCellDelegate,
                                                  MNONoteEditorControllerDelegate,
                                                  CLLocationManagerDelegate,
                                                  UIAlertViewDelegate,
-                                                 UITableViewDelegate,
-                                                 UITableViewDataSource> 
+                                                 UICollectionViewDataSource,
+                                                 UICollectionViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *trashButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *locationButton;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;

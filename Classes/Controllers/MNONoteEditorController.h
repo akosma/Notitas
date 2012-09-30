@@ -11,6 +11,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import <Social/Social.h>
 #import "MNONoteEditorControllerDelegate.h"
 
 @class Note;

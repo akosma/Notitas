@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <Social/Social.h>
 
 @interface MNORootControllerPad : UIViewController <UIAlertViewDelegate,
                                                     CLLocationManagerDelegate,

@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MNONoteCellDelegate.h"
 
 @class Note;
 
-@interface MNONoteCell : UITableViewCell 
+@interface MNONoteCell : UICollectionViewCell
 
-@property (nonatomic, strong) Note *leftNote;
-@property (nonatomic, strong) Note *rightNote;
-@property (nonatomic, weak) id<MNONoteCellDelegate> delegate;
-
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+@property (nonatomic, strong) Note *note;
 
 @end
