@@ -29,14 +29,11 @@
 		3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093114238209003B5B43 /* MediaPlayer.framework */; };
 		3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093314238218003B5B43 /* CFNetwork.framework */; };
 		3A60093614238222003B5B43 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093514238222003B5B43 /* CoreText.framework */; };
-		3A6009381423822C003B5B43 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6009371423822C003B5B43 /* MobileCoreServices.framework */; };
 		3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093914238239003B5B43 /* QuartzCore.framework */; };
-		3A60093C14238239003B5B43 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60093A14238239003B5B43 /* Security.framework */; };
 		3A68EFF214238B83008DC819 /* MNOCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */; };
 		3A730AAE1618584100BD2CC8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A730AAD1618584100BD2CC8 /* Default-568h@2x.png */; };
 		3A730AB0161872DE00BD2CC8 /* MNONoteEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A730AAF161872DE00BD2CC8 /* MNONoteEditorController.xib */; };
 		3A730AB216187C2700BD2CC8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A730AB116187C2700BD2CC8 /* MainWindow.xib */; };
-		3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */; };
 		3A789242142649F8004B07F0 /* UIView+MNOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */; };
 		3A860E371429BD6F00649B27 /* MNOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E361429BD6F00649B27 /* MNOAppDelegate.m */; };
 		3A860E471429BF1000649B27 /* MNOMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A860E3B1429BF1000649B27 /* MNOMapController.m */; };
@@ -90,7 +87,7 @@
 		3A860F4D1429D1E000649B27 /* MNOMapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F151429D1E000649B27 /* MNOMapController.xib */; };
 		3A860F501429D1E000649B27 /* Erase.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F191429D1E000649B27 /* Erase.caf */; };
 		3A860F511429D1E000649B27 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A860F1B1429D1E000649B27 /* Localizable.strings */; };
-		3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8DBBD3144C4C2400DA46EC /* libz.dylib */; };
+		3A89510B1618E9D2003B08E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A89510A1618E9D2003B08E9 /* SystemConfiguration.framework */; };
 		3AA753E610179806007B3E5C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA753E510179806007B3E5C /* AudioToolbox.framework */; };
 		3AACED91161847FE002B8F77 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AACED90161847FE002B8F77 /* Social.framework */; };
 		3AC20570142E2E8100DF256C /* MNOBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2056F142E2E8100DF256C /* MNOBoard.m */; };
@@ -123,17 +120,13 @@
 		3A60093114238209003B5B43 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3A60093314238218003B5B43 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3A60093514238222003B5B43 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		3A6009371423822C003B5B43 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3A60093914238239003B5B43 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3A60093A14238239003B5B43 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3A60093D14238244003B5B43 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A68EFF014238B83008DC819 /* MNOCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOCoreDataManager.h; sourceTree = "<group>"; };
 		3A68EFF114238B83008DC819 /* MNOCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNOCoreDataManager.m; sourceTree = "<group>"; };
 		3A68EFFC14239015008DC819 /* MNOHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOHelpers.h; sourceTree = "<group>"; };
 		3A730AAD1618584100BD2CC8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3A730AAF161872DE00BD2CC8 /* MNONoteEditorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MNONoteEditorController.xib; sourceTree = "<group>"; };
 		3A730AB116187C2700BD2CC8 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A789240142649F8004B07F0 /* UIView+MNOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MNOExtensions.h"; sourceTree = "<group>"; };
 		3A789241142649F8004B07F0 /* UIView+MNOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MNOExtensions.m"; sourceTree = "<group>"; };
 		3A860E351429BD6F00649B27 /* MNOAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNOAppDelegate.h; sourceTree = "<group>"; };
@@ -207,7 +200,7 @@
 		3A860F1D1429D1E000649B27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1E1429D1E000649B27 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A860F1F1429D1E000649B27 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3A8DBBD3144C4C2400DA46EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3A89510A1618E9D2003B08E9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3AA753E510179806007B3E5C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3AACED90161847FE002B8F77 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3AC2056D142E2D1900DF256C /* Notitas 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Notitas 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -225,12 +218,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A89510B1618E9D2003B08E9 /* SystemConfiguration.framework in Frameworks */,
 				3AACED91161847FE002B8F77 /* Social.framework in Frameworks */,
-				3A8DBBD4144C4C2400DA46EC /* libz.dylib in Frameworks */,
-				3A7761D41018A73E009F0CD1 /* SystemConfiguration.framework in Frameworks */,
 				3A60093B14238239003B5B43 /* QuartzCore.framework in Frameworks */,
-				3A60093C14238239003B5B43 /* Security.framework in Frameworks */,
-				3A6009381423822C003B5B43 /* MobileCoreServices.framework in Frameworks */,
 				3A60093614238222003B5B43 /* CoreText.framework in Frameworks */,
 				3A60093414238218003B5B43 /* CFNetwork.framework in Frameworks */,
 				3A60093214238209003B5B43 /* MediaPlayer.framework in Frameworks */,
@@ -281,17 +271,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A8DBBD3144C4C2400DA46EC /* libz.dylib */,
+				3A89510A1618E9D2003B08E9 /* SystemConfiguration.framework */,
 				3AACED90161847FE002B8F77 /* Social.framework */,
 				3A60092D142381B9003B5B43 /* AKOLibrary.framework */,
-				3A60093D14238244003B5B43 /* SystemConfiguration.framework */,
 				3A60093914238239003B5B43 /* QuartzCore.framework */,
-				3A60093A14238239003B5B43 /* Security.framework */,
-				3A6009371423822C003B5B43 /* MobileCoreServices.framework */,
 				3A60093514238222003B5B43 /* CoreText.framework */,
 				3A60093314238218003B5B43 /* CFNetwork.framework */,
 				3A60093114238209003B5B43 /* MediaPlayer.framework */,
-				3A7761D31018A73E009F0CD1 /* SystemConfiguration.framework */,
 				3AA753E510179806007B3E5C /* AudioToolbox.framework */,
 				3A15C4C210175AB700ECB335 /* MapKit.framework */,
 				3A15C4BE10175AA500ECB335 /* CoreLocation.framework */,
