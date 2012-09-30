@@ -18,9 +18,6 @@
     self.layer.shadowPath = path.CGPath;
     self.layer.shadowOpacity = 1.0;
     self.layer.shadowColor = [UIColor blackColor].CGColor;
-    // Do not rasterize on the iPhone or the iPod. 
-    // The font rendering is very ugly if rasterized!
-    self.layer.shouldRasterize = [[[UIDevice currentDevice] ako_platform] hasPrefix:@"iPad"];
 }
 
 - (void)mno_removeShadow
