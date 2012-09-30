@@ -35,6 +35,7 @@
 @property (nonatomic, strong) IBOutlet UIToolbar *editingToolbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *mailButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *twitterButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *facebookButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *gridButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *stackButton;
 
@@ -58,5 +59,6 @@
 - (IBAction)changeFont:(id)sender;
 - (IBAction)sendViaEmail:(id)sender;
 - (IBAction)sendToTwitter:(id)sender;
+- (IBAction)sendToFacebook:(id)sender;
 
 @end

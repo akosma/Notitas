@@ -12,6 +12,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		3A006B9B1618A6330022F16F /* 208-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A006B991618A6330022F16F /* 208-facebook.png */; };
+		3A006B9C1618A6330022F16F /* 208-facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A006B9A1618A6330022F16F /* 208-facebook@2x.png */; };
 		3A09E58B14371A200079DDE5 /* 300-orgchart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A09E58914371A200079DDE5 /* 300-orgchart.png */; };
 		3A09E58C14371A200079DDE5 /* 300-orgchart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A09E58A14371A200079DDE5 /* 300-orgchart@2x.png */; };
 		3A09E58F14371F510079DDE5 /* 42-photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A09E58D14371F510079DDE5 /* 42-photos.png */; };
@@ -100,6 +102,8 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Notitas_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notitas_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A006B991618A6330022F16F /* 208-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook.png"; sourceTree = "<group>"; };
+		3A006B9A1618A6330022F16F /* 208-facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook@2x.png"; sourceTree = "<group>"; };
 		3A09E58914371A200079DDE5 /* 300-orgchart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "300-orgchart.png"; sourceTree = "<group>"; };
 		3A09E58A14371A200079DDE5 /* 300-orgchart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "300-orgchart@2x.png"; sourceTree = "<group>"; };
 		3A09E58D14371F510079DDE5 /* 42-photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "42-photos.png"; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 				3A860F081429D1E000649B27 /* 18-envelope@2x.png */,
 				3A860F091429D1E000649B27 /* 209-twitter.png */,
 				3A860F0A1429D1E000649B27 /* 209-twitter@2x.png */,
+				3A006B991618A6330022F16F /* 208-facebook.png */,
+				3A006B9A1618A6330022F16F /* 208-facebook@2x.png */,
 				3A860F0B1429D1E000649B27 /* 213-reply.png */,
 				3A860F0C1429D1E000649B27 /* 213-reply@2x.png */,
 				3A860F0D1429D1E000649B27 /* background_ipad.jpg */,
@@ -617,6 +623,8 @@
 				3A730AAE1618584100BD2CC8 /* Default-568h@2x.png in Resources */,
 				3A730AB0161872DE00BD2CC8 /* MNONoteEditorController.xib in Resources */,
 				3A730AB216187C2700BD2CC8 /* MainWindow.xib in Resources */,
+				3A006B9B1618A6330022F16F /* 208-facebook.png in Resources */,
+				3A006B9C1618A6330022F16F /* 208-facebook@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

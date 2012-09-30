@@ -870,6 +870,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.textView.inputAccessoryView = self.editingToolbar;
     self.mailButton.enabled = [MFMailComposeViewController canSendMail];
     self.twitterButton.enabled = ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]);
+    self.facebookButton.enabled = ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]);
     
     self.textView.text = self.currentThumbnail.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.currentThumbnail.note.fontCode) size:30.0];
@@ -992,6 +993,17 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         [controller setInitialText:self.currentThumbnail.note.contents];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (IBAction)sendToFacebook:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [controller setInitialText:self.currentThumbnail.note.contents];
+        [self presentViewController:controller animated:YES completion:nil];
     }
 }
 
