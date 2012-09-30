@@ -16,7 +16,6 @@
 @property (nonatomic) NSInteger twitterButtonIndex;
 @property (nonatomic) NSInteger facebookButtonIndex;
 @property (nonatomic) NSInteger locationButtonIndex;
-@property (nonatomic) CGAffineTransform hidingTransformation;
 @property (nonatomic, strong) MNOMapController *mapController;
 
 - (void)updateLabel;
@@ -30,7 +29,6 @@
 
 - (void)viewDidLoad 
 {
-    self.hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);
     self.textView.inputAccessoryView = self.inputAccessoryView;
     self.twitterButtonIndex = -1;
     self.locationButtonIndex = -1;
