@@ -23,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window.rootViewController = self.rootController;
     [self.window makeKeyAndVisible];
 
     // Check for 'notita' files opened from other applications

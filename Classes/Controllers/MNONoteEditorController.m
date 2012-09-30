@@ -146,7 +146,7 @@
     [sheet addButtonWithTitle:cancelText];
     sheet.cancelButtonIndex = sheetButtonCount;
     
-    [sheet showInView:self.parentViewController.view];
+    [sheet showInView:self.view];
 }
 
 #pragma mark - UIActionSheetDelegate methods
