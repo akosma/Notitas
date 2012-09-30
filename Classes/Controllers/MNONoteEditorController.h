@@ -25,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *textView;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UILabel *timeStampLabel;
+@property (strong, nonatomic) IBOutlet UIView *inputAccessoryView;
 @property (nonatomic, strong) Note *note;
 @property (nonatomic, weak) id<MNONoteEditorControllerDelegate> delegate;
 

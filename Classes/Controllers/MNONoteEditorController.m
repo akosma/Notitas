@@ -14,11 +14,11 @@
 @interface MNONoteEditorController ()
 
 @property (nonatomic) NSInteger twitterButtonIndex;
+@property (nonatomic) NSInteger facebookButtonIndex;
 @property (nonatomic) NSInteger locationButtonIndex;
 @property (nonatomic) CGAffineTransform hidingTransformation;
 @property (nonatomic, strong) MNOMapController *mapController;
 
-- (void)disappear;
 - (void)updateLabel;
 
 @end
@@ -30,34 +30,32 @@
 
 - (void)viewDidLoad 
 {
-    // This line is required; otherwise, after calling dismissModalViewControllerAnimated:
-    // the whole editor appears 20 pixels down... weird!
-    self.view.frame = CGRectMake(0.0, 20.0, 320.0, 460.0);
-    self.hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);    
-    self.toolbar.transform = self.hidingTransformation;
+    self.hidingTransformation = CGAffineTransformMakeTranslation(0.0, 260.0);
+    self.textView.inputAccessoryView = self.inputAccessoryView;
     self.twitterButtonIndex = -1;
     self.locationButtonIndex = -1;
+    self.facebookButtonIndex = -1;
 }
 
-- (void)didReceiveMemoryWarning 
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    self.mapController.delegate = nil;
-    self.mapController = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated 
-{
+    [super viewWillAppear:animated];
     self.timeStampLabel.font = [UIFont fontWithName:fontNameForCode(self.note.fontCode) size:12.0];
     self.textView.text = self.note.contents;
     self.textView.font = [UIFont fontWithName:fontNameForCode(self.note.fontCode) size:24.0];
-    [self.textView becomeFirstResponder];
     [self updateLabel];
-    
-    [UIView animateWithDuration:0.3 
-                     animations:^{
-                         self.toolbar.transform = CGAffineTransformIdentity;
-                     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.textView becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.textView resignFirstResponder];
 }
 
 #pragma mark - IBAction methods
@@ -84,7 +82,7 @@
 
 - (IBAction)done:(id)sender
 {
-    [self disappear];
+    [self.textView resignFirstResponder];
     
     self.note.contents = self.textView.text;
     if ([self.delegate respondsToSelector:@selector(noteEditorDidFinishedEditing:)])
@@ -118,7 +116,8 @@
                                               otherButtonTitles:nil];
 
     NSString *emailText = NSLocalizedString(@"SEND_VIA_EMAIL", @"Button to send notes via e-mail");
-    NSString *twitterrifficText = NSLocalizedString(@"SEND_VIA_TWITTER", @"Button to send notes via Twitter");
+    NSString *twitterText = NSLocalizedString(@"SEND_VIA_TWITTER", @"Button to send notes via Twitter");
+    NSString *facebookText = NSLocalizedString(@"SEND_VIA_FACEBOOK", @"Button to send notes via Facebook");
     NSString *locationText = NSLocalizedString(@"VIEW_LOCATION", @"Button to view the note location");
     NSString *cancelText = NSLocalizedString(@"CANCEL", @"The 'cancel' word");
     
@@ -127,11 +126,18 @@
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
-        [sheet addButtonWithTitle:twitterrifficText];
+        [sheet addButtonWithTitle:twitterText];
         self.twitterButtonIndex = sheetButtonCount;
         sheetButtonCount += 1;
     }    
-    
+
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        [sheet addButtonWithTitle:facebookText];
+        self.facebookButtonIndex = sheetButtonCount;
+        sheetButtonCount += 1;
+    }
+
     BOOL locationAvailable = [self.note.hasLocation boolValue];
     if (locationAvailable)
     {
@@ -142,7 +148,7 @@
     [sheet addButtonWithTitle:cancelText];
     sheet.cancelButtonIndex = sheetButtonCount;
     
-    [sheet showInView:self.view];
+    [sheet showInView:self.parentViewController.view];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -181,8 +187,6 @@
         [composer setSubject:subject];
         [composer setMessageBody:message isHTML:NO];
 
-        [self disappear];
-
         [self presentViewController:composer animated:YES completion:nil];
     }
     else
@@ -193,6 +197,26 @@
             {
                 SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
                 [controller setInitialText:self.note.contents];
+                [controller setCompletionHandler:^(SLComposeViewControllerResult result){
+                    [self.textView becomeFirstResponder];
+                }];
+                [self presentViewController:controller
+                                   animated:YES
+                                 completion:nil];
+            }
+        }
+        else if (self.facebookButtonIndex == buttonIndex)
+        {
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+            {
+                SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+                [controller setInitialText:self.note.contents];
+                [controller setCompletionHandler:^(SLComposeViewControllerResult result){
+                    [self.textView becomeFirstResponder];
+                }];
+                [self presentViewController:controller
+                                   animated:YES
+                                 completion:nil];
             }
         }
         else if (self.locationButtonIndex == buttonIndex)
@@ -206,7 +230,7 @@
                 }
                 self.mapController.note = self.note;
                 
-                [self disappear];
+                [self.textView resignFirstResponder];
                 [self presentViewController:self.mapController animated:YES completion:nil];
             }
         }
@@ -271,7 +295,7 @@
         case 1:
         {
             // OK
-            [self disappear];
+            [self.textView resignFirstResponder];
             
             if ([self.delegate respondsToSelector:@selector(noteEditorDidSendNoteToTrash:)])
             {
@@ -295,16 +319,6 @@
 }
 
 #pragma mark - Private methods
-
-- (void)disappear
-{
-    [self.textView resignFirstResponder];
-    
-    [UIView animateWithDuration:0.3 
-                     animations:^{
-                         self.toolbar.transform = self.hidingTransformation;
-                     }];
-}
 
 - (void)updateLabel
 {

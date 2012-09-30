@@ -115,15 +115,6 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
 	[super viewWillDisappear:animated];
 }
 
-- (void)didReceiveMemoryWarning 
-{
-    [super didReceiveMemoryWarning];
-    _thumbnail = nil;
-    
-    _editor.delegate = nil;
-    _editor = nil;
-}
-
 #pragma mark - Shake events
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
@@ -232,7 +223,7 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
                         layout:(UICollectionViewLayout*)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(20.0, 30.0, 50.0, 30.0);
+    return UIEdgeInsetsMake(20.0, 25.0, 50.0, 25.0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -259,14 +250,14 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
         self.editor.view.alpha = 0.0;
         self.editor.delegate = self;
     }
+    [self addChildViewController:self.editor];
     self.editor.note = self.currentNote;
     
     self.thumbnail.alpha = 1.0;
     self.thumbnail.transform = CGAffineTransformMakeRotation(note.angleRadians);
     
-    [self.collectionView.window addSubview:self.thumbnail];
-    [self.collectionView.window addSubview:self.editor.view];
-    [self.editor viewWillAppear:NO];
+    [self.view addSubview:self.thumbnail];
+    [self.view addSubview:self.editor.view];
     
     [UIView animateWithDuration:0.5
                      animations:^{
@@ -302,6 +293,7 @@ static NSString *CELL_IDENTIFIER = @"MNONoteCell";
                          self.thumbnail.transform = CGAffineTransformIdentity;
                          [self.thumbnail removeFromSuperview];
                          [self.editor.view removeFromSuperview];
+                         [self.editor removeFromParentViewController];
                          self.editing = NO;
                      }];
 

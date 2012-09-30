@@ -22,6 +22,9 @@
 /* Button to send notes via Twitter */
 "SEND_VIA_TWITTER" = "Send via Twitter";
 
+/* Button to send notes via Facebook */
+"SEND_VIA_FACEBOOK" = "Send via Facebook";
+
 /* Title of the 'remove all notes' dialog */
 "REMOVE_ALL_NOTES_QUESTION" = "Remove all the notes?";
 
